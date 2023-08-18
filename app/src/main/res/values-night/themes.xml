@@ -1,0 +1,7 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Projeto" parent="Theme.AppCompat.NoActionBar">
+        <!-- Customize your dark theme here. -->
+        <item name="colorPrimaryDark">@color/azulMarinho</item>
+    </style>
+</resources>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/pagina_login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/new_background"
+    android:gravity="center_horizontal|center_vertical"
+    android:orientation="vertical"
+    android:paddingLeft="32dp"
+    android:paddingRight="32dp"
+    android:textAlignment="center"
+    tools:context=".activity.LoginActivity">
+
+    <ImageView
+        android:id="@+id/imageApc"
+        android:layout_width="212dp"
+        android:layout_height="198dp"
+        android:layout_marginBottom="24dp"
+        android:baselineAligned="false"
+        app:srcCompat="@drawable/logotipo"
+        tools:srcCompat="@drawable/logotipo" />
+
+    <EditText
+        android:id="@+id/TextCpf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/background_texto"
+        android:drawableLeft="@drawable/baseline_person_24"
+        android:drawablePadding="6dp"
+        android:ems="11"
+        android:fontFamily="sans-serif-light"
+        android:hint="CPF"
+        android:inputType="number"
+
+        android:maxLength="11"
+        android:padding="10dp"
+        android:textColor="#FDF8F8"
+        android:textColorHint="#F6F0F2" />
+
+    <EditText
+        android:id="@+id/TextSenha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/background_texto"
+        android:drawableLeft="@drawable/baseline_lock_24"
+        android:drawablePadding="6dp"
+        android:ems="5"
+        android:fontFamily="sans-serif-light"
+        android:hint="Senha"
+        android:inputType="textPassword"
+        android:maxLength="6"
+        android:padding="10dp"
+        android:selectAllOnFocus="false"
+        android:singleLine="false"
+        android:textColor="#FDF8F8"
+        android:textColorHint="#F6F0F2" />
+
+    <Button
+        android:id="@+id/buttonCadastrar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_botao"
+        android:text="ACESSAR" />
+
+    <TextView
+        android:id="@+id/button_ajuda"
+        android:layout_width="wrap_content"
+        android:layout_height="28dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="60dp"
+        android:drawableLeft="@drawable/whatsapp"
+        android:fontFamily="sans-serif-light"
+        android:text="@string/text_ajudaZap"
+        android:textAlignment="center"
+        android:textSize="18sp" />
+
+
+</LinearLayout>
