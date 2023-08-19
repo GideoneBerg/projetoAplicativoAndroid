@@ -23,7 +23,7 @@
         tools:srcCompat="@drawable/logotipo" />
 
     <EditText
-        android:id="@+id/TextCpf"
+        android:id="@+id/editTextCpf"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -41,7 +41,7 @@
         android:textColorHint="#F6F0F2" />
 
     <EditText
-        android:id="@+id/TextSenha"
+        android:id="@+id/editTextSenha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
@@ -60,7 +60,7 @@
         android:textColorHint="#F6F0F2" />
 
     <Button
-        android:id="@+id/buttonCadastrar"
+        android:id="@+id/buttonAcessar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/background_botao"
