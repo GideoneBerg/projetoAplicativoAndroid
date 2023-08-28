@@ -6,20 +6,21 @@
         android:name="android.hardware.telephony"
         android:required="false" />
 
-    <uses-permission android:name="android.permission.CALL_PHONE" />
-    <!-- Permissão para acesso a internet -->
+    <uses-permission android:name="android.permission.CALL_PHONE" /> <!-- Permissão para acesso a internet -->
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logotipo_abertura"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/logotipo_abertura"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Projeto"
+        android:theme="@style/Base.Theme.Projeto"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
         <activity
             android:name=".activity.ClienteActivity"
             android:exported="false" />
@@ -31,7 +32,11 @@
             android:exported="false" />
         <activity
             android:name=".activity.InicialActivity"
-            android:exported="true">
+            android:exported="false"/>
+            <activity
+                android:name=".activity.SplashScreenActivity"
+                android:exported="true"
+                android:theme="@style/AppCompat.TelaCheia">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

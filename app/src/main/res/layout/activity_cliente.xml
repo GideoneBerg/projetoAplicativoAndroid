@@ -2,8 +2,194 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/pagina_cliente"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/new_background"
-    tools:context=".activity.ClienteActivity" />
+    android:descendantFocusability="beforeDescendants"
+    android:orientation="vertical"
+    android:paddingLeft="32dp"
+    android:paddingRight="32dp"
+    tools:context=".activity.ClienteActivity">
+
+    <ImageView
+        android:id="@+id/image_logo_cliente"
+        android:layout_width="93dp"
+        android:layout_height="67dp"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="left"
+        android:layout_marginTop="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.468"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logotipo" />
+
+    <TextView
+        android:id="@+id/text_ola"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="44dp"
+        android:fontFamily="sans-serif-thin"
+        android:text="Olá"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image_logo_cliente" />
+
+    <TextView
+        android:id="@+id/textViewNome"
+        android:layout_width="233dp"
+        android:layout_height="92dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="sans-serif-condensed"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_ola" />
+
+
+    <TextView
+        android:id="@+id/plano_atual"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNome" />
+
+    <Button
+        android:id="@+id/plano"
+        android:layout_width="161dp"
+        android:layout_height="123dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/background_plano_vencimento"
+        android:text="@string/plano"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/plano_atual" />
+
+    <Button
+        android:id="@+id/vencimento"
+        android:layout_width="161dp"
+        android:layout_height="123dp"
+        android:background="@drawable/background_plano_vencimento"
+        android:text="@string/vencimento"
+        app:layout_constraintBottom_toBottomOf="@+id/plano"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/plano" />
+
+    <TextView
+        android:id="@+id/textViewPlano"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="42dp"
+        android:elevation="2dp"
+        android:textColor="@color/tiffany"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/plano"
+        app:layout_constraintEnd_toEndOf="@+id/plano"
+        app:layout_constraintStart_toStartOf="@+id/plano"
+        app:layout_constraintTop_toTopOf="@+id/plano" />
+
+    <TextView
+        android:id="@+id/textViewVencimento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="42dp"
+        android:elevation="2dp"
+        android:textColor="@color/tiffany"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/vencimento"
+        app:layout_constraintEnd_toEndOf="@+id/vencimento"
+        app:layout_constraintStart_toStartOf="@+id/vencimento"
+        app:layout_constraintTop_toTopOf="@+id/vencimento" />
+
+    <HorizontalScrollView
+        android:id="@+id/menu_cliente"
+        android:layout_width="match_parent"
+        android:layout_height="112dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/plano"
+        app:layout_constraintVertical_bias="0.501"
+        tools:ignore="MissingConstraints">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/central_cliente"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="10dp"
+
+                android:background="@drawable/background_botao_menu_cliente"
+
+                android:shadowRadius="0"
+                android:text="@string/central_cliente"
+                android:textAlignment="inherit"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <Button
+                android:id="@+id/segunda_via"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/background_botao_menu_cliente"
+                android:shadowRadius="0"
+                android:text="@string/segunda_via"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <Button
+                android:id="@+id/pagamento_pix"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/background_botao_menu_cliente"
+                android:shadowRadius="0"
+                android:text="@string/pagamento_pix"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <Button
+                android:id="@+id/teste_velocidade"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/background_botao_menu_cliente"
+                android:scrollbarAlwaysDrawHorizontalTrack="false"
+                android:shadowRadius="0"
+                android:text="@string/teste_velocidade"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <Button
+                android:id="@+id/sobre"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/background_botao_menu_cliente"
+                android:shadowRadius="0"
+                android:text="@string/sobre"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

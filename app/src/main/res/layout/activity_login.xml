@@ -52,7 +52,7 @@
         android:fontFamily="sans-serif-light"
         android:hint="Senha"
         android:inputType="textPassword"
-        android:maxLength="6"
+        android:maxLength="8"
         android:padding="10dp"
         android:selectAllOnFocus="false"
         android:singleLine="false"
@@ -60,10 +60,11 @@
         android:textColorHint="#F6F0F2" />
 
     <Button
-        android:id="@+id/buttonAcessar"
+        android:id="@+id/btnEntrar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/background_botao"
+        android:onClick="validarAutenticacao"
         android:text="ACESSAR" />
 
     <TextView

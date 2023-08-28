@@ -5,5 +5,11 @@
         <item name="colorPrimaryDark">@color/azulMarinho</item>
     </style>
 
+    <style name="AppCompat.TelaCheia" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimaryDark">@color/azulMarinho</item>
+    </style>
+
+
+
     <style name="Theme.Projeto" parent="Base.Theme.Projeto" />
 </resources>
