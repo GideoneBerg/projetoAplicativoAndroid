@@ -11,185 +11,293 @@
     android:paddingRight="32dp"
     tools:context=".activity.ClienteActivity">
 
+
     <ImageView
         android:id="@+id/image_logo_cliente"
         android:layout_width="93dp"
         android:layout_height="67dp"
         android:layout_alignParentTop="true"
-        android:layout_gravity="left"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.468"
+        app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logotipo" />
 
     <TextView
+        android:id="@+id/textViewNome"
+        android:layout_width="260dp"
+        android:layout_height="78dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="sans-serif-condensed"
+        android:textColor="@color/tiffany"
+        android:textSize="30sp"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_ola"
+        tools:text="Cliente" />
+
+    <TextView
         android:id="@+id/text_ola"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="left"
         android:layout_marginStart="60dp"
         android:layout_marginLeft="60dp"
         android:layout_marginTop="44dp"
         android:fontFamily="sans-serif-thin"
-        android:text="Olá"
-        android:textSize="20sp"
+        android:text="@string/ola"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/image_logo_cliente" />
 
     <TextView
-        android:id="@+id/textViewNome"
-        android:layout_width="233dp"
-        android:layout_height="92dp"
-        android:layout_marginTop="4dp"
-        android:fontFamily="sans-serif-condensed"
-        android:textSize="34sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_ola" />
-
-
-    <TextView
-        android:id="@+id/plano_atual"
+        android:id="@+id/textPlano"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="75dp"
+        android:layout_marginLeft="75dp"
+        android:layout_marginTop="52dp"
+        android:gravity="center"
+        android:text="@string/plano"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewNome" />
 
-    <Button
+    <TextView
+        android:id="@+id/textVencimento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
+        android:gravity="center"
+        android:text="@string/vencimento"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/vencimento"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.811"
+        app:layout_constraintStart_toEndOf="@+id/textPlano"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNome"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
         android:id="@+id/plano"
         android:layout_width="161dp"
         android:layout_height="123dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/background_plano_vencimento"
+        android:gravity="center"
         android:text="@string/plano"
+        android:textColor="@color/tiffany"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/plano_atual" />
+        app:layout_constraintTop_toBottomOf="@+id/textPlano" />
 
-    <Button
+    <TextView
         android:id="@+id/vencimento"
         android:layout_width="161dp"
         android:layout_height="123dp"
+        android:layout_marginStart="161dp"
+        android:layout_marginLeft="161dp"
         android:background="@drawable/background_plano_vencimento"
+        android:gravity="center"
         android:text="@string/vencimento"
-        app:layout_constraintBottom_toBottomOf="@+id/plano"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/plano" />
-
-    <TextView
-        android:id="@+id/textViewPlano"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="42dp"
-        android:elevation="2dp"
         android:textColor="@color/tiffany"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/plano"
-        app:layout_constraintEnd_toEndOf="@+id/plano"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/plano"
         app:layout_constraintStart_toStartOf="@+id/plano"
         app:layout_constraintTop_toTopOf="@+id/plano" />
-
-    <TextView
-        android:id="@+id/textViewVencimento"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="42dp"
-        android:elevation="2dp"
-        android:textColor="@color/tiffany"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/vencimento"
-        app:layout_constraintEnd_toEndOf="@+id/vencimento"
-        app:layout_constraintStart_toStartOf="@+id/vencimento"
-        app:layout_constraintTop_toTopOf="@+id/vencimento" />
 
     <HorizontalScrollView
         android:id="@+id/menu_cliente"
         android:layout_width="match_parent"
-        android:layout_height="112dp"
-        android:fillViewport="true"
+        android:layout_height="match_parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="550dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="195dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/plano"
-        app:layout_constraintVertical_bias="0.501"
         tools:ignore="MissingConstraints">
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
+
             <Button
-                android:id="@+id/central_cliente"
+                android:id="@+id/centralClienteScroll"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginLeft="10dp"
-
+                android:layout_height="147dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="2dp"
                 android:background="@drawable/background_botao_menu_cliente"
-
-                android:shadowRadius="0"
+                android:drawableTop="@drawable/baseline_person_24"
+                android:paddingLeft="10dp"
+                android:paddingTop="40sp"
+                android:paddingRight="10dp"
+                android:paddingBottom="40dp"
                 android:text="@string/central_cliente"
-                android:textAlignment="inherit"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                app:layout_constraintEnd_toEndOf="parent" />
+                android:textColor="@color/white" />
+
 
             <Button
                 android:id="@+id/segunda_via"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_height="147dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginLeft="10dp"
                 android:background="@drawable/background_botao_menu_cliente"
-                android:shadowRadius="0"
+                android:drawableTop="@drawable/baseline_view_column_24"
+                android:paddingLeft="10dp"
+                android:paddingTop="40sp"
+                android:paddingRight="10dp"
+                android:paddingBottom="40dp"
                 android:text="@string/segunda_via"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                app:layout_constraintEnd_toEndOf="parent" />
+                android:textColor="@color/white" />
 
             <Button
                 android:id="@+id/pagamento_pix"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_height="147dp"
                 android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:background="@drawable/background_botao_menu_cliente"
+                android:drawableTop="@drawable/baseline_pix_24"
+                android:paddingLeft="10dp"
+                android:paddingTop="40sp"
+                android:paddingRight="10dp"
+                android:paddingBottom="40dp"
                 android:shadowRadius="0"
                 android:text="@string/pagamento_pix"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                app:layout_constraintEnd_toEndOf="parent" />
+                android:textColor="@color/white" />
+
 
             <Button
                 android:id="@+id/teste_velocidade"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginLeft="10dp"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="109dp"
+                android:layout_height="147dp"
                 android:background="@drawable/background_botao_menu_cliente"
-                android:scrollbarAlwaysDrawHorizontalTrack="false"
+                android:drawableTop="@drawable/baseline_network_check_24"
+                android:paddingLeft="10dp"
+                android:paddingTop="40sp"
+                android:paddingRight="10dp"
+                android:paddingBottom="40dp"
                 android:shadowRadius="0"
                 android:text="@string/teste_velocidade"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                app:layout_constraintEnd_toEndOf="parent" />
+                android:textColor="@color/white" />
 
             <Button
                 android:id="@+id/sobre"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginLeft="10dp"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="107dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:background="@drawable/background_botao_menu_cliente"
+                android:drawableTop="@drawable/baseline_info_24"
+                android:paddingLeft="10dp"
+                android:paddingTop="40sp"
+                android:paddingRight="10dp"
+                android:paddingBottom="40dp"
                 android:shadowRadius="0"
                 android:text="@string/sobre"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/white" />
 
 
         </LinearLayout>
 
     </HorizontalScrollView>
 
+    <ImageButton
+        android:id="@+id/siteApcTecnologia"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="180dp"
+        android:background="@drawable/background_menu_rede_sociais"
+        android:contentDescription="TODO"
+        app:layout_constraintBottom_toBottomOf="@+id/whatsappApcTecnologia"
+        app:layout_constraintEnd_toStartOf="@+id/whatsappApcTecnologia"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/plano"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/samsung_internet"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/facebookApcTecnologia"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="-60dp"
+        android:layout_marginTop="180dp"
+        android:layout_marginEnd="47dp"
+        android:background="@drawable/background_menu_rede_sociais"
+        app:layout_constraintBottom_toBottomOf="@+id/whatsappApcTecnologia"
+        app:layout_constraintEnd_toStartOf="@+id/instagramApcTecnologia"
+        app:layout_constraintStart_toEndOf="@+id/whatsappApcTecnologia"
+        app:layout_constraintTop_toBottomOf="@+id/vencimento"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/facebook"
+        tools:ignore="SpeakableTextPresentCheck"
+        android:layout_marginLeft="-60dp"
+        android:layout_marginRight="47dp"
+        android:contentDescription="TODO" />
+
+    <ImageButton
+        android:id="@+id/instagramApcTecnologia"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="-60dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="180dp"
+        android:background="@drawable/background_menu_rede_sociais"
+        android:src="@drawable/instagram"
+        app:layout_constraintBottom_toBottomOf="@+id/facebookApcTecnologia"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/facebookApcTecnologia"
+        app:layout_constraintTop_toBottomOf="@+id/vencimento"
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="SpeakableTextPresentCheck"
+        tools:src="@drawable/instagram"
+        tools:srcCompat="@drawable/instagram" />
+
+    <ImageButton
+        android:id="@+id/whatsappApcTecnologia"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="-60dp"
+        android:layout_marginTop="180dp"
+        android:layout_marginEnd="31dp"
+        android:background="@drawable/background_menu_rede_sociais"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/facebookApcTecnologia"
+        app:layout_constraintStart_toEndOf="@+id/siteApcTecnologia"
+        app:layout_constraintTop_toBottomOf="@+id/plano"
+        app:srcCompat="@drawable/whatsapp"
+        tools:ignore="SpeakableTextPresentCheck"
+        android:layout_marginLeft="-60dp"
+        android:layout_marginRight="31dp"
+        android:contentDescription="TODO" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

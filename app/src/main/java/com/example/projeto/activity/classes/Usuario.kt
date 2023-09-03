@@ -1,4 +1,4 @@
-package com.example.projeto.activity
+package com.example.projeto.activity.classes
 
 
 class Usuario {
