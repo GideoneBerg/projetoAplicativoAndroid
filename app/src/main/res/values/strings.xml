@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">APC Tecnologia</string>
+    <string name="botaoAcessar">ACESSAR</string>
     <string name="bem_vindo">Olá, Seja Bem vindo ao \n nosso Aplicativo!</string>
     <string name="text_ajuda">Em que podemos te \n ajudar hoje?</string>
     <string name="text_cliente">Já sou Cliente</string>
@@ -13,11 +14,13 @@
     <string name="ajuda">Como podemos ajudar?</string>
     <string name="pagamento_pix">Pagamento\nPix</string>
     <string name="vencimento">Vencimento</string>
-    <string name="plano">Plano</string>
+    <string name="plano">Plano Atual</string>
     <string name="central_cliente">Central do\nCliente</string>
     <string name="segunda_via">Segunda\nVia</string>
     <string name="teste_velocidade">Teste\nVelocidade</string>
     <string name="sobre">Sobre</string>
     <string name="ola">Olá</string>
+    <string name="descricao">imagem</string>
+    <string name="maisDados">Mais Dados</string>
 
 </resources>

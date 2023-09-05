@@ -22,23 +22,26 @@
         app:srcCompat="@drawable/logotipo"
         tools:srcCompat="@drawable/logotipo" />
 
-    <EditText
+    <com.santalu.maskara.widget.MaskEditText
         android:id="@+id/editTextCpf"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:background="@drawable/background_texto"
-        android:drawableLeft="@drawable/baseline_person_24"
+        android:drawableStart="@drawable/baseline_person_24"
         android:drawablePadding="6dp"
         android:ems="11"
         android:fontFamily="sans-serif-light"
         android:hint="CPF"
         android:inputType="number"
-
-        android:maxLength="11"
         android:padding="10dp"
         android:textColor="#FDF8F8"
-        android:textColorHint="#F6F0F2" />
+        android:textColorHint="#F6F0F2"
+        app:mask="___.___.___-__"
+        app:maskCharacter="_"
+        app:maskStyle="completable"
+         />
+
 
     <EditText
         android:id="@+id/editTextSenha"
@@ -46,7 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
         android:background="@drawable/background_texto"
-        android:drawableLeft="@drawable/baseline_lock_24"
+        android:drawableStart="@drawable/baseline_lock_24"
         android:drawablePadding="6dp"
         android:ems="5"
         android:fontFamily="sans-serif-light"
@@ -65,7 +68,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/background_botao"
         android:onClick="validarAutenticacao"
-        android:text="ACESSAR" />
+        android:text= "@string/botaoAcessar" />
 
     <TextView
         android:id="@+id/button_ajuda"

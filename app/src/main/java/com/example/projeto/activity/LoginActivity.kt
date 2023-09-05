@@ -40,10 +40,17 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.btnEntrar.setOnClickListener {
-            val usuario = Usuario()
-            usuario.cpf = binding.editTextCpf.text.toString()
-            usuario.senha = binding.editTextSenha.text.toString()
-            chamaAPI(usuario)
+            // isDone verifica se o usuario preencheu todos os campos
+            // unMasked recupera os dados sem a máscara
+            val isDone = binding.editTextCpf.isDone
+            if (isDone){ // verifica se o usuario digitou os dados corretamente
+                val usuario = Usuario()
+                usuario.cpf = binding.editTextCpf.unMasked
+                usuario.senha = binding.editTextSenha.text.toString()
+                chamaAPI(usuario)
+            } else {
+                Toast.makeText(this,"Ops!, Preencha um CPF válido.", Toast.LENGTH_SHORT).show()
+                }
         }
     }
     private fun chamaAPI(usuario: Usuario) {
@@ -55,27 +62,22 @@ class LoginActivity : AppCompatActivity() {
 
             override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
                 if (response.isSuccessful) {
-
                     response.body()?.let {
-                        if (usuario.cpf.isEmpty() || usuario.senha.isEmpty()){
-                            Toast.makeText(
-                                applicationContext,
-                                "Ops!, Você precisa preencher os campos de usuário e senha",
-                                Toast.LENGTH_LONG
-                            ).show()
-                        }
-                        else if (response.body()!!.cpf == "vazio") {
+                        if (response.body()!!.cpf == "vazio") {
                             exibeToast(false)
                         } else {
                             exibeToast(true)
                             val nomeUsuario = response.body()?.nome
                             val plano = response.body()?.plano
                             val vencimento = response.body()?.vencimento
-
+                            val cidade = response.body()?.cidade
+                            val rua = response.body()?.rua
                             val intent = Intent(this@LoginActivity, ClienteActivity::class.java)
                             intent.putExtra("nomeUsuario", nomeUsuario)
                             intent.putExtra("plano", plano)
                             intent.putExtra("vencimento",vencimento)
+                            intent.putExtra("cidade", cidade)
+                            intent.putExtra("rua", rua)
                             startActivity(intent)
                             finish()
                             // Limpa os campos depois de efetuar o login
