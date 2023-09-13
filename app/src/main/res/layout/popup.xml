@@ -2,80 +2,87 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:gravity="center"
     android:layout_width="match_parent"
-    android:layout_height="250dp"
-    android:background="@color/azulClaro">
+    android:layout_height="270dp"
+    android:background="@color/azulClaro"
+    android:gravity="center">
 
     <TextView
-        android:id="@+id/dadosCliente"
-        android:layout_width="114dp"
-        android:layout_height="22dp"
+        android:id="@+id/nome"
+        android:layout_width="381dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
-        android:text="Dados do Cliente"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:fontFamily="sans-serif-condensed-light"
+        android:text="Nome:"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/nome"
-        android:layout_width="50dp"
-        android:layout_height="23dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="Nome:"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dadosCliente" />
-
-    <TextView
-        android:id="@+id/endereco"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
-        android:text="Endereço:"
+        android:id="@+id/nascimento"
+        android:layout_width="381dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="sans-serif-condensed-light"
+        android:text="Nascimento:"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nome" />
 
     <TextView
+        android:id="@+id/endereco"
+        android:layout_width="381dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="sans-serif-condensed-light"
+        android:text="Endereço:"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nascimento" />
+
+    <TextView
+        android:id="@+id/bairro"
+        android:layout_width="313dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="sans-serif-condensed-light"
+        android:text="Bairro:"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cidade" />
+
+    <TextView
         android:id="@+id/cidade"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="313dp"
+        android:layout_height="31dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="sans-serif-condensed-light"
         android:text="Cidade:"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.048"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/endereco" />
 
-    <TextView
-        android:id="@+id/nomeCliente"
-        android:layout_width="329dp"
-        android:layout_height="24dp"
-        android:layout_marginTop="16dp"
-        android:text="TextView"
+    <Button
+        android:id="@+id/button_ok"
+        android:layout_width="42dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/background_botao"
+        android:text="OK"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/nome"
-        app:layout_constraintTop_toBottomOf="@+id/dadosCliente" />
-
-    <TextView
-        android:id="@+id/ruaCliente"
-        android:layout_width="322dp"
-        android:layout_height="18dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="3dp"
-        android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/endereco"
-        app:layout_constraintTop_toBottomOf="@+id/nomeCliente" />
-
-    <TextView
-        android:id="@+id/cidadeCliente"
-        android:layout_width="77dp"
-        android:layout_height="19dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
-        android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/cidade"
-        app:layout_constraintTop_toBottomOf="@+id/ruaCliente" />
+        app:layout_constraintHorizontal_bias="0.956"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bairro"
+        app:layout_constraintVertical_bias="1.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

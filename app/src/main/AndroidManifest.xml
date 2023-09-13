@@ -21,6 +21,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".activity.PopupActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.webView.WebViewSite"
             android:exported="false" />
         <activity

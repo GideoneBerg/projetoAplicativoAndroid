@@ -13,7 +13,7 @@
 
 
     <ImageView
-        android:id="@+id/imageLogoCliente"
+        android:id="@+id/image_logo_cliente"
         android:layout_width="93dp"
         android:layout_height="67dp"
         android:layout_alignParentTop="true"
@@ -23,20 +23,19 @@
         app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logotipo"
-        tools:ignore="RtlHardcoded" />
+        app:srcCompat="@drawable/logotipo" />
 
     <TextView
-        android:id="@+id/textOla"
+        android:id="@+id/text_ola"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="130dp"
         android:layout_marginTop="60dp"
         android:fontFamily="sans-serif-thin"
-        android:text="@string/ola"
+        android:text="Olá"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageLogoCliente" />
+        app:layout_constraintTop_toBottomOf="@+id/image_logo_cliente" />
 
     <TextView
         android:id="@+id/textViewNome"
@@ -45,11 +44,12 @@
         android:layout_marginStart="130dp"
         android:layout_marginTop="2dp"
         android:fontFamily="sans-serif-condensed"
+        android:text="TextView"
         android:textColor="@color/tiffany"
         android:textSize="25sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textOla"
-        tools:text="Cliente" />
+        app:layout_constraintTop_toBottomOf="@+id/text_ola"
+        tools:text="@string/text_nomeCliente" />
 
     <ImageView
         android:id="@+id/personCliente"
@@ -57,19 +57,20 @@
         android:layout_height="100dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="150dp"
-        app:layout_constraintEnd_toStartOf="@+id/textViewNome"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/personadd"
-        tools:srcCompat="@drawable/personadd" />
+        app:srcCompat="@drawable/personadd" />
 
     <TextView
         android:id="@+id/plano_atual"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="100dp"
-        android:text="@string/plano"
+        android:layout_marginStart="65dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="100dp"
+        android:gravity="center"
+        android:text="@string/planoAtual"
+        app:layout_constraintEnd_toStartOf="@+id/vencimentoData"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewNome" />
 
@@ -77,18 +78,19 @@
         android:id="@+id/vencimentoData"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        android:layout_marginStart="60dp"
+        android:layout_marginStart="90dp"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
         android:text="@string/vencimento"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/plano_atual"
-        app:layout_constraintTop_toTopOf="@+id/plano_atual" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewNome" />
 
     <TextView
         android:id="@+id/plano"
         android:layout_width="171dp"
         android:layout_height="122dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/background_plano_vencimento"
         android:gravity="center"
         android:text="@string/plano"
@@ -101,16 +103,15 @@
         android:id="@+id/vencimento"
         android:layout_width="171dp"
         android:layout_height="122dp"
-        android:layout_marginStart="-15dp"
-        android:layout_marginEnd="-5dp"
+        android:layout_marginStart="-5dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/background_plano_vencimento"
         android:gravity="center"
         android:text="@string/vencimento"
         android:textColor="@color/tiffany"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/plano"
-        app:layout_constraintTop_toTopOf="@+id/plano" />
+        app:layout_constraintTop_toBottomOf="@+id/vencimentoData" />
 
     <HorizontalScrollView
         android:id="@+id/menu_cliente"
@@ -129,11 +130,12 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+
             android:orientation="horizontal">
 
+
             <Button
-                android:id="@+id/centralClienteScroll"
-                style="?android:attr/buttonBarButtonStyle"
+                android:id="@+id/centralCliente"
                 android:layout_width="100dp"
                 android:layout_height="147dp"
                 android:layout_marginStart="10dp"
@@ -151,7 +153,7 @@
                 android:translationZ="50dp" />
 
             <Button
-                android:id="@+id/segundaVia"
+                android:id="@+id/segunda_via"
                 android:layout_width="100dp"
                 android:layout_height="147dp"
                 android:layout_marginStart="10dp"
@@ -167,7 +169,7 @@
                 android:textColor="@color/white" />
 
             <Button
-                android:id="@+id/pagamentoPix"
+                android:id="@+id/pagamento_pix"
                 android:layout_width="100dp"
                 android:layout_height="147dp"
                 android:layout_marginLeft="10dp"
@@ -223,7 +225,7 @@
     </HorizontalScrollView>
 
     <ImageButton
-        android:id="@+id/siteApcTecnologia"
+        android:id="@+id/site"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginStart="40dp"
@@ -234,47 +236,49 @@
         app:srcCompat="@drawable/samsung_internet" />
 
     <ImageButton
-        android:id="@+id/whatsappApcTecnologia"
+        android:id="@+id/whatsapp"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginStart="10dp"
         android:layout_marginBottom="40dp"
         android:background="@drawable/background_menu_rede_sociais"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/siteApcTecnologia"
+        app:layout_constraintStart_toEndOf="@+id/site"
         app:srcCompat="@drawable/whatsapp" />
 
     <ImageButton
-        android:id="@+id/facebookApcTecnologia"
+        android:id="@+id/facebook"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginStart="10dp"
         android:layout_marginBottom="40dp"
         android:background="@drawable/background_menu_rede_sociais"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/whatsappApcTecnologia"
+        app:layout_constraintStart_toEndOf="@+id/whatsapp"
         app:srcCompat="@drawable/facebook" />
 
     <ImageButton
-        android:id="@+id/instagramApcTecnologia"
+        android:id="@+id/instagram"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginStart="10dp"
         android:layout_marginBottom="40dp"
         android:background="@drawable/background_menu_rede_sociais"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/facebookApcTecnologia"
+        app:layout_constraintStart_toEndOf="@+id/facebook"
         app:srcCompat="@drawable/instagram" />
 
     <Button
         android:id="@+id/maisDados"
-        android:layout_width="110dp"
-        android:layout_height="35dp"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:background="@drawable/background_botao"
         android:text="@string/maisDados"
-        app:layout_constraintBottom_toTopOf="@+id/menu_cliente"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/plano" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

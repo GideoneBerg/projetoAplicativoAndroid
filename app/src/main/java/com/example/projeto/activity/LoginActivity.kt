@@ -17,11 +17,6 @@ import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
 
-private val retrofit = Retrofit.Builder()
-    .addConverterFactory(GsonConverterFactory.create())
-    .baseUrl("http://192.168.31.75/")
-    .build()
-    .create(LoginActivity.EnviaUsuario::class.java)
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
@@ -32,61 +27,82 @@ class LoginActivity : AppCompatActivity() {
         setContentView(view)
         funcaoBotoes()
     }
+    private fun servicoRetrofit(): EnviaUsuario{
+        return Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl("http://192.168.31.75/")
+            .build()
+            .create(EnviaUsuario::class.java)
+    }
+
     private fun funcaoBotoes() {
         binding.buttonAjuda.setOnClickListener {
-            val url = "https://api.whatsapp.com/send/?phone=5581986271986&text&type=phone_number&app_absent=0"
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-            startActivity(intent)
+            openUrl("https://api.whatsapp.com/send/?phone=5581986271986&text&type=phone_number&app_absent=0")
         }
 
         binding.btnEntrar.setOnClickListener {
-            // isDone verifica se o usuario preencheu todos os campos
-            // unMasked recupera os dados sem a máscara
-            val isDone = binding.editTextCpf.isDone
-            if (isDone){ // verifica se o usuario digitou os dados corretamente
-                val usuario = Usuario()
-                usuario.cpf = binding.editTextCpf.unMasked
-                usuario.senha = binding.editTextSenha.text.toString()
-                chamaAPI(usuario)
-            } else {
-                Toast.makeText(this,"Ops!, Preencha um CPF válido.", Toast.LENGTH_SHORT).show()
-                }
+            loginUsuario()
         }
     }
+
+    private fun loginUsuario() {
+        // isDone verifica se o usuario preencheu todos os campos
+        // unMasked recupera os dados sem a máscara
+        val isDone = binding.editTextCpf.isDone
+        if (isDone) { // verifica se o usuario digitou os dados corretamente
+            val usuario = Usuario()
+            usuario.cpf = binding.editTextCpf.unMasked
+            usuario.senha = binding.editTextSenha.text.toString()
+            chamaAPI(usuario)
+        } else {
+            Toast.makeText(this, "Ops!, Preencha um CPF válido.", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     private fun chamaAPI(usuario: Usuario) {
-        retrofit.setUsuario(usuario.cpf, usuario.senha).enqueue(object :
+        val servico = servicoRetrofit()
+        servico.setUsuario(usuario.cpf, usuario.senha).enqueue(object :
             Callback<Usuario> {
             override fun onFailure(call: Call<Usuario>, t: Throwable) {
                 Log.d("Erro", t.toString())
             }
-
             override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
-                if (response.isSuccessful) {
-                    response.body()?.let {
-                        if (response.body()!!.cpf == "vazio") {
-                            exibeToast(false)
-                        } else {
-                            exibeToast(true)
-                            val nomeUsuario = response.body()?.nome
-                            val plano = response.body()?.plano
-                            val vencimento = response.body()?.vencimento
-                            val cidade = response.body()?.cidade
-                            val rua = response.body()?.rua
-                            val intent = Intent(this@LoginActivity, ClienteActivity::class.java)
-                            intent.putExtra("nomeUsuario", nomeUsuario)
-                            intent.putExtra("plano", plano)
-                            intent.putExtra("vencimento",vencimento)
-                            intent.putExtra("cidade", cidade)
-                            intent.putExtra("rua", rua)
-                            startActivity(intent)
-                            finish()
-                            // Limpa os campos depois de efetuar o login
-                            limpaCampos()
-                        }
-                    }
-                }
+                handleResponse(response)
+
             }
         })
+    }
+    private fun handleResponse(response: Response<Usuario>) {
+        if (response.isSuccessful) {
+            response.body()?.let {
+                if (it.cpf == "vazio") {
+                    exibeToast(false)
+                } else {
+                    // Mensangem
+                    exibeToast(true)
+                    // Dados que seram enviados para ClienteActivity
+                    dadosActivity(it)
+                    // Limpa os campos depois de efetuar o login
+                    limpaCampos()
+                }
+            }
+        }
+    }
+
+    private fun dadosActivity(usuario: Usuario) {
+        val intent = Intent(this@LoginActivity, ClienteActivity::class.java)
+        intent.putExtra("nomeUsuario", usuario.nome)
+        intent.putExtra("nascimento", usuario.nascimento)
+        intent.putExtra("plano", usuario.plano)
+        intent.putExtra("vencimento", usuario.vencimento)
+        intent.putExtra("cidade", usuario.cidade)
+        intent.putExtra("rua", usuario.rua)
+        intent.putExtra("numero", usuario.numero)
+        intent.putExtra("bairro", usuario.bairro)
+        intent.putExtra("estado", usuario.estado)
+
+        startActivity(intent)
+        finish()
     }
 
     private fun exibeToast(respostaServidor: Boolean) {
@@ -114,5 +130,10 @@ class LoginActivity : AppCompatActivity() {
             ): Call<Usuario>
 
     }
-    
+    private fun openUrl(url: String) {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        startActivity(intent)
+    }
+
+
 }

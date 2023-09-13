@@ -68,7 +68,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/background_botao"
         android:onClick="validarAutenticacao"
-        android:text= "@string/botaoAcessar" />
+        android:text="@string/botaoAcessar" />
 
     <TextView
         android:id="@+id/button_ajuda"

@@ -1,11 +1,14 @@
 package com.example.projeto.activity
 
-import android.app.Dialog
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.TypedValue
+import android.widget.Button
 
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.projeto.R
 
@@ -20,85 +23,89 @@ class ClienteActivity : AppCompatActivity() {
         binding = ActivityClienteBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
         // Ação dos botões
         botoesScroll()
         // Dados do cliente
         dadosAPI()
-
     }
+     @SuppressLint("SetTextI18n")
      private fun dadosAPI() {
 
+         val extras = intent.extras ?: return
+
         // Trazendo dados para a activity
-        val nomeUsuario = intent.getStringExtra("nomeUsuario")
-        binding.textViewNome.text = nomeUsuario
+         val nomeUsuario = intent.getStringExtra("nomeUsuario")
+         binding.textViewNome.text = nomeUsuario
 
-        val plano = intent.getStringExtra("plano")
-        binding.plano.text = plano
+         binding.plano.text = extras.getString("plano")
 
-        val vencimento = intent.getStringExtra("vencimento")
-        binding.vencimento.text = vencimento
+         binding.vencimento.text = extras.getString("vencimento")
 
-         val cidade = intent.getStringExtra("cidade")
-
-         val rua = intent.getStringExtra("rua")
-
-
+         val cidade =  extras.getString("cidade")
+         val rua =  extras.getString("rua")
+         val nascimento =  extras.getString("nascimento")
+         val numeroCasa =  extras.getString("numero")
+         val bairroCasa =  extras.getString("bairro")
+         val estado =  extras.getString("estado")
 
          // Botao criado para exibição de dados do cliente usando popup
+         binding.maisDados.setOnClickListener{
+             val builder = AlertDialog.Builder(this)
+             builder.setTitle("Dados do Cliente")
 
-         binding.maisDados.setOnClickListener(){
-             val dialog = Dialog(this@ClienteActivity)
-             dialog.setContentView(R.layout.popup)
+             val inflater = layoutInflater
+             val dialogLayout = inflater.inflate(R.layout.popup, null)
+             builder.setView(dialogLayout)
 
-             val nome = dialog.findViewById<TextView>(R.id.nomeCliente)
-             nome.text = nomeUsuario
+             val dialog = builder.create()
+             // Personaliza o estilo do popup
+             dialog.window?.setBackgroundDrawableResource(R.drawable.backgroud_popup)
 
-             val ruaCliente = dialog.findViewById<TextView>(R.id.ruaCliente)
-             ruaCliente.text = rua
+             // dados do cliente no popup
+             val nome = dialogLayout.findViewById<TextView>(R.id.nome)
+             nome.text = "Nome: $nomeUsuario"
 
-             val cidadeAtual = dialog.findViewById<TextView>(R.id.cidadeCliente)
-             cidadeAtual.text = cidade
+             val ruaCliente = dialogLayout.findViewById<TextView>(R.id.endereco)
+             ruaCliente.text = "End: $rua, n° $numeroCasa"
+             fontSizeAut(35, rua!!, ruaCliente)
 
-//             val buttonFechar = dialog.findViewById<Button>(R.id.buttonFechar)
-//             buttonFechar.setOnClickListener {
-//                 dialog.dismiss() // Fecha o diálogo quando o botão "Fechar" é clicado
-//             }
+             val cidadeAtual = dialogLayout.findViewById<TextView>(R.id.cidade)
+             cidadeAtual.text = "Cidade: $cidade, $estado"
+
+             val nasc = dialogLayout.findViewById<TextView>(R.id.nascimento)
+             nasc.text = "Nascimento: $nascimento"
+
+             val bairro = dialogLayout.findViewById<TextView>(R.id.bairro)
+             bairro.text = "Bairro: $bairroCasa"
+
+             // Fechar o popup quando o botão "OK" é clicado
+             val buttonOk = dialogLayout.findViewById<Button>(R.id.button_ok)
+             buttonOk.setOnClickListener {
+                 dialog.dismiss()
+             }
              dialog.show()
-
-
          }
 
     }
-
-
     private fun botoesScroll(){
 
-        this.binding.siteApcTecnologia.setOnClickListener{
-            val site = "http://arteempc.com.br:6565/"
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(site))
-            startActivity(intent)
+        binding.site.setOnClickListener{
+            openUrl("http://arteempc.com.br:6565/")
         }
 
-        this.binding.whatsappApcTecnologia.setOnClickListener {
-            val whatsapp = "https://api.whatsapp.com/send/?phone=5581986271986&text&type=phone_number&app_absent=0"
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(whatsapp))
-            startActivity(intent)
+        binding.whatsapp.setOnClickListener {
+            openUrl("https://api.whatsapp.com/send/?phone=5581986271986&text&type=phone_number&app_absent=0")
         }
 
-        this.binding.facebookApcTecnologia.setOnClickListener {
-            val facebook = "https://www.facebook.com/ARTEEMPC?mibextid=ZbWKwL"
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(facebook))
-            startActivity(intent)
+        binding.facebook.setOnClickListener {
+            openUrl("https://www.facebook.com/ARTEEMPC?mibextid=ZbWKwL")
         }
 
-        this.binding.instagramApcTecnologia.setOnClickListener{
-            val instagram = "https://www.instagram.com/arteempc/"
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(instagram))
-            startActivity(intent)
+        binding.instagram.setOnClickListener{
+            openUrl("https://www.instagram.com/arteempc/")
         }
         // Scroll
-        this.binding.centralClienteScroll.setOnClickListener{
+        binding.centralCliente.setOnClickListener{
             val telefone = "8134356078"
             val intent = Intent(Intent.ACTION_DIAL)
             intent.data =Uri.parse("tel:$telefone")
@@ -109,6 +116,18 @@ class ClienteActivity : AppCompatActivity() {
             val intent = Intent(this, WebSpeedTestActivity::class.java)
             startActivity(intent)
         }
+    }
+    fun fontSizeAut(tamanhoMaximo: Int, dadoAPI: String, textview: TextView){
+        // função para diminuir o texto quando ele estiver muito grande no TextView
+        if(dadoAPI.length > tamanhoMaximo){
+            textview.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16.toFloat())
+        }
+
+    }
+
+    private fun openUrl(url: String){
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        startActivity(intent)
     }
 
 

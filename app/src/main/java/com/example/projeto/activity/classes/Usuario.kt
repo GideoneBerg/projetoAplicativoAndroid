@@ -12,6 +12,9 @@ class Usuario {
    lateinit var rua: String
    lateinit var numero: String
    lateinit var bairro: String
+   lateinit var estado: String
+
+
 
 
 }
