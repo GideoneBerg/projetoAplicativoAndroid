@@ -7,15 +7,15 @@
     android:background="@drawable/new_background"
     android:descendantFocusability="beforeDescendants"
     android:orientation="vertical"
-    android:paddingLeft="32dp"
-    android:paddingRight="32dp"
+    android:paddingLeft="22dp"
+    android:paddingRight="22dp"
     tools:context=".activity.ClienteActivity">
 
 
     <ImageView
         android:id="@+id/image_logo_cliente"
-        android:layout_width="93dp"
-        android:layout_height="67dp"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
         android:layout_alignParentTop="true"
         android:layout_gravity="left"
         android:layout_marginTop="24dp"
@@ -89,7 +89,7 @@
         android:id="@+id/plano"
         android:layout_width="171dp"
         android:layout_height="122dp"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="14dp"
         android:layout_marginTop="5dp"
         android:background="@drawable/background_plano_vencimento"
         android:gravity="center"
@@ -130,7 +130,6 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-
             android:orientation="horizontal">
 
 

@@ -30,7 +30,8 @@ class LoginActivity : AppCompatActivity() {
     private fun servicoRetrofit(): EnviaUsuario{
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl("http://192.168.31.75/")
+//          .baseUrl("http://10.0.2.2/") //virtual
+            .baseUrl("http://192.168.31.75")
             .build()
             .create(EnviaUsuario::class.java)
     }
@@ -51,7 +52,7 @@ class LoginActivity : AppCompatActivity() {
         val isDone = binding.editTextCpf.isDone
         if (isDone) { // verifica se o usuario digitou os dados corretamente
             val usuario = Usuario()
-            usuario.cpf = binding.editTextCpf.unMasked
+            usuario.cpf = binding.editTextCpf.text.toString()
             usuario.senha = binding.editTextSenha.text.toString()
             chamaAPI(usuario)
         } else {
@@ -72,6 +73,7 @@ class LoginActivity : AppCompatActivity() {
             }
         })
     }
+    //Resposta do servidor
     private fun handleResponse(response: Response<Usuario>) {
         if (response.isSuccessful) {
             response.body()?.let {

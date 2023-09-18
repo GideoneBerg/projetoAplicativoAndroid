@@ -51,7 +51,7 @@ class ClienteActivity : AppCompatActivity() {
          // Botao criado para exibição de dados do cliente usando popup
          binding.maisDados.setOnClickListener{
              val builder = AlertDialog.Builder(this)
-             builder.setTitle("Dados do Cliente")
+//             builder.setTitle("Dados do Cliente")
 
              val inflater = layoutInflater
              val dialogLayout = inflater.inflate(R.layout.popup, null)
@@ -67,7 +67,6 @@ class ClienteActivity : AppCompatActivity() {
 
              val ruaCliente = dialogLayout.findViewById<TextView>(R.id.endereco)
              ruaCliente.text = "End: $rua, n° $numeroCasa"
-             fontSizeAut(35, rua!!, ruaCliente)
 
              val cidadeAtual = dialogLayout.findViewById<TextView>(R.id.cidade)
              cidadeAtual.text = "Cidade: $cidade, $estado"
@@ -79,6 +78,7 @@ class ClienteActivity : AppCompatActivity() {
              bairro.text = "Bairro: $bairroCasa"
 
              // Fechar o popup quando o botão "OK" é clicado
+
              val buttonOk = dialogLayout.findViewById<Button>(R.id.button_ok)
              buttonOk.setOnClickListener {
                  dialog.dismiss()
@@ -116,14 +116,66 @@ class ClienteActivity : AppCompatActivity() {
             val intent = Intent(this, WebSpeedTestActivity::class.java)
             startActivity(intent)
         }
-    }
-    fun fontSizeAut(tamanhoMaximo: Int, dadoAPI: String, textview: TextView){
-        // função para diminuir o texto quando ele estiver muito grande no TextView
-        if(dadoAPI.length > tamanhoMaximo){
-            textview.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16.toFloat())
+
+        binding.sobre.setOnClickListener{
+            val intent = Intent(this, SobreMainActivity::class.java)
+            startActivity(intent)
         }
 
+        binding.segundaVia.setOnClickListener{
+            val builder = AlertDialog.Builder(this)
+//             builder.setTitle("Dados do Cliente")
+
+            val inflater = layoutInflater
+            val dialogLayout = inflater.inflate(R.layout.popup_segunda_via, null)
+            builder.setView(dialogLayout)
+
+            val dialog = builder.create()
+            // Personaliza o estilo do popup
+            dialog.window?.setBackgroundDrawableResource(R.drawable.background_popup_segundavia)
+
+
+
+            // Fechar o popup quando o botão "OK" é clicado
+
+            val buttonOk = dialogLayout.findViewById<Button>(R.id.button_ok)
+            buttonOk.setOnClickListener {
+                dialog.dismiss()
+            }
+            dialog.show()
+        }
+
+        binding.pagamentoPix.setOnClickListener{
+            val builder = AlertDialog.Builder(this)
+//             builder.setTitle("Dados do Cliente")
+
+            val inflater = layoutInflater
+            val dialogLayout = inflater.inflate(R.layout.popup_segunda_via, null)
+            builder.setView(dialogLayout)
+
+            val dialog = builder.create()
+            // Personaliza o estilo do popup
+            dialog.window?.setBackgroundDrawableResource(R.drawable.background_popup_segundavia)
+
+
+
+            // Fechar o popup quando o botão "OK" é clicado
+
+            val buttonOk = dialogLayout.findViewById<Button>(R.id.button_ok)
+            buttonOk.setOnClickListener {
+                dialog.dismiss()
+            }
+            dialog.show()
+        }
     }
+    // Função feita para diminuir o tamanho do texto da activity
+//    fun fontSizeAut(tamanhoMaximo: Int, dadoAPI: String, textview: TextView){
+//        // função para diminuir o texto quando ele estiver muito grande no TextView
+//        if(dadoAPI.length > tamanhoMaximo){
+//            textview.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16.toFloat())
+//        }
+//
+//    }
 
     private fun openUrl(url: String){
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
