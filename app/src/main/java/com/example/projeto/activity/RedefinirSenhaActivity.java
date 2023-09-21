@@ -22,6 +22,8 @@ import com.example.projeto.R;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RedefinirSenhaActivity extends AppCompatActivity {
 
@@ -35,6 +37,13 @@ public class RedefinirSenhaActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String email = editText.getText().toString();
+
+                if (!isValidEmail(email)) {
+                    // Exibir uma mensagem de erro ao usuário
+                    editText.setError("Email inválido");
+                    return;
+                }
                 progressBar.setVisibility(View.VISIBLE);
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
                 String url ="http://192.168.31.75/Login/reset_password.php";
@@ -92,5 +101,16 @@ public class RedefinirSenhaActivity extends AppCompatActivity {
             }
    });
 }
+
+    private boolean isValidEmail(CharSequence email) {
+        Pattern pattern = Pattern.compile(EMAIL_PATTERN);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
+
+    private static final String EMAIL_PATTERN =
+            "[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}";
+
+
 
 }

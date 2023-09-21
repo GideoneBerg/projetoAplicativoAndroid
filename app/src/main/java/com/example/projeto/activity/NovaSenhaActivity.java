@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -53,8 +54,6 @@ public class NovaSenhaActivity extends AppCompatActivity {
                                     startActivity(intent);
                                     finish();
 
-
-
                                 } else
                                     Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
 
@@ -76,6 +75,12 @@ public class NovaSenhaActivity extends AppCompatActivity {
                         return paramV;
                     }
                 };
+
+                stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                        5000, // timeout em milissegundos
+                        DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                        DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+                ));
                 queue.add(stringRequest);
 
             }
