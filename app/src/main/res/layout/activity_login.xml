@@ -71,6 +71,17 @@
         android:text="@string/botaoAcessar" />
 
     <TextView
+        android:id="@+id/text_esqueci_senha"
+        android:layout_width="wrap_content"
+        android:layout_height="28dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="60dp"
+        android:fontFamily="sans-serif"
+        android:text="@string/esqueceu_sua_senha"
+        android:textAlignment="center"
+        android:textSize="18sp" />
+
+    <TextView
         android:id="@+id/button_ajuda"
         android:layout_width="wrap_content"
         android:layout_height="28dp"

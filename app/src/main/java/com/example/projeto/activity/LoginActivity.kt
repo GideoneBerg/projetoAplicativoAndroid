@@ -31,12 +31,19 @@ class LoginActivity : AppCompatActivity() {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
 //          .baseUrl("http://10.0.2.2/") //virtual
-            .baseUrl("http://192.168.31.75")
+            .baseUrl("http://192.168.31.75/") // casa
+//            .baseUrl("http://192.168.100.181/") // ETE
             .build()
             .create(EnviaUsuario::class.java)
     }
 
     private fun funcaoBotoes() {
+        binding.textEsqueciSenha.setOnClickListener{
+            val intent = Intent(this, RedefinirSenhaActivity::class.java)
+            startActivity(intent)
+
+        }
+
         binding.buttonAjuda.setOnClickListener {
             openUrl("https://api.whatsapp.com/send/?phone=5581986271986&text&type=phone_number&app_absent=0")
         }
