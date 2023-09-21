@@ -33,5 +33,9 @@
         dados produtividade e redução de custos \npara a satisfação de nossos clientes, seja \n
         residencial ou corporativo.</string>
     <string name="esqueceu_sua_senha">Esqueceu sua senha?</string>
+    <string name="insira_o_token">Insira o Token</string>
+    <string name="nova_senha">Nova Senha</string>
+    <string name="insira_seu_email_aqui">Insira seu Email Aqui</string>
+    <string name="enviar">Enviar</string>
 
 </resources>
