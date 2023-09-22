@@ -1,24 +1,28 @@
 package com.example.projeto.activity
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.android.volley.DefaultRetryPolicy
-import com.android.volley.Response
-import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
 import com.example.projeto.R
 import com.example.projeto.databinding.ActivityNovaSenhaBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
+import retrofit2.http.POST
 
 class NovaSenhaActivity : AppCompatActivity() {
     private lateinit var binding: ActivityNovaSenhaBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityNovaSenhaBinding.inflate(layoutInflater)
@@ -35,53 +39,61 @@ class NovaSenhaActivity : AppCompatActivity() {
         val button = findViewById<Button>(R.id.btnEnviar)
         button.setOnClickListener {
             progressBar.visibility = View.VISIBLE
-            val queue = Volley.newRequestQueue(applicationContext)
-            val url = "http://192.168.31.75/Login/new_password.php"
-            val stringRequest: StringRequest = object : StringRequest(
-                Method.POST, url,
-                Response.Listener<String> { response ->
+
+            val retrofit = Retrofit.Builder()
+                .baseUrl("http://192.168.31.75/Login/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+
+            val apiService = retrofit.create(ApiService::class.java)
+            val call = apiService.submitData(email!!, editTextOPT.text.toString(), editTextNewPassword.text.toString())
+            call.enqueue(object : Callback<String> {
+                override fun onResponse(call: Call<String>, response: Response<String>) {
                     progressBar.visibility = View.GONE
-                    if (response == "success") {
-                        Toast.makeText(
-                            applicationContext,
-                            "Nova Senha Definida com Sucesso",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        val intent = Intent(applicationContext, LoginActivity::class.java)
-                        startActivity(intent)
-                        finish()
-                    } else Toast.makeText(applicationContext, response, Toast.LENGTH_SHORT).show()
-                }, Response.ErrorListener { error ->
-                    progressBar.visibility = View.GONE
-                    error.printStackTrace()
-                }) {
-                override fun getParams(): Map<String, String>? {
-                    val paramV: MutableMap<String, String> = HashMap()
-                    paramV["email"] = email!!
-                    paramV["otp"] = editTextOPT.text.toString()
-                    paramV["new-password"] = editTextNewPassword.text.toString()
-                    return paramV
+                    if (response.isSuccessful) {
+                        val responseBody = response.body()
+                        if (responseBody == "success") {
+                            Toast.makeText(
+                                applicationContext,
+                                "Nova Senha Definida",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            val intent = Intent(applicationContext, LoginActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        } else {
+                            Toast.makeText(applicationContext, responseBody, Toast.LENGTH_SHORT).show()
+                        }
+                    } else {
+                        Toast.makeText(applicationContext, "Erro na requisição", Toast.LENGTH_SHORT).show()
+                    }
                 }
-            }
-            stringRequest.retryPolicy = DefaultRetryPolicy(
-                5000,  // timeout em milissegundos
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
-            )
-            queue.add(stringRequest)
+
+                override fun onFailure(call: Call<String>, t: Throwable) {
+                    progressBar.visibility = View.GONE
+                    Toast.makeText(applicationContext, "Erro na requisição", Toast.LENGTH_SHORT).show()
+                    t.printStackTrace()
+                }
+            })
         }
     }
 
-    private fun dadosAPI(){
-
+    @SuppressLint("SetTextI18n")
+    private fun dadosAPI() {
         val extras = intent.extras ?: return
 
         val linkEmail = extras.getString("email")
 
         binding.linkemail.text = "Verifique seu E-mail $linkEmail"
-
-
-
     }
 
+    interface ApiService {
+        @FormUrlEncoded
+        @POST("new_password.php")
+        fun submitData(
+            @Field("email") email: String,
+            @Field("otp") otp: String,
+            @Field("new-password") newPassword: String
+        ): Call<String>
+    }
 }
