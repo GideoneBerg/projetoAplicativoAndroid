@@ -1,6 +1,5 @@
 package com.example.projeto.activity
 
-
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -9,18 +8,23 @@ import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.android.volley.Response
-import com.android.volley.RetryPolicy
-import com.android.volley.VolleyError
-import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
 import com.example.projeto.R
+
+
 import com.example.projeto.databinding.ActivityRedefinirSenhaBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
+import retrofit2.http.POST
 import java.util.regex.Pattern
 
 class RedefinirSenhaActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityRedefinirSenhaBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRedefinirSenhaBinding.inflate(layoutInflater)
@@ -30,6 +34,14 @@ class RedefinirSenhaActivity : AppCompatActivity() {
         val editText = findViewById<EditText>(R.id.email)
         val button = findViewById<Button>(R.id.btnEnviar)
         val progressBar = findViewById<ProgressBar>(R.id.progressBar)
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http://192.168.31.75/Login/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val service = retrofit.create(APIInterface::class.java)
+
         button.setOnClickListener(View.OnClickListener {
             val email = editText.text.toString()
             if (!isValidEmail(email)) {
@@ -37,49 +49,37 @@ class RedefinirSenhaActivity : AppCompatActivity() {
                 editText.error = "Email inválido"
                 return@OnClickListener
             }
+
             progressBar.visibility = View.VISIBLE
             button.visibility = View.INVISIBLE
-            val queue = Volley.newRequestQueue(applicationContext)
-            val url = "http://192.168.31.75/Login/reset_password.php"
-            val stringRequest: StringRequest = object : StringRequest(
-                Method.POST, url,
-                Response.Listener<String> { response ->
+
+            val call = service.resetPassword(email)
+            call.enqueue(object : Callback<String> {
+                override fun onResponse(call: Call<String>, response: Response<String>) {
                     progressBar.visibility = View.GONE
-                    if (response == "success") {
-                        val intent = Intent(applicationContext, NovaSenhaActivity::class.java)
-                        intent.putExtra("email", editText.text.toString())
-                        startActivity(intent)
-                        finish()
+                    if (response.isSuccessful) {
+                        val result = response.body()
+                        if (result == "success") {
+                            val intent = Intent(applicationContext, NovaSenhaActivity::class.java)
+                            intent.putExtra("email", email)
+                            startActivity(intent)
+                            finish()
+                        } else {
+                            Toast.makeText(applicationContext, result, Toast.LENGTH_SHORT).show()
+                            button.visibility = View.VISIBLE
+                        }
                     } else {
-                        Toast.makeText(applicationContext, response, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(applicationContext, "Error: ${response.code()}", Toast.LENGTH_SHORT).show()
                         button.visibility = View.VISIBLE
                     }
-                }, Response.ErrorListener { error ->
+                }
+
+                override fun onFailure(call: Call<String>, t: Throwable) {
                     button.visibility = View.VISIBLE
                     progressBar.visibility = View.GONE
-                    error.printStackTrace()
-                }) {
-                override fun getParams(): Map<String, String>? {
-                    val paramV: MutableMap<String, String> = HashMap()
-                    paramV["email"] = editText.text.toString()
-                    return paramV
+                    Toast.makeText(applicationContext, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
                 }
-            }
-            // definindo um tempo para verificar o email
-            stringRequest.retryPolicy = object : RetryPolicy {
-                override fun getCurrentTimeout(): Int {
-                    return 30000
-                }
-
-                override fun getCurrentRetryCount(): Int {
-                    return 30000
-                }
-
-                @Throws(VolleyError::class)
-                override fun retry(error: VolleyError) {
-                }
-            }
-            queue.add(stringRequest)
+            })
         })
     }
 
@@ -92,5 +92,10 @@ class RedefinirSenhaActivity : AppCompatActivity() {
     companion object {
         // mascara do email
         private const val EMAIL_PATTERN = "[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}"
+    }
+    interface APIInterface {
+        @POST("reset_password.php")
+        @FormUrlEncoded
+        fun resetPassword(@Field("email") email: String): Call<String>
     }
 }
