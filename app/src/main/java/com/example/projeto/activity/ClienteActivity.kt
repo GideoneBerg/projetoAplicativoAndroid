@@ -34,10 +34,9 @@ class ClienteActivity : AppCompatActivity() {
 
         // Trazendo dados para a activity
          val nomeUsuario = intent.getStringExtra("nomeUsuario")
+
          binding.textViewNome.text = nomeUsuario
-
          binding.plano.text = extras.getString("plano")
-
          binding.vencimento.text = extras.getString("vencimento")
 
          val cidade =  extras.getString("cidade")
@@ -167,14 +166,7 @@ class ClienteActivity : AppCompatActivity() {
             dialog.show()
         }
     }
-    // Função feita para diminuir o tamanho do texto da activity
-//    fun fontSizeAut(tamanhoMaximo: Int, dadoAPI: String, textview: TextView){
-//        // função para diminuir o texto quando ele estiver muito grande no TextView
-//        if(dadoAPI.length > tamanhoMaximo){
-//            textview.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16.toFloat())
-//        }
-//
-//    }
+
 
     private fun openUrl(url: String){
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))

@@ -2,10 +2,12 @@ package com.example.projeto.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.DefaultRetryPolicy
@@ -13,13 +15,21 @@ import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.projeto.R
+import com.example.projeto.databinding.ActivityNovaSenhaBinding
 
 class NovaSenhaActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityNovaSenhaBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_nova_senha)
+        binding = ActivityNovaSenhaBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+
+        dadosAPI()
+
         val email = intent.extras!!.getString("email")
-        val editTextNewPassword = findViewById<EditText>(R.id.new_password)
+
+        val editTextNewPassword = findViewById<EditText>(R.id.newpassword)
         val editTextOPT = findViewById<EditText>(R.id.otp)
         val progressBar = findViewById<ProgressBar>(R.id.progressBar)
         val button = findViewById<Button>(R.id.btnEnviar)
@@ -61,4 +71,17 @@ class NovaSenhaActivity : AppCompatActivity() {
             queue.add(stringRequest)
         }
     }
+
+    private fun dadosAPI(){
+
+        val extras = intent.extras ?: return
+
+        val linkEmail = extras.getString("email")
+
+        binding.linkemail.text = "Verifique seu E-mail $linkEmail"
+
+
+
+    }
+
 }

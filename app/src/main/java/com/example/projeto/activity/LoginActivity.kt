@@ -72,31 +72,29 @@ class LoginActivity : AppCompatActivity() {
         servico.setUsuario(usuario.cpf, usuario.senha).enqueue(object :
             Callback<Usuario> {
             override fun onFailure(call: Call<Usuario>, t: Throwable) {
+                // registra informações de erro
                 Log.d("Erro", t.toString())
             }
             override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
-                handleResponse(response)
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        if (it.cpf == "vazio") {
+                            exibeToast(false)
+                        } else {
+                            // Mensangem
+                            exibeToast(true)
+                            // Dados que seram enviados para ClienteActivity
+                            dadosActivity(it)
+                            // Limpa os campos depois de efetuar o login
+                            limpaCampos()
+                        }
+                    }
+                }
 
             }
         })
     }
-    //Resposta do servidor
-    private fun handleResponse(response: Response<Usuario>) {
-        if (response.isSuccessful) {
-            response.body()?.let {
-                if (it.cpf == "vazio") {
-                    exibeToast(false)
-                } else {
-                    // Mensangem
-                    exibeToast(true)
-                    // Dados que seram enviados para ClienteActivity
-                    dadosActivity(it)
-                    // Limpa os campos depois de efetuar o login
-                    limpaCampos()
-                }
-            }
-        }
-    }
+
 
     private fun dadosActivity(usuario: Usuario) {
         val intent = Intent(this@LoginActivity, ClienteActivity::class.java)

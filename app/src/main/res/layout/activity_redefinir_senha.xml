@@ -35,6 +35,7 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/background_botao"
         android:text="@string/enviar"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/progressBar" />
@@ -50,6 +51,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/email" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

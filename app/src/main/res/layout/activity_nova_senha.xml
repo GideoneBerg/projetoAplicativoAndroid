@@ -8,6 +8,19 @@
     android:padding="20dp"
     tools:context=".activity.NovaSenhaActivity">
 
+    <TextView
+        android:id="@+id/linkemail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="E-mail"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:fontFamily="sans-serif-light"
+        app:layout_constraintBottom_toTopOf="@+id/otp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <EditText
         android:id="@+id/otp"
         android:layout_width="match_parent"
@@ -30,7 +43,7 @@
         />
 
     <EditText
-        android:id="@+id/new_password"
+        android:id="@+id/newpassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -60,7 +73,7 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/new_password" />
+        app:layout_constraintTop_toBottomOf="@+id/newpassword" />
 
     <Button
         android:id="@+id/btnEnviar"

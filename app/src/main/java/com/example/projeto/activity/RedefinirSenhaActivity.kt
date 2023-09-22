@@ -1,5 +1,6 @@
 package com.example.projeto.activity
 
+
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -14,12 +15,18 @@ import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.projeto.R
+import com.example.projeto.databinding.ActivityRedefinirSenhaBinding
 import java.util.regex.Pattern
 
 class RedefinirSenhaActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityRedefinirSenhaBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_redefinir_senha)
+        binding = ActivityRedefinirSenhaBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+
         val editText = findViewById<EditText>(R.id.email)
         val button = findViewById<Button>(R.id.btnEnviar)
         val progressBar = findViewById<ProgressBar>(R.id.progressBar)
@@ -31,6 +38,7 @@ class RedefinirSenhaActivity : AppCompatActivity() {
                 return@OnClickListener
             }
             progressBar.visibility = View.VISIBLE
+            button.visibility = View.INVISIBLE
             val queue = Volley.newRequestQueue(applicationContext)
             val url = "http://192.168.31.75/Login/reset_password.php"
             val stringRequest: StringRequest = object : StringRequest(
@@ -42,8 +50,12 @@ class RedefinirSenhaActivity : AppCompatActivity() {
                         intent.putExtra("email", editText.text.toString())
                         startActivity(intent)
                         finish()
-                    } else Toast.makeText(applicationContext, response, Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(applicationContext, response, Toast.LENGTH_SHORT).show()
+                        button.visibility = View.VISIBLE
+                    }
                 }, Response.ErrorListener { error ->
+                    button.visibility = View.VISIBLE
                     progressBar.visibility = View.GONE
                     error.printStackTrace()
                 }) {
