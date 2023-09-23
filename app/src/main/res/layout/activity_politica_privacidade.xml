@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/new_background"
+    android:padding="20dp"
+    tools:context=".activity.PoliticaPrivacidadeActivity">
+
+    <!--  transparencia da imagem  android:alpha="0.5"-->
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="83dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logotipo"
+        android:contentDescription="@string/logoartepc" />
+
+    <TextView
+        android:id="@+id/politica"
+        android:layout_width="340dp"
+        android:layout_height="27dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/abel"
+        android:text="@string/politica_de_privacidade"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="34dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/politica">
+
+        <TextView
+            android:id="@+id/textpolitica"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/politica"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="18sp"
+            tools:layout_editor_absoluteX="-180dp"
+            tools:layout_editor_absoluteY="348dp" />
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
