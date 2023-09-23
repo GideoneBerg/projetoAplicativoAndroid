@@ -54,39 +54,36 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <Button
-        android:id="@+id/button_cliente"
+        android:id="@+id/buttonCliente"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
         android:background="@drawable/background_inicio_botao"
-        android:onClick="button_cliente"
         android:text="@string/text_cliente"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <Button
-        android:id="@+id/button_newCliente"
+        android:id="@+id/buttonNewCliente"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:background="@drawable/background_inicio_botao"
-        android:onClick="button_newCliente"
         android:text="@string/text_newcliente"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_planos" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonPlanos" />
 
     <Button
-        android:id="@+id/button_planos"
+        android:id="@+id/buttonPlanos"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:background="@drawable/background_inicio_botao"
-        android:onClick="button_planos"
         android:text="@string/text_planos"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_cliente" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonCliente" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
