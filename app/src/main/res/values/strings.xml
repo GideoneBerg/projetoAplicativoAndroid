@@ -11,6 +11,8 @@
     <string name="planos_consultores">Fale com nossos Consultores!</string>
     <string name="central">Central</string>
     <string name="zap">Whatsapp</string>
+    <string name="cpf">CPF</string>
+    <string name="senha">Senha</string>
     <string name="ajuda">Como podemos ajudar?</string>
     <string name="pagamento_pix">Pagamento\nPix</string>
     <string name="vencimento">Vencimento</string>

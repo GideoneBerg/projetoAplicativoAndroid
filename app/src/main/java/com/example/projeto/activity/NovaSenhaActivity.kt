@@ -41,7 +41,7 @@ class NovaSenhaActivity : AppCompatActivity() {
             progressBar.visibility = View.VISIBLE
 
             val retrofit = Retrofit.Builder()
-                .baseUrl("http://192.168.31.75/Login/")
+                .baseUrl("http://192.168.31.23/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
 
@@ -89,7 +89,7 @@ class NovaSenhaActivity : AppCompatActivity() {
 
     interface ApiService {
         @FormUrlEncoded
-        @POST("new_password.php")
+        @POST("/Login/new_password.php")
         fun submitData(
             @Field("email") email: String,
             @Field("otp") otp: String,

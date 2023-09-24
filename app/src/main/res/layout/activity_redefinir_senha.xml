@@ -5,15 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/new_background"
-    android:padding="20dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
     tools:context=".activity.RedefinirSenhaActivity">
 
 
     <EditText
         android:id="@+id/email"
-        android:layout_width="335dp"
+        android:layout_width="match_parent"
         android:layout_height="49dp"
-        android:layout_marginStart="28dp"
+        android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/background_texto"
         android:fontFamily="sans-serif-light"
@@ -24,10 +25,9 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.432"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.777" />
+        app:layout_constraintTop_toBottomOf="@+id/enviaremosToken"
+        app:layout_constraintVertical_bias="0.1" />
 
     <Button
         android:id="@+id/btnEnviar"
@@ -59,7 +59,7 @@
         android:id="@+id/imageView4"
         android:layout_width="274dp"
         android:layout_height="335dp"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
@@ -96,37 +96,34 @@
 
     <TextView
         android:id="@+id/enviaremosToken"
-        android:layout_width="232dp"
-        android:layout_height="19dp"
-        android:layout_marginStart="-8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="15dp"
         android:fontFamily="@font/assistant_extralight"
         android:text="@string/enviaremos_token"
         android:textAlignment="center"
         android:textColor="#FDF8F8"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/email"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.213"
+        app:layout_constraintHorizontal_bias="0.081"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/envieEmail" />
 
     <TextView
         android:id="@+id/envieEmail"
-        android:layout_width="214dp"
-        android:layout_height="21dp"
-        android:layout_marginStart="-20dp"
-        android:layout_marginTop="56dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="80dp"
         android:drawableRight="@drawable/baseline_email_24"
-        android:drawablePadding="1dp"
+        android:drawablePadding="10dp"
         android:fontFamily="@font/lexend_black"
         android:text="@string/envie_email"
-        android:textAlignment="center"
         android:textColor="#FDF8F8"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.204"
+        app:layout_constraintHorizontal_bias="0.072"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ajudarSenha"
         tools:ignore="UseCompatTextViewDrawableXml" />

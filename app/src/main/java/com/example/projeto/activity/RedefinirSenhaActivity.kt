@@ -36,7 +36,7 @@ class RedefinirSenhaActivity : AppCompatActivity() {
         val progressBar = findViewById<ProgressBar>(R.id.progressBar)
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.31.75/Login/")
+                .baseUrl("http://192.168.31.23/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
@@ -94,7 +94,7 @@ class RedefinirSenhaActivity : AppCompatActivity() {
         private const val EMAIL_PATTERN = "[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}"
     }
     interface APIInterface {
-        @POST("reset_password.php")
+        @POST("/Login/reset_password.php")
         @FormUrlEncoded
         fun resetPassword(@Field("email") email: String): Call<String>
     }
