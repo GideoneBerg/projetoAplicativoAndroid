@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/new_background"
     android:padding="20dp"
-    tools:context=".activity.SobreActivity">
+    tools:context=".activity.SobreApcActivity">
 
     <!--  transparencia da imagem  android:alpha="0.5"-->
 

@@ -21,6 +21,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".activity.SobreApcActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.SobreActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.TermosDeUsoActivity"
             android:exported="false" />
         <activity
@@ -31,9 +37,6 @@
             android:exported="false" />
         <activity
             android:name=".activity.RedefinirSenhaActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activity.SobreActivity"
             android:exported="false" />
         <activity
             android:name=".activity.webView.WebSpeedTestActivity"

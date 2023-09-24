@@ -59,7 +59,7 @@
         android:id="@+id/imageView4"
         android:layout_width="274dp"
         android:layout_height="335dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"

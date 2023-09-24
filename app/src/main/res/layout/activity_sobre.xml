@@ -12,8 +12,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="83dp"
+        android:layout_width="191dp"
+        android:layout_height="133dp"
         android:layout_marginTop="80dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,39 +22,47 @@
 
     <Button
         android:id="@+id/termosUso"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/background_inicio_botao"
-
+        android:layout_width="272dp"
+        android:layout_height="74dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/background_botao_planos"
         android:text="@string/termos_de_uso"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/idpoliticaPrivacidade" />
 
     <Button
         android:id="@+id/sobreApc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
-        android:background="@drawable/background_inicio_botao"
+        android:layout_width="272dp"
+        android:layout_height="74dp"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/background_botao_planos"
         android:text="@string/sobre_apc"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <Button
         android:id="@+id/idpoliticaPrivacidade"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/background_inicio_botao"
+        android:layout_width="272dp"
+        android:layout_height="74dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/background_botao_planos"
         android:text="@string/politica_de_privacidade"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sobreApc" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="283dp"
+        android:layout_height="343dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.156"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/termosUso"
+        app:srcCompat="@drawable/pixels" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/pagina_login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/new_background"
+    android:gravity="center_horizontal|center_vertical"
+    android:orientation="vertical"
+    android:paddingLeft="32dp"
+    android:paddingRight="32dp"
+    android:textAlignment="center"
+    tools:context=".activity.LoginActivity">
+
+
+    <ImageView
+        android:id="@+id/imageApc"
+        android:layout_width="212dp"
+        android:layout_height="198dp"
+        android:layout_marginTop="150dp"
+        android:baselineAligned="false"
+        android:contentDescription="apc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logotipo"
+        tools:srcCompat="@drawable/logotipo" />
+
+    <com.santalu.maskara.widget.MaskEditText
+        android:id="@+id/editTextCpf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/background_texto"
+        android:drawableStart="@drawable/baseline_person_24"
+        android:drawablePadding="6dp"
+        android:ems="11"
+        android:fontFamily="sans-serif-light"
+        android:hint="@string/cpf"
+        android:inputType="number"
+        android:padding="10dp"
+        android:textColor="#FDF8F8"
+        android:textColorHint="#F6F0F2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageApc"
+        app:mask="___.___.___-__"
+        app:maskCharacter="_"
+        app:maskStyle="completable" />
+
+    <EditText
+        android:id="@+id/editTextSenha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/background_texto"
+        android:drawableStart="@drawable/baseline_lock_24"
+        android:drawablePadding="6dp"
+        android:ems="5"
+        android:fontFamily="sans-serif-light"
+        android:hint="@string/senha"
+        android:inputType="textPassword"
+        android:maxLength="8"
+        android:padding="10dp"
+        android:selectAllOnFocus="false"
+        android:singleLine="false"
+        android:textColor="#FDF8F8"
+        android:textColorHint="#F6F0F2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextCpf" />
+
+
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/editTextSenha"
+        app:layout_constraintStart_toStartOf="@+id/editTextSenha"
+        app:layout_constraintTop_toBottomOf="@+id/editTextSenha" />
+
+    <Button
+        android:id="@+id/btnEntrar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/background_botao"
+        android:text="@string/botaoAcessar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextSenha" />
+
+    <TextView
+        android:id="@+id/text_esqueci_senha"
+        android:layout_width="167dp"
+        android:layout_height="20dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="12dp"
+        android:fontFamily="sans-serif-light"
+        android:text="@string/esqueceu_sua_senha"
+        android:textAlignment="center"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnEntrar" />
+
+    <TextView
+        android:id="@+id/button_ajuda"
+        android:layout_width="wrap_content"
+        android:layout_height="28dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="60dp"
+        android:fontFamily="sans-serif-light"
+        android:text="@string/text_ajudaZap"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:drawableStartCompat="@drawable/whatsapp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.481"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_esqueci_senha" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

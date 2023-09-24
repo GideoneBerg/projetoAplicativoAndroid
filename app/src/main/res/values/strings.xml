@@ -2,6 +2,8 @@
     <string name="app_name">APC Tecnologia</string>
     <string name="botaoAcessar">ACESSAR</string>
     <string name="bem_vindo">Olá, Seja Bem vindo ao \n nosso Aplicativo!</string>
+    <string name="bem">Bem Vindo!</string>
+    <string name="insira_informacoes">Por favor insira as informações abaixo para continuar</string>
     <string name="text_ajuda">Em que podemos te \n ajudar hoje?</string>
     <string name="text_cliente">Já sou Cliente</string>
     <string name="text_newcliente">Quero ser Cliente</string>

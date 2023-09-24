@@ -16,7 +16,7 @@ class SobreActivity : AppCompatActivity() {
         setContentView(view)
 
         binding.sobreApc.setOnClickListener {
-            val intent = Intent(this, WebSpeedTestActivity::class.java)
+            val intent = Intent(this, SobreApcActivity::class.java)
             startActivity(intent)
         }
         binding.idpoliticaPrivacidade.setOnClickListener {
