@@ -37,23 +37,33 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="331dp"
+        android:layout_height="658dp"
         android:layout_marginStart="34dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="34dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/politica">
+        app:layout_constraintTop_toBottomOf="@+id/politica"
+        tools:ignore="MissingConstraints">
 
-        <TextView
-            android:id="@+id/textpolitica"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/politica"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="18sp"
-            tools:layout_editor_absoluteX="-180dp"
-            tools:layout_editor_absoluteY="348dp" />
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/textpolitica"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/politica"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:justificationMode="inter_word"
+                android:textAlignment="textStart"
+                android:textSize="18sp"
+                tools:layout_editor_absoluteX="-180dp"
+                tools:layout_editor_absoluteY="348dp" />
+        </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

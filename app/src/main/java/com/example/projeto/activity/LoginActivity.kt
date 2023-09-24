@@ -1,12 +1,15 @@
 package com.example.projeto.activity
 
-
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.projeto.R
 import com.example.projeto.activity.classes.Usuario
 import com.example.projeto.databinding.ActivityLoginBinding
 import retrofit2.Call
@@ -27,6 +30,9 @@ class LoginActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
         funcaoBotoes()
+
+
+
     }
     private fun servicoRetrofit(): EnviaUsuario{
         return Retrofit.Builder()
@@ -69,6 +75,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun chamaAPI(usuario: Usuario) {
+        val progressBar = findViewById<ProgressBar>(R.id.progressBar2)
+        val botaoVisibilidade = findViewById<Button>(R.id.btnEntrar)
         val servico = servicoRetrofit()
         servico.setUsuario(usuario.cpf, usuario.senha).enqueue(object :
             Callback<Usuario> {
@@ -80,10 +88,16 @@ class LoginActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     response.body()?.let {
                         if (it.cpf == "vazio") {
+                            progressBar.visibility = View.GONE
+                            botaoVisibilidade.visibility = View.VISIBLE
+
                             exibeToast(false)
                         } else {
+                            progressBar.visibility = View.VISIBLE
+                            botaoVisibilidade.visibility = View.INVISIBLE
                             // Mensangem
                             exibeToast(true)
+
                             // Dados que seram enviados para ClienteActivity
                             dadosActivity(it)
                             // Limpa os campos depois de efetuar o login

@@ -20,10 +20,12 @@
         android:theme="@style/Base.Theme.Projeto"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-
+        <activity
+            android:name=".activity.TermosDeUsoActivity"
+            android:exported="false" />
         <activity
             android:name=".activity.PoliticaPrivacidadeActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".activity.NovaSenhaActivity"
             android:exported="false" />

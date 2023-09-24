@@ -97,5 +97,51 @@
     <string name="logoartepc">logoArtePC</string>
     <string name="cpf">CPF</string>
     <string name="senha">Senha</string>
+    <string name="termo_de_uso">
+        \n
+        \nEstes Termos de Uso regem o uso do aplicativo móvel do provedor de internet APC fornecido por APC - Tecnologia, uma empresa registrada no Brasil sob o CNPJ 11.599.791/0001-34, com sede em Av. Antonio Cabral de Souza, nº 5000, Bairro Nossa Senhora da Conceição,
+cidade Paulista, CEP 53.425-430. Ao usar o Aplicativo, você concorda em cumprir estes Termos. Se você não concorda com estes Termos, não deve usar o Aplicativo.
+        \n
+        \n
+        \n1. Uso do Aplicativo
+        \n
+        \n1.1. Conta do Usuário: \nPara acessar algumas funcionalidades do Aplicativo, você pode ser solicitado a criar uma conta de usuário. Você é responsável por manter a confidencialidade de suas credenciais de acesso.
+        \n
+        \n1.2. Uso Aceitável: \nVocê concorda em usar o Aplicativo de acordo com todas as leis e regulamentos brasileiros aplicáveis e em conformidade com estes Termos. Você não deve usar o Aplicativo para fins ilegais, prejudiciais ou antiéticos.
+        \n
+        \n2. Serviços de Internet
+        \n
+        \n2.1. Qualidade do Serviço: \nForneceremos serviços de internet conforme descrito em seu contrato de serviço. Fazemos esforços razoáveis para garantir a disponibilidade e a qualidade dos serviços, mas não garantimos que o serviço será ininterrupto ou isento de erros.
+
+        \n2.2. Uso Responsável: \nVocê concorda em usar os serviços de internet de forma responsável e em conformidade com qualquer política de uso justo que possa ser aplicável.
+        \n
+        \n3. Privacidade e Proteção de Dados
+        \n
+        \n3.1. Privacidade dos Dados: \nNós respeitamos sua privacidade e protegeremos seus dados pessoais de acordo com a legislação brasileira vigente e nossa Política de Privacidade, que você pode consultar no Aplicativo.
+        \n
+        \n4. Cancelamento de Serviços
+        \n
+        \n4.1. Cancelamento: \nVocê pode cancelar os serviços de internet de acordo com os termos e condições do seu contrato de serviço. O cancelamento está sujeito a eventuais penalidades ou encargos, conforme acordado no contrato.
+        \n
+        \n5. Atualizações do Aplicativo
+        \n
+        \n5.1. Atualizações: \nPodemos disponibilizar atualizações para o Aplicativo para melhorias de segurança e desempenho. Você concorda em manter o Aplicativo atualizado.
+        \n
+        \n6. Disposições Gerais
+        \n
+        \n6.1. Modificações dos Termos: \nPodemos modificar estes Termos a qualquer momento. Quaisquer alterações serão comunicadas a você por meio do Aplicativo. O uso contínuo do Aplicativo após as modificações constituirá sua aceitação dos Termos modificados.
+
+        \n6.2. Lei Aplicável e Jurisdição: \nEstes Termos são regidos pelas leis brasileiras. Quaisquer disputas decorrentes destes Termos serão resolvidas no foro da comarca de Paulista - Pernambuco, com renúncia a qualquer outro, por mais privilegiado que seja.
+        \n
+        \nEstes Termos de Uso constituem o acordo completo entre você e Arte em PC em relação ao uso do Aplicativo. Se você tiver alguma dúvida ou preocupação sobre esses Termos, entre em contato conosco em tecnologia@arteempc.com.br.
+
+        Ao usar o Aplicativo, você concorda com estes Termos e aceita estar legalmente vinculado por eles.
+        \n
+        \n
+
+        \nData da última atualização: [27/12/2023]
+        \n
+        \n
+    </string>
 
 </resources>

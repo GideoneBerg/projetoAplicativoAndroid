@@ -24,7 +24,7 @@ class SobreActivity : AppCompatActivity() {
             startActivity(intent)
         }
         binding.termosUso.setOnClickListener {
-            val intent = Intent(this, WebSpeedTestActivity::class.java)
+            val intent = Intent(this, TermosDeUsoActivity::class.java)
             startActivity(intent)
         }
 
