@@ -9,8 +9,6 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.projeto.R
-
-
 import com.example.projeto.databinding.ActivityRedefinirSenhaBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -36,7 +34,7 @@ class RedefinirSenhaActivity : AppCompatActivity() {
         val progressBar = findViewById<ProgressBar>(R.id.progressBar)
 
         val retrofit = Retrofit.Builder()
-                .baseUrl("http://192.168.31.23/")
+                .baseUrl("http://192.168.31.75/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 

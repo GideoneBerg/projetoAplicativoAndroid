@@ -41,7 +41,7 @@ class NovaSenhaActivity : AppCompatActivity() {
             progressBar.visibility = View.VISIBLE
 
             val retrofit = Retrofit.Builder()
-                .baseUrl("http://192.168.31.23/")
+                .baseUrl("http://192.168.31.75/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
 
