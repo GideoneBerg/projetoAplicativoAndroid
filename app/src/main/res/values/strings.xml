@@ -32,7 +32,11 @@
         sempre estamos comprometidos em prestar \num serviço de qualidade, com segurança de \n
         dados produtividade e redução de custos \npara a satisfação de nossos clientes, seja \n
         residencial ou corporativo.</string>
-    <string name="esqueceu_sua_senha">Esqueceu sua senha?</string>
+    <string name="esqueceu_sua_senha">Esqueceu sua Senha?</string>
+    <string name="vamos_ajudar_senha">Não se preocupe! Nós iremos ajudá-lo a recuperar sua senha</string>
+    <string name="envie_email">ENVIE SEU EMAIL</string>
+    <string name="enviaremos_token">Enviaremos um token para seu e-mail:</string>
+    <string name="nao_tem_conta">NÃO TEM CONTA NO APC? INSCREVA-SE</string>
     <string name="insira_o_token">Insira o Token</string>
     <string name="nova_senha">Nova Senha</string>
     <string name="insira_seu_email_aqui">Insira seu Email Aqui</string>
@@ -93,13 +97,10 @@
         \nSe você tiver alguma dúvida ou preocupação sobre esta política de privacidade, entre em contato conosco (81) 3435-6078.
     \n
     \n
-    \n</string>
-    <string name="logoartepc">logoArtePC</string>
-    <string name="cpf">CPF</string>
-    <string name="senha">Senha</string>
+    \n</string>
     <string name="termo_de_uso">
         \n
-        \nEstes Termos de Uso regem o uso do aplicativo móvel do provedor de internet APC fornecido por APC - Tecnologia, uma empresa registrada no Brasil sob o CNPJ 11.599.791/0001-34, com sede em Av. Antonio Cabral de Souza, nº 5000, Bairro Nossa Senhora da Conceição,
+        \nEstes Termos de Uso regem o uso do aplicativo móvel do provedor de internet APC - Tecnologia fornecido por Arte em PC - Tecnologia, uma empresa registrada no Brasil sob o CNPJ 11.599.791/0001-34, com sede em Av. Antonio Cabral de Souza, nº 5000, Bairro Nossa Senhora da Conceição,
 cidade Paulista, CEP 53.425-430. Ao usar o Aplicativo, você concorda em cumprir estes Termos. Se você não concorda com estes Termos, não deve usar o Aplicativo.
         \n
         \n
@@ -133,7 +134,7 @@ cidade Paulista, CEP 53.425-430. Ao usar o Aplicativo, você concorda em cumprir
 
         \n6.2. Lei Aplicável e Jurisdição: \nEstes Termos são regidos pelas leis brasileiras. Quaisquer disputas decorrentes destes Termos serão resolvidas no foro da comarca de Paulista - Pernambuco, com renúncia a qualquer outro, por mais privilegiado que seja.
         \n
-        \nEstes Termos de Uso constituem o acordo completo entre você e Arte em PC em relação ao uso do Aplicativo. Se você tiver alguma dúvida ou preocupação sobre esses Termos, entre em contato conosco em tecnologia@arteempc.com.br.
+        \nEstes Termos de Uso constituem o acordo completo entre você e Arte em PC - Tecnologia em relação ao uso do Aplicativo. Se você tiver alguma dúvida ou preocupação sobre esses Termos, entre em contato conosco em tecnologia@arteempc.com.br.
 
         Ao usar o Aplicativo, você concorda com estes Termos e aceita estar legalmente vinculado por eles.
         \n
@@ -143,5 +144,26 @@ cidade Paulista, CEP 53.425-430. Ao usar o Aplicativo, você concorda em cumprir
         \n
         \n
     </string>
+
+    <string name="sobreApc">
+        Nossa missão é fornecer um serviço de qualidade sem oscilação e sem intervenções, tendo você como nosso principal cliente.
+        \nFundada em 2010, na cidade de Paulista - PE, somos uma empresa especializada no serviço de telecomunicações.
+        \nAtuando na área de internet banda larga e homologados pela ANATEL.
+        \nAplicando tecnologia avançada e inovadoras, sempre estamos comprometidos em prestar um serviço de qualidade, \ncom segurança de dados produtividade e redução de custos para a satisfação de nossos clientes, \nseja residencial ou corporativo.
+        \n
+        \n
+        \n
+        \n
+        \n
+        \nVersão: 1.0.0
+        \n
+        \nDevelopers
+        \n
+        \nValdery Silva
+        \nGideone Berg
+        \nThamíris Albuquerque
+
+    </string>
+    <string name="logoartepc">logoArtePC</string>
 
 </resources>

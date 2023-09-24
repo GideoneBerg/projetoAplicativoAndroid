@@ -8,35 +8,38 @@
     android:padding="20dp"
     tools:context=".activity.RedefinirSenhaActivity">
 
+
     <EditText
         android:id="@+id/email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_width="335dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="28dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/background_texto"
-        android:hint="@string/insira_seu_email_aqui"
-        android:drawableStart="@drawable/baseline_email_24"
-        android:drawablePadding="6dp"
-        android:padding="10dp"
-        android:textColor="#FDF8F8"
-        android:textColorHint="#F6F0F2"
         android:fontFamily="sans-serif-light"
+        android:hint="@string/insira_seu_email_aqui"
+        android:padding="10dp"
+        android:textColor="#79FDF8F8"
+        android:textColorHint="#167AC2"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.432"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.777" />
 
     <Button
         android:id="@+id/btnEnviar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_width="86dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="44dp"
         android:background="@drawable/background_botao"
+        android:fontFamily="sans-serif-light"
         android:text="@string/enviar"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/progressBar" />
 
@@ -45,14 +48,101 @@
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:layout_margin="20dp"
+        android:layout_marginTop="15dp"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/email" />
 
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="274dp"
+        android:layout_height="335dp"
+        android:layout_marginTop="88dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/password_forgot" />
 
+    <TextView
+        android:id="@+id/esqueceu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lexend_black"
+        android:text="@string/esqueceu_sua_senha"
+        android:textAlignment="gravity"
+        android:textColor="#FDF8F8"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+    <TextView
+        android:id="@+id/naoTemConta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/nao_tem_conta"
+        android:textAlignment="gravity"
+        android:textColor="#FDF8F8"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnEnviar" />
+
+    <TextView
+        android:id="@+id/enviaremosToken"
+        android:layout_width="232dp"
+        android:layout_height="19dp"
+        android:layout_marginStart="-8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="15dp"
+        android:fontFamily="@font/assistant_extralight"
+        android:text="@string/enviaremos_token"
+        android:textAlignment="center"
+        android:textColor="#FDF8F8"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.213"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/envieEmail" />
+
+    <TextView
+        android:id="@+id/envieEmail"
+        android:layout_width="214dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="-20dp"
+        android:layout_marginTop="56dp"
+        android:drawableRight="@drawable/baseline_email_24"
+        android:drawablePadding="1dp"
+        android:fontFamily="@font/lexend_black"
+        android:text="@string/envie_email"
+        android:textAlignment="center"
+        android:textColor="#FDF8F8"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.204"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ajudarSenha"
+        tools:ignore="UseCompatTextViewDrawableXml" />
+
+    <TextView
+        android:id="@+id/ajudarSenha"
+        android:layout_width="230dp"
+        android:layout_height="49dp"
+        android:fontFamily="@font/assistant_extralight"
+        android:text="@string/vamos_ajudar_senha"
+        android:textAlignment="center"
+        android:textColor="#FDF8F8"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/esqueceu" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
