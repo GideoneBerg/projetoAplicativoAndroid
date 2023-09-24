@@ -50,27 +50,27 @@
         \n
         \n1. Dados Pessoais Coletados
         \n
-        \n1.1. Informações de Cadastro: Para utilizar nossos serviços, você precisará fornecer informações pessoais, como nome, endereço de e-mail, número de telefone, CPF ou CNPJ, e informações de pagamento, quando aplicável.
+        \n1.1. Informações de Cadastro: \nPara utilizar nossos serviços, você precisará fornecer informações pessoais, como nome, endereço de e-mail, número de telefone, CPF ou CNPJ, e informações de pagamento, quando aplicável.
 
-        \n1.2. Informações de Uso: Coletamos informações sobre como você utiliza nosso serviço de internet, incluindo dados de tráfego, histórico de navegação, tempos de acesso e páginas visitadas.
+        \n1.2. Informações de Uso: \nColetamos informações sobre como você utiliza nosso serviço de internet, incluindo dados de tráfego, histórico de navegação, tempos de acesso e páginas visitadas.
 
-        \n1.3. Informações de Dispositivo: Podemos coletar informações sobre o dispositivo que você usa para acessar nossos serviços, como modelo, sistema operacional e identificadores exclusivos do dispositivo.
+        \n1.3. Informações de Dispositivo: \nPodemos coletar informações sobre o dispositivo que você usa para acessar nossos serviços, como modelo, sistema operacional e identificadores exclusivos do dispositivo.
         \n
         \n
         \n2. Finalidades do Tratamento de Dados
         \n
-        \n2.1. Fornecimento de Serviços: Utilizamos suas informações para fornecer serviços de internet, incluindo a configuração da conexão, monitoramento de uso, faturamento e resolução de problemas técnicos.
+        \n2.1. Fornecimento de Serviços: \nUtilizamos suas informações para fornecer serviços de internet, incluindo a configuração da conexão, monitoramento de uso, faturamento e resolução de problemas técnicos.
 
-        \n2.2. Melhoria dos Serviços: Usamos informações de uso para melhorar a qualidade e a funcionalidade dos nossos serviços.
+        \n2.2. Melhoria dos Serviços: \nUsamos informações de uso para melhorar a qualidade e a funcionalidade dos nossos serviços.
 
-        \n2.3. Comunicações: Podemos entrar em contato com você para fornecer informações importantes sobre sua conta, atualizações de serviços ou ofertas especiais.
+        \n2.3. Comunicações: \nPodemos entrar em contato com você para fornecer informações importantes sobre sua conta, atualizações de serviços ou ofertas especiais.
         \n
         \n
        \n3. Compartilhamento de Informações
         \n
-        \n3.1. Compartilhamento Necessário: Podemos compartilhar suas informações com terceiros, como parceiros de rede, apenas quando necessário para fornecer nossos serviços.
+        \n3.1. Compartilhamento Necessário: \nPodemos compartilhar suas informações com terceiros, como parceiros de rede, apenas quando necessário para fornecer nossos serviços.
 
-        \n3.2. Requisitos Legais: Podemos divulgar suas informações em resposta a solicitações legais ou cumprimento de leis aplicáveis.
+        \n3.2. Requisitos Legais: \nPodemos divulgar suas informações em resposta a solicitações legais ou cumprimento de leis aplicáveis.
         \n
         \n
        \n4. Segurança de Dados
@@ -79,13 +79,13 @@
         \n
         \n
         \n5. Seus Direitos de Privacidade
-
-        Você tem direitos em relação às suas informações pessoais, incluindo o direito de acessar, corrigir,excluir ou revogar seu consentimento. Para exercer esses direitos, entre em contato conosco (81) 3435-6078.
+        \n
+        \nVocê tem direitos em relação às suas informações pessoais, incluindo o direito de acessar, corrigir,excluir ou revogar seu consentimento. Para exercer esses direitos, entre em contato conosco (81) 3435-6078.
         \n
         \n
         \n6. Alterações nesta Política de Privacidade
         \n
-       \nReservamo-nos o direito de atualizar esta política de privacidade periodicamente. A versão mais recente estará sempre disponível em nosso aplicativo.
+        \nReservamo-nos o direito de atualizar esta política de privacidade periodicamente. A versão mais recente estará sempre disponível em nosso aplicativo.
         \n
         \n
         \n7. Contato
@@ -93,15 +93,9 @@
         \nSe você tiver alguma dúvida ou preocupação sobre esta política de privacidade, entre em contato conosco (81) 3435-6078.
     \n
     \n
-    \n</string>
-
-    <string name="missao2">Nossa missão é fornecer um serviço de \nqualidade sem oscilação e sem intervenções, \n
-        tendo você como nosso principal cliente.\n\nFundada em 2010, na cidade de Paulista - PE,\n
-        somos uma empresa especializada no serviço \nde telecomunicações. Atuando na área de \n
-        internet banda larga e homologados pela \nANATEL.\n\nAplicando tecnologia avançada e inovadoras, \n
-        sempre estamos comprometidos em prestar \num serviço de qualidade, com segurança de \n
-        dados produtividade e redução de custos \npara a satisfação de nossos clientes, seja \n
-        residencial ou corporativo.</string>
+    \n</string>
     <string name="logoartepc">logoArtePC</string>
+    <string name="cpf">CPF</string>
+    <string name="senha">Senha</string>
 
 </resources>
