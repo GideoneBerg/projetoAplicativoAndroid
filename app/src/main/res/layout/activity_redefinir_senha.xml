@@ -19,8 +19,8 @@
         android:fontFamily="sans-serif-light"
         android:hint="@string/insira_seu_email_aqui"
         android:padding="10dp"
-        android:textColor="#79FDF8F8"
-        android:textColorHint="#167AC2"
+        android:textColor="@color/azulAnil"
+        android:textColorHint="@color/azulAnil"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -68,7 +68,7 @@
         app:srcCompat="@drawable/password_forgot" />
 
     <TextView
-        android:id="@+id/esqueceu"
+        android:id="@+id/verifique"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/lexend_black"
@@ -125,16 +125,18 @@
         android:fontFamily="@font/lexend_black"
         android:text="@string/envie_email"
         android:textColor="@color/azulAnil"
+        android:textColorHighlight="@color/azulAnil"
         android:textColorHint="@color/azulAnil"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.072"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ajudarSenha"
-        tools:ignore="UseCompatTextViewDrawableXml" />
+        app:layout_constraintTop_toBottomOf="@+id/emailtoken"
+        tools:ignore="UseCompatTextViewDrawableXml"
+        />
 
     <TextView
-        android:id="@+id/ajudarSenha"
+        android:id="@+id/emailtoken"
         android:layout_width="230dp"
         android:layout_height="49dp"
         android:fontFamily="@font/assistant_extralight"
@@ -144,7 +146,7 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/esqueceu" />
+        app:layout_constraintTop_toBottomOf="@+id/verifique" />
 
     <ImageView
         android:id="@+id/objetosenha"
