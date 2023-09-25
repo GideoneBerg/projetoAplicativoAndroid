@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:elevation="2dp"
                 android:justificationMode="inter_word"
-                android:text="@string/politica"
+                android:text="@string/termo_de_uso"
                 android:textAlignment="textStart"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="@color/azulAnil"

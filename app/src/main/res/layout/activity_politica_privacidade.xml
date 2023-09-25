@@ -5,43 +5,58 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/new_background"
-    android:padding="20dp"
-    tools:context=".activity.PoliticaPrivacidadeActivity">
+    tools:context=".activity.TermosDeUsoActivity">
 
     <!--  transparencia da imagem  android:alpha="0.5"-->
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="170dp"
+        android:elevation="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/objeto8" />
+
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="83dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="373dp"
+        android:layout_height="94dp"
+        android:layout_marginTop="50dp"
+        android:contentDescription="@string/logoartepc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logotipo"
-        android:contentDescription="@string/logoartepc" />
+        app:srcCompat="@drawable/logotipo" />
 
     <TextView
         android:id="@+id/politica"
         android:layout_width="340dp"
         android:layout_height="27dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="20dp"
+        android:elevation="2dp"
         android:fontFamily="@font/abel"
         android:text="@string/politica_de_privacidade"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@color/white"
         android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <ScrollView
-        android:layout_width="331dp"
-        android:layout_height="658dp"
+        android:id="@+id/scrollView2"
+        android:layout_width="332dp"
+        android:layout_height="599dp"
         android:layout_marginStart="34dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="34dp"
+        android:elevation="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/politica"
@@ -50,6 +65,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:elevation="2dp"
             android:orientation="vertical">
 
 
@@ -57,13 +73,16 @@
                 android:id="@+id/missao"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/politica"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:elevation="2dp"
                 android:justificationMode="inter_word"
+                android:text="@string/politica"
                 android:textAlignment="textStart"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/azulAnil"
                 android:textSize="18sp"
                 tools:layout_editor_absoluteX="-180dp"
                 tools:layout_editor_absoluteY="348dp" />
         </LinearLayout>
     </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
