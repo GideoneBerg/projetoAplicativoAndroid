@@ -29,12 +29,12 @@ class RedefinirSenhaActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        val editText = findViewById<EditText>(R.id.email)
-        val button = findViewById<Button>(R.id.btnEnviar)
+        val editText = findViewById<EditText>(R.id.tokenn)
+        val button = findViewById<Button>(R.id.btnToken)
         val progressBar = findViewById<ProgressBar>(R.id.progressBar)
 
         val retrofit = Retrofit.Builder()
-                .baseUrl("http://192.168.31.75/")
+            .baseUrl("http://192.168.31.75/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 

@@ -34,9 +34,9 @@ class NovaSenhaActivity : AppCompatActivity() {
         val email = intent.extras!!.getString("email")
 
         val editTextNewPassword = findViewById<EditText>(R.id.newpassword)
-        val editTextOPT = findViewById<EditText>(R.id.otp)
+        val editTextOTP = findViewById<EditText>(R.id.otp)
         val progressBar = findViewById<ProgressBar>(R.id.progressBar)
-        val button = findViewById<Button>(R.id.btnEnviar)
+        val button = findViewById<Button>(R.id.btnToken)
         button.setOnClickListener {
             progressBar.visibility = View.VISIBLE
 
@@ -44,9 +44,9 @@ class NovaSenhaActivity : AppCompatActivity() {
                 .baseUrl("http://192.168.31.75/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
-
+            // criar um classe pra a senha ATENCAO
             val apiService = retrofit.create(ApiService::class.java)
-            val call = apiService.submitData(email!!, editTextOPT.text.toString(), editTextNewPassword.text.toString())
+            val call = apiService.submitData(email!!, editTextOTP.text.toString(), editTextNewPassword.text.toString())
             call.enqueue(object : Callback<String> {
                 override fun onResponse(call: Call<String>, response: Response<String>) {
                     progressBar.visibility = View.GONE

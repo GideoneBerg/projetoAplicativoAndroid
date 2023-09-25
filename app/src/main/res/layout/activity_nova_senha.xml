@@ -9,7 +9,7 @@
 
 
     <EditText
-        android:id="@+id/email"
+        android:id="@+id/otp"
         android:layout_width="match_parent"
         android:layout_height="49dp"
         android:layout_marginStart="20dp"
@@ -17,7 +17,7 @@
         android:background="@drawable/background_texto1"
         android:elevation="2dp"
         android:fontFamily="sans-serif-light"
-        android:hint="@string/insira_seu_email_aqui"
+        android:hint="@string/insira_o_token"
         android:padding="10dp"
         android:textColor="@color/azulAnil"
         android:textColorHint="@color/azulAnil"
@@ -54,7 +54,7 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email" />
+        app:layout_constraintTop_toBottomOf="@+id/otp" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -103,7 +103,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="120dp"
-        android:drawableRight="@drawable/baseline_email_24"
+        android:drawableEnd="@drawable/baseline_email_24"
         android:drawablePadding="10dp"
         android:elevation="2dp"
         android:fontFamily="@font/lexend_black"

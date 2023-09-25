@@ -31,8 +31,6 @@ class LoginActivity : AppCompatActivity() {
         setContentView(view)
         funcaoBotoes()
 
-
-
     }
     private fun servicoRetrofit(): EnviaUsuario{
         return Retrofit.Builder()
@@ -77,6 +75,7 @@ class LoginActivity : AppCompatActivity() {
     private fun chamaAPI(usuario: Usuario) {
         val progressBar = findViewById<ProgressBar>(R.id.progressBar2)
         val botaoVisibilidade = findViewById<Button>(R.id.btnEntrar)
+
         val servico = servicoRetrofit()
         servico.setUsuario(usuario.cpf, usuario.senha).enqueue(object :
             Callback<Usuario> {
