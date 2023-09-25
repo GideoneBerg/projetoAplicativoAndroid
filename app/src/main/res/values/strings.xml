@@ -159,15 +159,15 @@ cidade Paulista, CEP 53.425-430. Ao usar o Aplicativo, você concorda em cumprir
         \n
         \n
         \n
+    </string>
+    <string name="developers">\n
         \nVersão: 1.0.0
         \n
         \nDevelopers
         \n
         \nValdery Silva
         \nGideone Berg
-        \nThamíris Albuquerque
-
-    </string>
+        \nThamíris Albuquerque</string>
     <string name="logoartepc">logoArtePC</string>
 
 </resources>

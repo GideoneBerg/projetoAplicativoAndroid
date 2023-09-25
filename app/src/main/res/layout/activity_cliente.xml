@@ -139,7 +139,7 @@
                 android:layout_height="147dp"
                 android:layout_marginStart="10dp"
                 android:background="@drawable/background_botao_menu_cliente"
-                android:drawableTop="@drawable/baseline_person_24"
+                android:drawableTop="@drawable/baseline_person_white"
                 android:elevation="800dp"
                 android:paddingLeft="10dp"
                 android:paddingTop="40sp"
@@ -243,7 +243,7 @@
         android:background="@drawable/background_menu_rede_sociais"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/site"
-        app:srcCompat="@drawable/whatsapp" />
+        app:srcCompat="@drawable/whatsapp_white" />
 
     <ImageButton
         android:id="@+id/facebook"

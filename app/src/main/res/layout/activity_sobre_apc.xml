@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/new_background"
-    android:padding="20dp"
     tools:context=".activity.SobreApcActivity">
 
     <!--  transparencia da imagem  android:alpha="0.5"-->
@@ -15,7 +14,7 @@
         android:id="@+id/imageView"
         android:layout_width="125dp"
         android:layout_height="76dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="28dp"
         android:contentDescription="@string/logoartepc"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,18 +24,45 @@
 
     <TextView
         android:id="@+id/textpolitica"
-        android:layout_width="281dp"
-        android:layout_height="864dp"
+        android:layout_width="291dp"
+        android:layout_height="480dp"
         android:layout_marginTop="48dp"
+        android:elevation="2dp"
         android:fontFamily="@font/abel"
         android:text="@string/sobreApc"
         android:textAlignment="textStart"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="18sp"
+        android:textColor="@color/azulAnil"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.123"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="88dp"
+        android:elevation="1dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/objeto6" />
+
+    <TextView
+        android:id="@+id/developers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/abel"
+        android:text="@string/developers"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.064"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textpolitica" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

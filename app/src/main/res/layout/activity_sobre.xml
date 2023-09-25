@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/new_background"
-    android:padding="20dp"
     tools:context=".activity.SobreActivity">
 
     <!--  transparencia da imagem  android:alpha="0.5"-->
@@ -25,7 +24,8 @@
         android:layout_width="272dp"
         android:layout_height="74dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/background_botao_planos"
+        android:background="@drawable/background_botao1"
+        android:elevation="2dp"
         android:text="@string/termos_de_uso"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,8 +35,9 @@
         android:id="@+id/sobreApc"
         android:layout_width="272dp"
         android:layout_height="74dp"
-        android:layout_marginTop="100dp"
-        android:background="@drawable/background_botao_planos"
+        android:layout_marginTop="200dp"
+        android:background="@drawable/background_botao1"
+        android:elevation="2dp"
         android:text="@string/sobre_apc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,7 +48,8 @@
         android:layout_width="272dp"
         android:layout_height="74dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/background_botao_planos"
+        android:background="@drawable/background_botao1"
+        android:elevation="2dp"
         android:text="@string/politica_de_privacidade"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -56,13 +58,12 @@
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="283dp"
-        android:layout_height="343dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.156"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/termosUso"
-        app:srcCompat="@drawable/pixels" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:srcCompat="@drawable/objeto1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

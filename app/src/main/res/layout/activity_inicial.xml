@@ -7,13 +7,22 @@
     android:layout_height="match_parent"
     android:background="@drawable/new_background"
     android:orientation="vertical"
-    android:paddingLeft="32dp"
-    android:paddingRight="32dp"
-    android:scrollbarThumbHorizontal="@drawable/background_inicio_botao"
+        android:scrollbarThumbHorizontal="@drawable/background_inicio_botao"
     tools:context=".activity.InicialActivity">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imageView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo"
+        app:srcCompat="@drawable/objeto5" />
+
+    <ImageView
+        android:id="@+id/logo"
         android:layout_width="159dp"
         android:layout_height="112dp"
         android:layout_alignParentTop="true"
@@ -25,51 +34,52 @@
         app:srcCompat="@drawable/logotipo" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/ola"
         android:layout_width="match_parent"
         android:layout_height="78dp"
         android:layout_marginTop="90dp"
-        android:fontFamily="sans-serif-light"
+        android:fontFamily="@font/abel"
         android:gravity="center"
         android:text="@string/bem_vindo"
         android:textColor="#FFFFFF"
         android:textColorHint="#FFFFFF"
-        android:textSize="24sp"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/logo" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/ajudar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:fontFamily="sans-serif-condensed"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/assistant_extralight"
         android:gravity="center"
         android:text="@string/text_ajuda"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/ola" />
 
     <Button
         android:id="@+id/buttonCliente"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:background="@drawable/background_inicio_botao"
+        android:layout_width="327dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="150dp"
+        android:background="@drawable/background_botao1"
         android:text="@string/text_cliente"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/ajudar" />
 
     <Button
         android:id="@+id/buttonNewCliente"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/background_inicio_botao"
+        android:layout_width="327dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/background_botao1"
         android:text="@string/text_newcliente"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -77,10 +87,10 @@
 
     <Button
         android:id="@+id/buttonPlanos"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/background_inicio_botao"
+        android:layout_width="327dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/background_botao1"
         android:text="@string/text_planos"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
