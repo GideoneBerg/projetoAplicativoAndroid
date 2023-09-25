@@ -11,17 +11,6 @@
     tools:context=".activity.InicialActivity">
 
     <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo"
-        app:srcCompat="@drawable/objeto5" />
-
-    <ImageView
         android:id="@+id/logo"
         android:layout_width="159dp"
         android:layout_height="112dp"
@@ -67,33 +56,44 @@
         android:id="@+id/buttonCliente"
         android:layout_width="327dp"
         android:layout_height="55dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="125dp"
         android:background="@drawable/background_botao1"
         android:text="@string/text_cliente"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ajudar" />
 
-    <Button
-        android:id="@+id/buttonNewCliente"
-        android:layout_width="327dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/background_botao1"
-        android:text="@string/text_newcliente"
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="152dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonPlanos" />
+        app:layout_constraintTop_toBottomOf="@+id/logo"
+        app:srcCompat="@drawable/objeto1" />
 
     <Button
         android:id="@+id/buttonPlanos"
         android:layout_width="327dp"
         android:layout_height="55dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/background_botao1"
         android:text="@string/text_planos"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonCliente" />
+
+    <Button
+        android:id="@+id/buttonNewCliente"
+        android:layout_width="327dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/background_botao1"
+        android:text="@string/text_newcliente"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonPlanos" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

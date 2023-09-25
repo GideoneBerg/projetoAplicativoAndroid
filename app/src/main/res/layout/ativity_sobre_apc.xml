@@ -24,7 +24,7 @@
         app:srcCompat="@drawable/logotipo" />
 
     <TextView
-        android:id="@+id/textpolitica"
+        android:id="@+id/missao"
         android:layout_width="281dp"
         android:layout_height="864dp"
         android:layout_marginTop="48dp"

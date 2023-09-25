@@ -160,11 +160,9 @@ cidade Paulista, CEP 53.425-430. Ao usar o Aplicativo, você concorda em cumprir
         \n
         \n
     </string>
-    <string name="developers">\n
-        \nVersão: 1.0.0
+    <string name="developers">Versão: 1.0.0
         \n
-        \nDevelopers
-        \n
+        \nDevelopers:
         \nValdery Silva
         \nGideone Berg
         \nThamíris Albuquerque</string>
