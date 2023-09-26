@@ -40,6 +40,7 @@
         android:fontFamily="sans-serif-light"
         android:hint="@string/nova_senha"
         android:padding="10dp"
+        android:inputType="numberPassword"
         android:textColor="@color/azulAnil"
         android:textColorHint="@color/azulAnil"
         android:textSize="18sp"

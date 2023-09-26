@@ -40,6 +40,7 @@
     <string name="vamos_ajudar_senha">Não se preocupe! Nós iremos ajudá-lo a recuperar sua senha</string>
     <string name="envie_email">ENVIE SEU EMAIL</string>
     <string name="enviaremos_token">Enviaremos um token para seu e-mail:</string>
+    <string name="enviamos_token">Enviamos um token para seu e-mail:</string>
     <string name="nao_tem_conta">NÃO TEM CONTA NO APC? INSCREVA-SE</string>
     <string name="insira_o_token">Insira o Token</string>
     <string name="nova_senha">Nova Senha</string>
