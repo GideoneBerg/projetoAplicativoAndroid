@@ -8,63 +8,6 @@
     tools:context=".activity.NovaSenhaActivity">
 
 
-    <EditText
-        android:id="@+id/otp"
-        android:layout_width="match_parent"
-        android:layout_height="49dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/background_texto1"
-        android:elevation="2dp"
-        android:fontFamily="sans-serif-light"
-        android:hint="@string/insira_o_token"
-        android:padding="10dp"
-        android:textColor="@color/azulAnil"
-        android:textColorHint="@color/azulAnil"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/enviaremosToken"
-        app:layout_constraintVertical_bias="0.1" />
-
-    <EditText
-        android:id="@+id/newpassword"
-        android:layout_width="match_parent"
-        android:layout_height="49dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/background_texto1"
-        android:elevation="2dp"
-        android:fontFamily="sans-serif-light"
-        android:hint="@string/nova_senha"
-        android:padding="10dp"
-        android:inputType="numberPassword"
-        android:textColor="@color/azulAnil"
-        android:textColorHint="@color/azulAnil"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/enviaremosToken"
-        app:layout_constraintVertical_bias="0.1" />
-
-    <Button
-        android:id="@+id/btnNovaSenha"
-        android:layout_width="86dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="44dp"
-        android:background="@drawable/background_botao1"
-        android:elevation="2dp"
-        android:fontFamily="sans-serif-light"
-        android:text="@string/enviar"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar" />
-
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyle"
@@ -103,39 +46,22 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
     <TextView
-        android:id="@+id/enviaremosToken"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="8dp"
-        android:elevation="2dp"
-        android:fontFamily="@font/assistant_extralight"
-        android:text="@string/enviamos_token"
-        android:textAlignment="center"
-        android:textColor="@color/azulAnil"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.081"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linkemail" />
-
-    <TextView
         android:id="@+id/linkemail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="120dp"
-        android:drawableEnd="@drawable/baseline_email_24"
+        android:layout_marginTop="10dp"
+        android:drawableStart="@drawable/baseline_email_24"
         android:drawablePadding="10dp"
         android:elevation="2dp"
         android:fontFamily="@font/lexend_black"
-        android:text="@string/envie_email"
-        android:textColor="@color/azulAnil"
-        android:textColorHighlight="@color/azulAnil"
-        android:textColorHint="@color/azulAnil"
+        android:text="EMAIL"
+        android:textColor="@color/white"
+        android:textColorHighlight="@color/white"
+        android:textColorHint="@color/white"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.072"
+        app:layout_constraintHorizontal_bias="0.447"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailtoken"
         tools:ignore="UseCompatTextViewDrawableXml" />
@@ -164,95 +90,77 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView4"
         app:srcCompat="@drawable/objeto1" />
 
+    <TextView
+        android:id="@+id/enviaremosToken"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="70dp"
+        android:elevation="2dp"
+        android:fontFamily="@font/assistant_extralight"
+        android:text="@string/enviamos_token"
+        android:textAlignment="center"
+        android:textColor="@color/azulAnil"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.474"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linkemail" />
 
+    <EditText
+        android:id="@+id/otp"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/background_texto1"
+        android:elevation="2dp"
+        android:fontFamily="sans-serif-light"
+        android:hint="@string/insira_o_token"
+        android:padding="10dp"
+        android:textColor="@color/azulAnil"
+        android:textColorHint="@color/azulAnil"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enviaremosToken"
+        app:layout_constraintVertical_bias="0.1" />
+
+    <EditText
+        android:id="@+id/novaSenha"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/background_texto1"
+        android:elevation="2dp"
+        android:fontFamily="sans-serif-light"
+        android:hint="@string/nova_senha"
+        android:inputType="textPassword"
+        android:padding="10dp"
+        android:textColor="@color/azulAnil"
+        android:textColorHint="@color/azulAnil"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enviaremosToken"
+        app:layout_constraintVertical_bias="0.1" />
+
+    <Button
+        android:id="@+id/btnNovaSenha"
+        android:layout_width="86dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/background_botao1"
+        android:elevation="2dp"
+        android:fontFamily="sans-serif-light"
+        android:text="@string/enviar"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/novaSenha" />
 </androidx.constraintlayout.widget.ConstraintLayout>
-<!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--    xmlns:tools="http://schemas.android.com/tools"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent"-->
-<!--    android:background="@drawable/new_background"-->
-<!--    android:padding="20dp"-->
-<!--    tools:context=".activity.NovaSenhaActivity">-->
-
-<!--    <TextView-->
-<!--        android:id="@+id/linkemail"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="E-mail"-->
-<!--        android:textAlignment="center"-->
-<!--        android:textSize="18sp"-->
-<!--        android:fontFamily="sans-serif-light"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/otp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
-
-<!--    <EditText-->
-<!--        android:id="@+id/otp"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="20dp"-->
-<!--        android:layout_marginTop="300dp"-->
-<!--        android:layout_marginEnd="20dp"-->
-<!--        android:background="@drawable/background_texto"-->
-<!--        android:drawableStart="@drawable/baseline_token"-->
-<!--        android:drawablePadding="6dp"-->
-<!--        android:fontFamily="sans-serif-light"-->
-<!--        android:hint="@string/insira_o_token"-->
-<!--        android:maxLength="6"-->
-<!--        android:padding="10dp"-->
-<!--        android:textColor="#FDF8F8"-->
-<!--        android:textColorHint="#F6F0F2"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
-
-<!--    <EditText-->
-<!--        android:id="@+id/newpassword"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="20dp"-->
-<!--        android:layout_marginTop="5dp"-->
-<!--        android:layout_marginEnd="20dp"-->
-<!--        android:background="@drawable/background_texto"-->
-<!--        android:drawableStart="@drawable/baseline_lock_24"-->
-<!--        android:drawablePadding="6dp"-->
-<!--        android:fontFamily="sans-serif-light"-->
-<!--        android:hint="@string/nova_senha"-->
-<!--        android:inputType="textPassword"-->
-<!--        android:maxLength="8"-->
-<!--        android:padding="10dp"-->
-<!--        android:textColor="#FDF8F8"-->
-<!--        android:textColorHint="#F6F0F2"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/otp" />-->
-
-<!--    <ProgressBar-->
-<!--        android:id="@+id/progressBar"-->
-<!--        style="?android:attr/progressBarStyle"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="8dp"-->
-<!--        android:layout_margin="20dp"-->
-<!--        android:visibility="gone"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/newpassword" />-->
-
-<!--    <Button-->
-<!--        android:id="@+id/btnEnviar"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="8dp"-->
-<!--        android:background="@drawable/background_botao"-->
-<!--        android:text="Enviar"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/progressBar" />-->
-
-
-
-<!--</androidx.constraintlayout.widget.ConstraintLayout>-->

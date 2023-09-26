@@ -9,9 +9,9 @@
 
 
     <EditText
-        android:id="@+id/tokenn"
+        android:id="@+id/email"
         android:layout_width="match_parent"
-        android:layout_height="49dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/background_texto1"
@@ -54,7 +54,7 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tokenn" />
+        app:layout_constraintTop_toBottomOf="@+id/email" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -84,7 +84,7 @@
         android:id="@+id/naoTemConta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="40dp"
         android:elevation="2dp"
         android:fontFamily="sans-serif-black"
         android:text="@string/nao_tem_conta"

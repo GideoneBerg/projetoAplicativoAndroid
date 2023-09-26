@@ -33,15 +33,15 @@ class NovaSenhaActivity : AppCompatActivity() {
 
         val email = intent.extras!!.getString("email")
 
-        val editTextNewPassword = findViewById<EditText>(R.id.newpassword)
+        val editTextNewPassword = findViewById<EditText>(R.id.novaSenha)
         val editTextOTP = findViewById<EditText>(R.id.otp)
         val progressBar = findViewById<ProgressBar>(R.id.progressBar)
-        val buttonNovaSenha = findViewById<Button>(R.id.btnNovaSenha)
-        buttonNovaSenha.setOnClickListener {
+        val button = findViewById<Button>(R.id.btnNovaSenha)
+        button.setOnClickListener {
             progressBar.visibility = View.VISIBLE
 
             val retrofit = Retrofit.Builder()
-                .baseUrl("http://192.168.1.101/")
+                .baseUrl("http://192.168.1.102/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
             // criar um classe pra a senha ATENCAO
