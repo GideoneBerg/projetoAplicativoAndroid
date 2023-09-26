@@ -36,12 +36,12 @@ class NovaSenhaActivity : AppCompatActivity() {
         val editTextNewPassword = findViewById<EditText>(R.id.newpassword)
         val editTextOTP = findViewById<EditText>(R.id.otp)
         val progressBar = findViewById<ProgressBar>(R.id.progressBar)
-        val button = findViewById<Button>(R.id.btnToken)
-        button.setOnClickListener {
+        val buttonNovaSenha = findViewById<Button>(R.id.btnNovaSenha)
+        buttonNovaSenha.setOnClickListener {
             progressBar.visibility = View.VISIBLE
 
             val retrofit = Retrofit.Builder()
-                .baseUrl("http://192.168.31.75/")
+                .baseUrl("http://192.168.1.101/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
             // criar um classe pra a senha ATENCAO
@@ -84,7 +84,7 @@ class NovaSenhaActivity : AppCompatActivity() {
 
         val linkEmail = extras.getString("email")
 
-        binding.linkemail.text = "Verifique seu E-mail $linkEmail"
+        binding.linkemail.text = linkEmail
     }
 
     interface ApiService {

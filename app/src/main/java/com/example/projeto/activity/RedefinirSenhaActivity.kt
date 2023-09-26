@@ -8,8 +8,11 @@ import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.android.volley.RetryPolicy
+import com.android.volley.VolleyError
 import com.example.projeto.R
 import com.example.projeto.databinding.ActivityRedefinirSenhaBinding
+import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -18,6 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
+import java.util.concurrent.TimeUnit
 import java.util.regex.Pattern
 
 class RedefinirSenhaActivity : AppCompatActivity() {
@@ -33,9 +37,16 @@ class RedefinirSenhaActivity : AppCompatActivity() {
         val button = findViewById<Button>(R.id.btnToken)
         val progressBar = findViewById<ProgressBar>(R.id.progressBar)
 
+        val okHttpClient = OkHttpClient.Builder()
+            .connectTimeout(30, TimeUnit.SECONDS) // Timeout de conexão
+            .readTimeout(30, TimeUnit.SECONDS)    // Timeout de leitura
+            .writeTimeout(30, TimeUnit.SECONDS)   // Timeout de escrita
+            .build()
+
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.31.75/")
+            .baseUrl("http://192.168.1.101/")
             .addConverterFactory(GsonConverterFactory.create())
+            .client(okHttpClient)
             .build()
 
         val service = retrofit.create(APIInterface::class.java)
@@ -77,6 +88,7 @@ class RedefinirSenhaActivity : AppCompatActivity() {
                     progressBar.visibility = View.GONE
                     Toast.makeText(applicationContext, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
                 }
+
             })
         })
     }
@@ -96,4 +108,8 @@ class RedefinirSenhaActivity : AppCompatActivity() {
         @FormUrlEncoded
         fun resetPassword(@Field("email") email: String): Call<String>
     }
+
+
+    // definindo um tempo para verificar o email
+
 }

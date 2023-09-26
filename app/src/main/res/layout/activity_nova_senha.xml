@@ -28,8 +28,29 @@
         app:layout_constraintTop_toBottomOf="@+id/enviaremosToken"
         app:layout_constraintVertical_bias="0.1" />
 
+    <EditText
+        android:id="@+id/newpassword"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/background_texto1"
+        android:elevation="2dp"
+        android:fontFamily="sans-serif-light"
+        android:hint="@string/nova_senha"
+        android:padding="10dp"
+        android:textColor="@color/azulAnil"
+        android:textColorHint="@color/azulAnil"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enviaremosToken"
+        app:layout_constraintVertical_bias="0.1" />
+
     <Button
-        android:id="@+id/btnEnviar"
+        android:id="@+id/btnNovaSenha"
         android:layout_width="86dp"
         android:layout_height="41dp"
         android:layout_marginTop="44dp"
@@ -95,10 +116,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.081"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/envieEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/linkemail" />
 
     <TextView
-        android:id="@+id/envieEmail"
+        android:id="@+id/linkemail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
