@@ -41,7 +41,7 @@ class NovaSenhaActivity : AppCompatActivity() {
             progressBar.visibility = View.VISIBLE
 
             val retrofit = Retrofit.Builder()
-                .baseUrl("http://192.168.1.102/")
+                .baseUrl("http://192.168.31.23/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
             // criar um classe pra a senha ATENCAO

@@ -17,6 +17,7 @@
         android:layout_marginTop="15dp"
         android:elevation="2dp"
         android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/btnNovaSenha"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/otp" />
@@ -28,7 +29,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/email_marketing" />
+        app:srcCompat="@drawable/email_marketing___copia" />
 
     <TextView
         android:id="@+id/verifique"
@@ -69,17 +70,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="48dp"
         android:drawablePadding="10dp"
         android:elevation="2dp"
         android:fontFamily="@font/archivo_black"
         android:text="@string/text_token"
-        android:textColor="@color/rosa"
+        android:textColor="@color/azulClaro"
         android:textColorHighlight="@color/azulAnil"
         android:textColorHint="@color/azulAnil"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.458"
+        app:layout_constraintHorizontal_bias="0.463"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linkemail"
         tools:ignore="UseCompatTextViewDrawableXml" />
@@ -88,7 +89,7 @@
         android:id="@+id/textnovaSenha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
         android:drawablePadding="10dp"
         android:elevation="2dp"
         android:fontFamily="@font/archivo_black"
@@ -98,34 +99,10 @@
         android:textColorHint="@color/azulAnil"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.527"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/otp"
+        app:layout_constraintTop_toBottomOf="@+id/pin_view"
         tools:ignore="UseCompatTextViewDrawableXml" />
-
-    <com.santalu.maskara.widget.MaskEditText
-        android:id="@+id/otp"
-        android:layout_width="313dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="50dp"
-        android:background="@drawable/background_token"
-        android:drawablePadding="6dp"
-        android:elevation="3dp"
-        android:ems="6"
-        android:fontFamily="@font/abel"
-        android:inputType="number"
-        android:padding="10dp"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textToken"
-        app:mask="_         _         _         _         _         _"
-        app:maskCharacter="_"
-        app:maskStyle="completable"
-        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/emailtoken"
@@ -159,30 +136,30 @@
         android:layout_width="match_parent"
         android:layout_height="49dp"
         android:layout_marginStart="70dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="70dp"
-        android:background="@drawable/background_botao1"
+        android:background="@drawable/background_texto1"
         android:elevation="2dp"
         android:fontFamily="sans-serif-light"
 
         android:inputType="textPassword"
         android:padding="10dp"
-        android:textColor="@color/white"
+        android:textColor="@color/azulAnil"
         android:textColorHint="@color/white"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textnovaSenha"
-        app:layout_constraintVertical_bias="0.093" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/btnNovaSenha"
         android:layout_width="86dp"
         android:layout_height="41dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/background_botao1"
+        android:background="@drawable/background_token"
         android:elevation="2dp"
         android:fontFamily="sans-serif-light"
         android:text="@string/enviar"
@@ -192,66 +169,33 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/novaSenha" />
 
-    <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="37dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="55dp"
-        android:layout_marginTop="20dp"
-        android:elevation="2dp"
+
+    <com.chaos.view.PinView
+        android:id="@+id/pin_view"
+        style="@style/PinWidget.PinView"
+        android:layout_width="265dp"
+        android:layout_height="65dp"
+        android:layout_below="@+id/verify_text_6"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp"
+        android:elevation="10dp"
+        android:inputType="number"
+        android:itemBackground="@color/azulClaro"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:itemCount="6"
+        app:itemHeight="60dp"
+        app:itemRadius="10dp"
+        app:itemSpacing="5dp"
+        app:itemWidth="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textToken"
-        app:srcCompat="@drawable/background_quadrado_token" />
+        app:viewType="rectangle"
+        tools:ignore="MissingConstraints,UnknownId">
+        <!--        app:lineColor="@color/azulEscuro"-->
 
-    <ImageView
-        android:id="@+id/imageView9"
-        android:layout_width="37dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="15dp"
-        android:elevation="2dp"
-        app:layout_constraintStart_toEndOf="@+id/imageView8"
-        app:layout_constraintTop_toTopOf="@+id/imageView8"
-        app:srcCompat="@drawable/background_quadrado_token" />
+    </com.chaos.view.PinView>
 
-    <ImageView
-        android:id="@+id/imageView10"
-        android:layout_width="37dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="15dp"
-        android:elevation="2dp"
-        app:layout_constraintStart_toEndOf="@+id/imageView9"
-        app:layout_constraintTop_toTopOf="@+id/imageView9"
-        app:srcCompat="@drawable/background_quadrado_token" />
-
-    <ImageView
-        android:id="@+id/imageView11"
-        android:layout_width="37dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="15dp"
-        android:elevation="2dp"
-        app:layout_constraintStart_toEndOf="@+id/imageView10"
-        app:layout_constraintTop_toTopOf="@+id/imageView10"
-        app:srcCompat="@drawable/background_quadrado_token" />
-
-    <ImageView
-        android:id="@+id/imageView12"
-        android:layout_width="37dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="15dp"
-        android:elevation="2dp"
-        app:layout_constraintStart_toEndOf="@+id/imageView11"
-        app:layout_constraintTop_toTopOf="@+id/imageView11"
-        app:srcCompat="@drawable/background_quadrado_token" />
-
-    <ImageView
-        android:id="@+id/imageView13"
-        android:layout_width="37dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="15dp"
-        android:elevation="2dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView8"
-        app:layout_constraintStart_toEndOf="@+id/imageView12"
-        app:layout_constraintTop_toTopOf="@+id/imageView12"
-        app:srcCompat="@drawable/background_quadrado_token" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -34,7 +34,7 @@ class RedefinirSenhaActivity : AppCompatActivity() {
         val progressBar = findViewById<ProgressBar>(R.id.progressBar)
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.1.102/")
+            .baseUrl("http://192.168.31.23/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
