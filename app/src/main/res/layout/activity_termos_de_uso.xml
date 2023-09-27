@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/new_background"
-    tools:context=".activity.TermosDeUsoActivity">
+    tools:context=".activity.activitys.TermosDeUsoActivity">
 
     <!--  transparencia da imagem  android:alpha="0.5"-->
     <ImageView

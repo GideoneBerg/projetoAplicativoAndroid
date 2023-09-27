@@ -1,4 +1,4 @@
-package com.example.projeto.activity
+package com.example.projeto.activity.activitys
 
 import android.content.Intent
 import android.net.Uri

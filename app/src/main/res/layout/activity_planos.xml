@@ -9,7 +9,7 @@
     android:orientation="vertical"
     android:paddingLeft="32dp"
     android:paddingRight="32dp"
-    tools:context=".activity.PlanosActivity">
+    tools:context=".activity.activitys.PlanosActivity">
 
 
     <TextView

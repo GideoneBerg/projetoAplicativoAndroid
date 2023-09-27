@@ -1,4 +1,4 @@
-package com.example.projeto.activity
+package com.example.projeto.activity.activitys
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.projeto.R
 import com.example.projeto.databinding.ActivityRedefinirSenhaBinding
+import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -18,21 +19,31 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
+import java.util.concurrent.TimeUnit
 import java.util.regex.Pattern
 
 class RedefinirSenhaActivity : AppCompatActivity() {
-    private fun servicoRetrofit(): APIInterface{
+    private fun servicoRetrofit(): APIInterface {
+
+        val okHttpClient = OkHttpClient.Builder()
+            .connectTimeout(30, TimeUnit.SECONDS) // Timeout de conexão
+            .readTimeout(30, TimeUnit.SECONDS)    // Timeout de leitura
+            .writeTimeout(30, TimeUnit.SECONDS)   // Timeout de escrita
+            .build()
+
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
 //          .baseUrl("http://10.0.2.2/") //virtual
             .baseUrl("http://192.168.31.75/") // casa
 //            .baseUrl("http://192.168.100.181/") // ETE
+            .client(okHttpClient)
             .build()
             .create(APIInterface::class.java)
     }
     private lateinit var binding: ActivityRedefinirSenhaBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         binding = ActivityRedefinirSenhaBinding.inflate(layoutInflater)
         val view = binding.root
@@ -53,8 +64,7 @@ class RedefinirSenhaActivity : AppCompatActivity() {
             button.visibility = View.INVISIBLE
 
             val servico = servicoRetrofit()
-            servico.resetPassword(email)
-            .enqueue(object : Callback<String> {
+            servico.resetPassword(email).enqueue(object : Callback<String> {
                 override fun onResponse(call: Call<String>, response: Response<String>) {
                     progressBar.visibility = View.GONE
                     if (response.isSuccessful) {

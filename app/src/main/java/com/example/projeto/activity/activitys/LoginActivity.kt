@@ -1,4 +1,4 @@
-package com.example.projeto.activity
+package com.example.projeto.activity.activitys
 
 import android.content.Intent
 import android.net.Uri
@@ -20,11 +20,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
-import java.net.InterfaceAddress
 
 class LoginActivity : AppCompatActivity() {
 
-    private fun servicoRetrofit(): EnviaUsuario{
+    private fun servicoRetrofit(): EnviaUsuario {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
 //          .baseUrl("http://10.0.2.2/") //virtual

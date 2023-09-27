@@ -26,37 +26,37 @@
 <!--            android:windowSoftInputMode="adjustResize"/>-->
 
         <activity
-            android:name=".activity.SobreApcActivity"
+            android:name=".activity.activitys.SobreApcActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.SobreActivity"
+            android:name=".activity.activitys.SobreActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.TermosDeUsoActivity"
+            android:name=".activity.activitys.TermosDeUsoActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.PoliticaPrivacidadeActivity"
+            android:name=".activity.activitys.PoliticaPrivacidadeActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.NovaSenhaActivity"
+            android:name=".activity.activitys.NovaSenhaActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.RedefinirSenhaActivity"
+            android:name=".activity.activitys.RedefinirSenhaActivity"
             android:exported="false" />
         <activity
             android:name=".activity.webView.WebSpeedTestActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.ClienteActivity"
+            android:name=".activity.activitys.ClienteActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.PlanosActivity"
+            android:name=".activity.activitys.PlanosActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.LoginActivity"
+            android:name=".activity.activitys.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.InicialActivity"
+            android:name=".activity.activitys.InicialActivity"
             android:exported="false" />
         <activity
             android:name=".activity.tema.SplashScreenActivity"

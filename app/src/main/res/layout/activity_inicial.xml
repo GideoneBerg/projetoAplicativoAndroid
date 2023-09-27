@@ -8,7 +8,7 @@
     android:background="@drawable/new_background"
     android:orientation="vertical"
         android:scrollbarThumbHorizontal="@drawable/background_inicio_botao"
-    tools:context=".activity.InicialActivity">
+    tools:context=".activity.activitys.InicialActivity">
 
     <ImageView
         android:id="@+id/logo"

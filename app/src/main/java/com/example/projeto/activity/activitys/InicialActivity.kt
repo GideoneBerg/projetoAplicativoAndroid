@@ -1,12 +1,9 @@
-package com.example.projeto.activity
+package com.example.projeto.activity.activitys
 
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.View
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import com.example.projeto.R
 import com.example.projeto.databinding.ActivityInicialBinding
 
 class InicialActivity : AppCompatActivity() {

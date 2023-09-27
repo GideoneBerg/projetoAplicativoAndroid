@@ -11,7 +11,7 @@
     android:paddingLeft="32dp"
     android:paddingRight="32dp"
     android:textAlignment="center"
-    tools:context=".activity.LoginActivity">
+    tools:context=".activity.activitys.LoginActivity">
 
 
     <ImageView

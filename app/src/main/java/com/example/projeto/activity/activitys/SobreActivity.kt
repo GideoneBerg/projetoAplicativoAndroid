@@ -1,9 +1,8 @@
-package com.example.projeto.activity
+package com.example.projeto.activity.activitys
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.projeto.activity.webView.WebSpeedTestActivity
 import com.example.projeto.databinding.ActivitySobreBinding
 
 class SobreActivity : AppCompatActivity() {
