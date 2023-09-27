@@ -1,4 +1,4 @@
-package com.example.projeto.activity;
+package com.example.projeto.activity.classes;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,7 +9,6 @@ import android.text.TextWatcher;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.chaos.view.PinView;
 import com.example.projeto.R;
 

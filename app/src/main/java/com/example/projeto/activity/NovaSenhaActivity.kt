@@ -21,6 +21,17 @@ import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
 
 class NovaSenhaActivity : AppCompatActivity() {
+
+    private fun servicoRetrofit(): ApiService {
+        return Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+//          .baseUrl("http://10.0.2.2/") //virtual
+            .baseUrl("http://192.168.31.75/") // casa
+//            .baseUrl("http://192.168.100.181/") // ETE
+            .build()
+            .create(ApiService::class.java)
+    }
+
     private lateinit var binding: ActivityNovaSenhaBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,14 +51,9 @@ class NovaSenhaActivity : AppCompatActivity() {
         button.setOnClickListener {
             progressBar.visibility = View.VISIBLE
 
-            val retrofit = Retrofit.Builder()
-                .baseUrl("http://192.168.31.75/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-            // criar um classe pra a senha ATENCAO
-            val apiService = retrofit.create(ApiService::class.java)
-            val call = apiService.submitData(email!!, editTextOTP.text.toString(), editTextNewPassword.text.toString())
-            call.enqueue(object : Callback<String> {
+            val servico = servicoRetrofit()
+            servico.submitData(email!!, editTextOTP.text.toString(), editTextNewPassword.text.toString())
+            .enqueue(object : Callback<String> {
                 override fun onResponse(call: Call<String>, response: Response<String>) {
                     progressBar.visibility = View.GONE
                     if (response.isSuccessful) {
@@ -77,6 +83,8 @@ class NovaSenhaActivity : AppCompatActivity() {
             })
         }
     }
+
+
 
     @SuppressLint("SetTextI18n")
     private fun dadosAPI() {

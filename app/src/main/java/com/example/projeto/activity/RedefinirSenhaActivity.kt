@@ -21,6 +21,15 @@ import retrofit2.http.POST
 import java.util.regex.Pattern
 
 class RedefinirSenhaActivity : AppCompatActivity() {
+    private fun servicoRetrofit(): APIInterface{
+        return Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+//          .baseUrl("http://10.0.2.2/") //virtual
+            .baseUrl("http://192.168.31.75/") // casa
+//            .baseUrl("http://192.168.100.181/") // ETE
+            .build()
+            .create(APIInterface::class.java)
+    }
     private lateinit var binding: ActivityRedefinirSenhaBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,13 +42,6 @@ class RedefinirSenhaActivity : AppCompatActivity() {
         val button = findViewById<Button>(R.id.btnToken)
         val progressBar = findViewById<ProgressBar>(R.id.progressBar)
 
-        val retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.31.75/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        val service = retrofit.create(APIInterface::class.java)
-
         button.setOnClickListener(View.OnClickListener {
             val email = editText.text.toString()
             if (!isValidEmail(email)) {
@@ -47,12 +49,12 @@ class RedefinirSenhaActivity : AppCompatActivity() {
                 editText.error = "Email inválido"
                 return@OnClickListener
             }
-
             progressBar.visibility = View.VISIBLE
             button.visibility = View.INVISIBLE
 
-            val call = service.resetPassword(email)
-            call.enqueue(object : Callback<String> {
+            val servico = servicoRetrofit()
+            servico.resetPassword(email)
+            .enqueue(object : Callback<String> {
                 override fun onResponse(call: Call<String>, response: Response<String>) {
                     progressBar.visibility = View.GONE
                     if (response.isSuccessful) {
