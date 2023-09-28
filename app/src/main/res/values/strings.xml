@@ -43,12 +43,12 @@
     <string name="enviamos_token">Enviamos um token para seu e-mail:</string>
     <string name="nao_tem_conta">NÃO TEM CONTA NO APC? INSCREVA-SE</string>
     <string name="insira_o_token">Insira o Token</string>
-    <string name="nova_senha">NOVA SENHA</string>
+    <string name="nova_senha">Nova Senha</string>
     <string name="insira_seu_email_aqui">Insira seu Email Aqui</string>
     <string name="enviar">Enviar</string>
     <string name="verifique_email">Verifique seu Email!</string>
     <string name="email_token">Por favor insira o token enviado para o seu e-mail:</string>
-    <string name="text_token">TOKEN</string>
+    <string name="text_token">Token</string>
     <string name="sobre_apc">Sobre o Apc (1.0.0)</string>
     <string name="termos_de_uso">Termos de Uso</string>
     <string name="politica_de_privacidade">Política de Privacidade - APC</string>

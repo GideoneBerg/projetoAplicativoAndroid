@@ -19,8 +19,7 @@
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/btnNovaSenha"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-         />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -29,17 +28,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/email_marketing___copia" />
+        app:srcCompat="@drawable/email_marketing1" />
 
     <TextView
         android:id="@+id/verifique"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/lexend_black"
+        android:fontFamily="@font/bebas_neue"
         android:text="@string/verifique_email"
         android:textAlignment="gravity"
-        android:textColor="#FDF8F8"
-        android:textSize="25sp"
+        android:textColor="@color/amarelo"
+        android:textSize="35sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView4" />
@@ -73,9 +72,9 @@
         android:layout_marginTop="48dp"
         android:drawablePadding="10dp"
         android:elevation="2dp"
-        android:fontFamily="@font/archivo_black"
+        android:fontFamily="@font/bebas_neue"
         android:text="@string/text_token"
-        android:textColor="@color/azulClaro"
+        android:textColor="@color/azulAnil"
         android:textColorHighlight="@color/azulAnil"
         android:textColorHint="@color/azulAnil"
         android:textSize="30sp"
@@ -92,12 +91,12 @@
         android:layout_marginTop="40dp"
         android:drawablePadding="10dp"
         android:elevation="2dp"
-        android:fontFamily="@font/archivo_black"
+        android:fontFamily="@font/bebas_neue"
         android:text="@string/nova_senha"
         android:textColor="@color/azulAnil"
         android:textColorHighlight="@color/azulAnil"
         android:textColorHint="@color/azulAnil"
-        android:textSize="25sp"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -111,7 +110,7 @@
         android:fontFamily="@font/assistant_extralight"
         android:text="@string/email_token"
         android:textAlignment="center"
-        android:textColor="#FDF8F8"
+        android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -141,7 +140,6 @@
         android:background="@drawable/background_texto1"
         android:elevation="2dp"
         android:fontFamily="sans-serif-light"
-
         android:inputType="textPassword"
         android:padding="10dp"
         android:textColor="@color/azulAnil"
@@ -159,7 +157,7 @@
         android:layout_width="86dp"
         android:layout_height="41dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/background_token"
+        android:background="@drawable/background_botao1"
         android:elevation="2dp"
         android:fontFamily="sans-serif-light"
         android:text="@string/enviar"
@@ -180,8 +178,9 @@
         android:layout_marginTop="12dp"
         android:elevation="10dp"
         android:inputType="number"
-        android:itemBackground="@color/azulClaro"
-        android:textColor="@color/white"
+        android:itemBackground="@drawable/background_texto1"
+        android:textColor="@color/azulAnil"
+        app:lineColor="@color/white"
         android:textSize="20sp"
         app:itemCount="6"
         app:itemHeight="60dp"
@@ -193,7 +192,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textToken"
         app:viewType="rectangle"
         tools:ignore="MissingConstraints,UnknownId">
-        <!--        app:lineColor="@color/azulEscuro"-->
+
 
     </com.chaos.view.PinView>
 

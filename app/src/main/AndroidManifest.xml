@@ -15,11 +15,11 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/logotipo_abertura"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/logotipo_abertura"
         android:supportsRtl="true"
         android:theme="@style/Base.Theme.Projeto"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+<!--        android:roundIcon="@drawable/logotipo_abertura" isso estava dentro de aplication-->
         <activity
             android:name=".activity.classes.TokenActivity"
             android:exported="false"/>
@@ -68,6 +68,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

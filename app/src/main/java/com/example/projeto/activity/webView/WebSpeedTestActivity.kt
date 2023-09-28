@@ -17,7 +17,7 @@ class WebSpeedTestActivity : AppCompatActivity() {
 
         val webView = binding.webView
         webView.webViewClient = WebViewClient() // acessar o site sem sair do app
-        webView.loadUrl("https://www.testeavelocidade.net/p/velocimetro-widget.html")
+        webView.loadUrl("https://www.testeavelocidade.net/speedtest-claro/")
         webView.settings.javaScriptEnabled =  true // ativando o javascript
         webView.settings.domStorageEnabled = true // aumentar desempenho do WebView
     }

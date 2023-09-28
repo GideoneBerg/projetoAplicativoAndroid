@@ -11,5 +11,5 @@
 
 
 
-    <style name="Theme.Projeto" parent="Base.Theme.Projeto" />
+    <style name="Theme.Projeto" parent="Theme.AppCompat.NoActionBar" />
 </resources>
