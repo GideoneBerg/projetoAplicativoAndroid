@@ -1,63 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/pagina_planos"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fundo"
-    android:orientation="vertical"
-    android:paddingLeft="32dp"
-    android:paddingRight="32dp"
+    android:background="@drawable/new_background"
     tools:context=".activity.activitys.PlanosActivity">
 
+    <!--  transparencia da imagem  android:alpha="0.5"-->
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="118dp"
+        android:layout_height="116dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.939"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logotipo" />
 
     <TextView
         android:id="@+id/texto_planos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="290dp"
         android:fontFamily="sans-serif-thin"
         android:paddingLeft="20dp"
         android:text="@string/planos"
         android:textColor="#FFFFFF"
         android:textColorHint="#FFFFFF"
-        android:textSize="28sp" />
+        android:textSize="28sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <TextView
         android:id="@+id/texto_consultores"
         android:layout_width="344dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginTop="28dp"
         android:fontFamily="sans-serif-condensed"
         android:gravity="center"
         android:text="@string/planos_consultores"
         android:textColor="#BDBDBD"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/texto_planos" />
 
     <Button
         android:id="@+id/button_central"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="70dp"
-        android:layout_marginLeft="70dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="70dp"
-        android:layout_marginRight="70dp"
-        android:background="@drawable/background_botao_planos"
-        android:text="@string/central" />
+        android:layout_width="272dp"
+        android:layout_height="74dp"
+        android:layout_marginTop="348dp"
+        android:background="@drawable/background_botao1"
+        android:elevation="2dp"
+        android:text="@string/central"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.517"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <Button
         android:id="@+id/button_whatsapp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="70dp"
-        android:layout_marginLeft="70dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="70dp"
-        android:layout_marginRight="70dp"
-        android:background="@drawable/background_botao_planos"
-        android:text="@string/zap" />
+        android:layout_width="272dp"
+        android:layout_height="74dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/background_botao1"
+        android:elevation="2dp"
+        android:text="@string/zap"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.517"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_central" />
 
-</LinearLayout>
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:srcCompat="@drawable/objeto10" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:id="@+id/pagina_planos"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:background="@drawable/fundo"-->
+<!--    android:orientation="vertical"-->
+<!--    android:paddingLeft="32dp"-->
+<!--    android:paddingRight="32dp"-->
+<!--    tools:context=".activity.activitys.PlanosActivity">-->
+
+
+
+
+
+
+<!--    <Button-->
+<!--        android:id="@+id/button_central"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="70dp"-->
+<!--        android:layout_marginLeft="70dp"-->
+<!--        android:layout_marginTop="30dp"-->
+<!--        android:layout_marginEnd="70dp"-->
+<!--        android:layout_marginRight="70dp"-->
+<!--        android:background="@drawable/background_botao_planos"-->
+<!--        android:text="@string/central" />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/button_whatsapp"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="70dp"-->
+<!--        android:layout_marginLeft="70dp"-->
+<!--        android:layout_marginTop="30dp"-->
+<!--        android:layout_marginEnd="70dp"-->
+<!--        android:layout_marginRight="70dp"-->
+<!--        android:background="@drawable/background_botao_planos"-->
+<!--        android:text="@string/zap" />-->
+
+<!--</LinearLayout>-->
