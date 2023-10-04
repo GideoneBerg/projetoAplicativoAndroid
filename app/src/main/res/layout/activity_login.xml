@@ -56,13 +56,13 @@
         android:id="@+id/btnEntrar"
         android:layout_width="325dp"
         android:layout_height="57dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="28dp"
         android:background="@drawable/background_botao1"
         android:elevation="2dp"
         android:text="@string/botaoAcessar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextSenha" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutSenha" />
 
     <TextView
         android:id="@+id/bem"
@@ -119,28 +119,59 @@
         app:maskStyle="completable"
         tools:ignore="MissingConstraints" />
 
-    <EditText
-        android:id="@+id/editTextSenha"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutSenha"
         android:layout_width="325dp"
-        android:layout_height="57dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:background="@drawable/background_texto1"
-        android:drawableStart="@drawable/baseline_lock_24"
-        android:drawablePadding="6dp"
-        android:elevation="2dp"
-        android:ems="5"
-        android:fontFamily="sans-serif-light"
-        android:hint="@string/senha"
-        android:inputType="textPassword"
-        android:maxLength="8"
-        android:padding="10dp"
-        android:selectAllOnFocus="false"
-        android:singleLine="false"
-        android:textColor="@color/azulAnil"
+        android:elevation="3dp"
         android:textColorHint="@color/azulAnil"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextCpf" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextCpf"
+        tools:ignore="MissingConstraints">
+
+        <EditText
+            android:id="@+id/editTextSenha"
+            android:layout_width="match_parent"
+            android:layout_height="57dp"
+            android:background="@drawable/background_texto1"
+            android:drawableStart="@drawable/baseline_lock_24"
+            android:drawablePadding="6dp"
+            android:elevation="2dp"
+            android:ems="5"
+            android:fontFamily="sans-serif-light"
+            android:maxLength="8"
+            android:padding="10dp"
+            android:selectAllOnFocus="false"
+            android:singleLine="false"
+            android:textColor="@color/azulAnil"
+            android:textColorHint="@color/azulAnil"
+            android:inputType="textPassword" />
+
+        <ToggleButton
+            android:id="@+id/toggleButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Mostrar"
+            android:checked="false"
+            app:layout_constraintEnd_toEndOf="@+id/editTextSenha"
+            app:layout_constraintTop_toBottomOf="@+id/editTextSenha" />
+
+        <!--        <ImageView-->
+<!--            android:id="@+id/showPasswordButton"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center_vertical"-->
+<!--            android:layout_marginEnd="8dp"-->
+<!--            android:clickable="true"-->
+<!--            android:focusable="true"-->
+<!--            android:src="@drawable/baseline_visibility_off_24"-->
+<!--            android:contentDescription="show password" />-->
+
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <TextView
         android:id="@+id/text_esqueci_senha"

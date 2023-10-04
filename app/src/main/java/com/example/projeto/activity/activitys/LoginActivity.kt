@@ -3,6 +3,8 @@ package com.example.projeto.activity.activitys
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.view.View
 import android.widget.Button
@@ -23,6 +25,9 @@ import retrofit2.http.POST
 
 class LoginActivity : AppCompatActivity() {
 
+
+
+
     private fun servicoRetrofit(): EnviaUsuario {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
@@ -33,15 +38,20 @@ class LoginActivity : AppCompatActivity() {
             .create(EnviaUsuario::class.java)
     }
 
+
+
+
     private lateinit var binding: ActivityLoginBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        funcaoBotoes()
 
-    }
+        funcaoBotoes()
+}
+
+
 
 
     private fun funcaoBotoes() {
