@@ -24,7 +24,7 @@
     <string name="segunda_via">Segunda\nVia</string>
     <string name="teste_velocidade">Teste\nVelocidade</string>
     <string name="sobre">Sobre</string>
-    <string name="ola">Olá</string>
+    <string name="ola">Olá, </string>
     <string name="descricao">imagem</string>
     <string name="maisDados">Meus Dados</string>
     <string name="dados_do_cliente">Dados do Cliente</string>
