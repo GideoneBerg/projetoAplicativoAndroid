@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.widget.Button
 
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.projeto.R
@@ -87,6 +88,11 @@ class ClienteActivity : AppCompatActivity() {
     }
     private fun botoesScroll(){
 
+        binding.btnLogout.setOnClickListener {
+            realizarLogout()
+
+        }
+
         binding.site.setOnClickListener{
             openUrl("https://arteempc.com.br:6565/")
         }
@@ -165,6 +171,36 @@ class ClienteActivity : AppCompatActivity() {
             }
             dialog.show()
         }
+    }
+
+    private fun realizarLogout() {
+
+
+// Lógica de logout personalizada aqui
+        // Por exemplo, você pode limpar informações de sessão, preferências compartilhadas, etc.
+
+
+
+// Limpar as preferências compartilhadas
+        val sharedPreferences = getSharedPreferences("suas_preferencias", MODE_PRIVATE)
+
+
+        val editor = sharedPreferences.edit()
+        editor.clear()
+        editor.apply()
+
+
+        editor.clear()
+        editor.apply()
+
+
+        editor.clear()
+// Redirecionar o usuário para a tela de login
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        finish()
+
+        Toast.makeText(this, "Logout realizado com sucesso", Toast.LENGTH_SHORT).show()
     }
 
 

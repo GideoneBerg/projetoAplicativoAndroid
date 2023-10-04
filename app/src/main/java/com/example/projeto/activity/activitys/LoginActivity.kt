@@ -58,6 +58,7 @@ class LoginActivity : AppCompatActivity() {
         binding.btnEntrar.setOnClickListener {
             loginUsuario()
         }
+
     }
 
     private fun loginUsuario() {

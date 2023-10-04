@@ -9,7 +9,8 @@
     <string name="text_newcliente">Quero ser Cliente</string>
     <string name="text_planos">Consultar Planos</string>
     <string name="text_ajudaZap">Preciso de Ajuda</string>
-    <string name="planos">Planos para você\nque navega sem \nLimites e Valores \nque cabem no seu \nBolso!</string>
+    <string name="planos">Navege sem limites com Valores que cabem no seu Bolso!</string>
+    <string name="planos_voce">Planos para você!</string>
     <string name="planos_consultores">Fale com nossos Consultores!</string>
     <string name="central">Central</string>
     <string name="zap">Whatsapp</string>
