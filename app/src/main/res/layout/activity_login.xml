@@ -130,6 +130,7 @@
         android:drawablePadding="6dp"
         android:elevation="2dp"
         android:ems="6"
+        android:hint="@string/senha"
         android:fontFamily="sans-serif-light"
         android:inputType="textPassword"
         android:maxLength="8"
