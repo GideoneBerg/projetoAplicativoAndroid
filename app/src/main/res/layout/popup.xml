@@ -3,25 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="270dp"
-    android:background="#57CCCA"
-    android:gravity="center"
+    android:layout_height="wrap_content"
+    android:background="#FFFFFF"
     android:paddingLeft="10dp"
+    android:paddingBottom="30dp"
     android:paddingRight="10dp">
 
     <TextView
         android:id="@+id/titulo_pop_up"
-        android:layout_width="362dp"
-        android:layout_height="45dp"
+        android:layout_width="312dp"
+        android:layout_height="42dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="28dp"
         android:layout_marginEnd="10dp"
         android:fontFamily="@font/anton"
         android:text="DADOS DO CLIENTE"
         android:textAlignment="center"
-        android:textColor="@color/white"
+        android:textColor="@color/azulClaro"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.62"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,7 +35,7 @@
         android:layout_marginEnd="10dp"
         android:fontFamily="@font/abel"
         android:text="Nome:"
-        android:textColor="@color/white"
+        android:textColor="@color/azulClaro"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -49,7 +50,7 @@
         android:layout_marginEnd="10dp"
         android:fontFamily="@font/abel"
         android:text="Nascimento:"
-        android:textColor="@color/white"
+        android:textColor="@color/azulClaro"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,26 +65,11 @@
         android:layout_marginEnd="10dp"
         android:fontFamily="@font/abel"
         android:text="Endereço:"
-        android:textColor="@color/white"
+        android:textColor="@color/azulClaro"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nascimento" />
-
-    <TextView
-        android:id="@+id/bairro"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="10dp"
-        android:fontFamily="@font/abel"
-        android:text="Bairro:"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cidade" />
 
     <TextView
         android:id="@+id/cidade"
@@ -94,29 +80,67 @@
         android:layout_marginEnd="10dp"
         android:fontFamily="@font/abel"
         android:text="Cidade:"
-        android:textColor="@color/white"
+        android:textColor="@color/azulClaro"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/endereco" />
 
+    <TextView
+        android:id="@+id/bairro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="50dp"
+        android:fontFamily="@font/abel"
+        android:text="Bairro:"
+        android:textColor="@color/azulClaro"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cidade" />
+
     <Button
         android:id="@+id/button_ok"
-        android:layout_width="42dp"
-        android:layout_height="39dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/background_botao_popup"
+        android:layout_width="30dp"
+        android:layout_height="29dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/background_botao_fechar_popup"
         android:fontFamily="sans-serif-medium"
         android:text="X"
         android:textColor="@color/white"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.986"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bairro"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+<!--    <ImageView-->
+<!--        android:id="@+id/imageView8"-->
+<!--        android:layout_width="39dp"-->
+<!--        android:layout_height="43dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="1.0"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/bairro"-->
+<!--        app:srcCompat="@drawable/background_popup_segundavia" />-->
+
+    <!--    <Button-->
+    <!--        android:id="@+id/button_ok2"-->
+    <!--        android:layout_width="30dp"-->
+    <!--        android:layout_height="29dp"-->
+    <!--        android:layout_marginTop="256dp"-->
+    <!--        android:background="#ffffff"-->
+    <!--        android:fontFamily="sans-serif-medium"-->
+    <!--        android:textColor="@color/white"-->
+    <!--        android:textSize="20sp"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintHorizontal_bias="1.0"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

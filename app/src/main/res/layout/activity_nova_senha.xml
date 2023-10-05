@@ -152,6 +152,21 @@
         app:layout_constraintTop_toBottomOf="@+id/textnovaSenha"
         app:layout_constraintVertical_bias="0.0" />
 
+    <ToggleButton
+        android:id="@+id/toggleButton"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/backgroud_mostra_ocultar_senha"
+        android:checked="false"
+        android:elevation="3dp"
+        android:textOff=""
+        android:textOn=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.788"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textnovaSenha" />
+
     <Button
         android:id="@+id/btnNovaSenha"
         android:layout_width="86dp"

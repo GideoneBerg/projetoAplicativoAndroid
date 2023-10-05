@@ -28,69 +28,68 @@ class ClienteActivity : AppCompatActivity() {
         // Dados do cliente
         dadosAPI()
     }
-     @SuppressLint("SetTextI18n")
-     private fun dadosAPI() {
+    @SuppressLint("SetTextI18n")
+    private fun dadosAPI() {
 
-         val extras = intent.extras ?: return
+        val extras = intent.extras ?: return
 
         // Trazendo dados para a activity
-         val nomeUsuario = intent.getStringExtra("nomeUsuario")
+        val nomeUsuario = intent.getStringExtra("nomeUsuario")
 
-         binding.textViewNome.text = nomeUsuario
-         binding.plano.text = extras.getString("plano")
-         binding.vencimento.text = extras.getString("vencimento")
+        binding.textViewNome.text = nomeUsuario
+        binding.plano.text = extras.getString("plano")
+        binding.vencimento.text = extras.getString("vencimento")
 
-         val cidade =  extras.getString("cidade")
-         val rua =  extras.getString("rua")
-         val nascimento =  extras.getString("nascimento")
-         val numeroCasa =  extras.getString("numero")
-         val bairroCasa =  extras.getString("bairro")
-         val estado =  extras.getString("estado")
+        val cidade =  extras.getString("cidade")
+        val rua =  extras.getString("rua")
+        val nascimento =  extras.getString("nascimento")
+        val numeroCasa =  extras.getString("numero")
+        val bairroCasa =  extras.getString("bairro")
+        val estado =  extras.getString("estado")
 
-         // Botao criado para exibição de dados do cliente usando popup
-         binding.maisDados.setOnClickListener{
-             val builder = AlertDialog.Builder(this)
+        // Botao criado para exibição de dados do cliente usando popup
+        binding.maisDados.setOnClickListener{
+            val builder = AlertDialog.Builder(this)
 //             builder.setTitle("Dados do Cliente")
 
-             val inflater = layoutInflater
-             val dialogLayout = inflater.inflate(R.layout.popup, null)
-             builder.setView(dialogLayout)
+            val inflater = layoutInflater
+            val dialogLayout = inflater.inflate(R.layout.popup, null)
+            builder.setView(dialogLayout)
 
-             val dialog = builder.create()
-             // Personaliza o estilo do popup
-             dialog.window?.setBackgroundDrawableResource(R.drawable.backgroud_popup)
+            val dialog = builder.create()
+            // Personaliza o estilo do popup
+            dialog.window?.setBackgroundDrawableResource(R.drawable.backgroud_popup)
 
-             // dados do cliente no popup
-             val nome = dialogLayout.findViewById<TextView>(R.id.nome)
-             nome.text = "Nome: $nomeUsuario"
+            // dados do cliente no popup
+            val nome = dialogLayout.findViewById<TextView>(R.id.nome)
+            nome.text = "Nome: $nomeUsuario"
 
-             val ruaCliente = dialogLayout.findViewById<TextView>(R.id.endereco)
-             ruaCliente.text = "End: $rua, n° $numeroCasa"
+            val ruaCliente = dialogLayout.findViewById<TextView>(R.id.endereco)
+            ruaCliente.text = "End: $rua, n° $numeroCasa"
 
-             val cidadeAtual = dialogLayout.findViewById<TextView>(R.id.cidade)
-             cidadeAtual.text = "Cidade: $cidade, $estado"
+            val cidadeAtual = dialogLayout.findViewById<TextView>(R.id.cidade)
+            cidadeAtual.text = "Cidade: $cidade, $estado"
 
-             val nasc = dialogLayout.findViewById<TextView>(R.id.nascimento)
-             nasc.text = "Nascimento: $nascimento"
+            val nasc = dialogLayout.findViewById<TextView>(R.id.nascimento)
+            nasc.text = "Nascimento: $nascimento"
 
-             val bairro = dialogLayout.findViewById<TextView>(R.id.bairro)
-             bairro.text = "Bairro: $bairroCasa"
+            val bairro = dialogLayout.findViewById<TextView>(R.id.bairro)
+            bairro.text = "Bairro: $bairroCasa"
 
-             // Fechar o popup quando o botão "OK" é clicado
+            // Fechar o popup quando o botão "OK" é clicado
 
-             val buttonOk = dialogLayout.findViewById<Button>(R.id.button_ok)
-             buttonOk.setOnClickListener {
-                 dialog.dismiss()
-             }
-             dialog.show()
-         }
+            val buttonOk = dialogLayout.findViewById<Button>(R.id.button_ok)
+            buttonOk.setOnClickListener {
+                dialog.dismiss()
+            }
+            dialog.show()
+        }
 
     }
     private fun botoesScroll(){
 
         binding.btnLogout.setOnClickListener {
             realizarLogout()
-
         }
 
         binding.site.setOnClickListener{
@@ -138,8 +137,6 @@ class ClienteActivity : AppCompatActivity() {
             // Personaliza o estilo do popup
             dialog.window?.setBackgroundDrawableResource(R.drawable.background_popup_segundavia)
 
-
-
             // Fechar o popup quando o botão "OK" é clicado
 
             val buttonOk = dialogLayout.findViewById<Button>(R.id.button_ok)
@@ -160,8 +157,6 @@ class ClienteActivity : AppCompatActivity() {
             val dialog = builder.create()
             // Personaliza o estilo do popup
             dialog.window?.setBackgroundDrawableResource(R.drawable.background_popup_segundavia)
-
-
 
             // Fechar o popup quando o botão "OK" é clicado
 
@@ -184,15 +179,12 @@ class ClienteActivity : AppCompatActivity() {
 // Limpar as preferências compartilhadas
         val sharedPreferences = getSharedPreferences("suas_preferencias", MODE_PRIVATE)
 
-
         val editor = sharedPreferences.edit()
         editor.clear()
         editor.apply()
 
-
         editor.clear()
         editor.apply()
-
 
         editor.clear()
 // Redirecionar o usuário para a tela de login

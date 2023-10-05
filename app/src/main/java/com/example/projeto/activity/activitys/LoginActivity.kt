@@ -25,9 +25,6 @@ import retrofit2.http.POST
 
 class LoginActivity : AppCompatActivity() {
 
-
-
-
     private fun servicoRetrofit(): EnviaUsuario {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
@@ -39,8 +36,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
-
-
     private lateinit var binding: ActivityLoginBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,12 +44,33 @@ class LoginActivity : AppCompatActivity() {
         setContentView(view)
 
         funcaoBotoes()
-}
 
 
+    }
+
+
+    private fun togglePasswordVisibility() {
+        val editTextSenha = binding.editTextSenha
+        if (editTextSenha.transformationMethod == PasswordTransformationMethod.getInstance()) {
+            // Se a senha estiver oculta, mostra-a
+            editTextSenha.transformationMethod = HideReturnsTransformationMethod.getInstance()
+        } else {
+            // Se a senha estiver visível, oculta-a
+            editTextSenha.transformationMethod = PasswordTransformationMethod.getInstance()
+        }
+        // Move o cursor para o final do texto
+        editTextSenha.setSelection(editTextSenha.text.length)
+    }
 
 
     private fun funcaoBotoes() {
+        binding.toggleButton.setOnCheckedChangeListener { _, _ ->
+            // Chama a função para alternar a visibilidade da senha
+            togglePasswordVisibility()
+        }
+
+
+
         binding.textEsqueciSenha.setOnClickListener{
             val intent = Intent(this, RedefinirSenhaActivity::class.java)
             startActivity(intent)
