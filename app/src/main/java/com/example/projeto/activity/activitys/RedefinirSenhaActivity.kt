@@ -34,7 +34,7 @@ class RedefinirSenhaActivity : AppCompatActivity() {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
 //          .baseUrl("http://10.0.2.2/") //virtual
-            .baseUrl("http://192.168.31.23/") // casa
+            .baseUrl("http://192.168.31.75/") // casa
 //            .baseUrl("http://192.168.100.181/") // ETE
             .client(okHttpClient)
             .build()
