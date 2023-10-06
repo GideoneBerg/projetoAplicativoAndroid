@@ -19,12 +19,13 @@
         android:theme="@style/Base.Theme.Projeto"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-<!--        android:roundIcon="@drawable/logotipo_abertura" isso estava dentro de aplication-->
+        <activity
+            android:name=".activity.activitys.SolicitacaoCliente"
+            android:exported="false" />
+        <!-- android:roundIcon="@drawable/logotipo_abertura" isso estava dentro de aplication -->
         <activity
             android:name=".activity.classes.TokenActivity"
-            android:exported="false"/>
-<!--            android:windowSoftInputMode="adjustResize"/>-->
-
+            android:exported="false" /> <!-- android:windowSoftInputMode="adjustResize"/> -->
         <activity
             android:name=".activity.activitys.SobreApcActivity"
             android:exported="false" />

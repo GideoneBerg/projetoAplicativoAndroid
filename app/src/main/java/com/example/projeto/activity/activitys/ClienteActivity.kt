@@ -47,6 +47,7 @@ class ClienteActivity : AppCompatActivity() {
         val bairroCasa =  extras.getString("bairro")
         val estado =  extras.getString("estado")
 
+
         // Botao criado para exibição de dados do cliente usando popup
         binding.maisDados.setOnClickListener{
             val builder = AlertDialog.Builder(this)
@@ -87,6 +88,14 @@ class ClienteActivity : AppCompatActivity() {
 
     }
     private fun botoesScroll(){
+        val extras = intent.extras ?: return
+
+        binding.solicitarServico.setOnClickListener {
+            val intent = Intent(this, SolicitacaoCliente::class.java)
+            val cod=  extras.getString("cod")
+            intent.putExtra("cod", cod)
+            startActivity(intent)
+        }
 
         binding.btnLogout.setOnClickListener {
             realizarLogout()
@@ -170,11 +179,8 @@ class ClienteActivity : AppCompatActivity() {
 
     private fun realizarLogout() {
 
-
 // Lógica de logout personalizada aqui
         // Por exemplo, você pode limpar informações de sessão, preferências compartilhadas, etc.
-
-
 
 // Limpar as preferências compartilhadas
         val sharedPreferences = getSharedPreferences("suas_preferencias", MODE_PRIVATE)

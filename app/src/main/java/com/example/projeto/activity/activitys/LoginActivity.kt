@@ -35,7 +35,6 @@ class LoginActivity : AppCompatActivity() {
             .create(EnviaUsuario::class.java)
     }
 
-
     private lateinit var binding: ActivityLoginBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,8 +43,6 @@ class LoginActivity : AppCompatActivity() {
         setContentView(view)
 
         funcaoBotoes()
-
-
     }
 
 
@@ -68,8 +65,6 @@ class LoginActivity : AppCompatActivity() {
             // Chama a função para alternar a visibilidade da senha
             togglePasswordVisibility()
         }
-
-
 
         binding.textEsqueciSenha.setOnClickListener{
             val intent = Intent(this, RedefinirSenhaActivity::class.java)
@@ -138,7 +133,6 @@ class LoginActivity : AppCompatActivity() {
         })
     }
 
-
     private fun dadosActivity(usuario: Usuario) {
         val intent = Intent(this@LoginActivity, ClienteActivity::class.java)
         intent.putExtra("nomeUsuario", usuario.nome)
@@ -150,6 +144,7 @@ class LoginActivity : AppCompatActivity() {
         intent.putExtra("numero", usuario.numero)
         intent.putExtra("bairro", usuario.bairro)
         intent.putExtra("estado", usuario.estado)
+        intent.putExtra("cod", usuario.cod)
 
         startActivity(intent)
         finish()

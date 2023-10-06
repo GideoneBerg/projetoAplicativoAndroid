@@ -13,8 +13,6 @@ class Usuario {
    lateinit var numero: String
    lateinit var bairro: String
    lateinit var estado: String
-
-
-
+   lateinit var cod: String
 
 }
