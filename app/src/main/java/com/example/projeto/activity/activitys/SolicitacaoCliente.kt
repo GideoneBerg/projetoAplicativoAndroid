@@ -48,11 +48,11 @@ class SolicitacaoCliente : AppCompatActivity() {
         val adapter: ArrayAdapter<CharSequence> = ArrayAdapter.createFromResource(
             this,
             R.array.motivos,
-            android.R.layout.simple_spinner_item
+            R.layout.lista_itens
         )
 
         // Especifique o layout a ser usado quando a lista de opções aparecer
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        adapter.setDropDownViewResource(R.layout.lista_itens)
         // Associe o ArrayAdapter ao Spinner
         spinner.adapter = adapter
 
@@ -72,8 +72,6 @@ class SolicitacaoCliente : AppCompatActivity() {
                 // Executado quando nada é selecionado (opcional)
             }
         }
-
-
         binding.botaoEnvSolicitacao.setOnClickListener {
             val motivo = spinner.selectedItem.toString()
             val descricao = binding.descricao.text.toString()
