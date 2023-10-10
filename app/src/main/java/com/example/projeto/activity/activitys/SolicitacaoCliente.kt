@@ -3,7 +3,14 @@ package com.example.projeto.activity.activitys
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
+import com.example.projeto.R
+import com.example.projeto.activity.classes.Usuario
 import com.example.projeto.databinding.ActivitySolicitacaoClienteBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -20,27 +27,64 @@ class SolicitacaoCliente : AppCompatActivity() {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
 //          .baseUrl("http://10.0.2.2/") //virtual
-            .baseUrl("http://192.168.31.75/") // casa
-//            .baseUrl("http://192.168.100.181/") // ET
+//            .baseUrl("http://192.168.31.75/") // casa
+            .baseUrl("http://192.168.1.101/") // ET
             .build()
             .create(ServicoAPI::class.java)
     }
 
     private lateinit var binding: ActivitySolicitacaoClienteBinding
+    private lateinit var spinner: Spinner
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySolicitacaoClienteBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
+        this.spinner = binding.opcoes
+
+        // Crie um ArrayAdapter usando o array de strings definido no XML
+        val adapter: ArrayAdapter<CharSequence> = ArrayAdapter.createFromResource(
+            this,
+            R.array.motivos,
+            android.R.layout.simple_spinner_item
+        )
+
+        // Especifique o layout a ser usado quando a lista de opções aparecer
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        // Associe o ArrayAdapter ao Spinner
+        spinner.adapter = adapter
+
+        // Defina o ouvinte de seleção do Spinner
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                val selectedItem = parent?.getItemAtPosition(position).toString()
+                // Faça algo com o item selecionado, se necessário
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // Executado quando nada é selecionado (opcional)
+            }
+        }
+
+
         binding.botaoEnvSolicitacao.setOnClickListener {
-            val motivo = binding.motivo.text.toString()
+            val motivo = spinner.selectedItem.toString()
             val descricao = binding.descricao.text.toString()
             if (motivo.isNotEmpty() && descricao.isNotEmpty()){
-                // enviando cod do cliente para o banco de dados                                                                                                                                                                 20
+                // enviando cod do cliente para o banco de dados
+
                 val cod = intent.extras!!.getString("cod")
+                val nomeUsuario = intent.extras!!.getString("nomeUsuario")
+
                 val servicoApi = servicoRetrofit()
-                servicoApi.enviarDados(cod!!, motivo, descricao)
+                servicoApi.enviarDados(cod!!, nomeUsuario!!, motivo, descricao)
                     .enqueue(object : Callback<String> {
                         override fun onResponse(call: Call<String>, response: Response<String>) {
                             if (response.isSuccessful) {
@@ -63,11 +107,13 @@ class SolicitacaoCliente : AppCompatActivity() {
                 }
             }
     }
+
     interface ServicoAPI {
         @FormUrlEncoded
         @POST("/Login/solicitacao_servico.php")
         fun enviarDados(
             @Field("cliente_cod") cod: String,
+            @Field("nome_cliente") nomeUsuario: String,
             @Field("motivo_chamado") motivo: String,
             @Field("descricao") descricao: String
         ): Call<String>

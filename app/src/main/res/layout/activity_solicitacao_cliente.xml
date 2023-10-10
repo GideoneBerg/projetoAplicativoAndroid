@@ -5,39 +5,105 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/new_background"
-    android:padding="20dp"
     tools:context=".activity.activitys.SolicitacaoCliente">
 
 
-    <Button
-        android:id="@+id/botaoEnvSolicitacao"
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="335dp"
+        android:layout_height="303dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.565"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/img_solicitacao" />
+
+
+    <TextView
+        android:id="@+id/solicitacao"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Enviar Solicitação"
+        android:layout_marginTop="320dp"
+        android:fontFamily="@font/bebas_neue"
+        android:text="Solicitar Suporte"
+        android:textAlignment="gravity"
+        android:textColor="@color/amarelo"
+        android:textSize="35sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="@drawable/background_botao_menu_cliente"
-        app:layout_constraintTop_toBottomOf="@+id/descricao" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/descricaochamado"
+        android:layout_width="230dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/assistant_extralight"
+        android:text="Como podemos ajudar? \nSelecione o motivo:"
+        android:textAlignment="center"
+        android:textColor="#FDF8F8"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="276dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/objeto1" />
+
+
+    <!--        tools:ignore="MissingConstraints" />-->
+
+    <Spinner
+        android:id="@+id/opcoes"
+        android:layout_width="345dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="464dp"
+        android:background="@drawable/background_texto1"
+        android:dropDownWidth="match_parent"
+        android:elevation="4dp"
+        android:spinnerMode="dropdown"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.575"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <EditText
         android:id="@+id/descricao"
-        android:layout_width="match_parent"
-        android:layout_height="191dp"
-        android:layout_marginTop="32dp"
+        android:layout_width="345dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="572dp"
+        android:background="@drawable/background_texto1"
+        android:elevation="3dp"
         android:hint="Descrição"
+        android:paddingLeft="20dp"
+        android:textColor="@color/azulAnil"
+        android:textColorHint="@color/azulAnil"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/motivo" />
-
-    <EditText
-        android:id="@+id/motivo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
-        android:hint="Motivo"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.568"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/botaoEnvSolicitacao"
+        android:layout_width="134dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/background_botao1"
+        android:text=" solicitar "
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descricao" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

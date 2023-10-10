@@ -138,6 +138,27 @@
                 android:textSize="12sp" />
 
             <Button
+                android:id="@+id/solicitarServico"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/background_botao_scrool"
+                android:drawableTop="@drawable/baseline_construction_24"
+                android:elevation="2dp"
+                android:fontFamily="@font/abel"
+                android:paddingLeft="10dp"
+                android:paddingTop="30sp"
+                android:paddingRight="10dp"
+                android:paddingBottom="30dp"
+                android:shadowRadius="0"
+                android:text="Solicitar Suporte Técnico"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+            <Button
                 android:id="@+id/testeVelocidade"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
@@ -173,27 +194,6 @@
                 android:paddingBottom="30dp"
                 android:shadowRadius="0"
                 android:text="Sobre Apc - Tecnolgia"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textColor="@color/white"
-                android:textSize="12sp" />
-
-            <Button
-                android:id="@+id/solicitarServico"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="0dp"
-                android:background="@drawable/background_botao_scrool"
-                android:drawableTop="@drawable/baseline_info_24"
-                android:elevation="2dp"
-                android:fontFamily="@font/abel"
-                android:paddingLeft="10dp"
-                android:paddingTop="30sp"
-                android:paddingRight="10dp"
-                android:paddingBottom="30dp"
-                android:shadowRadius="0"
-                android:text="Solictar Serviço"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="@color/white"

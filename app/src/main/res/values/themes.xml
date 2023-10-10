@@ -11,5 +11,10 @@
 
 
 
+
     <style name="Theme.Projeto" parent="Theme.AppCompat.NoActionBar" />
+
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Other theme attributes -->
+    </style>
 </resources>

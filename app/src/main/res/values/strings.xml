@@ -153,7 +153,6 @@ cidade Paulista, CEP 53.425-430. Ao usar o Aplicativo, você concorda em cumprir
         \n
         \n
     </string>
-
     <string name="sobreApc">
         Nossa missão é fornecer um serviço de qualidade sem oscilação e sem intervenções, tendo você como nosso principal cliente.
         \nFundada em 2010, na cidade de Paulista - PE, somos uma empresa especializada no serviço de telecomunicações.
@@ -172,5 +171,13 @@ cidade Paulista, CEP 53.425-430. Ao usar o Aplicativo, você concorda em cumprir
         \nGideone Berg
         \nThamíris Albuquerque</string>
     <string name="logoartepc">logoArtePC</string>
+    <string-array name="motivos">
+        <item>Problemas de velocidade de conexão</item>
+        <item>Interrupções frequentes no serviço</item>
+        <item>Configuração e instalação do serviço com problemas</item>
+        <item>Mau desempenho durante horários de pico</item>
+        <item>Dificuldade em cancelar o serviço ou alterar detalhes de cobrança</item>
+        <item>Outros</item>
+    </string-array>
 
 </resources>

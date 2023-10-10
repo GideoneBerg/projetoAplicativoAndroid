@@ -92,8 +92,10 @@ class ClienteActivity : AppCompatActivity() {
 
         binding.solicitarServico.setOnClickListener {
             val intent = Intent(this, SolicitacaoCliente::class.java)
-            val cod=  extras.getString("cod")
+            val cod =  extras.getString("cod")
+            val nomeUsuario = extras.getString("nomeUsuario")
             intent.putExtra("cod", cod)
+            intent.putExtra("nomeUsuario", nomeUsuario)
             startActivity(intent)
         }
 

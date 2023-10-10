@@ -29,8 +29,8 @@ class LoginActivity : AppCompatActivity() {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
 //          .baseUrl("http://10.0.2.2/") //virtual
-            .baseUrl("http://192.168.31.75/") // casa
-//            .baseUrl("http://192.168.100.181/") // ETE
+//            .baseUrl("http://192.168.31.75/") // casa
+            .baseUrl("http://192.168.1.101/") // ETE
             .build()
             .create(EnviaUsuario::class.java)
     }
@@ -145,7 +145,6 @@ class LoginActivity : AppCompatActivity() {
         intent.putExtra("bairro", usuario.bairro)
         intent.putExtra("estado", usuario.estado)
         intent.putExtra("cod", usuario.cod)
-
         startActivity(intent)
         finish()
     }
@@ -171,7 +170,6 @@ class LoginActivity : AppCompatActivity() {
         fun setUsuario(
             @Field("cpf") cpf: String,
             @Field("senha") senha: String,
-
             ): Call<Usuario>
 
     }

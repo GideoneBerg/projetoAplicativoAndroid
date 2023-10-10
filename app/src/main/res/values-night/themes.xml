@@ -4,4 +4,10 @@
         <!-- Customize your dark theme here. -->
         <item name="colorPrimaryDark">@color/azulMarinho</item>
     </style>
+
+
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Other theme attributes -->
+    </style>
+
 </resources>
