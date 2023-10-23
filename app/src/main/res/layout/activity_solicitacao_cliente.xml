@@ -70,6 +70,7 @@
         android:layout_height="64dp"
         android:layout_marginTop="464dp"
         android:background="@drawable/background_texto1"
+        android:popupBackground="@color/white"
         android:dropDownWidth="match_parent"
         android:elevation="4dp"
         android:spinnerMode="dropdown"

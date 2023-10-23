@@ -4,11 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="Selecionar Opção"
-    android:background="@color/white"
+
+    android:background="@drawable/background_texto1"
     android:padding="20dp"
     android:ellipsize="end"
     android:maxLines="1"
     android:textSize="16sp"
+
     android:textColor="@color/azulAnil"
 
     />
