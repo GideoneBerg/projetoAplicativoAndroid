@@ -51,7 +51,8 @@ dependencies {
     implementation("io.github.chaosleung:pinview:1.4.4")
     implementation ("com.hbb20:ccp:2.5.2")
     implementation ("com.squareup.okhttp3:okhttp:4.9.1")
-
-
+    implementation ("com.google.zxing:core:3.4.1") // Adicionando a dependência ZXing
+    implementation("com.google.zxing:android-integration:3.3.0")
+    implementation("pub.doric.extension:barcodescanner:0.1.16")
 
 }

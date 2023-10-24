@@ -28,7 +28,7 @@ class SolicitacaoCliente : AppCompatActivity() {
             .addConverterFactory(GsonConverterFactory.create())
 //          .baseUrl("http://10.0.2.2/") //virtual
 //            .baseUrl("http://192.168.31.75/") // casa
-            .baseUrl("http://192.168.1.101/") // ET
+            .baseUrl("http://192.168.31.23/") // ET
             .build()
             .create(ServicoAPI::class.java)
     }

@@ -158,24 +158,8 @@ class ClienteActivity : AppCompatActivity() {
         }
 
         binding.pagamentoPix.setOnClickListener{
-            val builder = AlertDialog.Builder(this)
-//             builder.setTitle("Dados do Cliente")
-
-            val inflater = layoutInflater
-            val dialogLayout = inflater.inflate(R.layout.popup_segunda_via, null)
-            builder.setView(dialogLayout)
-
-            val dialog = builder.create()
-            // Personaliza o estilo do popup
-            dialog.window?.setBackgroundDrawableResource(R.drawable.background_popup_segundavia)
-
-            // Fechar o popup quando o botão "OK" é clicado
-
-            val buttonOk = dialogLayout.findViewById<Button>(R.id.button_ok)
-            buttonOk.setOnClickListener {
-                dialog.dismiss()
-            }
-            dialog.show()
+            val intent = Intent(this, GeradorQRActivity::class.java)
+            startActivity(intent)
         }
     }
 

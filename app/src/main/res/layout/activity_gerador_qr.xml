@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/qrCode"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/new_background"
+    android:descendantFocusability="beforeDescendants"
+    android:orientation="vertical"
+    tools:context=".activity.activitys.GeradorQRActivity">
+
+
+    <TextView
+        android:id="@+id/qr"
+        android:layout_width="169dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="44dp"
+        android:elevation="3sp"
+        android:fontFamily="@font/bebas_neue"
+        android:text="Pix - QR Code"
+        android:textAlignment="gravity"
+        android:textColor="@color/amarelo"
+        android:textSize="35sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.549"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivQRCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="3sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView13"
+        app:layout_constraintEnd_toEndOf="@+id/imageView13"
+        app:layout_constraintStart_toStartOf="@+id/imageView13"
+        app:layout_constraintTop_toTopOf="@+id/imageView13"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="644dp"
+        android:layout_height="679dp"
+        android:layout_marginTop="412dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/objeto10" />
+
+    <EditText
+        android:id="@+id/editText_qrcode"
+        android:layout_width="278dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="128dp"
+        android:background="@drawable/background_texto1"
+        android:elevation="3sp"
+        android:hint="Informe a palavra para codificação"
+        android:inputType="textPersonName"
+        android:padding="10dp"
+        android:textColor="@color/azulAnil"
+        android:textColorHint="@color/azulAnil"
+        app:layout_constraintBottom_toTopOf="@+id/buttonGerar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.954" />
+
+    <Button
+        android:id="@+id/buttonGerar"
+        android:layout_width="114dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="776dp"
+        android:background="@drawable/background_botao1"
+        android:text="QR Code"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="370dp"
+        android:layout_height="304dp"
+        android:layout_marginTop="88dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.609"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/img_qrcode" />
+
+    <ImageView
+        android:id="@+id/imageView13"
+        android:layout_width="257dp"
+        android:layout_height="257dp"
+        android:layout_marginTop="316dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/qr"
+        app:srcCompat="@drawable/objeto3" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
