@@ -54,5 +54,6 @@ dependencies {
     implementation ("com.google.zxing:core:3.4.1") // Adicionando a dependência ZXing
     implementation("com.google.zxing:android-integration:3.3.0")
     implementation("pub.doric.extension:barcodescanner:0.1.16")
+    implementation ("com.github.barteksc:android-pdf-viewer:2.8.2")
 
 }

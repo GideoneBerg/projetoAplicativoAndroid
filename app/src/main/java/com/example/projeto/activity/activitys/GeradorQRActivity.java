@@ -60,7 +60,7 @@ public class GeradorQRActivity extends AppCompatActivity {
 
     private void inicializarComponentes() {
         editText_qrcode = findViewById(R.id.editText_qrcode);
-        buttonGerar = findViewById(R.id.buttonGerar);
+        buttonGerar = findViewById(R.id.buttonPdf);
         ivQRCode = findViewById(R.id.ivQRCode);
     }
 }

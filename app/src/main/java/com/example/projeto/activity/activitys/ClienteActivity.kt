@@ -14,6 +14,7 @@ import com.example.projeto.R
 
 import com.example.projeto.activity.webView.WebSpeedTestActivity
 import com.example.projeto.databinding.ActivityClienteBinding
+import com.example.projeto.databinding.ActivityPdfBinding
 
 class ClienteActivity : AppCompatActivity() {
 
@@ -137,24 +138,8 @@ class ClienteActivity : AppCompatActivity() {
         }
 
         binding.segundaVia.setOnClickListener{
-            val builder = AlertDialog.Builder(this)
-//             builder.setTitle("Dados do Cliente")
-
-            val inflater = layoutInflater
-            val dialogLayout = inflater.inflate(R.layout.popup_segunda_via, null)
-            builder.setView(dialogLayout)
-
-            val dialog = builder.create()
-            // Personaliza o estilo do popup
-            dialog.window?.setBackgroundDrawableResource(R.drawable.background_popup_segundavia)
-
-            // Fechar o popup quando o botão "OK" é clicado
-
-            val buttonOk = dialogLayout.findViewById<Button>(R.id.button_ok)
-            buttonOk.setOnClickListener {
-                dialog.dismiss()
-            }
-            dialog.show()
+            val intent = Intent(this, PdfActivity::class.java)
+            startActivity(intent)
         }
 
         binding.pagamentoPix.setOnClickListener{
