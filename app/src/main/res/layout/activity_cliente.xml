@@ -205,9 +205,11 @@
 
     <Button
         android:id="@+id/maisDados"
-        android:layout_width="152dp"
+        android:layout_width="0dp"
         android:layout_height="49dp"
+        android:layout_marginStart="140dp"
         android:layout_marginTop="550dp"
+        android:layout_marginEnd="140dp"
         android:background="@drawable/background_quadrado_token"
         android:elevation="2dp"
         android:fontFamily="@font/abel"
@@ -287,7 +289,7 @@
 
     <ImageView
         android:id="@+id/imageView7"
-        android:layout_width="644dp"
+        android:layout_width="wrap_content"
         android:layout_height="679dp"
         android:layout_marginTop="470dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -300,49 +302,57 @@
         android:id="@+id/site"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginStart="87dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="8dp"
         android:background="@drawable/background_botao_planos"
         android:elevation="3dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/whatsapp"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toEndOf="@+id/imageView7"
+        app:layout_constraintTop_toBottomOf="@+id/menu_cliente"
         app:srcCompat="@drawable/samsung_internet" />
-
-    <ImageButton
-        android:id="@+id/instagram"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginBottom="40dp"
-        android:background="@drawable/background_botao_planos"
-        android:elevation="3dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/facebook"
-        app:srcCompat="@drawable/instagram" />
 
     <ImageButton
         android:id="@+id/whatsapp"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="8dp"
         android:background="@drawable/background_botao_planos"
         android:elevation="3dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/facebook"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/site"
+        app:layout_constraintTop_toBottomOf="@+id/menu_cliente"
         app:srcCompat="@drawable/whatsapp_white" />
 
     <ImageButton
         android:id="@+id/facebook"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="8dp"
         android:background="@drawable/background_botao_planos"
         android:elevation="3dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/instagram"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/whatsapp"
+        app:layout_constraintTop_toBottomOf="@+id/menu_cliente"
         app:srcCompat="@drawable/facebook" />
+
+    <ImageButton
+        android:id="@+id/instagram"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/background_botao_planos"
+        android:elevation="3dp"
+        app:layout_constraintEnd_toStartOf="@+id/imageView7"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/facebook"
+        app:layout_constraintTop_toBottomOf="@+id/menu_cliente"
+        app:srcCompat="@drawable/instagram" />
 
     <ImageView
         android:id="@+id/personCliente"

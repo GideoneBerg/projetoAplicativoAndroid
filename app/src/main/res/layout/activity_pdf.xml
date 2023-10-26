@@ -41,7 +41,7 @@
         android:id="@+id/buttonPdf"
         android:layout_width="114dp"
         android:layout_height="50dp"
-        android:layout_marginTop="776dp"
+        android:layout_marginTop="700dp"
         android:background="@drawable/background_botao1"
         android:text="Pdf"
         app:layout_constraintEnd_toEndOf="parent"
