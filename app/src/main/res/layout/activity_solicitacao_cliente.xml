@@ -50,61 +50,79 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
+
+    <!--        tools:ignore="MissingConstraints" />-->
+
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="276dp"
+        android:layout_marginTop="273dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/objeto1" />
 
-
-    <!--        tools:ignore="MissingConstraints" />-->
-
     <Spinner
         android:id="@+id/opcoes"
-        android:layout_width="345dp"
+        android:layout_width="0dp"
         android:layout_height="64dp"
-        android:layout_marginTop="464dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="32dp"
         android:background="@drawable/background_texto1"
-        android:popupBackground="@color/white"
         android:dropDownWidth="match_parent"
-        android:elevation="4dp"
+        android:elevation="3dp"
+        android:popupBackground="@color/white"
         android:spinnerMode="dropdown"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.575"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/guideline" />
 
 
     <EditText
         android:id="@+id/descricao"
-        android:layout_width="345dp"
-        android:layout_height="120dp"
-        android:layout_marginTop="572dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
         android:background="@drawable/background_texto1"
         android:elevation="3dp"
         android:hint="Descrição"
-        android:paddingLeft="20dp"
+        android:maxLength="200"
+        android:padding="20dp"
         android:textColor="@color/azulAnil"
         android:textColorHint="@color/azulAnil"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.568"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/opcoes" />
 
     <Button
         android:id="@+id/botaoEnvSolicitacao"
         android:layout_width="134dp"
         android:layout_height="57dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/background_botao1"
         android:text="solicitar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descricao" />
+        app:layout_constraintTop_toBottomOf="@id/barrierDivisor" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrierDivisor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="descricao" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
