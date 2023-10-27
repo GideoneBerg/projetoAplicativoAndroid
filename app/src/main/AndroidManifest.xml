@@ -21,52 +21,68 @@
         tools:targetApi="31">
         <activity
             android:name=".activity.activitys.PdfActivity"
-            android:exported="false" />
+            android:screenOrientation="portrait"
+            android:exported="false" />  <!--portrait => orientação de tela sempre na vertical -->
         <activity
             android:name=".activity.activitys.GeradorQRActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".activity.activitys.SolicitacaoCliente"
+            android:screenOrientation="portrait"
             android:exported="false" /> <!-- android:roundIcon="@drawable/logotipo_abertura" isso estava dentro de aplication -->
         <activity
             android:name=".activity.classes.TokenActivity"
+            android:screenOrientation="portrait"
             android:exported="false" /> <!-- android:windowSoftInputMode="adjustResize"/> -->
         <activity
             android:name=".activity.activitys.SobreApcActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".activity.activitys.SobreActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".activity.activitys.TermosDeUsoActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".activity.activitys.PoliticaPrivacidadeActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".activity.activitys.NovaSenhaActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".activity.activitys.RedefinirSenhaActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".activity.webView.WebSpeedTestActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".activity.activitys.ClienteActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".activity.activitys.PlanosActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".activity.activitys.LoginActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".activity.activitys.InicialActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".activity.tema.SplashScreenActivity"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:theme="@style/AppCompat.TelaCheia">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
