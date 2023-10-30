@@ -28,7 +28,7 @@ class SolicitacaoCliente : AppCompatActivity() {
             .addConverterFactory(GsonConverterFactory.create())
 //          .baseUrl("http://10.0.2.2/") //virtual
             .baseUrl("http://192.168.31.75/") // casa
-//            .baseUrl("https://arteempc.com/") // Servidor HTTPS
+//            .baseUrl("https://arteempc.com/api/") // Servidor HTTPS
 //            .baseUrl("http://192.168.1.101/") // ET
             .build()
             .create(ServicoAPI::class.java)

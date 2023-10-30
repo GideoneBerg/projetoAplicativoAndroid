@@ -1,510 +1,515 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/new_background"
-    android:descendantFocusability="beforeDescendants"
-    android:orientation="vertical"
     tools:context=".activity.activitys.ClienteActivity">
 
-
-    <ImageView
-        android:id="@+id/image_logo_cliente"
-        android:layout_width="175dp"
-        android:layout_height="99dp"
-        android:layout_alignParentTop="true"
-        android:layout_gravity="left"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="28dp"
-        android:elevation="2dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.453"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logotipo" />
-
-    <TextView
-        android:id="@+id/textViewNome"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="118dp"
-        android:layout_marginTop="150dp"
-        android:elevation="2dp"
-        android:fontFamily="@font/abel"
-        android:text="TextView"
-        android:textColor="@color/tiffany"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/text_nomeCliente" />
+        android:background="@drawable/new_background"
+        android:descendantFocusability="beforeDescendants">
 
-    <TextView
-        android:id="@+id/text_ola"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="88dp"
-        android:layout_marginTop="150dp"
-        android:elevation="2dp"
-        android:fontFamily="@font/abel"
-        android:text="Olá"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <HorizontalScrollView
-        android:id="@+id/menu_cliente"
-        android:layout_width="344dp"
-        android:layout_height="122dp"
-        android:layout_marginTop="15dp"
-        android:elevation="3dp"
-        android:fillViewport="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.471"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/maisDados"
-        tools:ignore="MissingConstraints">
+        <ImageView
+            android:id="@+id/image_logo_cliente"
+            android:layout_width="175dp"
+            android:layout_height="99dp"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="left"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="28dp"
+            android:elevation="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.453"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/logotipo" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+        <TextView
+            android:id="@+id/textViewNome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="118dp"
+            android:layout_marginTop="150dp"
             android:elevation="2dp"
             android:fontFamily="@font/abel"
-            android:orientation="horizontal">
+            android:text="TextView"
+            android:textColor="@color/tiffany"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/text_nomeCliente" />
 
+        <TextView
+            android:id="@+id/text_ola"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="88dp"
+            android:layout_marginTop="150dp"
+            android:elevation="2dp"
+            android:fontFamily="@font/abel"
+            android:text="Olá"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/centralCliente"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:background="@drawable/background_botao_scrool"
-                android:drawableTop="@drawable/baseline_person_white"
+        <HorizontalScrollView
+            android:id="@+id/menu_cliente"
+            android:layout_width="344dp"
+            android:layout_height="122dp"
+            android:layout_marginTop="15dp"
+            android:elevation="3dp"
+            android:fillViewport="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.471"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/maisDados"
+            tools:ignore="MissingConstraints">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 android:elevation="2dp"
                 android:fontFamily="@font/abel"
-                android:paddingLeft="10dp"
-                android:paddingTop="30sp"
-                android:paddingRight="10dp"
-                android:paddingBottom="30dp"
-                android:text="@string/central_cliente"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textColor="@color/white"
-                android:textSize="12sp"
-                android:translationZ="50dp" />
+                android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/segunda_via"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:background="@drawable/background_botao_scrool"
-                android:drawableTop="@drawable/baseline_view_column_24"
-                android:elevation="2dp"
-                android:fontFamily="@font/abel"
-                android:paddingLeft="10dp"
-                android:paddingTop="30sp"
-                android:paddingRight="10dp"
-                android:paddingBottom="30dp"
-                android:text="@string/segunda_via"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textColor="@color/white"
-                android:textSize="12sp" />
 
-            <Button
-                android:id="@+id/pagamento_pix"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/background_botao_scrool"
-                android:drawableTop="@drawable/baseline_pix_24"
-                android:elevation="2dp"
-                android:fontFamily="@font/abel"
-                android:paddingLeft="10dp"
-                android:paddingTop="30sp"
-                android:paddingRight="10dp"
-                android:paddingBottom="30dp"
-                android:shadowRadius="0"
-                android:text="@string/pagamento_pix"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textColor="@color/white"
-                android:textSize="12sp" />
+                <Button
+                    android:id="@+id/centralCliente"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/background_botao_scrool"
+                    android:drawableTop="@drawable/baseline_person_white"
+                    android:elevation="2dp"
+                    android:fontFamily="@font/abel"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="30sp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="30dp"
+                    android:text="@string/central_cliente"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:translationZ="50dp" />
 
-            <Button
-                android:id="@+id/solicitarServico"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:layout_marginEnd="10dp"
-                android:background="@drawable/background_botao_scrool"
-                android:drawableTop="@drawable/baseline_construction_24"
-                android:elevation="2dp"
-                android:fontFamily="@font/abel"
-                android:paddingLeft="10dp"
-                android:paddingTop="30sp"
-                android:paddingRight="10dp"
-                android:paddingBottom="30dp"
-                android:shadowRadius="0"
-                android:text="Solicitar Suporte Técnico"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textColor="@color/white"
-                android:textSize="12sp" />
+                <Button
+                    android:id="@+id/segunda_via"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/background_botao_scrool"
+                    android:drawableTop="@drawable/baseline_view_column_24"
+                    android:elevation="2dp"
+                    android:fontFamily="@font/abel"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="30sp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="30dp"
+                    android:text="@string/segunda_via"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
 
-            <Button
-                android:id="@+id/testeVelocidade"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
-                android:background="@drawable/background_botao_scrool"
-                android:drawableTop="@drawable/baseline_network_check_24"
-                android:elevation="2dp"
-                android:fontFamily="@font/abel"
-                android:paddingLeft="10dp"
-                android:paddingTop="30sp"
-                android:paddingRight="10dp"
-                android:paddingBottom="30dp"
-                android:shadowRadius="0"
-                android:text="@string/teste_velocidade"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textColor="@color/white"
-                android:textSize="12sp" />
+                <Button
+                    android:id="@+id/pagamento_pix"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/background_botao_scrool"
+                    android:drawableTop="@drawable/baseline_pix_24"
+                    android:elevation="2dp"
+                    android:fontFamily="@font/abel"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="30sp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="30dp"
+                    android:shadowRadius="0"
+                    android:text="@string/pagamento_pix"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
 
-            <Button
-                android:id="@+id/sobre"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="0dp"
-                android:background="@drawable/background_botao_scrool"
-                android:drawableTop="@drawable/baseline_info_24"
-                android:elevation="2dp"
-                android:fontFamily="@font/abel"
-                android:paddingLeft="10dp"
-                android:paddingTop="30sp"
-                android:paddingRight="10dp"
-                android:paddingBottom="30dp"
-                android:shadowRadius="0"
-                android:text="Sobre Apc - Tecnolgia"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textColor="@color/white"
-                android:textSize="12sp" />
+                <Button
+                    android:id="@+id/solicitarServico"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/background_botao_scrool"
+                    android:drawableTop="@drawable/baseline_construction_24"
+                    android:elevation="2dp"
+                    android:fontFamily="@font/abel"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="30sp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="30dp"
+                    android:shadowRadius="0"
+                    android:text="Solicitar Suporte Técnico"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
 
-        </LinearLayout>
+                <Button
+                    android:id="@+id/testeVelocidade"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="0dp"
+                    android:background="@drawable/background_botao_scrool"
+                    android:drawableTop="@drawable/baseline_network_check_24"
+                    android:elevation="2dp"
+                    android:fontFamily="@font/abel"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="30sp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="30dp"
+                    android:shadowRadius="0"
+                    android:text="@string/teste_velocidade"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
 
-    </HorizontalScrollView>
+                <Button
+                    android:id="@+id/sobre"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="0dp"
+                    android:background="@drawable/background_botao_scrool"
+                    android:drawableTop="@drawable/baseline_info_24"
+                    android:elevation="2dp"
+                    android:fontFamily="@font/abel"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="30sp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="30dp"
+                    android:shadowRadius="0"
+                    android:text="Sobre Apc - Tecnolgia"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
 
-    <Button
-        android:id="@+id/maisDados"
-        android:layout_width="0dp"
-        android:layout_height="49dp"
-        android:layout_marginStart="140dp"
-        android:layout_marginTop="550dp"
-        android:layout_marginEnd="140dp"
-        android:background="@drawable/background_quadrado_token"
-        android:elevation="2dp"
-        android:fontFamily="@font/abel"
-        android:text="@string/maisDados"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            </LinearLayout>
 
-    <TextView
-        android:id="@+id/plano"
-        android:layout_width="129dp"
-        android:layout_height="39dp"
-        android:layout_marginTop="210dp"
-        android:background="@drawable/background_botaotransparente"
-        android:elevation="2dp"
-        android:fontFamily="@font/abel"
-        android:gravity="left"
-        android:text="@string/plano"
-        android:textColor="@color/rosa"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.12"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        </HorizontalScrollView>
 
-    <TextView
-        android:id="@+id/vencimento"
-        android:layout_width="141dp"
-        android:layout_height="22dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="160dp"
-        android:background="@drawable/background_botaotransparente"
-        android:elevation="2dp"
-        android:fontFamily="@font/abel"
-        android:gravity="left"
-        android:text="@string/vencimento"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.777"
-        app:layout_constraintStart_toEndOf="@+id/cifrão"
-        app:layout_constraintTop_toBottomOf="@+id/vencimentoData" />
+        <Button
+            android:id="@+id/maisDados"
+            android:layout_width="0dp"
+            android:layout_height="49dp"
+            android:layout_marginStart="140dp"
+            android:layout_marginTop="550dp"
+            android:layout_marginEnd="140dp"
+            android:background="@drawable/background_quadrado_token"
+            android:elevation="2dp"
+            android:fontFamily="@font/abel"
+            android:text="@string/maisDados"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.505"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/plano_atual"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="190dp"
-        android:elevation="2dp"
-        android:fontFamily="@font/abel"
-        android:gravity="center"
-        android:text="Meu Plano"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.099"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/plano"
+            android:layout_width="129dp"
+            android:layout_height="39dp"
+            android:layout_marginTop="210dp"
+            android:background="@drawable/background_botaotransparente"
+            android:elevation="2dp"
+            android:fontFamily="@font/abel"
+            android:gravity="start"
+            android:text="@string/plano"
+            android:textColor="@color/rosa"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.12"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/vencimentoData"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="244dp"
-        android:elevation="2dp"
-        android:fontFamily="@font/abel"
-        android:gravity="center"
-        android:text="@string/vencimento"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.954"
-        app:layout_constraintStart_toEndOf="@+id/cifrão"
-        app:layout_constraintTop_toBottomOf="@+id/faturadisponivel" />
+        <TextView
+            android:id="@+id/vencimento"
+            android:layout_width="141dp"
+            android:layout_height="22dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="160dp"
+            android:background="@drawable/background_botaotransparente"
+            android:elevation="2dp"
+            android:fontFamily="@font/abel"
+            android:gravity="left"
+            android:text="@string/vencimento"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.777"
+            app:layout_constraintStart_toEndOf="@+id/cifrão"
+            app:layout_constraintTop_toBottomOf="@+id/vencimentoData" />
 
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="wrap_content"
-        android:layout_height="679dp"
-        android:layout_marginTop="470dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/objeto10" />
+        <TextView
+            android:id="@+id/plano_atual"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="190dp"
+            android:elevation="2dp"
+            android:fontFamily="@font/abel"
+            android:gravity="center"
+            android:text="Meu Plano"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.099"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/site"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/background_botao_planos"
-        android:elevation="3dp"
-        app:layout_constraintEnd_toStartOf="@+id/whatsapp"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toEndOf="@+id/imageView7"
-        app:layout_constraintTop_toBottomOf="@+id/menu_cliente"
-        app:srcCompat="@drawable/samsung_internet" />
+        <TextView
+            android:id="@+id/vencimentoData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="244dp"
+            android:elevation="2dp"
+            android:fontFamily="@font/abel"
+            android:gravity="center"
+            android:text="@string/vencimento"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.954"
+            app:layout_constraintStart_toEndOf="@+id/cifrão"
+            app:layout_constraintTop_toBottomOf="@+id/faturadisponivel" />
 
-    <ImageButton
-        android:id="@+id/whatsapp"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/background_botao_planos"
-        android:elevation="3dp"
-        app:layout_constraintEnd_toStartOf="@+id/facebook"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/site"
-        app:layout_constraintTop_toBottomOf="@+id/menu_cliente"
-        app:srcCompat="@drawable/whatsapp_white" />
+        <ImageButton
+            android:id="@+id/site"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/background_botao_planos"
+            android:elevation="3dp"
+            app:layout_constraintEnd_toStartOf="@+id/whatsapp"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toEndOf="@+id/imageView7"
+            app:layout_constraintTop_toBottomOf="@+id/menu_cliente"
+            app:srcCompat="@drawable/samsung_internet" />
 
-    <ImageButton
-        android:id="@+id/facebook"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/background_botao_planos"
-        android:elevation="3dp"
-        app:layout_constraintEnd_toStartOf="@+id/instagram"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/whatsapp"
-        app:layout_constraintTop_toBottomOf="@+id/menu_cliente"
-        app:srcCompat="@drawable/facebook" />
+        <ImageButton
+            android:id="@+id/whatsapp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/background_botao_planos"
+            android:elevation="3dp"
+            app:layout_constraintEnd_toStartOf="@+id/facebook"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/site"
+            app:layout_constraintTop_toBottomOf="@+id/menu_cliente"
+            app:srcCompat="@drawable/whatsapp_white" />
 
-    <ImageButton
-        android:id="@+id/instagram"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/background_botao_planos"
-        android:elevation="3dp"
-        app:layout_constraintEnd_toStartOf="@+id/imageView7"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/facebook"
-        app:layout_constraintTop_toBottomOf="@+id/menu_cliente"
-        app:srcCompat="@drawable/instagram" />
+        <ImageButton
+            android:id="@+id/facebook"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/background_botao_planos"
+            android:elevation="3dp"
+            app:layout_constraintEnd_toStartOf="@+id/instagram"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/whatsapp"
+            app:layout_constraintTop_toBottomOf="@+id/menu_cliente"
+            app:srcCompat="@drawable/facebook" />
 
-    <ImageView
-        android:id="@+id/personCliente"
-        android:layout_width="43dp"
-        android:layout_height="43dp"
-        android:layout_marginTop="140dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.092"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/person2" />
-
-    <ImageView
-        android:id="@+id/imageView10"
-        android:layout_width="348dp"
-        android:layout_height="124dp"
-        android:layout_marginTop="250dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/background_plano_vencimento" />
-
-    <ImageView
-        android:id="@+id/cifrão"
-        android:layout_width="39dp"
-        android:layout_height="34dp"
-        android:layout_marginTop="290dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.129"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/baseline_monetization_on_24" />
-
-    <TextView
-        android:id="@+id/faturadisponivel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:fontFamily="@font/anton"
-        android:text="Próxima Fatura"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.343"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/plano" />
-
-    <ViewFlipper
-        android:id="@+id/viewFlipper"
-        android:layout_width="353dp"
-        android:layout_height="159dp"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="380dp"
-        android:autoStart="true"
-        android:flipInterval="2000"
-        android:inAnimation="@android:anim/slide_in_left"
-        android:outAnimation="@android:anim/slide_out_right"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints">
+        <ImageButton
+            android:id="@+id/instagram"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/background_botao_planos"
+            android:elevation="3dp"
+            app:layout_constraintEnd_toStartOf="@+id/imageView7"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/facebook"
+            app:layout_constraintTop_toBottomOf="@+id/menu_cliente"
+            app:srcCompat="@drawable/instagram" />
 
         <ImageView
-            android:id="@+id/familia"
+            android:id="@+id/personCliente"
+            android:layout_width="43dp"
+            android:layout_height="43dp"
+            android:layout_marginTop="140dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.092"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/person2" />
+
+        <ImageView
+            android:id="@+id/imageView10"
+            android:layout_width="348dp"
+            android:layout_height="124dp"
+            android:layout_marginTop="250dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.492"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/background_plano_vencimento" />
+
+        <ImageView
+            android:id="@+id/cifrão"
+            android:layout_width="39dp"
+            android:layout_height="34dp"
+            android:layout_marginTop="290dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.129"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/baseline_monetization_on_24" />
+
+        <TextView
+            android:id="@+id/faturadisponivel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/anton"
+            android:text="Próxima Fatura"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.343"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/plano" />
+
+        <ViewFlipper
+            android:id="@+id/viewFlipper"
+            android:layout_width="353dp"
+            android:layout_height="159dp"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="380dp"
+            android:autoStart="true"
+            android:flipInterval="2000"
+            android:inAnimation="@android:anim/slide_in_left"
+            android:outAnimation="@android:anim/slide_out_right"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints">
+
+            <ImageView
+                android:id="@+id/familia"
+                android:layout_width="match_parent"
+                android:layout_height="156dp"
+                android:elevation="4dp"
+                app:srcCompat="@drawable/familia"
+                tools:layout_editor_absoluteY="400dp" />
+
+            <ImageView
+                android:id="@+id/familia1"
+                android:layout_width="354dp"
+                android:layout_height="160dp"
+                android:elevation="4dp"
+                app:srcCompat="@drawable/familia1"
+                tools:layout_editor_absoluteY="400dp" />
+
+            <ImageView
+                android:id="@+id/familia2"
+                android:layout_width="354dp"
+                android:layout_height="160dp"
+                android:elevation="4dp"
+                app:srcCompat="@drawable/familia2"
+                tools:layout_editor_absoluteY="400dp" />
+
+            <ImageView
+                android:id="@+id/familia3"
+                android:layout_width="354dp"
+                android:layout_height="160dp"
+                android:elevation="4dp"
+                app:srcCompat="@drawable/familia3"
+                tools:layout_editor_absoluteY="400dp" />
+
+        </ViewFlipper>
+
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="436dp"
+            android:elevation="4dp"
+            android:fontFamily="@font/lexend_black"
+            android:text="Os Melhores"
+            android:textColor="@color/azulAnil"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.155"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="4dp"
+            android:fontFamily="@font/lexend_black"
+            android:text="para toda \nsua família"
+            android:textColor="@color/azulClaro"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.136"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="4dp"
+            android:fontFamily="@font/lexend_black"
+            android:text="COMBOS"
+            android:textColor="@color/rosa"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.15"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+        <Button
+            android:id="@+id/btnLogout"
+            android:layout_width="31dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="48dp"
+            android:background="@drawable/baseline_logout_24"
+            android:elevation="3dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.918"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/facebook" />
+
+        <ImageView
+            android:id="@+id/imageView7"
             android:layout_width="match_parent"
-            android:layout_height="156dp"
-            android:elevation="4dp"
-            app:srcCompat="@drawable/familia"
-            tools:layout_editor_absoluteY="400dp" />
-
-        <ImageView
-            android:id="@+id/familia1"
-            android:layout_width="354dp"
-            android:layout_height="160dp"
-            android:elevation="4dp"
-            app:srcCompat="@drawable/familia1"
-            tools:layout_editor_absoluteY="400dp" />
-
-        <ImageView
-            android:id="@+id/familia2"
-            android:layout_width="354dp"
-            android:layout_height="160dp"
-            android:elevation="4dp"
-            app:srcCompat="@drawable/familia2"
-            tools:layout_editor_absoluteY="400dp" />
-
-        <ImageView
-            android:id="@+id/familia3"
-            android:layout_width="354dp"
-            android:layout_height="160dp"
-            android:elevation="4dp"
-            app:srcCompat="@drawable/familia3"
-            tools:layout_editor_absoluteY="400dp" />
-
-    </ViewFlipper>
+            android:layout_height="476dp"
+            android:layout_marginTop="470dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/objeto20" />
 
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="436dp"
-        android:elevation="4dp"
-        android:fontFamily="@font/lexend_black"
-        android:text="Os Melhores"
-        android:textColor="@color/azulAnil"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.155"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:elevation="4dp"
-        android:fontFamily="@font/lexend_black"
-        android:text="para toda \nsua família"
-        android:textColor="@color/azulClaro"
-        android:textSize="10sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.136"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:elevation="4dp"
-        android:fontFamily="@font/lexend_black"
-        android:text="COMBOS"
-        android:textColor="@color/rosa"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.15"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-    <Button
-        android:id="@+id/btnLogout"
-        android:layout_width="31dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="48dp"
-        android:background="@drawable/baseline_logout_24"
-        android:elevation="3dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.918"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/facebook" />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
