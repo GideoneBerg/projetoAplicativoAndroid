@@ -79,6 +79,7 @@
             android:name=".activity.activitys.InicialActivity"
             android:screenOrientation="portrait"
             android:exported="false" />
+
         <activity
             android:name=".activity.tema.SplashScreenActivity"
             android:exported="true"
