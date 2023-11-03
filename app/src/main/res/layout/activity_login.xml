@@ -56,13 +56,13 @@
         android:id="@+id/btnEntrar"
         android:layout_width="325dp"
         android:layout_height="57dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/background_botao1"
         android:elevation="2dp"
         android:text="@string/botaoAcessar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextSenha" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextCpfCnpj" />
 
     <TextView
         android:id="@+id/bem"
@@ -96,7 +96,7 @@
         tools:srcCompat="@drawable/objeto1" />
 
     <com.santalu.maskara.widget.MaskEditText
-        android:id="@+id/editTextCpf"
+        android:id="@+id/editTextCpfCnpj"
         android:layout_width="325dp"
         android:layout_height="57dp"
         android:layout_marginTop="25dp"
@@ -106,7 +106,7 @@
         android:elevation="2dp"
         android:ems="11"
         android:fontFamily="sans-serif-light"
-        android:hint="@string/cpf"
+        android:hint="@string/cpf_cnpj"
         android:inputType="number"
         android:padding="10dp"
         android:textColor="@color/azulAnil"
@@ -120,43 +120,6 @@
         tools:ignore="MissingConstraints" />
 
 
-    <EditText
-        android:id="@+id/editTextSenha"
-        android:layout_width="325dp"
-        android:layout_height="57dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/background_texto1"
-        android:drawableStart="@drawable/baseline_lock_24"
-        android:drawablePadding="6dp"
-        android:elevation="2dp"
-        android:ems="6"
-        android:hint="@string/senha"
-        android:fontFamily="sans-serif-light"
-        android:inputType="textPassword"
-        android:maxLength="8"
-        android:padding="10dp"
-        android:selectAllOnFocus="false"
-        android:singleLine="false"
-        android:textColor="@color/azulAnil"
-        android:textColorHint="@color/azulAnil"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextCpf" />
-
-    <ToggleButton
-        android:id="@+id/toggleButton"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginTop="18dp"
-        android:background="@drawable/backgroud_mostra_ocultar_senha"
-        android:checked="false"
-        android:elevation="3dp"
-        android:textOff=""
-        android:textOn=""
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.845"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editTextSenha" />
 
     <TextView
         android:id="@+id/text_esqueci_senha"

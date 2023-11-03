@@ -105,7 +105,7 @@ class ClienteActivity : AppCompatActivity() {
         }
 
         binding.site.setOnClickListener{
-            openUrl("https://arteempc.com.br:6565/")
+            openUrl("https://arteempc.com/")
         }
 
         binding.whatsapp.setOnClickListener {

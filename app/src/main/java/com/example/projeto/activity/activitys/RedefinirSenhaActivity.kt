@@ -34,8 +34,8 @@ class RedefinirSenhaActivity : AppCompatActivity() {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
 //          .baseUrl("http://10.0.2.2/") //virtual
-           .baseUrl("http://192.168.31.75/") // casa
-//            .baseUrl("https://arteempc.com/api/") // Servidor HTTPS
+//           .baseUrl("http://192.168.31.75/") // casa
+            .baseUrl("https://arteempc.com/api/") // Servidor HTTPS
 //            .baseUrl("http://192.168.1.101/") // ETE
             .client(okHttpClient)
             .build()
@@ -105,7 +105,7 @@ class RedefinirSenhaActivity : AppCompatActivity() {
         private const val EMAIL_PATTERN = "[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}"
     }
     interface APIInterface {
-        @POST("/Login/reset_password.php")
+        @POST("/login/reset_password.php")
         @FormUrlEncoded
         fun resetPassword(@Field("email") email: String): Call<String>
     }

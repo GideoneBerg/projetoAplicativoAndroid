@@ -27,9 +27,9 @@ class SolicitacaoCliente : AppCompatActivity() {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
 //          .baseUrl("http://10.0.2.2/") //virtual
-            .baseUrl("http://192.168.31.75/") // casa
+//            .baseUrl("http://192.168.31.75/") // casa
 //            .baseUrl("https://arteempc.com/api/") // Servidor HTTPS
-//            .baseUrl("http://192.168.1.101/") // ET
+            .baseUrl("http://192.168.1.101/") // ET
             .build()
             .create(ServicoAPI::class.java)
     }
@@ -109,7 +109,7 @@ class SolicitacaoCliente : AppCompatActivity() {
 
     interface ServicoAPI {
         @FormUrlEncoded
-        @POST("/Login/solicitacao_servico.php")
+        @POST("/login/solicitacao_servico.php")
         fun enviarDados(
             @Field("cliente_cod") cod: String,
             @Field("nome_cliente") nomeUsuario: String,

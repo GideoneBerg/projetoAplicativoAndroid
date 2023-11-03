@@ -46,7 +46,6 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation ("com.github.santalu:maskara:1.0.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
     implementation("io.github.chaosleung:pinview:1.4.4")
     implementation ("com.hbb20:ccp:2.5.2")
@@ -55,5 +54,8 @@ dependencies {
     implementation("com.google.zxing:android-integration:3.3.0")
     implementation("pub.doric.extension:barcodescanner:0.1.16")
     implementation ("com.github.barteksc:android-pdf-viewer:2.8.2")
+    implementation ("com.github.santalu:maskara:1.0.0")
+
+
 
 }

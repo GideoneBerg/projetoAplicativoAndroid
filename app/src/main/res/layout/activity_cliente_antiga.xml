@@ -6,10 +6,9 @@
     android:layout_height="match_parent"
     android:background="@drawable/new_background"
     android:descendantFocusability="beforeDescendants"
-    android:orientation="vertical"
-    android:paddingLeft="22dp"
-    android:paddingRight="22dp"
     tools:context=".activity.activitys.ClienteActivity">
+
+
 
 
     <ImageView
@@ -24,6 +23,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logotipo" />
+
 
     <TextView
         android:id="@+id/text_ola"

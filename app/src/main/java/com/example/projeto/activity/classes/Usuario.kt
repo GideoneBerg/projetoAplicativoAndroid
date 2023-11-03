@@ -2,8 +2,9 @@ package com.example.projeto.activity.classes
 
 
 class Usuario {
-   lateinit var cpf: String
-   lateinit var senha: String
+   var cpf: String = ""
+   lateinit var cpfCnpj: String
+//   lateinit var senha: String
    lateinit var nome: String
    lateinit var nascimento: String
    lateinit var plano: String
@@ -14,5 +15,9 @@ class Usuario {
    lateinit var bairro: String
    lateinit var estado: String
    lateinit var cod: String
+
+
+
+
 
 }

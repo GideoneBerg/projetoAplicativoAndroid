@@ -1,24 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
+    android:background="@drawable/new_background"
     tools:context=".activity.activitys.ClienteActivity">
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/new_background"
         android:descendantFocusability="beforeDescendants">
 
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="413dp"
+            android:layout_marginTop="483dp"
+            android:background="@drawable/objeto15"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/image_logo_cliente"
             android:layout_width="175dp"
             android:layout_height="99dp"
             android:layout_alignParentTop="true"
-            android:layout_gravity="left"
             android:layout_marginStart="20dp"
             android:layout_marginTop="28dp"
             android:elevation="2dp"
@@ -27,6 +41,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/logotipo" />
+
 
         <TextView
             android:id="@+id/textViewNome"
@@ -225,9 +240,11 @@
 
         <TextView
             android:id="@+id/plano"
-            android:layout_width="129dp"
+            android:layout_width="0dp"
             android:layout_height="39dp"
+            android:layout_marginStart="33dp"
             android:layout_marginTop="210dp"
+            android:layout_marginEnd="200dp"
             android:background="@drawable/background_botaotransparente"
             android:elevation="2dp"
             android:fontFamily="@font/abel"
@@ -294,14 +311,14 @@
             android:id="@+id/site"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/background_botao_planos"
             android:elevation="3dp"
             app:layout_constraintEnd_toStartOf="@+id/whatsapp"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="spread"
-            app:layout_constraintStart_toEndOf="@+id/imageView7"
+            app:layout_constraintStart_toEndOf="@+id/view"
             app:layout_constraintTop_toBottomOf="@+id/menu_cliente"
             app:srcCompat="@drawable/samsung_internet" />
 
@@ -309,41 +326,38 @@
             android:id="@+id/whatsapp"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginTop="30dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/background_botao_planos"
             android:elevation="3dp"
             app:layout_constraintEnd_toStartOf="@+id/facebook"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/site"
-            app:layout_constraintTop_toBottomOf="@+id/menu_cliente"
+            app:layout_constraintTop_toTopOf="@+id/site"
             app:srcCompat="@drawable/whatsapp_white" />
 
         <ImageButton
             android:id="@+id/facebook"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginTop="30dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/background_botao_planos"
             android:elevation="3dp"
             app:layout_constraintEnd_toStartOf="@+id/instagram"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/whatsapp"
-            app:layout_constraintTop_toBottomOf="@+id/menu_cliente"
+            app:layout_constraintTop_toTopOf="@+id/site"
             app:srcCompat="@drawable/facebook" />
 
         <ImageButton
             android:id="@+id/instagram"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginTop="30dp"
             android:background="@drawable/background_botao_planos"
             android:elevation="3dp"
-            app:layout_constraintEnd_toStartOf="@+id/imageView7"
+            app:layout_constraintEnd_toStartOf="@+id/view"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/facebook"
-            app:layout_constraintTop_toBottomOf="@+id/menu_cliente"
+            app:layout_constraintTop_toTopOf="@+id/site"
             app:srcCompat="@drawable/instagram" />
 
         <ImageView
@@ -498,18 +512,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/facebook" />
 
-        <ImageView
-            android:id="@+id/imageView7"
-            android:layout_width="match_parent"
-            android:layout_height="476dp"
-            android:layout_marginTop="470dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/objeto20" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</ScrollView>
+    </ScrollView>
+

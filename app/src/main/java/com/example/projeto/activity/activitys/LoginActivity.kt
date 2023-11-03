@@ -3,11 +3,12 @@ package com.example.projeto.activity.activitys
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.text.method.HideReturnsTransformationMethod
-import android.text.method.PasswordTransformationMethod
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -23,6 +24,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
+import java.lang.StringBuilder
 import java.util.concurrent.TimeUnit
 
 class LoginActivity : AppCompatActivity() {
@@ -38,8 +40,8 @@ class LoginActivity : AppCompatActivity() {
      return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
 //          .baseUrl("http://10.0.2.2/") //virtual
-            .baseUrl("http://192.168.31.75/") // casa
-//            .baseUrl("https://arteempc.com/") // Servidor HTTPS
+//            .baseUrl("http://192.168.31.75/") // casa
+            .baseUrl("https://arteempc.com/") // Servidor HTTPS
 //            .baseUrl("http://192.168.1.101/") // ETE
             .client(okHttpClient)
             .build()
@@ -49,6 +51,7 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         val view = binding.root
@@ -57,26 +60,7 @@ class LoginActivity : AppCompatActivity() {
         funcaoBotoes()
     }
 
-
-    private fun togglePasswordVisibility() {
-        val editTextSenha = binding.editTextSenha
-        if (editTextSenha.transformationMethod == PasswordTransformationMethod.getInstance()) {
-            // Se a senha estiver oculta, mostra-a
-            editTextSenha.transformationMethod = HideReturnsTransformationMethod.getInstance()
-        } else {
-            // Se a senha estiver visível, oculta-a
-            editTextSenha.transformationMethod = PasswordTransformationMethod.getInstance()
-        }
-        // Move o cursor para o final do texto
-        editTextSenha.setSelection(editTextSenha.text.length)
-    }
-
-
     private fun funcaoBotoes() {
-        binding.toggleButton.setOnCheckedChangeListener { _, _ ->
-            // Chama a função para alternar a visibilidade da senha
-            togglePasswordVisibility()
-        }
 
         binding.textEsqueciSenha.setOnClickListener{
             val intent = Intent(this, RedefinirSenhaActivity::class.java)
@@ -97,11 +81,10 @@ class LoginActivity : AppCompatActivity() {
     private fun loginUsuario() {
         // isDone verifica se o usuario preencheu todos os campos
         // unMasked recupera os dados sem a máscara
-        val isDone = binding.editTextCpf.isDone
+        val isDone = binding.editTextCpfCnpj.isDone
         if (isDone) { // verifica se o usuario digitou os dados corretamente
             val usuario = Usuario()
-            usuario.cpf = binding.editTextCpf.text.toString()
-            usuario.senha = binding.editTextSenha.text.toString()
+            usuario.cpf = binding.editTextCpfCnpj.unMasked
             chamaAPI(usuario)
         } else {
             Toast.makeText(this, "Ops!, Preencha um CPF válido.", Toast.LENGTH_SHORT).show()
@@ -113,7 +96,7 @@ class LoginActivity : AppCompatActivity() {
         val botaoVisibilidade = findViewById<Button>(R.id.btnEntrar)
 
         val servico = servicoRetrofit()
-        servico.setUsuario(usuario.cpf, usuario.senha).enqueue(object :
+        servico.setUsuario(usuario.cpf).enqueue(object :
             Callback<Usuario> {
             override fun onFailure(call: Call<Usuario>, t: Throwable) {
                 // registra informações de erro
@@ -148,15 +131,16 @@ class LoginActivity : AppCompatActivity() {
     private fun dadosActivity(usuario: Usuario) {
         val intent = Intent(this@LoginActivity, ClienteActivity::class.java)
         intent.putExtra("nomeUsuario", usuario.nome)
-        intent.putExtra("nascimento", usuario.nascimento)
-        intent.putExtra("plano", usuario.plano)
-        intent.putExtra("vencimento", usuario.vencimento)
         intent.putExtra("cidade", usuario.cidade)
         intent.putExtra("rua", usuario.rua)
         intent.putExtra("numero", usuario.numero)
         intent.putExtra("bairro", usuario.bairro)
         intent.putExtra("estado", usuario.estado)
+        intent.putExtra("vencimento", usuario.vencimento)
+        intent.putExtra("nascimento", usuario.nascimento)
+        intent.putExtra("plano", usuario.plano)
         intent.putExtra("cod", usuario.cod)
+
         startActivity(intent)
         finish()
     }
@@ -167,21 +151,21 @@ class LoginActivity : AppCompatActivity() {
             Toast.makeText(this, "Usuário autenticado", Toast.LENGTH_SHORT).show()
 
         } else {
-            Toast.makeText(this, "Usuário ou senha incorretos", Toast.LENGTH_LONG).show()
+//            Toast.makeText(this, "Usuário ou senha incorretos", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Ops! CPF/CNPF não existe no banco de dados", Toast.LENGTH_LONG).show()
         }
     }
 
     private fun limpaCampos() {
-        binding.editTextCpf.setText("")
-        binding.editTextSenha.setText("")
+        binding.editTextCpfCnpj.setText("")
     }
 
     interface EnviaUsuario {
         @FormUrlEncoded
-        @POST("/Login/login.php")
+        @POST("/api/login/login.php")
         fun setUsuario(
             @Field("cpf") cpf: String,
-            @Field("senha") senha: String,
+//            @Field("senha") senha: String,
             ): Call<Usuario>
 
     }

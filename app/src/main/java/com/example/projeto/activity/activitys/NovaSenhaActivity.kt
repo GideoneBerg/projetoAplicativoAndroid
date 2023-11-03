@@ -28,9 +28,9 @@ class NovaSenhaActivity : AppCompatActivity() {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
 //            .baseUrl("http://10.0.2.2/") //virtual
-            .baseUrl("http://192.168.31.75/") // casa
+//            .baseUrl("http://192.168.31.75/") // casa
 //            .baseUrl("https://arteempc.com/api/") // Servidor HTTPS
-//            .baseUrl("http://192.168.1.101/") // ETE
+            .baseUrl("http://192.168.1.101/") // ETE
             .build()
             .create(ApiService::class.java)
     }
@@ -55,7 +55,7 @@ class NovaSenhaActivity : AppCompatActivity() {
         val editTextNewPassword = findViewById<EditText>(R.id.novaSenha)
         val editTextOTP = findViewById<EditText>(R.id.pin_view)
         val progressBar = findViewById<ProgressBar>(R.id.progressBar)
-        val button = findViewById<Button>(R.id.btnNovaSenha)
+        val button = findViewById<Button>(R.id.botaoToken)
         button.setOnClickListener {
             progressBar.visibility = View.VISIBLE
 
@@ -119,7 +119,7 @@ class NovaSenhaActivity : AppCompatActivity() {
 
     interface ApiService {
         @FormUrlEncoded
-        @POST("/Login/new_password.php")
+        @POST("/login/new_password.php")
         fun submitData(
             @Field("email") email: String,
             @Field("otp") otp: String,
