@@ -82,24 +82,37 @@
         app:layout_constraintTop_toTopOf="@id/guideline" />
 
 
-    <EditText
-        android:id="@+id/descricao"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/descricaoLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
-        android:background="@drawable/background_texto1"
-        android:elevation="3dp"
-        android:hint="Descrição"
-        android:maxLength="200"
-        android:padding="20dp"
-        android:textColor="@color/azulAnil"
         android:textColorHint="@color/azulAnil"
+        app:counterEnabled="true"
+        app:counterMaxLength="200"
+        app:counterTextColor="@color/azulAnil"
+        app:cursorColor="@color/azulAnil"
+        app:hintTextColor="@color/azulAnil"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/opcoes" />
+        app:layout_constraintTop_toBottomOf="@+id/opcoes">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/descricao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_texto1"
+            android:hint="Descrição"
+            android:maxLength="200"
+            android:padding="20dp"
+            android:textColor="@color/azulAnil"
+            android:textColorHint="@color/azulAnil" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
 
     <Button
         android:id="@+id/botaoEnvSolicitacao"
@@ -117,7 +130,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
-        app:constraint_referenced_ids="descricao" />
+        app:constraint_referenced_ids="descricaoLayout" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -125,5 +138,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.5" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="96dp"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="537dp">
+
+    </com.google.android.material.textfield.TextInputLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
