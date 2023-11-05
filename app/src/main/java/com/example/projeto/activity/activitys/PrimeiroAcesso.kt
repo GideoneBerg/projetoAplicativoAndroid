@@ -1,11 +1,49 @@
 package com.example.projeto.activity.activitys
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
+import android.util.Log
+
+import android.widget.Toast
+
+import com.example.projeto.activity.classes.Usuario
 import com.example.projeto.databinding.ActivityPrimeiroAcessoBinding
+import okhttp3.OkHttpClient
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
+import retrofit2.http.POST
+import java.util.concurrent.TimeUnit
 
 
 class PrimeiroAcesso : AppCompatActivity() {
+
+    private fun servicoRetrofit(): EnviaCadastro {
+
+        val okHttpClient = OkHttpClient.Builder()
+            .connectTimeout(30, TimeUnit.SECONDS) // Timeout de conexão
+            .readTimeout(30, TimeUnit.SECONDS)    // Timeout de leitura
+            .writeTimeout(30, TimeUnit.SECONDS)   // Timeout de escrita
+            .build()
+
+        return Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+//          .baseUrl("http://10.0.2.2/") //virtual
+//            .baseUrl("http://192.168.31.75/") // casa
+            .baseUrl("https://arteempc.com/") // Servidor HTTPS
+//            .baseUrl("http://192.168.1.101/") // ETE
+            .client(okHttpClient)
+            .build()
+
+            .create(EnviaCadastro::class.java)
+    }
 
     private lateinit var binding: ActivityPrimeiroAcessoBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,7 +52,110 @@ class PrimeiroAcesso : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        funcaoBotoes()
 
+    }
+
+    private fun consultaAPI(usuario: Usuario) {
+
+        val servicoApi = servicoRetrofit()
+        servicoApi.setCadastro(usuario.cpf, usuario.senha).enqueue(object :
+            Callback<Usuario> {
+            override fun onFailure(call: Call<Usuario>, t: Throwable) {
+                // registra informações de erro
+                Log.d("Erro", t.toString())
+            }
+
+            override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
+                if (response.isSuccessful) {
+                    val result = response.body()
+                    if (result != null) {
+                        val mensagem = result.mensagem
+                        if (mensagem != null) {
+                        if (mensagem == "Senha Cadastrada com sucesso!") {
+                            Toast.makeText(applicationContext, mensagem, Toast.LENGTH_SHORT).show()
+                            val intent = Intent(this@PrimeiroAcesso, LoginActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        } else if (mensagem == "Senha ja cadastrada!") {
+                            Toast.makeText(applicationContext, mensagem, Toast.LENGTH_SHORT).show()
+                        } else if (mensagem == "CPF nao localizado!") {
+                            Toast.makeText(applicationContext, mensagem, Toast.LENGTH_SHORT).show()
+                        } else {
+                            Toast.makeText(
+                                applicationContext,
+                                "Erro inesperado",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+
+                    } else {
+
+                            Toast.makeText(applicationContext, "mensagem nula", Toast.LENGTH_SHORT).show()
+                        }
+                    } else {
+                        Toast.makeText(
+                            applicationContext,
+                            "Erro na resposta da API",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+
+                }
+
+            }
+        })
+
+    }
+
+
+    private fun togglePasswordVisibility() {
+        val txtNovaSenha = binding.txtNovaSenha
+        if (txtNovaSenha.transformationMethod == PasswordTransformationMethod.getInstance()) {
+            // Se a senha estiver oculta, mostra-a
+            txtNovaSenha.transformationMethod = HideReturnsTransformationMethod.getInstance()
+        } else {
+            // Se a senha estiver visível, oculta-a
+            txtNovaSenha.transformationMethod = PasswordTransformationMethod.getInstance()
+        }
+        // Move o cursor para o final do texto
+        txtNovaSenha.setSelection(txtNovaSenha.text.length)
+    }
+
+    private fun funcaoBotoes() {
+
+        binding.btnNovaSenha.setOnClickListener {
+            cadastroPrimeiroAcesso()
+        }
+        binding.toggleButton.setOnCheckedChangeListener { _, _ ->
+            // Chama a função para alternar a visibilidade da senha
+            togglePasswordVisibility()
+        }
+
+
+    }
+
+    private fun cadastroPrimeiroAcesso() {
+
+        val isDone = binding.textCpfCnpj.isDone
+        if (isDone) { // verifica se o usuario digitou os dados corretamente
+            val usuario = Usuario()
+            usuario.cpf = binding.textCpfCnpj.unMasked
+            usuario.senha = binding.txtNovaSenha.text.toString()
+            consultaAPI(usuario)
+        } else {
+            Toast.makeText(this, "Ops!, Campos vazios.", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+
+    interface EnviaCadastro {
+        @FormUrlEncoded
+        @POST("/api/login/primeiro_acesso.php")
+        fun setCadastro(
+            @Field("cpf") cpf: String,
+            @Field("senha_app") senha: String,
+        ): Call<Usuario>
 
     }
 }

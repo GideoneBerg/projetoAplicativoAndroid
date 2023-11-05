@@ -9,15 +9,28 @@
     android:background="@drawable/new_background"
     tools:context=".activity.activitys.PrimeiroAcesso">
 
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="690dp"
+        android:layout_marginTop="170dp"
+        android:background="@drawable/objeto15"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
     <com.santalu.maskara.widget.MaskEditText
-        android:id="@+id/TextCpfCnpj"
+        android:id="@+id/textCpfCnpj"
         android:layout_width="325dp"
         android:layout_height="57dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/background_texto1"
         android:drawableStart="@drawable/baseline_person_24"
         android:drawablePadding="6dp"
-        android:elevation="2dp"
         android:ems="11"
         android:fontFamily="sans-serif-light"
         android:hint="@string/cpf_cnpj"
@@ -33,17 +46,51 @@
         app:maskStyle="completable"
         tools:ignore="MissingConstraints" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/background_botao"
-        android:text="@string/enviar"
+    <EditText
+        android:id="@+id/txtNovaSenha"
+        android:layout_width="325dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:ems="10"
+        android:hint="Nova Senha"
+        android:inputType="textPassword"
+        android:background="@drawable/background_texto1"
+        android:padding="10dp"
+        android:textColor="@color/azulAnil"
+        android:textColorHint="@color/azulAnil"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TextCpfCnpj" />
+        app:layout_constraintTop_toBottomOf="@+id/textCpfCnpj" />
+
+    <ToggleButton
+        android:id="@+id/toggleButton"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="18dp"
+        android:background="@drawable/backgroud_mostra_ocultar_senha"
+        android:checked="false"
+        android:elevation="3dp"
+        android:textOff=""
+        android:textOn=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.845"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/txtNovaSenha" />
+
+    <Button
+        android:id="@+id/btnNovaSenha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/background_botao1"
+        android:text="@string/enviar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtNovaSenha" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
@@ -52,18 +99,12 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.5" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="172dp"
+        android:layout_height="118dp"
+        app:srcCompat="@drawable/logotipo"
+        tools:layout_editor_absoluteX="110dp"
+        tools:layout_editor_absoluteY="98dp" />
 
-        android:autoText="false"
-        android:text="PRIMEIRO ACESSO"
-        android:textAllCaps="false"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

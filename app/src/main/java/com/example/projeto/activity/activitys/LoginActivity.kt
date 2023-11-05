@@ -73,6 +73,13 @@ class LoginActivity : AppCompatActivity() {
 
 
     private fun funcaoBotoes() {
+
+        binding.txtPrimeiroAcesso.setOnClickListener{
+            val intent = Intent(this, PrimeiroAcesso::class.java)
+            startActivity(intent)
+            finish()
+        }
+
         binding.toggleButton.setOnCheckedChangeListener { _, _ ->
             // Chama a função para alternar a visibilidade da senha
             togglePasswordVisibility()
