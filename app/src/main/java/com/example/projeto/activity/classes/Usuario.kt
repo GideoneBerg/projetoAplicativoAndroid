@@ -4,7 +4,7 @@ package com.example.projeto.activity.classes
 class Usuario {
    var cpf: String = ""
    lateinit var cpfCnpj: String
-//   lateinit var senha: String
+   lateinit var senha: String
    lateinit var nome: String
    lateinit var nascimento: String
    lateinit var plano: String
