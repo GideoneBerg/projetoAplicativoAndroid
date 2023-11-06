@@ -38,20 +38,20 @@ class NovaSenhaActivity : AppCompatActivity() {
             // Chama a função para alternar a visibilidade da senha
             togglePasswordVisibility()
         }
-
-        val email = intent.extras!!.getString("email")
-        val editTextNewPassword = findViewById<EditText>(R.id.novaSenha)
-        val editTextOTP = findViewById<EditText>(R.id.pin_view)
-        val progressBar = findViewById<ProgressBar>(R.id.progressBar)
         val button = findViewById<Button>(R.id.botaoToken)
         button.setOnClickListener {
-            chamaAPI(progressBar, email, editTextOTP, editTextNewPassword)
+            chamaAPI()
         }
     }
-    private fun chamaAPI(progressBar: ProgressBar, email: String?, editTextOTP: EditText, editTextNewPassword: EditText) {
+    private fun chamaAPI() {
+        val textNewPassword = binding.novaSenha.text.toString()
+        val progressBar = binding.progressBar
+        val email = intent.extras!!.getString("email")
+        val textOTP = binding.pinView.text.toString()
+
         progressBar.visibility = View.VISIBLE
         val servico = serviceNewPassword
-        servico.submitData(email!!, editTextOTP.text.toString(), editTextNewPassword.text.toString()
+        servico.submitData(email!!, textOTP, textNewPassword
         ).enqueue(object : Callback<String> {
                 override fun onResponse(call: Call<String>, response: Response<String>) {
                     progressBar.visibility = View.GONE
