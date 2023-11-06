@@ -2,7 +2,6 @@ package com.example.projeto.activity.activitys
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.content.ServiceConnection
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
@@ -19,28 +18,11 @@ import com.example.projeto.databinding.ActivityNovaSenhaBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
 
 class NovaSenhaActivity : AppCompatActivity() {
 
     private lateinit var serviceNewPassword: ServiceNewPassword
-   /* private fun servicoRetrofit(): ApiService {
-        return Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
-//            .baseUrl("http://10.0.2.2/") //virtual
-//            .baseUrl("http://192.168.31.75/") // casa
-//            .baseUrl("https://arteempc.com/api/") // Servidor HTTPS
-            .baseUrl("http://192.168.1.101/") // ETE
-            .build()
-            .create(ApiService::class.java)
-    }*/
-
     private lateinit var binding: ActivityNovaSenhaBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityNovaSenhaBinding.inflate(layoutInflater)
@@ -58,20 +40,16 @@ class NovaSenhaActivity : AppCompatActivity() {
         }
 
         val email = intent.extras!!.getString("email")
-
         val editTextNewPassword = findViewById<EditText>(R.id.novaSenha)
         val editTextOTP = findViewById<EditText>(R.id.pin_view)
         val progressBar = findViewById<ProgressBar>(R.id.progressBar)
         val button = findViewById<Button>(R.id.botaoToken)
         button.setOnClickListener {
             chamaAPI(progressBar, email, editTextOTP, editTextNewPassword)
-
         }
     }
-
     private fun chamaAPI(progressBar: ProgressBar, email: String?, editTextOTP: EditText, editTextNewPassword: EditText) {
         progressBar.visibility = View.VISIBLE
-
         val servico = serviceNewPassword
         servico.submitData(email!!, editTextOTP.text.toString(), editTextNewPassword.text.toString()
         ).enqueue(object : Callback<String> {
@@ -97,7 +75,6 @@ class NovaSenhaActivity : AppCompatActivity() {
                             .show()
                     }
                 }
-
                 override fun onFailure(call: Call<String>, t: Throwable) {
                     progressBar.visibility = View.GONE
                     Toast.makeText(applicationContext, "Erro na requisição", Toast.LENGTH_SHORT)
@@ -106,7 +83,6 @@ class NovaSenhaActivity : AppCompatActivity() {
                 }
             })
     }
-
     private fun togglePasswordVisibility() {
         val editTextSenha = binding.novaSenha
         if (editTextSenha.transformationMethod == PasswordTransformationMethod.getInstance()) {
@@ -119,24 +95,10 @@ class NovaSenhaActivity : AppCompatActivity() {
         // Move o cursor para o final do texto
         editTextSenha.setSelection(editTextSenha.text.length)
     }
-
-
     @SuppressLint("SetTextI18n")
     private fun dadosAPI() {
         val extras = intent.extras ?: return
-
         val linkEmail = extras.getString("email")
-
         binding.linkemail.text = linkEmail
     }
-
-/*    interface ApiService {
-        @FormUrlEncoded
-        @POST("/login/new_password.php")
-        fun submitData(
-            @Field("email") email: String,
-            @Field("otp") otp: String,
-            @Field("new-password") newPassword: String
-        ): Call<String>
-    }*/
 }

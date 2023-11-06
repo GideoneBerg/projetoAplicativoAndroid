@@ -16,41 +16,13 @@ import com.example.projeto.activity.classes.RetrofitService
 import com.example.projeto.activity.classes.Usuario
 import com.example.projeto.activity.interfaces.ServiceLogin
 import com.example.projeto.databinding.ActivityLoginBinding
-import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
-import java.util.concurrent.TimeUnit
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var serviceLogin: ServiceLogin
-
-    /*private fun servicoRetrofit(): EnviaUsuario {
-
-        val okHttpClient = OkHttpClient.Builder()
-            .connectTimeout(30, TimeUnit.SECONDS) // Timeout de conexão
-            .readTimeout(30, TimeUnit.SECONDS)    // Timeout de leitura
-            .writeTimeout(30, TimeUnit.SECONDS)   // Timeout de escrita
-            .build()
-
-        return Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
-//          .baseUrl("http://10.0.2.2/") //virtual
-//            .baseUrl("http://192.168.31.75/") // casa
-            .baseUrl("https://arteempc.com/") // Servidor HTTPS
-//            .baseUrl("http://192.168.1.101/") // ETE
-            .client(okHttpClient)
-            .build()
-            .create(EnviaUsuario::class.java)
-    }*/
-
     private lateinit var binding: ActivityLoginBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,8 +36,6 @@ class LoginActivity : AppCompatActivity() {
 
         funcaoBotoes()
     }
-
-
     private fun togglePasswordVisibility() {
         val editTextSenha = binding.editTextSenha
         if (editTextSenha.transformationMethod == PasswordTransformationMethod.getInstance()) {
@@ -78,8 +48,6 @@ class LoginActivity : AppCompatActivity() {
         // Move o cursor para o final do texto
         editTextSenha.setSelection(editTextSenha.text.length)
     }
-
-
     private fun funcaoBotoes() {
 
         binding.txtPrimeiroAcesso.setOnClickListener{
@@ -108,7 +76,6 @@ class LoginActivity : AppCompatActivity() {
         }
 
     }
-
     private fun loginUsuario() {
         // isDone verifica se o usuario preencheu todos os campos
         // unMasked recupera os dados sem a máscara
@@ -122,7 +89,6 @@ class LoginActivity : AppCompatActivity() {
             Toast.makeText(this, "Ops!, Campos vazios.", Toast.LENGTH_SHORT).show()
         }
     }
-
     private fun chamaAPI(usuario: Usuario) {
         val progressBar = findViewById<ProgressBar>(R.id.progressBar2)
         val botaoVisibilidade = findViewById<Button>(R.id.btnEntrar)
@@ -155,11 +121,9 @@ class LoginActivity : AppCompatActivity() {
                         }
                     }
                 }
-
             }
         })
     }
-
     private fun dadosActivity(usuario: Usuario) {
         val intent = Intent(this@LoginActivity, ClienteActivity::class.java)
         intent.putExtra("nomeUsuario", usuario.nome)
@@ -175,7 +139,6 @@ class LoginActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
-
     private fun exibeToast(respostaServidor: Boolean) {
         if (respostaServidor) {
             Toast.makeText(this, "Usuário autenticado", Toast.LENGTH_SHORT).show()
@@ -184,25 +147,12 @@ class LoginActivity : AppCompatActivity() {
             Toast.makeText(this, "Usuário ou senha incorretos", Toast.LENGTH_LONG).show()
         }
     }
-
     private fun limpaCampos() {
         binding.editTextCpfCnpj.setText("")
         binding.editTextSenha.setText("")
     }
-
-/*    interface EnviaUsuario {
-        @FormUrlEncoded
-        @POST("/api/login/login.php")
-        fun setUsuario(
-            @Field("cpf") cpf: String,
-            @Field("senha_app") senha: String,
-        ): Call<Usuario>
-
-    }*/
     private fun openUrl(url: String) {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         startActivity(intent)
     }
-
-
 }

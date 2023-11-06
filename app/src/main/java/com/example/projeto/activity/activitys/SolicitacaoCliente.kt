@@ -1,6 +1,5 @@
 package com.example.projeto.activity.activitys
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -8,40 +7,19 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.projeto.R
 import com.example.projeto.activity.classes.RetrofitService
-import com.example.projeto.activity.classes.Usuario
 import com.example.projeto.activity.interfaces.ServiceClientRequest
 import com.example.projeto.databinding.ActivitySolicitacaoClienteBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
 
 class SolicitacaoCliente : AppCompatActivity() {
 
     private lateinit var serviceClientRequest: ServiceClientRequest
-
-/*    private fun servicoRetrofit(): ServicoAPI {
-        return Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
-//          .baseUrl("http://10.0.2.2/") //virtual
-//            .baseUrl("http://192.168.31.75/") // casa
-//            .baseUrl("https://arteempc.com/api/") // Servidor HTTPS
-            .baseUrl("http://192.168.1.101/") // ET
-            .build()
-            .create(ServicoAPI::class.java)
-    }*/
-
     private lateinit var binding: ActivitySolicitacaoClienteBinding
     private lateinit var spinner: Spinner
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySolicitacaoClienteBinding.inflate(layoutInflater)
@@ -60,7 +38,6 @@ class SolicitacaoCliente : AppCompatActivity() {
             R.array.motivos,
             R.layout.lista_itens
         )
-
         // Especifique o layout a ser usado quando a lista de opções aparecer
         adapter.setDropDownViewResource(R.layout.lista_itens)
         // Associe o ArrayAdapter ao Spinner
@@ -113,17 +90,6 @@ class SolicitacaoCliente : AppCompatActivity() {
             } else{
                 Toast.makeText(this, "Ops! Os campos são obrigatórios", Toast.LENGTH_SHORT).show()
                 }
-            }
+        }
     }
-
-/*    interface ServicoAPI {
-        @FormUrlEncoded
-        @POST("/login/solicitacao_servico.php")
-        fun enviarDados(
-            @Field("cliente_cod") cod: String,
-            @Field("nome_cliente") nomeUsuario: String,
-            @Field("motivo_chamado") motivo: String,
-            @Field("descricao") descricao: String
-        ): Call<String>*/
-
 }

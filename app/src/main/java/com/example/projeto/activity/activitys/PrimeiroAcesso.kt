@@ -11,40 +11,13 @@ import com.example.projeto.activity.classes.RetrofitService
 import com.example.projeto.activity.classes.Usuario
 import com.example.projeto.activity.interfaces.ServiceFirstAccess
 import com.example.projeto.databinding.ActivityPrimeiroAcessoBinding
-import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
-import java.util.concurrent.TimeUnit
+
 class PrimeiroAcesso : AppCompatActivity() {
 
     private  lateinit var serviceFirstAccess: ServiceFirstAccess
-
-/*    private fun servicoRetrofit(): EnviaCadastro {
-
-        val okHttpClient = OkHttpClient.Builder()
-            .connectTimeout(30, TimeUnit.SECONDS) // Timeout de conexão
-            .readTimeout(30, TimeUnit.SECONDS)    // Timeout de leitura
-            .writeTimeout(30, TimeUnit.SECONDS)   // Timeout de escrita
-            .build()
-
-        return Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
-//          .baseUrl("http://10.0.2.2/") //virtual
-//            .baseUrl("http://192.168.31.75/") // casa
-            .baseUrl("https://arteempc.com/") // Servidor HTTPS
-//            .baseUrl("http://192.168.1.101/") // ETE
-            .client(okHttpClient)
-            .build()
-
-            .create(EnviaCadastro::class.java)
-    }*/
-
     private lateinit var binding: ActivityPrimeiroAcessoBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,7 +31,6 @@ class PrimeiroAcesso : AppCompatActivity() {
 
         funcaoBotoes()
     }
-
     private fun consultaAPI(usuario: Usuario) {
 
         val servico = serviceFirstAccess
@@ -93,9 +65,7 @@ class PrimeiroAcesso : AppCompatActivity() {
                                     Toast.LENGTH_SHORT
                                 ).show()
                             }
-
                         } else {
-
                             Toast.makeText(applicationContext, "Null", Toast.LENGTH_SHORT).show()
                         }
                     } else {
@@ -105,15 +75,11 @@ class PrimeiroAcesso : AppCompatActivity() {
                             Toast.LENGTH_SHORT
                         ).show()
                     }
-
                 }
-
             }
         })
 
     }
-
-
     private fun togglePasswordVisibility() {
         val txtNovaSenha = binding.txtNovaSenha
         if (txtNovaSenha.transformationMethod == PasswordTransformationMethod.getInstance()) {
@@ -126,7 +92,6 @@ class PrimeiroAcesso : AppCompatActivity() {
         // Move o cursor para o final do texto
         txtNovaSenha.setSelection(txtNovaSenha.text.length)
     }
-
     private fun funcaoBotoes() {
 
         binding.btnNovaSenha.setOnClickListener {
@@ -136,10 +101,7 @@ class PrimeiroAcesso : AppCompatActivity() {
             // Chama a função para alternar a visibilidade da senha
             togglePasswordVisibility()
         }
-
-
     }
-
     private fun cadastroPrimeiroAcesso() {
 
         val isDone = binding.textCpfCnpj.isDone
@@ -152,17 +114,6 @@ class PrimeiroAcesso : AppCompatActivity() {
             Toast.makeText(this, "Ops!, Campos vazios.", Toast.LENGTH_SHORT).show()
         }
     }
-
-
-/*    interface EnviaCadastro {
-        @FormUrlEncoded
-        @POST("/api/login/primeiro_acesso.php")
-        fun setCadastro(
-            @Field("cpf") cpf: String,
-            @Field("senha_app") senha: String,
-        ): Call<Usuario>
-
-    }*/
 
     private fun exibeToast(respostaServidor: String) {
         if (respostaServidor == "Senha Cadastrada com sucesso!") {

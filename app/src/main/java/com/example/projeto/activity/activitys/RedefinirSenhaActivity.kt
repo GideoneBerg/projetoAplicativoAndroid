@@ -12,17 +12,9 @@ import com.example.projeto.R
 import com.example.projeto.activity.classes.RetrofitService
 import com.example.projeto.activity.interfaces.ServiceResetPassword
 import com.example.projeto.databinding.ActivityRedefinirSenhaBinding
-import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
-import java.util.concurrent.TimeUnit
 import java.util.regex.Pattern
 
 class RedefinirSenhaActivity : AppCompatActivity() {
@@ -36,7 +28,7 @@ class RedefinirSenhaActivity : AppCompatActivity() {
         binding = ActivityRedefinirSenhaBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
+        // Serviço Retrofit(Conexão com banco de dados)
         serviceResetPassword = RetrofitService.getRetrofitInstance()
             .create(ServiceResetPassword::class.java)
 
