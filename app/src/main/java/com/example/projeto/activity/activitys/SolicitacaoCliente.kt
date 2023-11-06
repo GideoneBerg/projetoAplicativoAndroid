@@ -10,20 +10,25 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.projeto.R
+import com.example.projeto.activity.classes.RetrofitService
 import com.example.projeto.activity.classes.Usuario
+import com.example.projeto.activity.interfaces.ServiceClientRequest
 import com.example.projeto.databinding.ActivitySolicitacaoClienteBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
 
 class SolicitacaoCliente : AppCompatActivity() {
 
-    private fun servicoRetrofit(): ServicoAPI {
+    private lateinit var serviceClientRequest: ServiceClientRequest
+
+/*    private fun servicoRetrofit(): ServicoAPI {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
 //          .baseUrl("http://10.0.2.2/") //virtual
@@ -32,7 +37,7 @@ class SolicitacaoCliente : AppCompatActivity() {
             .baseUrl("http://192.168.1.101/") // ET
             .build()
             .create(ServicoAPI::class.java)
-    }
+    }*/
 
     private lateinit var binding: ActivitySolicitacaoClienteBinding
     private lateinit var spinner: Spinner
@@ -42,6 +47,10 @@ class SolicitacaoCliente : AppCompatActivity() {
         binding = ActivitySolicitacaoClienteBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        // Serviço Retrofit(Conexão com banco de dados)
+        serviceClientRequest = RetrofitService.getRetrofitInstance()
+            .create(ServiceClientRequest::class.java)
 
         this.spinner = binding.opcoes
 
@@ -82,8 +91,8 @@ class SolicitacaoCliente : AppCompatActivity() {
                 val cod = intent.extras!!.getString("cod")
                 val nomeUsuario = intent.extras!!.getString("nomeUsuario")
 
-                val servicoApi = servicoRetrofit()
-                servicoApi.enviarDados(cod!!, nomeUsuario!!, motivo, descricao)
+                val servico = serviceClientRequest
+                servico.enviarDados(cod!!, nomeUsuario!!, motivo, descricao)
                     .enqueue(object : Callback<String> {
                         override fun onResponse(call: Call<String>, response: Response<String>) {
                             if (response.isSuccessful) {
@@ -107,7 +116,7 @@ class SolicitacaoCliente : AppCompatActivity() {
             }
     }
 
-    interface ServicoAPI {
+/*    interface ServicoAPI {
         @FormUrlEncoded
         @POST("/login/solicitacao_servico.php")
         fun enviarDados(
@@ -115,6 +124,6 @@ class SolicitacaoCliente : AppCompatActivity() {
             @Field("nome_cliente") nomeUsuario: String,
             @Field("motivo_chamado") motivo: String,
             @Field("descricao") descricao: String
-        ): Call<String>
-    }
+        ): Call<String>*/
+
 }

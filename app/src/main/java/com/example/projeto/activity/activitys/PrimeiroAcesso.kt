@@ -6,10 +6,10 @@ import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.util.Log
-
 import android.widget.Toast
-
+import com.example.projeto.activity.classes.RetrofitService
 import com.example.projeto.activity.classes.Usuario
+import com.example.projeto.activity.interfaces.ServiceFirstAccess
 import com.example.projeto.databinding.ActivityPrimeiroAcessoBinding
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -21,11 +21,11 @@ import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
 import java.util.concurrent.TimeUnit
-
-
 class PrimeiroAcesso : AppCompatActivity() {
 
-    private fun servicoRetrofit(): EnviaCadastro {
+    private  lateinit var serviceFirstAccess: ServiceFirstAccess
+
+/*    private fun servicoRetrofit(): EnviaCadastro {
 
         val okHttpClient = OkHttpClient.Builder()
             .connectTimeout(30, TimeUnit.SECONDS) // Timeout de conexão
@@ -43,7 +43,7 @@ class PrimeiroAcesso : AppCompatActivity() {
             .build()
 
             .create(EnviaCadastro::class.java)
-    }
+    }*/
 
     private lateinit var binding: ActivityPrimeiroAcessoBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,14 +52,17 @@ class PrimeiroAcesso : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        funcaoBotoes()
+        // Serviço Retrofit(Conexão com banco de dados)
+        serviceFirstAccess = RetrofitService.getRetrofitInstance()
+            .create(ServiceFirstAccess::class.java)
 
+        funcaoBotoes()
     }
 
     private fun consultaAPI(usuario: Usuario) {
 
-        val servicoApi = servicoRetrofit()
-        servicoApi.setCadastro(usuario.cpf, usuario.senha).enqueue(object :
+        val servico = serviceFirstAccess
+        servico.setCadastro(usuario.cpf, usuario.senha).enqueue(object :
             Callback<Usuario> {
             override fun onFailure(call: Call<Usuario>, t: Throwable) {
                 // registra informações de erro
@@ -72,26 +75,28 @@ class PrimeiroAcesso : AppCompatActivity() {
                     if (result != null) {
                         val mensagem = result.mensagem
                         if (mensagem != null) {
-                        if (mensagem == "Senha Cadastrada com sucesso!") {
-                            Toast.makeText(applicationContext, mensagem, Toast.LENGTH_SHORT).show()
-                            val intent = Intent(this@PrimeiroAcesso, LoginActivity::class.java)
-                            startActivity(intent)
-                            finish()
-                        } else if (mensagem == "Senha ja cadastrada!") {
-                            Toast.makeText(applicationContext, mensagem, Toast.LENGTH_SHORT).show()
-                        } else if (mensagem == "CPF nao localizado!") {
-                            Toast.makeText(applicationContext, mensagem, Toast.LENGTH_SHORT).show()
+                            if (mensagem == "Senha Cadastrada com sucesso!") {
+                                exibeToast(mensagem)
+                                val intent = Intent(this@PrimeiroAcesso, LoginActivity::class.java)
+                                startActivity(intent)
+                                finish()
+                            } else if (mensagem == "Senha ja cadastrada!") {
+                                exibeToast(mensagem)
+                            } else if (mensagem == "CPF nao localizado!") {
+                                exibeToast(mensagem)
+                            } else if (mensagem == "Senha nao pode estar em branco!") {
+                                exibeToast(mensagem)
+                            } else {
+                                Toast.makeText(
+                                    applicationContext,
+                                    "Erro inesperado!",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+
                         } else {
-                            Toast.makeText(
-                                applicationContext,
-                                "Erro inesperado",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
 
-                    } else {
-
-                            Toast.makeText(applicationContext, "mensagem nula", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(applicationContext, "Null", Toast.LENGTH_SHORT).show()
                         }
                     } else {
                         Toast.makeText(
@@ -149,7 +154,7 @@ class PrimeiroAcesso : AppCompatActivity() {
     }
 
 
-    interface EnviaCadastro {
+/*    interface EnviaCadastro {
         @FormUrlEncoded
         @POST("/api/login/primeiro_acesso.php")
         fun setCadastro(
@@ -157,5 +162,21 @@ class PrimeiroAcesso : AppCompatActivity() {
             @Field("senha_app") senha: String,
         ): Call<Usuario>
 
+    }*/
+
+    private fun exibeToast(respostaServidor: String) {
+        if (respostaServidor == "Senha Cadastrada com sucesso!") {
+            val msg = "Senha cadastrada com sucesso!"
+            Toast.makeText(this, msg , Toast.LENGTH_SHORT).show()
+        } else if (respostaServidor == "Senha ja cadastrada!"){
+            val msg = "Senha já cadastrada!"
+            Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
+        } else if (respostaServidor == "CPF nao localizado!"){
+            val msg = "Ops! CPF não localizado na base de dados!"
+            Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
+        } else if (respostaServidor == "Senha nao pode estar em branco!") {
+            val msg = "Senha não pode estar em branco!"
+            Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
+        }
     }
 }

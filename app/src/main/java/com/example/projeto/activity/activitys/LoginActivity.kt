@@ -12,7 +12,9 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.projeto.R
+import com.example.projeto.activity.classes.RetrofitService
 import com.example.projeto.activity.classes.Usuario
+import com.example.projeto.activity.interfaces.ServiceLogin
 import com.example.projeto.databinding.ActivityLoginBinding
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -20,6 +22,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
@@ -27,7 +30,9 @@ import java.util.concurrent.TimeUnit
 
 class LoginActivity : AppCompatActivity() {
 
-    private fun servicoRetrofit(): EnviaUsuario {
+    private lateinit var serviceLogin: ServiceLogin
+
+    /*private fun servicoRetrofit(): EnviaUsuario {
 
         val okHttpClient = OkHttpClient.Builder()
             .connectTimeout(30, TimeUnit.SECONDS) // Timeout de conexão
@@ -43,9 +48,8 @@ class LoginActivity : AppCompatActivity() {
 //            .baseUrl("http://192.168.1.101/") // ETE
             .client(okHttpClient)
             .build()
-
             .create(EnviaUsuario::class.java)
-    }
+    }*/
 
     private lateinit var binding: ActivityLoginBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,6 +57,10 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        // Serviço Retrofit(Conexão com banco de dados)
+        serviceLogin = RetrofitService.getRetrofitInstance()
+            .create(ServiceLogin::class.java)
 
         funcaoBotoes()
     }
@@ -119,7 +127,7 @@ class LoginActivity : AppCompatActivity() {
         val progressBar = findViewById<ProgressBar>(R.id.progressBar2)
         val botaoVisibilidade = findViewById<Button>(R.id.btnEntrar)
 
-        val servico = servicoRetrofit()
+        val servico = serviceLogin
         servico.setUsuario(usuario.cpf, usuario.senha).enqueue(object :
             Callback<Usuario> {
             override fun onFailure(call: Call<Usuario>, t: Throwable) {
@@ -169,7 +177,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun exibeToast(respostaServidor: Boolean) {
-
         if (respostaServidor) {
             Toast.makeText(this, "Usuário autenticado", Toast.LENGTH_SHORT).show()
 
@@ -183,7 +190,7 @@ class LoginActivity : AppCompatActivity() {
         binding.editTextSenha.setText("")
     }
 
-    interface EnviaUsuario {
+/*    interface EnviaUsuario {
         @FormUrlEncoded
         @POST("/api/login/login.php")
         fun setUsuario(
@@ -191,7 +198,7 @@ class LoginActivity : AppCompatActivity() {
             @Field("senha_app") senha: String,
         ): Call<Usuario>
 
-    }
+    }*/
     private fun openUrl(url: String) {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         startActivity(intent)

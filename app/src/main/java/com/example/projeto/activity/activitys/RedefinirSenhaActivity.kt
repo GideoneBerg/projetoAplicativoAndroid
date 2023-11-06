@@ -9,6 +9,8 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.projeto.R
+import com.example.projeto.activity.classes.RetrofitService
+import com.example.projeto.activity.interfaces.ServiceResetPassword
 import com.example.projeto.databinding.ActivityRedefinirSenhaBinding
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -16,6 +18,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
@@ -23,24 +26,8 @@ import java.util.concurrent.TimeUnit
 import java.util.regex.Pattern
 
 class RedefinirSenhaActivity : AppCompatActivity() {
-    private fun servicoRetrofit(): APIInterface {
 
-        val okHttpClient = OkHttpClient.Builder()
-            .connectTimeout(30, TimeUnit.SECONDS) // Timeout de conexão
-            .readTimeout(30, TimeUnit.SECONDS)    // Timeout de leitura
-            .writeTimeout(30, TimeUnit.SECONDS)   // Timeout de escrita
-            .build()
-
-        return Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
-//          .baseUrl("http://10.0.2.2/") //virtual
-//           .baseUrl("http://192.168.31.75/") // casa
-            .baseUrl("https://arteempc.com/api/") // Servidor HTTPS
-//            .baseUrl("http://192.168.1.101/") // ETE
-            .client(okHttpClient)
-            .build()
-            .create(APIInterface::class.java)
-    }
+    private lateinit var serviceResetPassword: ServiceResetPassword
     private lateinit var binding: ActivityRedefinirSenhaBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,6 +36,9 @@ class RedefinirSenhaActivity : AppCompatActivity() {
         binding = ActivityRedefinirSenhaBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        serviceResetPassword = RetrofitService.getRetrofitInstance()
+            .create(ServiceResetPassword::class.java)
 
         val editText = findViewById<EditText>(R.id.email)
         val button = findViewById<Button>(R.id.btnToken)
@@ -64,7 +54,7 @@ class RedefinirSenhaActivity : AppCompatActivity() {
             progressBar.visibility = View.VISIBLE
             button.visibility = View.INVISIBLE
 
-            val servico = servicoRetrofit()
+            val servico = serviceResetPassword
             servico.resetPassword(email).enqueue(object : Callback<String> {
                 override fun onResponse(call: Call<String>, response: Response<String>) {
                     progressBar.visibility = View.GONE
@@ -103,10 +93,5 @@ class RedefinirSenhaActivity : AppCompatActivity() {
     companion object {
         // mascara do email
         private const val EMAIL_PATTERN = "[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}"
-    }
-    interface APIInterface {
-        @POST("/login/reset_password.php")
-        @FormUrlEncoded
-        fun resetPassword(@Field("email") email: String): Call<String>
     }
 }

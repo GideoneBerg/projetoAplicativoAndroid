@@ -10,6 +10,16 @@
     tools:context=".activity.activitys.PrimeiroAcesso">
 
 
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="172dp"
+        android:layout_height="118dp"
+        android:layout_marginTop="98dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logotipo" />
+
     <View
         android:id="@+id/view"
         android:layout_width="match_parent"
@@ -53,10 +63,10 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
+        android:background="@drawable/background_texto1"
         android:ems="10"
         android:hint="Nova Senha"
         android:inputType="textPassword"
-        android:background="@drawable/background_texto1"
         android:padding="10dp"
         android:textColor="@color/azulAnil"
         android:textColorHint="@color/azulAnil"
@@ -98,13 +108,5 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.5" />
-
-    <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="172dp"
-        android:layout_height="118dp"
-        app:srcCompat="@drawable/logotipo"
-        tools:layout_editor_absoluteX="110dp"
-        tools:layout_editor_absoluteY="98dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
