@@ -86,7 +86,7 @@ class LoginActivity : AppCompatActivity() {
             usuario.senha = binding.editTextSenha.text.toString()
             chamaAPI(usuario)
         } else {
-            Toast.makeText(this, "Ops!, Campos vazios.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Ops! Campos vazios.", Toast.LENGTH_SHORT).show()
         }
     }
     private fun chamaAPI(usuario: Usuario) {

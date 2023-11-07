@@ -111,7 +111,7 @@ class PrimeiroAcesso : AppCompatActivity() {
             usuario.senha = binding.txtNovaSenha.text.toString()
             consultaAPI(usuario)
         } else {
-            Toast.makeText(this, "Ops!, Campos vazios.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Ops! Campos vazios.", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -123,7 +123,7 @@ class PrimeiroAcesso : AppCompatActivity() {
             val msg = "Senha já cadastrada!"
             Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
         } else if (respostaServidor == "CPF nao localizado!"){
-            val msg = "Ops! CPF não localizado na base de dados!"
+            val msg = "Ops! CPF não localizado na base de dados."
             Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
         } else if (respostaServidor == "Senha nao pode estar em branco!") {
             val msg = "Senha não pode estar em branco!"
