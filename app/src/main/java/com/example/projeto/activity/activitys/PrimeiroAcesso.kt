@@ -28,7 +28,6 @@ class PrimeiroAcesso : AppCompatActivity() {
         // Serviço Retrofit(Conexão com banco de dados)
         serviceFirstAccess = RetrofitService.getRetrofitInstance()
             .create(ServiceFirstAccess::class.java)
-
         funcaoBotoes()
     }
     private fun consultaAPI(usuario: Usuario) {
@@ -40,7 +39,6 @@ class PrimeiroAcesso : AppCompatActivity() {
                 // registra informações de erro
                 Log.d("Erro", t.toString())
             }
-
             override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
                 if (response.isSuccessful) {
                     val result = response.body()
@@ -114,7 +112,6 @@ class PrimeiroAcesso : AppCompatActivity() {
             Toast.makeText(this, "Ops! Campos vazios.", Toast.LENGTH_SHORT).show()
         }
     }
-
     private fun exibeToast(respostaServidor: String) {
         if (respostaServidor == "Senha Cadastrada com sucesso!") {
             val msg = "Senha cadastrada com sucesso!"
@@ -130,4 +127,15 @@ class PrimeiroAcesso : AppCompatActivity() {
             Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
         }
     }
+
+//    private fun showToast(){
+//        val inflater = layoutInflater
+//        val layout = inflater.inflate(R.layout.toast_layout, findViewById(R.id.toast_root))
+//
+//        val toast = Toast(applicationContext)
+//        toast.duration = Toast.LENGTH_SHORT
+//        toast.view = layout
+//        toast.show()
+//    }
+
 }

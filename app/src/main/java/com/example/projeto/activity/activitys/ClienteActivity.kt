@@ -5,16 +5,13 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
-
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.projeto.R
-
 import com.example.projeto.activity.webView.WebSpeedTestActivity
 import com.example.projeto.databinding.ActivityClienteBinding
-import com.example.projeto.databinding.ActivityPdfBinding
 
 class ClienteActivity : AppCompatActivity() {
 
@@ -35,10 +32,14 @@ class ClienteActivity : AppCompatActivity() {
         val extras = intent.extras ?: return
 
         // Trazendo dados para a activity
-        val nomeUsuario = intent.getStringExtra("nomeUsuario")
+        var nomeUsuario = intent.getStringExtra("nomeUsuario")
+        var plano = extras.getString("plano")
+
+
+        binding.plano.text = plano?.replace("_"," ")
 
         binding.textViewNome.text = nomeUsuario
-        binding.plano.text = extras.getString("plano")
+
         binding.vencimento.text = extras.getString("vencimento")
 
         val cidade =  extras.getString("cidade")
