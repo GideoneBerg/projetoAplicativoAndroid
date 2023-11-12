@@ -20,22 +20,25 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var serviceLogin: ServiceLogin
     private lateinit var binding: ActivityLoginBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
-        // Serviço Retrofit(Conexão com banco de dados)
         serviceLogin = RetrofitService.getRetrofitInstance()
             .create(ServiceLogin::class.java)
 
         funcaoBotoes()
     }
+
+
     private fun togglePasswordVisibility() {
         val editTextSenha = binding.editTextSenha
         if (editTextSenha.transformationMethod == PasswordTransformationMethod.getInstance()) {
@@ -77,14 +80,15 @@ class LoginActivity : AppCompatActivity() {
 
     }
     private fun loginUsuario() {
-        // isDone verifica se o usuario preencheu todos os campos
+      // isDone verifica se o usuario preencheu todos os campos
         // unMasked recupera os dados sem a máscara
         val isDone = binding.editTextCpfCnpj.isDone
         if (isDone) { // verifica se o usuario digitou os dados corretamente
             val usuario = Usuario()
-            usuario.cpf = binding.editTextCpfCnpj.unMasked
-            usuario.senha = binding.editTextSenha.text.toString()
+            usuario.setCpf(binding.editTextCpfCnpj.unMasked)
+            usuario.setSenha(binding.editTextSenha.text.toString())
             chamaAPI(usuario)
+
         } else {
             Toast.makeText(this, "Ops! Campos vazios.", Toast.LENGTH_SHORT).show()
         }
@@ -94,7 +98,7 @@ class LoginActivity : AppCompatActivity() {
         val botaoVisibilidade = findViewById<Button>(R.id.btnEntrar)
 
         val servico = serviceLogin
-        servico.setUsuario(usuario.cpf, usuario.senha).enqueue(object :
+        servico.setUsuario(usuario.getCpf(), usuario.getSenha()).enqueue(object :
             Callback<Usuario> {
             override fun onFailure(call: Call<Usuario>, t: Throwable) {
                 // registra informações de erro
@@ -102,8 +106,14 @@ class LoginActivity : AppCompatActivity() {
             }
             override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
                 if (response.isSuccessful) {
+
                     response.body()?.let {
-                        if (it.cpf == "vazio") {
+                        val sharedPreferences = getSharedPreferences("db", MODE_PRIVATE)
+                        val editor = sharedPreferences.edit()
+                        editor.putBoolean("logado", true)
+                        editor.apply()
+
+                        if (it.getCpf() == "vazio") {
                             progressBar.visibility = View.GONE
                             botaoVisibilidade.visibility = View.VISIBLE
 
@@ -113,9 +123,9 @@ class LoginActivity : AppCompatActivity() {
                             botaoVisibilidade.visibility = View.INVISIBLE
                             // Mensangem
                             exibeToast(true)
-
                             // Dados que seram enviados para ClienteActivity
                             dadosActivity(it)
+
                             // Limpa os campos depois de efetuar o login
                             limpaCampos()
                         }
@@ -125,20 +135,36 @@ class LoginActivity : AppCompatActivity() {
         })
     }
     private fun dadosActivity(usuario: Usuario) {
+
         val intent = Intent(this@LoginActivity, ClienteActivity::class.java)
-        intent.putExtra("nomeUsuario", usuario.nome)
-        intent.putExtra("nascimento", usuario.nascimento)
-        intent.putExtra("plano", usuario.plano)
-        intent.putExtra("vencimento", usuario.vencimento)
-        intent.putExtra("cidade", usuario.cidade)
-        intent.putExtra("rua", usuario.rua)
-        intent.putExtra("numero", usuario.numero)
-        intent.putExtra("bairro", usuario.bairro)
-        intent.putExtra("estado", usuario.estado)
+        intent.putExtra("nomeUsuario", usuario.getNome())
+        intent.putExtra("nascimento", usuario.getNascimento())
+        intent.putExtra("plano", usuario.getPlano())
+        intent.putExtra("vencimento", usuario.getVencimento())
+        intent.putExtra("cidade", usuario.getCidade())
+        intent.putExtra("rua", usuario.getRua())
+        intent.putExtra("numero", usuario.getNumero())
+        intent.putExtra("bairro", usuario.getBairro())
+        intent.putExtra("estado", usuario.getEstado())
         intent.putExtra("cod", usuario.cod)
         startActivity(intent)
         finish()
+
+        val sharedPreferences = getSharedPreferences("db", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("nomeUsuario", usuario.getNome())
+        editor.putString("nascimento", usuario.getNascimento())
+        editor.putString("plano", usuario.getPlano())
+        editor.putString("cidade", usuario.getCidade())
+        editor.putString("vencimento", usuario.getVencimento())
+        editor.putString("rua", usuario.getRua())
+        editor.putString("numero", usuario.getNumero())
+        editor.putString("bairro", usuario.getBairro())
+        editor.putString("estado", usuario.getEstado())
+        editor.apply()
+
     }
+
     private fun exibeToast(respostaServidor: Boolean) {
         if (respostaServidor) {
             Toast.makeText(this, "Usuário autenticado", Toast.LENGTH_SHORT).show()
@@ -150,6 +176,7 @@ class LoginActivity : AppCompatActivity() {
     private fun limpaCampos() {
         binding.editTextCpfCnpj.setText("")
         binding.editTextSenha.setText("")
+
     }
     private fun openUrl(url: String) {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))

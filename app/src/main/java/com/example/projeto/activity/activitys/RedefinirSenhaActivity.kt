@@ -9,6 +9,7 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.projeto.R
+import com.example.projeto.activity.classes.ResetPassword
 import com.example.projeto.activity.classes.RetrofitService
 import com.example.projeto.activity.interfaces.ServiceResetPassword
 import com.example.projeto.databinding.ActivityRedefinirSenhaBinding
@@ -47,12 +48,14 @@ class RedefinirSenhaActivity : AppCompatActivity() {
             button.visibility = View.INVISIBLE
 
             val servico = serviceResetPassword
+
             servico.resetPassword(email).enqueue(object : Callback<String> {
                 override fun onResponse(call: Call<String>, response: Response<String>) {
                     progressBar.visibility = View.GONE
                     if (response.isSuccessful) {
                         val result = response.body()
                         if (result == "success") {
+                            Toast.makeText(applicationContext, "Email Enviado! Verifique Seu Email" , Toast.LENGTH_SHORT).show()
                             val intent = Intent(applicationContext, NovaSenhaActivity::class.java)
                             intent.putExtra("email", email)
                             startActivity(intent)

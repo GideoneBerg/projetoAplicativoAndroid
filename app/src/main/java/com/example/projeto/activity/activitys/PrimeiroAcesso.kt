@@ -33,7 +33,7 @@ class PrimeiroAcesso : AppCompatActivity() {
     private fun consultaAPI(usuario: Usuario) {
 
         val servico = serviceFirstAccess
-        servico.setCadastro(usuario.cpf, usuario.senha).enqueue(object :
+        servico.setCadastro(usuario.getCpf(), usuario.getSenha()).enqueue(object :
             Callback<Usuario> {
             override fun onFailure(call: Call<Usuario>, t: Throwable) {
                 // registra informações de erro
@@ -105,8 +105,8 @@ class PrimeiroAcesso : AppCompatActivity() {
         val isDone = binding.textCpfCnpj.isDone
         if (isDone) { // verifica se o usuario digitou os dados corretamente
             val usuario = Usuario()
-            usuario.cpf = binding.textCpfCnpj.unMasked
-            usuario.senha = binding.txtNovaSenha.text.toString()
+            usuario.setCpf(binding.textCpfCnpj.unMasked)
+            usuario.setSenha(binding.txtNovaSenha.text.toString())
             consultaAPI(usuario)
         } else {
             Toast.makeText(this, "Ops! Campos vazios.", Toast.LENGTH_SHORT).show()

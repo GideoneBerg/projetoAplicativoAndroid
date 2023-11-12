@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.projeto.R
+
 import com.example.projeto.activity.webView.WebSpeedTestActivity
 import com.example.projeto.databinding.ActivityClienteBinding
 
@@ -26,14 +27,15 @@ class ClienteActivity : AppCompatActivity() {
         // Dados do cliente
         dadosAPI()
     }
+
     @SuppressLint("SetTextI18n")
     private fun dadosAPI() {
 
         val extras = intent.extras ?: return
 
         // Trazendo dados para a activity
-        var nomeUsuario = intent.getStringExtra("nomeUsuario")
-        var plano = extras.getString("plano")
+        val nomeUsuario = intent.getStringExtra("nomeUsuario")
+        val plano = extras.getString("plano")
 
 
         binding.plano.text = plano?.replace("_"," ")
@@ -151,28 +153,17 @@ class ClienteActivity : AppCompatActivity() {
 
     private fun realizarLogout() {
 
-// Lógica de logout personalizada aqui
-        // Por exemplo, você pode limpar informações de sessão, preferências compartilhadas, etc.
-
-// Limpar as preferências compartilhadas
-        val sharedPreferences = getSharedPreferences("suas_preferencias", MODE_PRIVATE)
-
+        val sharedPreferences = getSharedPreferences("db", MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.clear()
         editor.apply()
 
-        editor.clear()
-        editor.apply()
-
-        editor.clear()
-// Redirecionar o usuário para a tela de login
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
         finish()
 
         Toast.makeText(this, "Logout realizado com sucesso", Toast.LENGTH_SHORT).show()
     }
-
 
     private fun openUrl(url: String){
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))

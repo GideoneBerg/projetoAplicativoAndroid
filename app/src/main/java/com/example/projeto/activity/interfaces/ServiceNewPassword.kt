@@ -8,7 +8,8 @@ import retrofit2.http.POST
 interface ServiceNewPassword {
 
     @FormUrlEncoded
-    @POST("/api/login/new_password.php")
+//    @POST("/login/new_password.php")
+    @POST("/api/new_password.php") // nova
     fun submitData(
         @Field("email") email: String,
         @Field("otp") otp: String,

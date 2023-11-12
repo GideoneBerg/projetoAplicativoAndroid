@@ -171,6 +171,7 @@ cidade Paulista, CEP 53.425-430. Ao usar o Aplicativo, você concorda em cumprir
         \nGideone Berg
         \nThamíris Albuquerque</string>
     <string name="logoartepc">logoArtePC</string>
+    <string name="preference_file_key">com.example.projeto.activity.PREFERENCE_FILE_KEY</string>
     <string-array name="motivos">
         <item>Problemas de velocidade de conexão</item>
         <item>Interrupções frequentes no serviço</item>

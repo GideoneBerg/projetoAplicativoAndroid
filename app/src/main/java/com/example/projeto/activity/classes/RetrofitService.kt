@@ -17,7 +17,8 @@ object RetrofitService {
     fun getRetrofitInstance(): Retrofit {
         if (retrofit == null){
             retrofit = Retrofit.Builder()
-                .baseUrl("https://arteempc.com")
+//                .baseUrl("http://192.168.31.196/")
+                .baseUrl("https://arteempc.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpClient)
                 .build()

@@ -20,7 +20,7 @@ class InicialActivity : AppCompatActivity() {
 
     }
 
-    fun botoes(){
+    private fun botoes(){
 
         binding.buttonCliente.setOnClickListener{
             val intent = Intent(this, LoginActivity::class.java)

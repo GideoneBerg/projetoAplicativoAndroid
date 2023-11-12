@@ -8,7 +8,9 @@ import retrofit2.http.POST
 
 interface ServiceLogin {
     @FormUrlEncoded
-    @POST("/api/login/login.php")
+//    @POST("/login/login.php")
+//    @POST("/api/login/login.php") // antiga
+    @POST("/api/login.php") // nova
     fun setUsuario(
         @Field("cpf") cpf: String,
         @Field("senha_app") senha: String,
