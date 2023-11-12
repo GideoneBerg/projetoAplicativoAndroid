@@ -9,10 +9,15 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.projeto.R
 import com.example.projeto.activity.classes.RetrofitService
+import com.example.projeto.activity.classes.ShowToast
+import com.example.projeto.activity.classes.ShowToastAlert
+import com.example.projeto.activity.classes.ShowToastSuccess
+import com.example.projeto.activity.classes.ShowToastWarning
 import com.example.projeto.activity.classes.Usuario
 import com.example.projeto.activity.interfaces.ServiceLogin
 import com.example.projeto.databinding.ActivityLoginBinding
@@ -90,9 +95,13 @@ class LoginActivity : AppCompatActivity() {
             chamaAPI(usuario)
 
         } else {
-            Toast.makeText(this, "Ops! Campos vazios.", Toast.LENGTH_SHORT).show()
+            val showToastAlert = ShowToastAlert(this)
+            showToastAlert.showToast("Ops! Campos vazios.")
         }
     }
+
+
+
     private fun chamaAPI(usuario: Usuario) {
         val progressBar = findViewById<ProgressBar>(R.id.progressBar2)
         val botaoVisibilidade = findViewById<Button>(R.id.btnEntrar)
@@ -167,10 +176,11 @@ class LoginActivity : AppCompatActivity() {
 
     private fun exibeToast(respostaServidor: Boolean) {
         if (respostaServidor) {
-            Toast.makeText(this, "Usuário autenticado", Toast.LENGTH_SHORT).show()
-
+            val showToastSuccess = ShowToastSuccess(this)
+            showToastSuccess.showToast("Usuário autenticado")
         } else {
-            Toast.makeText(this, "Usuário ou senha incorretos", Toast.LENGTH_LONG).show()
+            val showToastWarning = ShowToastWarning(this)
+            showToastWarning.showToast("Usuário ou senha incorretos")
         }
     }
     private fun limpaCampos() {
@@ -182,4 +192,19 @@ class LoginActivity : AppCompatActivity() {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         startActivity(intent)
     }
+
+//    private fun showToast(message: String) {
+//        // Crie o Toast com a mensagem
+//        val toast = Toast.makeText(this, message, Toast.LENGTH_SHORT)
+//        // Inflar o layout personalizado para o Toast
+//        val toastLayout = layoutInflater.inflate(R.layout.toast_custom, null)
+//        // Configurar o texto da mensagem no layout personalizado
+//        val textMessage = toastLayout.findViewById<TextView>(R.id.textMessage)
+//        textMessage.text = message
+//        // Definir o layout personalizado como a view do Toast
+//        toast.view = toastLayout
+//
+//        // Mostrar o Toast
+//        toast.show()
+//    }
 }

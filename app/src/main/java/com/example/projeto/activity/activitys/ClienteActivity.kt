@@ -6,10 +6,10 @@ import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.projeto.R
+import com.example.projeto.activity.classes.ShowToastSuccess
 
 import com.example.projeto.activity.webView.WebSpeedTestActivity
 import com.example.projeto.databinding.ActivityClienteBinding
@@ -158,17 +158,34 @@ class ClienteActivity : AppCompatActivity() {
         editor.clear()
         editor.apply()
 
+        val showToastSuccess = ShowToastSuccess(this)
+        showToastSuccess.showToast("Logout realizado com sucesso")
+
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
         finish()
 
-        Toast.makeText(this, "Logout realizado com sucesso", Toast.LENGTH_SHORT).show()
+
     }
 
     private fun openUrl(url: String){
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         startActivity(intent)
     }
+//    private fun showToast(message: String) {
+//        // Crie o Toast com a mensagem
+//        val toast = Toast.makeText(this, message, Toast.LENGTH_SHORT)
+//        // Inflar o layout personalizado para o Toast
+//        val toastLayout = layoutInflater.inflate(R.layout.toast_custom, null)
+//        // Configurar o texto da mensagem no layout personalizado
+//        val textMessage = toastLayout.findViewById<TextView>(R.id.textMessage)
+//        textMessage.text = message
+//        // Definir o layout personalizado como a view do Toast
+//        toast.view = toastLayout
+//        // Mostrar o Toast
+//        toast.show()
+//    }
+
 
 
 }
