@@ -107,7 +107,7 @@
                             android:layout_marginTop="4dp"
                             android:fontFamily="@font/abel"
                             android:textColor="@color/white"
-                            android:text="Fatura Disponível"
+                            android:text="@string/fatura_disponivel"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
