@@ -59,6 +59,7 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/background_botao1"
         android:elevation="2dp"
+        android:textColor="@color/white"
         android:text="@string/botaoAcessar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -198,7 +199,7 @@
         android:layout_width="wrap_content"
         android:layout_height="28dp"
         android:layout_gravity="center"
-        android:layout_marginBottom="84dp"
+        android:layout_marginTop="40dp"
         android:elevation="2dp"
         android:fontFamily="sans-serif-light"
         android:text="@string/text_ajudaZap"
@@ -206,9 +207,9 @@
         android:textColor="@color/azulAnil"
         android:textSize="18sp"
         app:drawableStartCompat="@drawable/whatsapp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.481"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtPrimeiroAcesso" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

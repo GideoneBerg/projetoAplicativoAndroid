@@ -16,9 +16,5 @@ class PoliticaPrivacidadeActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-
-
-
-
     }
 }

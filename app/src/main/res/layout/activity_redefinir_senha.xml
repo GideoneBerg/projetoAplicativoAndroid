@@ -38,6 +38,7 @@
         android:fontFamily="sans-serif-light"
         android:text="@string/enviar"
         android:visibility="visible"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"

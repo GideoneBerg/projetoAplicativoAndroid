@@ -60,6 +60,118 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@string/text_nomeCliente" />
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="8dp"
+            app:cardCornerRadius="15dp"
+            app:layout_constraintBottom_toTopOf="@+id/viewFlipper"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:cardBackgroundColor="@color/azulMarinho"
+            app:layout_constraintTop_toBottomOf="@+id/plano">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:orientation="vertical">
+
+                <!-- Componentes horizontais / um ao lado do outro -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/baseline_monetization_on_24" />
+
+                    <!-- Componentes verticais / um abaixo do outro -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:fontFamily="@font/abel"
+                            android:textColor="@color/white"
+                            android:text="Fatura Disponível"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/vencimento"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:fontFamily="@font/abel"
+                            android:text="Vence em 10/06/2023"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/valor"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/abel"
+                            android:textColor="@color/white"
+                            android:text="R$ 49,99"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <!-- Novo LinearLayout para os botões à direita -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:orientation="vertical">
+
+                        <!-- Adicione seus botões aqui -->
+                        <Button
+                            android:id="@+id/btnPagarFatura"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/background_botao_menu_cliente"
+                            android:fontFamily="sans-serif-condensed"
+                            android:text="@string/pagarFatura"
+                            android:textAllCaps="true"
+                            android:layout_marginTop="4dp"
+                            android:padding="10dp"
+                            android:textColor="@color/white"
+                            android:textSize="13sp" />
+
+                        <Button
+                            android:id="@+id/verFaturas"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/background_botao_menu_cliente"
+                            android:fontFamily="sans-serif-condensed"
+                            android:text="Ver Faturas"
+                            android:textAllCaps="true"
+                            android:layout_marginTop="4dp"
+                            android:padding="10dp"
+                            android:textColor="@color/white"
+                            android:textSize="13sp" />
+
+
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
         <TextView
             android:id="@+id/text_ola"
             android:layout_width="wrap_content"
@@ -233,6 +345,7 @@
             android:fontFamily="@font/abel"
             android:text="@string/maisDados"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.505"
             app:layout_constraintStart_toStartOf="parent"
@@ -258,24 +371,6 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/vencimento"
-            android:layout_width="141dp"
-            android:layout_height="22dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="160dp"
-            android:background="@drawable/background_botaotransparente"
-            android:elevation="2dp"
-            android:fontFamily="@font/abel"
-            android:gravity="left"
-            android:text="@string/vencimento"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.777"
-            app:layout_constraintStart_toEndOf="@+id/cifrão"
-            app:layout_constraintTop_toBottomOf="@+id/vencimentoData" />
-
-        <TextView
             android:id="@+id/plano_atual"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -291,21 +386,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/vencimentoData"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="244dp"
-            android:elevation="2dp"
-            android:fontFamily="@font/abel"
-            android:gravity="center"
-            android:text="@string/vencimento"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.954"
-            app:layout_constraintStart_toEndOf="@+id/cifrão"
-            app:layout_constraintTop_toBottomOf="@+id/faturadisponivel" />
+
 
         <ImageButton
             android:id="@+id/site"
@@ -371,16 +452,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/person2" />
 
-        <ImageView
-            android:id="@+id/imageView10"
-            android:layout_width="348dp"
-            android:layout_height="124dp"
-            android:layout_marginTop="250dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.492"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/background_plano_vencimento" />
+        <!--
 
         <ImageView
             android:id="@+id/cifrão"
@@ -392,27 +464,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/baseline_monetization_on_24" />
-
-        <TextView
-            android:id="@+id/faturadisponivel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:fontFamily="@font/anton"
-            android:text="Próxima Fatura"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.343"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/plano" />
+-->
 
         <ViewFlipper
             android:id="@+id/viewFlipper"
-            android:layout_width="353dp"
+            android:layout_width="0dp"
             android:layout_height="159dp"
             android:layout_centerInParent="true"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="380dp"
+            android:layout_marginEnd="32dp"
             android:autoStart="true"
             android:flipInterval="2000"
             android:inAnimation="@android:anim/slide_in_left"
