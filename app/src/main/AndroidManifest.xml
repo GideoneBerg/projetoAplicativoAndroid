@@ -20,9 +20,11 @@
         android:usesCleartextTraffic="false"
         tools:targetApi="31">
         <activity
+            android:name=".activity.activitys.FaturasEmAberto"
+            android:exported="false" />
+        <activity
             android:name=".activity.activitys.PrimeiroAcesso"
             android:exported="false" />
-
         <activity
             android:name=".activity.activitys.PdfActivity"
             android:exported="false"
@@ -82,8 +84,7 @@
         <activity
             android:name=".activity.activitys.InicialActivity"
             android:exported="false"
-            android:screenOrientation="portrait" />
-        <!--android:name=".activity.tema.SplashScreenActivity"-->
+            android:screenOrientation="portrait" /> <!-- android:name=".activity.tema.SplashScreenActivity" -->
         <activity
             android:name=".activity.tema.SplashScreenActivity"
             android:exported="true"
