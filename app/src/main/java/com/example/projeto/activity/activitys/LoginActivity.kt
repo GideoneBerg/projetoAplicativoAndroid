@@ -102,8 +102,8 @@ class LoginActivity : AppCompatActivity() {
             } else {
                 snackBar("Ops! Campos vazios")
             }
-
-        } else {
+        }
+        else {
             showNoInternetSnackbar()
         }
 
@@ -120,7 +120,7 @@ class LoginActivity : AppCompatActivity() {
             override fun onFailure(call: Call<Usuario>, t: Throwable) {
                 // registra informações de erro
                 Log.d("Erro", t.toString())
-                snackBar("Tivemos um problema. Por favor, tente novamente mais tarde.")
+                snackBar("Tivemos um problema. Tente novamente mais tarde.")
 
             }
 
@@ -199,7 +199,7 @@ class LoginActivity : AppCompatActivity() {
                 findViewById(R.id.pagina_login),
                 "Usuário ou senha incorretos",
                 Snackbar.LENGTH_LONG
-            ).setBackgroundTint(ContextCompat.getColor(this, R.color.azulAnil))
+            ).setBackgroundTint(ContextCompat.getColor(this, R.color.rosa))
                 .show()
         }
     }
@@ -227,12 +227,24 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun snackBar(mensagem: String) {
-        Snackbar.make(
-            findViewById(android.R.id.content),
-            mensagem,
-            Snackbar.LENGTH_LONG
-        ).setBackgroundTint(ContextCompat.getColor(this, R.color.azulAnil))
-            .show()
+        if(mensagem == "Ops! Campos vazios"){
+
+            Snackbar.make(
+                findViewById(android.R.id.content),
+                mensagem,
+                Snackbar.LENGTH_LONG
+            ).setBackgroundTint(ContextCompat.getColor(this, R.color.alerta))
+                .show()
+
+        } else {
+            Snackbar.make(
+                findViewById(android.R.id.content),
+                mensagem,
+                Snackbar.LENGTH_LONG
+            ).setBackgroundTint(ContextCompat.getColor(this, R.color.rosa))
+                .show()
+        }
+
     }
 
     private fun showNoInternetSnackbar() {
@@ -240,12 +252,13 @@ class LoginActivity : AppCompatActivity() {
             findViewById(android.R.id.content),
             R.string.conexao_internet,
             Snackbar.LENGTH_LONG
-        ).setBackgroundTint(ContextCompat.getColor(this, R.color.azulAnil))
+        ).setBackgroundTint(ContextCompat.getColor(this, R.color.rosa))
 
         snackbar.setAction("Abrir Configurações", View.OnClickListener {
             val intent = Intent(Settings.ACTION_WIFI_SETTINGS)
             startActivity(intent)
         })
+        snackbar.setActionTextColor(ContextCompat.getColor(this, R.color.amarelo))
 
         snackbar.show()
     }
