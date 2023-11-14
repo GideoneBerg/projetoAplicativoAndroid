@@ -7,10 +7,12 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.example.projeto.R
 import com.example.projeto.activity.classes.RetrofitService
 import com.example.projeto.activity.interfaces.ServiceClientRequest
 import com.example.projeto.databinding.ActivitySolicitacaoClienteBinding
+import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -75,12 +77,14 @@ class SolicitacaoCliente : AppCompatActivity() {
                             if (response.isSuccessful) {
                                 val responseBody = response.body()
                                 if (responseBody == "success") {
-                                    Toast.makeText(applicationContext, "Solicitação Enviada", Toast.LENGTH_SHORT).show()
+                                    snackBar("Solicitação Enviada")
                                 } else {
-                                    Toast.makeText(applicationContext, responseBody, Toast.LENGTH_SHORT).show()
+                                    if (responseBody != null) {
+                                        snackBar(responseBody)
+                                    }
                                 }
                             } else {
-                                Toast.makeText(applicationContext, "Erro: Solicitação não foi enviada", Toast.LENGTH_SHORT).show()
+                                snackBar("Erro: Solicitação não foi enviada")
                             }
                         }
                         override fun onFailure(call: Call<String>, t: Throwable) {
@@ -91,5 +95,25 @@ class SolicitacaoCliente : AppCompatActivity() {
                 Toast.makeText(this, "Ops! Os campos são obrigatórios", Toast.LENGTH_SHORT).show()
                 }
         }
+    }
+
+    private fun snackBar(mensagem: String){
+        if (mensagem == "Solicitação Enviada"){
+            Snackbar.make(
+                findViewById(android.R.id.content),
+                mensagem,
+                Snackbar.LENGTH_LONG
+            ).setBackgroundTint(ContextCompat.getColor(this, R.color.azulAnil))
+                .show()
+
+        } else {
+            Snackbar.make(
+                findViewById(android.R.id.content),
+                mensagem,
+                Snackbar.LENGTH_LONG
+            ).setBackgroundTint(ContextCompat.getColor(this, R.color.rosa))
+                .show()
+        }
+
     }
 }

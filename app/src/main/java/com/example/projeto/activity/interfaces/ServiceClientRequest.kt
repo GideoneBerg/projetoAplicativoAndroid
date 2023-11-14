@@ -7,7 +7,7 @@ import retrofit2.http.POST
 
 interface ServiceClientRequest {
     @FormUrlEncoded
-    @POST("/api/login/solicitacao_servico.php")
+    @POST("/api/solicitacao_servico.php")
     fun enviarDados(
         @Field("cliente_cod") cod: String,
         @Field("nome_cliente") nomeUsuario: String,

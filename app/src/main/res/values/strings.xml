@@ -183,5 +183,10 @@ cidade Paulista, CEP 53.425-430. Ao usar o Aplicativo, você concorda em cumprir
         <item>Dificuldade em cancelar o serviço ou alterar detalhes de cobrança</item>
         <item>Outros</item>
     </string-array>
+    <string name="msg_primeiroAcesso1">"Senha cadastrada com sucesso!"</string>
+    <string name="msg_primeiroAcesso2">"Senha já cadastrada!"</string>
+    <string name="msg_primeiroAcesso3">"Ops! CPF não localizado na base de dados."</string>
+    <string name="msg_primeiroAcesso4">"Senha não pode estar em branco!"</string>
+
 
 </resources>

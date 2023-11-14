@@ -7,10 +7,13 @@ import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import com.example.projeto.R
 import com.example.projeto.activity.classes.RetrofitService
 import com.example.projeto.activity.classes.Usuario
 import com.example.projeto.activity.interfaces.ServiceFirstAccess
 import com.example.projeto.databinding.ActivityPrimeiroAcessoBinding
+import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -46,16 +49,16 @@ class PrimeiroAcesso : AppCompatActivity() {
                         val mensagem = result.mensagem
                         if (mensagem != null) {
                             if (mensagem == "Senha Cadastrada com sucesso!") {
-                                exibeToast(mensagem)
+                                exibeSnackBar(mensagem)
                                 val intent = Intent(this@PrimeiroAcesso, LoginActivity::class.java)
                                 startActivity(intent)
                                 finish()
                             } else if (mensagem == "Senha ja cadastrada!") {
-                                exibeToast(mensagem)
+                                exibeSnackBar(mensagem)
                             } else if (mensagem == "CPF nao localizado!") {
-                                exibeToast(mensagem)
+                                exibeSnackBar(mensagem)
                             } else if (mensagem == "Senha nao pode estar em branco!") {
-                                exibeToast(mensagem)
+                                exibeSnackBar(mensagem)
                             } else {
                                 Toast.makeText(
                                     applicationContext,
@@ -112,30 +115,37 @@ class PrimeiroAcesso : AppCompatActivity() {
             Toast.makeText(this, "Ops! Campos vazios.", Toast.LENGTH_SHORT).show()
         }
     }
-    private fun exibeToast(respostaServidor: String) {
-        if (respostaServidor == "Senha Cadastrada com sucesso!") {
-            val msg = "Senha cadastrada com sucesso!"
-            Toast.makeText(this, msg , Toast.LENGTH_SHORT).show()
-        } else if (respostaServidor == "Senha ja cadastrada!"){
-            val msg = "Senha já cadastrada!"
-            Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
-        } else if (respostaServidor == "CPF nao localizado!"){
-            val msg = "Ops! CPF não localizado na base de dados."
-            Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
-        } else if (respostaServidor == "Senha nao pode estar em branco!") {
-            val msg = "Senha não pode estar em branco!"
-            Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
+    private fun exibeSnackBar(mensagem: String) {
+        if (mensagem == "Senha Cadastrada com sucesso!") {
+            Snackbar.make(
+                findViewById(android.R.id.content),
+                R.string.msg_primeiroAcesso1,
+                Snackbar.LENGTH_SHORT
+            ).setBackgroundTint(ContextCompat.getColor(this, R.color.azulAnil))
+                .show()
+        } else if (mensagem == "Senha ja cadastrada!"){
+            Snackbar.make(
+                findViewById(android.R.id.content),
+                R.string.msg_primeiroAcesso2,
+                Snackbar.LENGTH_SHORT
+            ).setBackgroundTint(ContextCompat.getColor(this, R.color.alerta))
+                .show()
+        } else if (mensagem == "CPF nao localizado!"){
+            Snackbar.make(
+                findViewById(android.R.id.content),
+                R.string.msg_primeiroAcesso3,
+                Snackbar.LENGTH_LONG
+            ).setBackgroundTint(ContextCompat.getColor(this, R.color.rosa))
+                .show()
+        } else if (mensagem == "Senha nao pode estar em branco!") {
+            Snackbar.make(
+                findViewById(android.R.id.content),
+                R.string.msg_primeiroAcesso4,
+                Snackbar.LENGTH_LONG
+            ).setBackgroundTint(ContextCompat.getColor(this, R.color.rosa))
+                .show()
+
         }
     }
-
-//    private fun showToast(){
-//        val inflater = layoutInflater
-//        val layout = inflater.inflate(R.layout.toast_layout, findViewById(R.id.toast_root))
-//
-//        val toast = Toast(applicationContext)
-//        toast.duration = Toast.LENGTH_SHORT
-//        toast.view = layout
-//        toast.show()
-//    }
 
 }

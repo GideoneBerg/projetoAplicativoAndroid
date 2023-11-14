@@ -8,7 +8,7 @@ import retrofit2.http.POST
 
 interface ServiceFirstAccess {
     @FormUrlEncoded
-    @POST("/api/login/primeiro_acesso.php")
+    @POST("/api/primeiro_acesso.php")
     fun setCadastro(
         @Field("cpf") cpf: String,
         @Field("senha_app") senha: String,

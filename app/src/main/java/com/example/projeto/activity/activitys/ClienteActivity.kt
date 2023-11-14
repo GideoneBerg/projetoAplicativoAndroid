@@ -8,11 +8,12 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.example.projeto.R
-import com.example.projeto.activity.classes.ShowToastSuccess
 
 import com.example.projeto.activity.webView.WebSpeedTestActivity
 import com.example.projeto.databinding.ActivityClienteBinding
+import com.google.android.material.snackbar.Snackbar
 
 class ClienteActivity : AppCompatActivity() {
 
@@ -155,34 +156,23 @@ class ClienteActivity : AppCompatActivity() {
         editor.clear()
         editor.apply()
 
-        val showToastSuccess = ShowToastSuccess(this)
-        showToastSuccess.showToast("Logout realizado com sucesso")
+        snackBar("Logout realizado com sucesso")
 
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
         finish()
-
-
     }
 
     private fun openUrl(url: String){
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         startActivity(intent)
     }
-//    private fun showToast(message: String) {
-//        // Crie o Toast com a mensagem
-//        val toast = Toast.makeText(this, message, Toast.LENGTH_SHORT)
-//        // Inflar o layout personalizado para o Toast
-//        val toastLayout = layoutInflater.inflate(R.layout.toast_custom, null)
-//        // Configurar o texto da mensagem no layout personalizado
-//        val textMessage = toastLayout.findViewById<TextView>(R.id.textMessage)
-//        textMessage.text = message
-//        // Definir o layout personalizado como a view do Toast
-//        toast.view = toastLayout
-//        // Mostrar o Toast
-//        toast.show()
-//    }
-
-
-
+    private fun snackBar(mensagem: String) {
+        Snackbar.make(
+            findViewById(R.id.pagina_login),
+            mensagem,
+            Snackbar.LENGTH_LONG
+        ).setBackgroundTint(ContextCompat.getColor(this, R.color.azulAnil))
+            .show()
+    }
 }

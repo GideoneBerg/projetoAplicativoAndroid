@@ -11,7 +11,7 @@ import retrofit2.http.POST
 interface FaturasAberto {
     @FormUrlEncoded
 //    @POST("/login/login.php")
-    @GET("/api/login/login.php") // antiga
+    @GET("/api/login.php") // antiga
 //    @POST("/api/login.php") // nova
     suspend fun getFaturas(): List<Mensagem>
 }

@@ -1,6 +1,8 @@
 package com.example.projeto.activity.activitys
 
+
 import android.content.Intent
+
 import android.net.Uri
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
@@ -9,18 +11,14 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
-import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.example.projeto.R
 import com.example.projeto.activity.classes.RetrofitService
-import com.example.projeto.activity.classes.ShowToast
-import com.example.projeto.activity.classes.ShowToastAlert
-import com.example.projeto.activity.classes.ShowToastSuccess
-import com.example.projeto.activity.classes.ShowToastWarning
 import com.example.projeto.activity.classes.Usuario
 import com.example.projeto.activity.interfaces.ServiceLogin
 import com.example.projeto.databinding.ActivityLoginBinding
+import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -55,9 +53,10 @@ class LoginActivity : AppCompatActivity() {
         // Move o cursor para o final do texto
         editTextSenha.setSelection(editTextSenha.text.length)
     }
+
     private fun funcaoBotoes() {
 
-        binding.txtPrimeiroAcesso.setOnClickListener{
+        binding.txtPrimeiroAcesso.setOnClickListener {
             val intent = Intent(this, PrimeiroAcesso::class.java)
             startActivity(intent)
             finish()
@@ -68,7 +67,7 @@ class LoginActivity : AppCompatActivity() {
             togglePasswordVisibility()
         }
 
-        binding.textEsqueciSenha.setOnClickListener{
+        binding.textEsqueciSenha.setOnClickListener {
             val intent = Intent(this, RedefinirSenhaActivity::class.java)
             startActivity(intent)
 
@@ -83,22 +82,22 @@ class LoginActivity : AppCompatActivity() {
         }
 
     }
+
     private fun loginUsuario() {
-      // isDone verifica se o usuario preencheu todos os campos
+        val usuario = Usuario()
+        // isDone verifica se o usuario preencheu todos os campos
         // unMasked recupera os dados sem a máscara
-        val isDone = binding.editTextCpfCnpj.isDone
-        if (isDone) { // verifica se o usuario digitou os dados corretamente
-            val usuario = Usuario()
+        val cpf = binding.editTextCpfCnpj.unMasked.isEmpty()
+        val senha = binding.editTextSenha.text.toString().isEmpty()
+        //val isDone = binding.editTextCpfCnpj.isDone
+        if (!cpf && !senha) { // verifica se o usuario digitou os dados corretamente
             usuario.setCpf(binding.editTextCpfCnpj.unMasked)
             usuario.setSenha(binding.editTextSenha.text.toString())
             chamaAPI(usuario)
-
         } else {
-            val showToastAlert = ShowToastAlert(this)
-            showToastAlert.showToast("Ops! Campos vazios.")
+            snackBar("Ops! Campos vazios")
         }
     }
-
 
 
     private fun chamaAPI(usuario: Usuario) {
@@ -112,6 +111,7 @@ class LoginActivity : AppCompatActivity() {
                 // registra informações de erro
                 Log.d("Erro", t.toString())
             }
+
             override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
                 if (response.isSuccessful) {
 
@@ -125,12 +125,12 @@ class LoginActivity : AppCompatActivity() {
                             progressBar.visibility = View.GONE
                             botaoVisibilidade.visibility = View.VISIBLE
 
-                            exibeToast(false)
+                            exibeSnackBar(false)
                         } else {
                             progressBar.visibility = View.VISIBLE
                             botaoVisibilidade.visibility = View.INVISIBLE
                             // Mensangem
-                            exibeToast(true)
+                            exibeSnackBar(true)
                             // Dados que seram enviados para ClienteActivity
                             dadosActivity(it)
 
@@ -142,6 +142,7 @@ class LoginActivity : AppCompatActivity() {
             }
         })
     }
+
     private fun dadosActivity(usuario: Usuario) {
 
         val intent = Intent(this@LoginActivity, ClienteActivity::class.java)
@@ -173,22 +174,42 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
-    private fun exibeToast(respostaServidor: Boolean) {
+    private fun exibeSnackBar(respostaServidor: Boolean) {
         if (respostaServidor) {
-            val showToastSuccess = ShowToastSuccess(this)
-            showToastSuccess.showToast("Usuário autenticado")
+            Snackbar.make(
+                findViewById(R.id.pagina_login),
+                "Usuário autenticado",
+                Snackbar.LENGTH_LONG
+            ).setBackgroundTint(ContextCompat.getColor(this, R.color.azulAnil))
+                .show()
+
         } else {
-            val showToastWarning = ShowToastWarning(this)
-            showToastWarning.showToast("Usuário ou senha incorretos")
+            Snackbar.make(
+                findViewById(R.id.pagina_login),
+                "Usuário ou senha incorretos",
+                Snackbar.LENGTH_LONG
+            ).setBackgroundTint(ContextCompat.getColor(this, R.color.azulAnil))
+                .show()
         }
     }
+
     private fun limpaCampos() {
         binding.editTextCpfCnpj.setText("")
         binding.editTextSenha.setText("")
 
     }
+
     private fun openUrl(url: String) {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         startActivity(intent)
+    }
+
+    private fun snackBar(mensagem: String) {
+        Snackbar.make(
+            findViewById(R.id.pagina_login),
+            mensagem,
+            Snackbar.LENGTH_LONG
+        ).setBackgroundTint(ContextCompat.getColor(this, R.color.azulAnil))
+            .show()
     }
 }
