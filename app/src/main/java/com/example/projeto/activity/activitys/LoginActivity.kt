@@ -9,6 +9,7 @@ import android.net.NetworkCapabilities
 
 import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.util.Log
@@ -235,11 +236,18 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun showNoInternetSnackbar() {
-        Snackbar.make(
+        val snackbar = Snackbar.make(
             findViewById(android.R.id.content),
             R.string.conexao_internet,
             Snackbar.LENGTH_LONG
-        ).setBackgroundTint(ContextCompat.getColor(this, R.color.rosa))
-            .show()
+        ).setBackgroundTint(ContextCompat.getColor(this, R.color.azulAnil))
+
+        snackbar.setAction("Abrir Configurações", View.OnClickListener {
+            val intent = Intent(Settings.ACTION_WIFI_SETTINGS)
+            startActivity(intent)
+        })
+
+        snackbar.show()
     }
+
 }
