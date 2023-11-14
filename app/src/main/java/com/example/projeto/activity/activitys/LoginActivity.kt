@@ -1,7 +1,11 @@
 package com.example.projeto.activity.activitys
 
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 
 import android.net.Uri
 import android.os.Bundle
@@ -85,18 +89,23 @@ class LoginActivity : AppCompatActivity() {
 
     private fun loginUsuario() {
         val usuario = Usuario()
-        // isDone verifica se o usuario preencheu todos os campos
-        // unMasked recupera os dados sem a máscara
-        val cpf = binding.editTextCpfCnpj.unMasked.isEmpty()
-        val senha = binding.editTextSenha.text.toString().isEmpty()
-        //val isDone = binding.editTextCpfCnpj.isDone
-        if (!cpf && !senha) { // verifica se o usuario digitou os dados corretamente
-            usuario.setCpf(binding.editTextCpfCnpj.unMasked)
-            usuario.setSenha(binding.editTextSenha.text.toString())
-            chamaAPI(usuario)
+        if(isNetworkAvailable()){
+
+            // isDone verifica se o usuario preencheu todos os campos
+            // unMasked recupera os dados sem a máscara
+            val isDone = binding.editTextCpfCnpj.isDone
+            if (isDone) { // verifica se o usuario digitou os dados corretamente
+                usuario.setCpf(binding.editTextCpfCnpj.unMasked)
+                usuario.setSenha(binding.editTextSenha.text.toString())
+                chamaAPI(usuario)
+            } else {
+                snackBar("Ops! Campos vazios")
+            }
+
         } else {
-            snackBar("Ops! Campos vazios")
+            showNoInternetSnackbar()
         }
+
     }
 
 
@@ -110,11 +119,12 @@ class LoginActivity : AppCompatActivity() {
             override fun onFailure(call: Call<Usuario>, t: Throwable) {
                 // registra informações de erro
                 Log.d("Erro", t.toString())
+                snackBar("Tivemos um problema. Por favor, tente novamente mais tarde.")
+
             }
 
             override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
                 if (response.isSuccessful) {
-
                     response.body()?.let {
                         val sharedPreferences = getSharedPreferences("db", MODE_PRIVATE)
                         val editor = sharedPreferences.edit()
@@ -204,12 +214,32 @@ class LoginActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    @SuppressLint("MissingPermission")
+    private fun isNetworkAvailable(): Boolean {
+        val connectivityManager =
+            getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val network = connectivityManager.activeNetwork
+        val capabilities = connectivityManager.getNetworkCapabilities(network)
+        return capabilities != null &&
+                (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ||
+                        capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR))
+    }
+
     private fun snackBar(mensagem: String) {
         Snackbar.make(
-            findViewById(R.id.pagina_login),
+            findViewById(android.R.id.content),
             mensagem,
             Snackbar.LENGTH_LONG
         ).setBackgroundTint(ContextCompat.getColor(this, R.color.azulAnil))
+            .show()
+    }
+
+    private fun showNoInternetSnackbar() {
+        Snackbar.make(
+            findViewById(android.R.id.content),
+            R.string.conexao_internet,
+            Snackbar.LENGTH_LONG
+        ).setBackgroundTint(ContextCompat.getColor(this, R.color.rosa))
             .show()
     }
 }

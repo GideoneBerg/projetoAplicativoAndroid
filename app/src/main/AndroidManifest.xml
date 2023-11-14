@@ -5,7 +5,7 @@
     <uses-feature
         android:name="android.hardware.telephony"
         android:required="false" />
-
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- Permissão para obter status da internet -->
     <uses-permission android:name="android.permission.CALL_PHONE" /> <!-- Permissão para acesso a internet -->
     <uses-permission android:name="android.permission.INTERNET" />
 
