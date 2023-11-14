@@ -43,7 +43,6 @@ class LoginActivity : AppCompatActivity() {
         funcaoBotoes()
     }
 
-
     private fun togglePasswordVisibility() {
         val editTextSenha = binding.editTextSenha
         if (editTextSenha.transformationMethod == PasswordTransformationMethod.getInstance()) {
@@ -192,19 +191,4 @@ class LoginActivity : AppCompatActivity() {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         startActivity(intent)
     }
-
-//    private fun showToast(message: String) {
-//        // Crie o Toast com a mensagem
-//        val toast = Toast.makeText(this, message, Toast.LENGTH_SHORT)
-//        // Inflar o layout personalizado para o Toast
-//        val toastLayout = layoutInflater.inflate(R.layout.toast_custom, null)
-//        // Configurar o texto da mensagem no layout personalizado
-//        val textMessage = toastLayout.findViewById<TextView>(R.id.textMessage)
-//        textMessage.text = message
-//        // Definir o layout personalizado como a view do Toast
-//        toast.view = toastLayout
-//
-//        // Mostrar o Toast
-//        toast.show()
-//    }
 }

@@ -37,11 +37,8 @@ class ClienteActivity : AppCompatActivity() {
         val nomeUsuario = intent.getStringExtra("nomeUsuario")
         val plano = extras.getString("plano")
 
-
         binding.plano.text = plano?.replace("_"," ")
-
         binding.textViewNome.text = nomeUsuario
-
         binding.vencimento.text = extras.getString("vencimento")
 
         val cidade =  extras.getString("cidade")
