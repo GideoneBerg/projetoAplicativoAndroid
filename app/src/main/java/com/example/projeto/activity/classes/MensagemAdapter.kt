@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.projeto.R
 
 class MensagemAdapter(
-    private val lista: List<String>
+    private val lista: List<Mensagem>
 ) : Adapter<MensagemAdapter.MensagemViewHolder>(){
 
     inner class MensagemViewHolder(
@@ -27,11 +27,11 @@ class MensagemAdapter(
         )
         return  MensagemViewHolder(itemView)
     }
-    // Ao vincular o view holder = pega os dados e vincula na lista
+    // Ao vincular os para view holder = pega os dados e vincula na lista
     override fun onBindViewHolder(holder: MensagemViewHolder, position: Int) {
 
-        val nome = lista[position]
-        holder.textNome.text = nome
+        val mensagem = lista[position]
+        holder.textNome.text = mensagem.nome
 
 
     }

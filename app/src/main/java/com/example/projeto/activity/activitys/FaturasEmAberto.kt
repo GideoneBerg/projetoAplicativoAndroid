@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Recycler
 import com.example.projeto.R
+import com.example.projeto.activity.classes.Mensagem
 import com.example.projeto.activity.classes.MensagemAdapter
 
 class FaturasEmAberto : AppCompatActivity() {
@@ -15,12 +16,15 @@ class FaturasEmAberto : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_faturas_em_aberto)
 
-        val lista = listOf<String>(
-            "Gideone",
-            "Thamiris",
-            "Geraldina",
-            "Denison",
-            "Deoclecio"
+        val lista = listOf(
+            Mensagem("Gideone"),
+            Mensagem("Thamiris"),
+            Mensagem("Geraldina"),
+            Mensagem("Ivani"),
+            Mensagem("Gideone"),
+            Mensagem("Thamiris"),
+            Mensagem("Geraldina"),
+            Mensagem("Ivani"),
 
         )
 
