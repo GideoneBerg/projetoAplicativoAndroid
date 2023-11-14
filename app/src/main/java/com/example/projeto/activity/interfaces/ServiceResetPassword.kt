@@ -9,8 +9,8 @@ import retrofit2.http.POST
 
 interface ServiceResetPassword {
 //    @POST("/login/reset_password.php")
-//    @POST("/api/login/reset_password.php") // antiga
-    @POST("/api/reset_password.php") // nova
+    @POST("/api/login/reset_password.php") // antiga
+ //   @POST("/api/reset_password.php") // nova
     @FormUrlEncoded
     fun resetPassword(
         @Field("email") email: String):
