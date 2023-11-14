@@ -169,7 +169,7 @@ class ClienteActivity : AppCompatActivity() {
     }
     private fun snackBar(mensagem: String) {
         Snackbar.make(
-            findViewById(R.id.pagina_login),
+            findViewById(android.R.id.content),
             mensagem,
             Snackbar.LENGTH_LONG
         ).setBackgroundTint(ContextCompat.getColor(this, R.color.azulAnil))
