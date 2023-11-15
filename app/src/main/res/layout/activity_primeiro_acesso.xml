@@ -9,34 +9,52 @@
     android:id="@+id/activityFirstAccess">
 
 
-    <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="172dp"
-        android:layout_height="118dp"
-        android:layout_marginTop="98dp"
+    <TextView
+        android:id="@+id/primeiroacesso"
+        android:layout_width="194dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="84dp"
+        android:elevation="3sp"
+        android:fontFamily="@font/bebas_neue"
+        android:text="Primeiro Acesso"
+        android:textAlignment="gravity"
+        android:textColor="@color/amarelo"
+        android:textSize="35sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logotipo" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="690dp"
-        android:layout_marginTop="170dp"
+        android:id="@+id/view2"
+        android:layout_width="413dp"
+        android:layout_height="485dp"
+        android:layout_marginTop="400dp"
         android:background="@drawable/objeto15"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.41" />
 
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="350dp"
+        android:layout_height="302dp"
+        android:layout_marginTop="160dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/primeiroacessoimg" />
 
     <com.santalu.maskara.widget.MaskEditText
         android:id="@+id/textCpfCnpj"
         android:layout_width="325dp"
         android:layout_height="57dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="136dp"
         android:background="@drawable/background_texto1"
         android:drawableStart="@drawable/baseline_person_24"
         android:drawablePadding="6dp"
@@ -64,6 +82,7 @@
         android:layout_marginEnd="32dp"
         android:background="@drawable/background_texto1"
         android:ems="10"
+        android:fontFamily="sans-serif-light"
         android:hint="Nova Senha"
         android:inputType="textPassword"
         android:padding="10dp"
