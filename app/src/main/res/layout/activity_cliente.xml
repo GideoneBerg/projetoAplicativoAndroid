@@ -3,6 +3,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_cliente"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/new_background"
@@ -66,12 +67,12 @@
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="8dp"
+            app:cardBackgroundColor="@color/azulMarinho"
             app:cardCornerRadius="15dp"
             app:layout_constraintBottom_toTopOf="@+id/viewFlipper"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:cardBackgroundColor="@color/azulMarinho"
             app:layout_constraintTop_toBottomOf="@+id/plano">
 
             <LinearLayout
@@ -105,8 +106,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:fontFamily="@font/abel"
-                            android:textColor="@color/white"
                             android:text="@string/fatura_disponivel"
+                            android:textColor="@color/white"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
@@ -114,9 +115,9 @@
                             android:id="@+id/vencimento"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/white"
                             android:fontFamily="@font/abel"
                             android:text="Vence em 10/06/2023"
+                            android:textColor="@color/white"
                             android:textSize="14sp" />
 
                         <TextView
@@ -125,8 +126,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:fontFamily="@font/abel"
-                            android:textColor="@color/white"
                             android:text="R$ 49,99"
+                            android:textColor="@color/white"
                             android:textSize="20sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -143,12 +144,12 @@
                             android:id="@+id/btnPagarFatura"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
                             android:background="@drawable/background_botao_menu_cliente"
                             android:fontFamily="sans-serif-condensed"
+                            android:padding="10dp"
                             android:text="@string/pagarFatura"
                             android:textAllCaps="true"
-                            android:layout_marginTop="4dp"
-                            android:padding="10dp"
                             android:textColor="@color/white"
                             android:textSize="13sp" />
 
@@ -156,12 +157,12 @@
                             android:id="@+id/verFaturas"
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
                             android:background="@drawable/background_botao_menu_cliente"
                             android:fontFamily="sans-serif-condensed"
+                            android:padding="10dp"
                             android:text="Ver Faturas"
                             android:textAllCaps="true"
-                            android:layout_marginTop="4dp"
-                            android:padding="10dp"
                             android:textColor="@color/white"
                             android:textSize="13sp" />
 
@@ -386,7 +387,6 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
-
         <ImageButton
             android:id="@+id/site"
             android:layout_width="50dp"
@@ -575,5 +575,5 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </ScrollView>
+</ScrollView>
 

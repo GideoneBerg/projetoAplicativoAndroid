@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
@@ -158,9 +160,11 @@ class ClienteActivity : AppCompatActivity() {
 
         snackBar("Logout realizado com sucesso")
 
-        val intent = Intent(this, LoginActivity::class.java)
-        startActivity(intent)
-        finish()
+        Handler(Looper.getMainLooper()).postDelayed({
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        }, 1000)
     }
 
     private fun openUrl(url: String){
@@ -169,7 +173,7 @@ class ClienteActivity : AppCompatActivity() {
     }
     private fun snackBar(mensagem: String) {
         Snackbar.make(
-            findViewById(android.R.id.content),
+            findViewById(R.id.layout_cliente),
             mensagem,
             Snackbar.LENGTH_LONG
         ).setBackgroundTint(ContextCompat.getColor(this, R.color.azulAnil))

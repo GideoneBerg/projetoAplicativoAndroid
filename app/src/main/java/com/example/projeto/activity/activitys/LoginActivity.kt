@@ -4,11 +4,14 @@ package com.example.projeto.activity.activitys
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.provider.Settings
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
@@ -30,7 +33,8 @@ import retrofit2.Response
 
 
 class LoginActivity : AppCompatActivity() {
-
+    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var handler: Handler
     private lateinit var serviceLogin: ServiceLogin
     private lateinit var binding: ActivityLoginBinding
 
@@ -40,11 +44,53 @@ class LoginActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+
         serviceLogin = RetrofitService.getRetrofitInstance()
             .create(ServiceLogin::class.java)
 
+        sharedPreferences = getSharedPreferences("db", MODE_PRIVATE)
+        handler = Handler(Looper.getMainLooper())
+        startUserStatusTimer()
+
         funcaoBotoes()
     }
+
+    private fun startUserStatusTimer() {
+        handler.postDelayed({
+            // Usuário inativo por 5 minutos (300,000 milissegundos)
+            val inactivityThreshold = 300000
+            val lastActiveTime = sharedPreferences.getLong("lastActiveTime", 0)
+
+            if (System.currentTimeMillis() - lastActiveTime >= inactivityThreshold) {
+                // Usuário inativo, realiza o logout
+                logoutUser()
+            } else {
+                // Usuário ainda está ativo, continua o timer
+                startUserStatusTimer()
+            }
+        }, 1000) // Executa a verificação a cada 1 segundo (pode ajustar conforme necessário)
+    }
+
+    private fun resetUserStatus() {
+        // Atualiza o tempo de atividade do usuário
+        val editor = sharedPreferences.edit()
+        editor.putLong("lastActiveTime", System.currentTimeMillis())
+        editor.apply()
+    }
+
+    private fun logoutUser() {
+        // Implemente as ações necessárias para realizar o logout aqui
+        // Por exemplo, limpe os dados do SharedPreferences e redirecione para a tela de login
+        val editor = sharedPreferences.edit()
+        editor.putBoolean("logado", false)
+        editor.apply()
+
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+
 
     private fun togglePasswordVisibility() {
         val editTextSenha = binding.editTextSenha
@@ -90,7 +136,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun loginUsuario() {
         val usuario = Usuario()
-        if(isNetworkAvailable()){
+        if (isNetworkAvailable()) {
 
             // isDone verifica se o usuario preencheu todos os campos
             // unMasked recupera os dados sem a máscara
@@ -102,8 +148,7 @@ class LoginActivity : AppCompatActivity() {
             } else {
                 snackBar("Ops! Campos vazios")
             }
-        }
-        else {
+        } else {
             showNoInternetSnackbar()
         }
 
@@ -127,7 +172,7 @@ class LoginActivity : AppCompatActivity() {
             override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
                 if (response.isSuccessful) {
                     response.body()?.let {
-                        val sharedPreferences = getSharedPreferences("db", MODE_PRIVATE)
+                     //   val sharedPreferences = getSharedPreferences("db", MODE_PRIVATE)
                         val editor = sharedPreferences.edit()
                         editor.putBoolean("logado", true)
                         editor.apply()
@@ -138,12 +183,13 @@ class LoginActivity : AppCompatActivity() {
 
                             exibeSnackBar(false)
                         } else {
-                            progressBar.visibility = View.VISIBLE
-                            botaoVisibilidade.visibility = View.INVISIBLE
+
                             // Mensangem
                             exibeSnackBar(true)
                             // Dados que seram enviados para ClienteActivity
                             dadosActivity(it)
+                            progressBar.visibility = View.VISIBLE
+                            botaoVisibilidade.visibility = View.INVISIBLE
 
                             // Limpa os campos depois de efetuar o login
                             limpaCampos()
@@ -167,38 +213,50 @@ class LoginActivity : AppCompatActivity() {
         intent.putExtra("bairro", usuario.getBairro())
         intent.putExtra("estado", usuario.getEstado())
         intent.putExtra("cod", usuario.cod)
-        startActivity(intent)
-        finish()
 
-        val sharedPreferences = getSharedPreferences("db", MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.putString("nomeUsuario", usuario.getNome())
-        editor.putString("nascimento", usuario.getNascimento())
-        editor.putString("plano", usuario.getPlano())
-        editor.putString("cidade", usuario.getCidade())
-        editor.putString("vencimento", usuario.getVencimento())
-        editor.putString("rua", usuario.getRua())
-        editor.putString("numero", usuario.getNumero())
-        editor.putString("bairro", usuario.getBairro())
-        editor.putString("estado", usuario.getEstado())
-        editor.apply()
+        // Exibe a Snackbar antes de iniciar a próxima atividade
+        Snackbar.make(
+            findViewById(android.R.id.content),
+            "Usuário autenticado",
+            Snackbar.LENGTH_SHORT
+        ).setBackgroundTint(ContextCompat.getColor(this, R.color.azulAnil))
+            .addCallback(object : Snackbar.Callback() {
+                override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
+                    // A Snackbar foi dispensada (usuário a viu), então agora inicie a próxima atividade
+                    startActivity(intent)
+                    finish()
 
+                    // Atualize os dados no SharedPreferences após iniciar a próxima atividade
+                    val editor = sharedPreferences.edit()
+                    editor.putString("nomeUsuario", usuario.getNome())
+                    editor.putString("nascimento", usuario.getNascimento())
+                    editor.putString("plano", usuario.getPlano())
+                    editor.putString("cidade", usuario.getCidade())
+                    editor.putString("vencimento", usuario.getVencimento())
+                    editor.putString("rua", usuario.getRua())
+                    editor.putString("numero", usuario.getNumero())
+                    editor.putString("bairro", usuario.getBairro())
+                    editor.putString("estado", usuario.getEstado())
+                    editor.apply()
+                }
+            }).show()
     }
+
 
     private fun exibeSnackBar(respostaServidor: Boolean) {
         if (respostaServidor) {
             Snackbar.make(
-                findViewById(R.id.pagina_login),
+                findViewById(android.R.id.content),
                 "Usuário autenticado",
-                Snackbar.LENGTH_LONG
+                Snackbar.LENGTH_SHORT
             ).setBackgroundTint(ContextCompat.getColor(this, R.color.azulAnil))
                 .show()
 
         } else {
             Snackbar.make(
-                findViewById(R.id.pagina_login),
+                findViewById(android.R.id.content),
                 "Usuário ou senha incorretos",
-                Snackbar.LENGTH_LONG
+                Snackbar.LENGTH_SHORT
             ).setBackgroundTint(ContextCompat.getColor(this, R.color.rosa))
                 .show()
         }
@@ -227,7 +285,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun snackBar(mensagem: String) {
-        if(mensagem == "Ops! Campos vazios"){
+        if (mensagem == "Ops! Campos vazios") {
 
             Snackbar.make(
                 findViewById(android.R.id.content),
@@ -261,6 +319,17 @@ class LoginActivity : AppCompatActivity() {
         snackbar.setActionTextColor(ContextCompat.getColor(this, R.color.amarelo))
 
         snackbar.show()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        resetUserStatus()
+        startUserStatusTimer()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        handler.removeCallbacksAndMessages(null)
     }
 
 }
