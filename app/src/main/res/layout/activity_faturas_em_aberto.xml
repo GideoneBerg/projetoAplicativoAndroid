@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
+
     tools:context=".activity.activitys.FaturasEmAberto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -101,6 +101,8 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
+
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_lista"
