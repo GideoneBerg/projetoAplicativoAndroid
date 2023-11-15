@@ -75,6 +75,7 @@
         android:layout_marginTop="776dp"
         android:background="@drawable/background_botao1"
         android:text="QR Code"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
