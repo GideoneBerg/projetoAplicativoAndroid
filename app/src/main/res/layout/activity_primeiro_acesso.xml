@@ -113,7 +113,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:background="@drawable/background_botao1"
+        android:background="@drawable/background_botao_fechar_popup"
         android:text="@string/enviar"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
