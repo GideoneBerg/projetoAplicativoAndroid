@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:fontFamily="@font/abel"
+                android:fontFamily="sans-serif-condensed"
                 android:text="@string/fatura_disponivel"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -48,6 +48,7 @@
                 android:text="R$ 49,99"
                 android:textSize="18sp"
                 android:textStyle="bold"
+                android:fontFamily="sans-serif-condensed"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/vencimento" />
 
@@ -57,9 +58,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:fontFamily="@font/abel"
+                android:fontFamily="sans-serif-condensed-light"
                 android:text="Vence em 10/06/2023"
-                android:textSize="14sp"
+                android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/text_nome" />
 
@@ -82,6 +83,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:background="@drawable/background_botao_planos"
                 android:padding="10dp"
                 android:text="2544"
