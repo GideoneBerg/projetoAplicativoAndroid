@@ -6,29 +6,83 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.projeto.R
+import com.example.projeto.activity.classes.Lancamento
+import com.example.projeto.activity.classes.RetrofitService
+import com.example.projeto.activity.interfaces.ServiceLancamentos
 
 import com.example.projeto.activity.webView.WebSpeedTestActivity
 import com.example.projeto.databinding.ActivityClienteBinding
 import com.google.android.material.snackbar.Snackbar
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class ClienteActivity : AppCompatActivity() {
 
+    private lateinit var serviceLancamentos: ServiceLancamentos
     private lateinit var binding: ActivityClienteBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityClienteBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        serviceLancamentos = RetrofitService.getRetrofitInstance()
+            .create(ServiceLancamentos::class.java)
+
         // Ação dos botões
         botoesScroll()
         // Dados do cliente
         dadosAPI()
+
+    }
+
+    private fun chamadaApiLanc() {
+
+        val login = intent.extras!!.getString("login")
+        val lancamento = Lancamento()
+        val servico = serviceLancamentos
+        servico.getLancamentos(login!!).enqueue(object :
+            Callback<Lancamento> {
+            override fun onFailure(call: Call<Lancamento>, t: Throwable) {
+                // registra informações de erro
+                Log.d("Erro", t.toString())
+                //      snackBar("Tivemos um problema. Tente novamente mais tarde.")
+
+            }
+
+            override fun onResponse(call: Call<Lancamento>, response: Response<Lancamento>) {
+                if (response.isSuccessful) {
+                    response.body()?.let {
+
+                        if (login == "vazio") {
+                            exibeSnackBar(false)
+                        } else {
+                            val intent = Intent(this@ClienteActivity, FaturasEmAberto::class.java)
+                            intent.putExtra("datavenc", lancamento.datavenc)
+                            intent.putExtra("linhadig", lancamento.linhadig)
+                            intent.putExtra("valor", lancamento.valor)
+                            intent.putExtra("status", lancamento.status)
+                            startActivity(intent)
+                            // Mensangem
+                            exibeSnackBar(true)
+                            // Dados que seram enviados para ClienteActivity
+                            // dadosActivity(it)
+
+
+                        }
+                    }
+                }
+            }
+        })
     }
 
     @SuppressLint("SetTextI18n")
@@ -37,23 +91,24 @@ class ClienteActivity : AppCompatActivity() {
         val extras = intent.extras ?: return
 
         // Trazendo dados para a activity
-        val nomeUsuario = intent.getStringExtra("nomeUsuario")
+        val nomeUsuario = intent.getStringExtra("nome")
         val plano = extras.getString("plano")
 
-        binding.plano.text = plano?.replace("_"," ")
+        binding.plano.text = plano?.replace("_", " ")
         binding.textViewNome.text = nomeUsuario
         binding.vencimento.text = extras.getString("vencimento")
 
-        val cidade =  extras.getString("cidade")
-        val rua =  extras.getString("rua")
-        val nascimento =  extras.getString("nascimento")
-        val numeroCasa =  extras.getString("numero")
-        val bairroCasa =  extras.getString("bairro")
-        val estado =  extras.getString("estado")
+        val cidade = extras.getString("cidade")
+        val rua = extras.getString("rua")
+        val nascimento = extras.getString("nascimento")
+        val numeroCasa = extras.getString("numero")
+        val bairroCasa = extras.getString("bairro")
+        val estado = extras.getString("estado")
 
 
         // Botao criado para exibição de dados do cliente usando popup
-        binding.maisDados.setOnClickListener{
+        binding.maisDados.setOnClickListener {
+
             val builder = AlertDialog.Builder(this)
 //             builder.setTitle("Dados do Cliente")
 
@@ -91,12 +146,18 @@ class ClienteActivity : AppCompatActivity() {
         }
 
     }
-    private fun botoesScroll(){
+
+    private fun botoesScroll() {
+
         val extras = intent.extras ?: return
+
+        binding.btnPagarFatura.setOnClickListener {
+            chamadaApiLanc()
+        }
 
         binding.solicitarServico.setOnClickListener {
             val intent = Intent(this, SolicitacaoCliente::class.java)
-            val cod =  extras.getString("cod")
+            val cod = extras.getString("cod")
             val nomeUsuario = extras.getString("nomeUsuario")
             intent.putExtra("cod", cod)
             intent.putExtra("nomeUsuario", nomeUsuario)
@@ -107,7 +168,7 @@ class ClienteActivity : AppCompatActivity() {
             realizarLogout()
         }
 
-        binding.site.setOnClickListener{
+        binding.site.setOnClickListener {
             openUrl("https://arteempc.com/")
         }
 
@@ -119,14 +180,14 @@ class ClienteActivity : AppCompatActivity() {
             openUrl("https://www.facebook.com/ARTEEMPC?mibextid=ZbWKwL")
         }
 
-        binding.instagram.setOnClickListener{
+        binding.instagram.setOnClickListener {
             openUrl("https://www.instagram.com/arteempc/")
         }
         // Scroll
-        binding.centralCliente.setOnClickListener{
+        binding.centralCliente.setOnClickListener {
             val telefone = "8134356078"
             val intent = Intent(Intent.ACTION_DIAL)
-            intent.data =Uri.parse("tel:$telefone")
+            intent.data = Uri.parse("tel:$telefone")
             startActivity(intent)
         }
 
@@ -135,17 +196,17 @@ class ClienteActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        binding.sobre.setOnClickListener{
+        binding.sobre.setOnClickListener {
             val intent = Intent(this, SobreActivity::class.java)
             startActivity(intent)
         }
 
-        binding.segundaVia.setOnClickListener{
+        binding.segundaVia.setOnClickListener {
             val intent = Intent(this, PdfActivity::class.java)
             startActivity(intent)
         }
 
-        binding.pagamentoPix.setOnClickListener{
+        binding.pagamentoPix.setOnClickListener {
             val intent = Intent(this, GeradorQRActivity::class.java)
             startActivity(intent)
         }
@@ -167,10 +228,11 @@ class ClienteActivity : AppCompatActivity() {
         }, 1000)
     }
 
-    private fun openUrl(url: String){
+    private fun openUrl(url: String) {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         startActivity(intent)
     }
+
     private fun snackBar(mensagem: String) {
         Snackbar.make(
             findViewById(R.id.layout_cliente),
@@ -179,4 +241,24 @@ class ClienteActivity : AppCompatActivity() {
         ).setBackgroundTint(ContextCompat.getColor(this, R.color.azulAnil))
             .show()
     }
+
+    private fun exibeSnackBar(respostaServidor: Boolean) {
+        if (respostaServidor) {
+            Snackbar.make(
+                findViewById(android.R.id.content),
+                "Usuário autenticado",
+                Snackbar.LENGTH_SHORT
+            ).setBackgroundTint(ContextCompat.getColor(this, R.color.azulAnil))
+                .show()
+
+        } else {
+            Snackbar.make(
+                findViewById(android.R.id.content),
+                "Usuário ou senha incorretos",
+                Snackbar.LENGTH_SHORT
+            ).setBackgroundTint(ContextCompat.getColor(this, R.color.rosa))
+                .show()
+        }
+    }
+
 }

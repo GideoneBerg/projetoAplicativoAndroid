@@ -203,7 +203,7 @@ class LoginActivity : AppCompatActivity() {
     private fun dadosActivity(usuario: Usuario) {
 
         val intent = Intent(this@LoginActivity, ClienteActivity::class.java)
-        intent.putExtra("nomeUsuario", usuario.getNome())
+        intent.putExtra("nome", usuario.getNome())
         intent.putExtra("nascimento", usuario.getNascimento())
         intent.putExtra("plano", usuario.getPlano())
         intent.putExtra("vencimento", usuario.getVencimento())
@@ -212,6 +212,7 @@ class LoginActivity : AppCompatActivity() {
         intent.putExtra("numero", usuario.getNumero())
         intent.putExtra("bairro", usuario.getBairro())
         intent.putExtra("estado", usuario.getEstado())
+        intent.putExtra("login", usuario.login)
         intent.putExtra("cod", usuario.cod)
 
         // Exibe a Snackbar antes de iniciar a próxima atividade
