@@ -36,49 +36,52 @@ class PrimeiroAcesso : AppCompatActivity() {
     private fun consultaAPI(usuario: Usuario) {
 
         val servico = serviceFirstAccess
-        servico.setCadastro(usuario.getCpf(), usuario.getSenha()).enqueue(object :
-            Callback<Usuario> {
-            override fun onFailure(call: Call<Usuario>, t: Throwable) {
-                // registra informações de erro
-                Log.d("Erro", t.toString())
-            }
-            override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
-                if (response.isSuccessful) {
-                    val result = response.body()
-                    if (result != null) {
-                        val mensagem = result.mensagem
-                        if (mensagem != null) {
-                            if (mensagem == "Senha Cadastrada com sucesso!") {
-                                exibeSnackBar(mensagem)
-                                val intent = Intent(this@PrimeiroAcesso, LoginActivity::class.java)
-                                startActivity(intent)
-                                finish()
-                            } else if (mensagem == "Senha ja cadastrada!") {
-                                exibeSnackBar(mensagem)
-                            } else if (mensagem == "CPF nao localizado!") {
-                                exibeSnackBar(mensagem)
-                            } else if (mensagem == "Senha nao pode estar em branco!") {
-                                exibeSnackBar(mensagem)
+        usuario.getSenha()?.let {
+            servico.setCadastro(usuario.getCpf()!!, it).enqueue(object :
+                Callback<Usuario> {
+                override fun onFailure(call: Call<Usuario>, t: Throwable) {
+                    // registra informações de erro
+                    Log.d("Erro", t.toString())
+                }
+
+                override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
+                    if (response.isSuccessful) {
+                        val result = response.body()
+                        if (result != null) {
+                            val mensagem = result.mensagem
+                            if (mensagem != null) {
+                                if (mensagem == "Senha Cadastrada com sucesso!") {
+                                    exibeSnackBar(mensagem)
+                                    val intent = Intent(this@PrimeiroAcesso, LoginActivity::class.java)
+                                    startActivity(intent)
+                                    finish()
+                                } else if (mensagem == "Senha ja cadastrada!") {
+                                    exibeSnackBar(mensagem)
+                                } else if (mensagem == "CPF nao localizado!") {
+                                    exibeSnackBar(mensagem)
+                                } else if (mensagem == "Senha nao pode estar em branco!") {
+                                    exibeSnackBar(mensagem)
+                                } else {
+                                    Toast.makeText(
+                                        applicationContext,
+                                        "Erro inesperado!",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
                             } else {
-                                Toast.makeText(
-                                    applicationContext,
-                                    "Erro inesperado!",
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                                Toast.makeText(applicationContext, "Null", Toast.LENGTH_SHORT).show()
                             }
                         } else {
-                            Toast.makeText(applicationContext, "Null", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                applicationContext,
+                                "Erro na resposta da API",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
-                    } else {
-                        Toast.makeText(
-                            applicationContext,
-                            "Erro na resposta da API",
-                            Toast.LENGTH_SHORT
-                        ).show()
                     }
                 }
-            }
-        })
+            })
+        }
 
     }
     private fun togglePasswordVisibility() {

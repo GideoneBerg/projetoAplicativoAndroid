@@ -20,11 +20,13 @@ class FaturasEmAberto : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_faturas_em_aberto)
 
-        lancamentos = intent.getParcelableArrayListExtra<Lancamento>("lancamentos") ?: emptyList()
+
+        lancamentos = intent.getParcelableArrayListExtra("lancamentos") ?: emptyList()
         rvLista = findViewById(R.id.rv_lista)
 
         faturasAdapter = FaturasAdapter(lancamentos)
         rvLista.adapter = faturasAdapter
         rvLista.layoutManager = LinearLayoutManager(this)
+
     }
 }

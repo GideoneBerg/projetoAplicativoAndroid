@@ -160,44 +160,46 @@ class LoginActivity : AppCompatActivity() {
         val botaoVisibilidade = findViewById<Button>(R.id.btnEntrar)
 
         val servico = serviceLogin
-        servico.setUsuario(usuario.getCpf(), usuario.getSenha()).enqueue(object :
-            Callback<Usuario> {
-            override fun onFailure(call: Call<Usuario>, t: Throwable) {
-                // registra informações de erro
-                Log.d("Erro", t.toString())
-                snackBar("Tivemos um problema. Tente novamente mais tarde.")
+        usuario.getCpf()?.let {
+            servico.setUsuario(it, usuario.getSenha()!!).enqueue(object :
+                Callback<Usuario> {
+                override fun onFailure(call: Call<Usuario>, t: Throwable) {
+                    // registra informações de erro
+                    Log.d("Erro", t.toString())
+                    snackBar("Tivemos um problema. Tente novamente mais tarde.")
 
-            }
+                }
 
-            override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
-                if (response.isSuccessful) {
-                    response.body()?.let {
-                     //   val sharedPreferences = getSharedPreferences("db", MODE_PRIVATE)
-                        val editor = sharedPreferences.edit()
-                        editor.putBoolean("logado", true)
-                        editor.apply()
+                override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
+                    if (response.isSuccessful) {
+                        response.body()?.let {
+                            //   val sharedPreferences = getSharedPreferences("db", MODE_PRIVATE)
+                            val editor = sharedPreferences.edit()
+                            editor.putBoolean("logado", true)
+                            editor.apply()
 
-                        if (it.getCpf() == "vazio") {
-                            progressBar.visibility = View.GONE
-                            botaoVisibilidade.visibility = View.VISIBLE
+                            if (it.getCpf() == "vazio") {
+                                progressBar.visibility = View.GONE
+                                botaoVisibilidade.visibility = View.VISIBLE
 
-                            exibeSnackBar(false)
-                        } else {
+                                exibeSnackBar(false)
+                            } else {
 
-                            // Mensangem
-                            exibeSnackBar(true)
-                            // Dados que seram enviados para ClienteActivity
-                            dadosActivity(it)
-                            progressBar.visibility = View.VISIBLE
-                            botaoVisibilidade.visibility = View.INVISIBLE
+                                // Mensangem
+                                exibeSnackBar(true)
+                                // Dados que seram enviados para ClienteActivity
+                                dadosActivity(it)
+                                progressBar.visibility = View.VISIBLE
+                                botaoVisibilidade.visibility = View.INVISIBLE
 
-                            // Limpa os campos depois de efetuar o login
-                            limpaCampos()
+                                // Limpa os campos depois de efetuar o login
+                                limpaCampos()
+                            }
                         }
                     }
                 }
-            }
-        })
+            })
+        }
     }
 
     private fun dadosActivity(usuario: Usuario) {
