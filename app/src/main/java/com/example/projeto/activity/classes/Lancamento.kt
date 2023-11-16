@@ -4,11 +4,11 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class Lancamento(
-    val datavenc: String,
-    val linhadig: String,
-    val valor: String,
-    val status: String,
-    val id: String
+    val datavenc: String? = null,
+    val linhadig: String? = null,
+    val valor: String? = null,
+    val status: String? = null,
+//    val titulo: String? = null
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this(
@@ -16,7 +16,7 @@ data class Lancamento(
         parcel.readString()!!,
         parcel.readString()!!,
         parcel.readString()!!,
-        parcel.readString()!!
+//        parcel.readString()!!
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -24,7 +24,7 @@ data class Lancamento(
         parcel.writeString(linhadig)
         parcel.writeString(valor)
         parcel.writeString(status)
-        parcel.writeString(id)
+//        parcel.writeString(titulo)
     }
 
     override fun describeContents(): Int {
