@@ -15,5 +15,5 @@ interface ServiceLancamentos {
 //    @POST("/api/login.php") // nova
     fun getLancamentos(
         @Field("login") login: String
-    ): Call<Lancamento>
+    ): Call<List<Lancamento>>
 }

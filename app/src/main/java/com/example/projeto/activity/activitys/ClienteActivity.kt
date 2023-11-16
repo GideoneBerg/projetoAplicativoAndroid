@@ -45,45 +45,6 @@ class ClienteActivity : AppCompatActivity() {
 
     }
 
-    private fun chamadaApiLanc() {
-
-        val login = intent.extras!!.getString("login")
-        val lancamento = Lancamento()
-        val servico = serviceLancamentos
-        servico.getLancamentos(login!!).enqueue(object :
-            Callback<Lancamento> {
-            override fun onFailure(call: Call<Lancamento>, t: Throwable) {
-                // registra informações de erro
-                Log.d("Erro", t.toString())
-                //      snackBar("Tivemos um problema. Tente novamente mais tarde.")
-
-            }
-
-            override fun onResponse(call: Call<Lancamento>, response: Response<Lancamento>) {
-                if (response.isSuccessful) {
-                    response.body()?.let {
-
-                        if (login == "vazio") {
-                            exibeSnackBar(false)
-                        } else {
-                            val intent = Intent(this@ClienteActivity, FaturasEmAberto::class.java)
-                            intent.putExtra("datavenc", lancamento.datavenc)
-                            intent.putExtra("linhadig", lancamento.linhadig)
-                            intent.putExtra("valor", lancamento.valor)
-                            intent.putExtra("status", lancamento.status)
-                            startActivity(intent)
-                            // Mensangem
-                            exibeSnackBar(true)
-                            // Dados que seram enviados para ClienteActivity
-                            // dadosActivity(it)
-
-
-                        }
-                    }
-                }
-            }
-        })
-    }
 
     @SuppressLint("SetTextI18n")
     private fun dadosAPI() {
@@ -152,13 +113,36 @@ class ClienteActivity : AppCompatActivity() {
         val extras = intent.extras ?: return
 
         binding.btnPagarFatura.setOnClickListener {
-            chamadaApiLanc()
+            val login = intent.getStringExtra("login")
+
+             serviceLancamentos.getLancamentos(login!!).enqueue(object :
+                Callback<List<Lancamento>> {
+                override fun onFailure(call: Call<List<Lancamento>>, t: Throwable) {
+                    // registra informações de erro
+                    Log.d("Erro", t.toString())
+                    //      snackBar("Tivemos um problema. Tente novamente mais tarde.")
+
+                }
+                override fun onResponse(call: Call<List<Lancamento>>, response: Response<List<Lancamento>>) {
+                    if (response.isSuccessful) {
+                        val lancamentos = response.body()
+                        if (lancamentos.isNullOrEmpty()) {
+                            exibeSnackBar(false)
+                        } else {
+                            val intent = Intent(this@ClienteActivity, FaturasEmAberto::class.java)
+                            intent.putParcelableArrayListExtra("lancamentos", ArrayList(lancamentos))
+                            startActivity(intent)
+                            exibeSnackBar(true)
+                        }
+                    }
+                }
+            })
         }
 
         binding.solicitarServico.setOnClickListener {
             val intent = Intent(this, SolicitacaoCliente::class.java)
             val cod = extras.getString("cod")
-            val nomeUsuario = extras.getString("nomeUsuario")
+            val nomeUsuario = extras.getString("nome")
             intent.putExtra("cod", cod)
             intent.putExtra("nomeUsuario", nomeUsuario)
             startActivity(intent)
@@ -246,7 +230,7 @@ class ClienteActivity : AppCompatActivity() {
         if (respostaServidor) {
             Snackbar.make(
                 findViewById(android.R.id.content),
-                "Usuário autenticado",
+                "ok",
                 Snackbar.LENGTH_SHORT
             ).setBackgroundTint(ContextCompat.getColor(this, R.color.azulAnil))
                 .show()
@@ -254,7 +238,7 @@ class ClienteActivity : AppCompatActivity() {
         } else {
             Snackbar.make(
                 findViewById(android.R.id.content),
-                "Usuário ou senha incorretos",
+                "false",
                 Snackbar.LENGTH_SHORT
             ).setBackgroundTint(ContextCompat.getColor(this, R.color.rosa))
                 .show()

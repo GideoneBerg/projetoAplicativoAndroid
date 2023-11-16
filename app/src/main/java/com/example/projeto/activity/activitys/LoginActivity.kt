@@ -229,7 +229,7 @@ class LoginActivity : AppCompatActivity() {
 
                     // Atualize os dados no SharedPreferences após iniciar a próxima atividade
                     val editor = sharedPreferences.edit()
-                    editor.putString("nomeUsuario", usuario.getNome())
+                    editor.putString("nome", usuario.getNome())
                     editor.putString("nascimento", usuario.getNascimento())
                     editor.putString("plano", usuario.getPlano())
                     editor.putString("cidade", usuario.getCidade())

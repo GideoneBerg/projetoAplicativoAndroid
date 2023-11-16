@@ -30,7 +30,7 @@ public class SplashScreenActivity extends AppCompatActivity {
     private void mostrarLogin() {
         SharedPreferences prefs = getSharedPreferences("db", MODE_PRIVATE);
         boolean logado = prefs.getBoolean("logado", false);
-        String nomeUsuario = prefs.getString("nomeUsuario", "");
+        String nomeUsuario = prefs.getString("nome", "");
         String nascimento = prefs.getString("nascimento", "");
         String plano = prefs.getString("plano", "");
         String cidade = prefs.getString("cidade", "");
@@ -49,7 +49,7 @@ public class SplashScreenActivity extends AppCompatActivity {
             intent.putExtra("numero", numero);
             intent.putExtra("bairro", bairro);
             intent.putExtra("estado", estado);
-            intent.putExtra("nomeUsuario", nomeUsuario);
+            intent.putExtra("nome", nomeUsuario);
             startActivity(intent);
 
         }   else {
