@@ -120,7 +120,7 @@ class ClienteActivity : AppCompatActivity() {
                 override fun onFailure(call: Call<List<Lancamento>>, t: Throwable) {
                     // registra informações de erro
                     Log.d("Erro", t.toString())
-                    //      snackBar("Tivemos um problema. Tente novamente mais tarde.")
+                          snackBar("Tivemos um problema. Tente novamente mais tarde.")
 
                 }
                 override fun onResponse(call: Call<List<Lancamento>>, response: Response<List<Lancamento>>) {

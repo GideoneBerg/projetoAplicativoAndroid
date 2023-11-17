@@ -5,11 +5,11 @@
     <uses-feature
         android:name="android.hardware.telephony"
         android:required="false" />
+
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- Permissão para obter status da internet -->
     <uses-permission android:name="android.permission.CALL_PHONE" /> <!-- Permissão para acesso a internet -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-
 
     <application
         android:allowBackup="true"
@@ -22,12 +22,15 @@
         android:usesCleartextTraffic="false"
         tools:targetApi="31">
         <activity
+            android:name=".activity.activitys.EscolhaPagamento"
+            android:exported="false" />
+        <activity
             android:name=".activity.activitys.FaturasEmAberto"
             android:exported="false" />
         <activity
             android:name=".activity.activitys.PrimeiroAcesso"
-            android:screenOrientation="portrait"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.activitys.PdfActivity"
             android:exported="false"
