@@ -11,6 +11,8 @@ import android.net.NetworkCapabilities
 
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.provider.Settings
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
@@ -24,6 +26,7 @@ import com.example.projeto.R
 import com.example.projeto.activity.classes.RetrofitService
 
 import com.example.projeto.activity.interfaces.ServiceLogin
+import com.example.projeto.activity.model.DataHolder
 import com.example.projeto.databinding.ActivityLoginBinding
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.delay
@@ -139,9 +142,14 @@ class LoginActivity : AppCompatActivity() {
                                     botaoVisibilidade.visibility = View.INVISIBLE
                                     progressBar.visibility = View.VISIBLE
                                     exibeSnackBar(true)
-                                    val intent = Intent(this@LoginActivity, ClienteActivity::class.java)
-                                    intent.putExtra("usuario", it)
-                                    startActivity(intent)
+                                    Handler(Looper.getMainLooper()).postDelayed({
+                                        val intent = Intent(this@LoginActivity, ClienteActivity::class.java)
+                                        val user = it
+                                        DataHolder.userData = user
+                                        intent.putExtra("usuario", it)
+                                        startActivity(intent)
+                                    }, 1000)
+
                                     // Dados que seram enviados para ClienteActivity
 
 

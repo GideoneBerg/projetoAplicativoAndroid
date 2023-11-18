@@ -20,6 +20,7 @@ import com.example.projeto.activity.classes.Lancamento
 import com.example.projeto.activity.classes.RetrofitService
 
 import com.example.projeto.activity.interfaces.ServiceLancamentos
+import com.example.projeto.activity.model.DataHolderLancamento
 
 import com.example.projeto.activity.webView.WebSpeedTestActivity
 import com.example.projeto.databinding.ActivityClienteBinding
@@ -129,6 +130,8 @@ class ClienteActivity : AppCompatActivity() {
 
                         } else {
                             val intent = Intent(this@ClienteActivity, FaturasEmAberto::class.java)
+                            val userList = lancamentos
+                            DataHolderLancamento.userList = userList
                             intent.putParcelableArrayListExtra("lancamentos", ArrayList(lancamentos))
                             startActivity(intent)
 

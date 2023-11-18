@@ -4,5 +4,5 @@ import Usuario
 
 object DataHolder {
 
-    val userData: Usuario? = null
+    var userData: Usuario? = null
 }
