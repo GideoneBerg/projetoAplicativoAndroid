@@ -1,20 +1,24 @@
 package com.example.projeto.activity.activitys
 
+import Usuario
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.projeto.R
 import com.example.projeto.activity.classes.Lancamento
 import com.example.projeto.activity.classes.RetrofitService
+
 import com.example.projeto.activity.interfaces.ServiceLancamentos
 
 import com.example.projeto.activity.webView.WebSpeedTestActivity
@@ -29,6 +33,7 @@ class ClienteActivity : AppCompatActivity() {
     private lateinit var serviceLancamentos: ServiceLancamentos
     private lateinit var binding: ActivityClienteBinding
 
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityClienteBinding.inflate(layoutInflater)
@@ -49,23 +54,14 @@ class ClienteActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     private fun dadosAPI() {
 
-        val extras = intent.extras ?: return
+        val usuario = intent.getParcelableExtra<Usuario>("usuario")
 
-        // Trazendo dados para a activity
-        val nomeUsuario = intent.getStringExtra("nome")
-        val plano = extras.getString("plano")
 
-        binding.plano.text = plano?.replace("_", " ")
-        binding.textViewNome.text = nomeUsuario
-        binding.vencimento.text = extras.getString("vencimento")
-
-        val cidade = extras.getString("cidade")
-        val rua = extras.getString("rua")
-        val nascimento = extras.getString("nascimento")
-        val numeroCasa = extras.getString("numero")
-        val bairroCasa = extras.getString("bairro")
-        val estado = extras.getString("estado")
-
+        if(usuario != null){
+            binding.textViewNome.text = usuario.nome
+            binding.plano.text = usuario.plano?.replace("_", " ")
+            binding.vencimento.text = usuario.vencimento
+        }
 
         // Botao criado para exibição de dados do cliente usando popup
         binding.maisDados.setOnClickListener {
@@ -83,19 +79,19 @@ class ClienteActivity : AppCompatActivity() {
 
             // dados do cliente no popup
             val nome = dialogLayout.findViewById<TextView>(R.id.nome)
-            nome.text = "Nome: $nomeUsuario"
+            nome.text = "Nome: ${usuario?.nome}"
 
             val ruaCliente = dialogLayout.findViewById<TextView>(R.id.endereco)
-            ruaCliente.text = "End: $rua, n° $numeroCasa"
+            ruaCliente.text = "End: ${usuario?.rua}, n° ${usuario?.numero}"
 
             val cidadeAtual = dialogLayout.findViewById<TextView>(R.id.cidade)
-            cidadeAtual.text = "Cidade: $cidade, $estado"
+            cidadeAtual.text = "Cidade: ${usuario?.cidade}, ${usuario?.estado}"
 
             val nasc = dialogLayout.findViewById<TextView>(R.id.nascimento)
-            nasc.text = "Nascimento: $nascimento"
+            nasc.text = "Nascimento: ${usuario?.nascimento}"
 
             val bairro = dialogLayout.findViewById<TextView>(R.id.bairro)
-            bairro.text = "Bairro: $bairroCasa"
+            bairro.text = "Bairro: ${usuario?.bairro}"
 
             // Fechar o popup quando o botão "OK" é clicado
 
@@ -112,8 +108,10 @@ class ClienteActivity : AppCompatActivity() {
 
         val extras = intent.extras ?: return
 
+        val usuario = intent.getParcelableExtra<Usuario>("usuario")
+
         binding.btnPagarFatura.setOnClickListener {
-            val login = intent.getStringExtra("login")
+            val login = usuario?.login
 
              serviceLancamentos.getLancamentos(login!!).enqueue(object :
                 Callback<List<Lancamento>> {

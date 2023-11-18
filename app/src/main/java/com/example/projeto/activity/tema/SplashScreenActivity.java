@@ -3,6 +3,7 @@ package com.example.projeto.activity.tema;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import com.example.projeto.R;
 import com.example.projeto.activity.activitys.ClienteActivity;
 import com.example.projeto.activity.activitys.InicialActivity;
 
+@SuppressLint("CustomSplashScreen")
 public class SplashScreenActivity extends AppCompatActivity {
 
     @Override

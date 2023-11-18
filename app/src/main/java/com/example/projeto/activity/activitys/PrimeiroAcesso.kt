@@ -1,5 +1,6 @@
 package com.example.projeto.activity.activitys
 
+import Usuario
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,7 +11,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.example.projeto.R
 import com.example.projeto.activity.classes.RetrofitService
-import com.example.projeto.activity.classes.Usuario
+
 import com.example.projeto.activity.interfaces.ServiceFirstAccess
 import com.example.projeto.databinding.ActivityPrimeiroAcessoBinding
 import com.google.android.material.snackbar.Snackbar
@@ -22,6 +23,9 @@ class PrimeiroAcesso : AppCompatActivity() {
 
     private  lateinit var serviceFirstAccess: ServiceFirstAccess
     private lateinit var binding: ActivityPrimeiroAcessoBinding
+    private var usuario: Usuario? = null
+    private lateinit var cpf: String
+    private lateinit var novaSenha: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPrimeiroAcessoBinding.inflate(layoutInflater)
@@ -33,11 +37,23 @@ class PrimeiroAcesso : AppCompatActivity() {
             .create(ServiceFirstAccess::class.java)
         funcaoBotoes()
     }
-    private fun consultaAPI(usuario: Usuario) {
+
+    private fun cadastroPrimeiroAcesso() {
+
+        val isDone = binding.textCpfCnpj.isDone
+        if (isDone) { // verifica se o usuario digitou os dados corretamente
+
+            cpf = binding.textCpfCnpj.unMasked
+            novaSenha = binding.txtNovaSenha.text.toString()
+            consultaAPI()
+        } else {
+            Toast.makeText(this, "Ops! Campos vazios.", Toast.LENGTH_SHORT).show()
+        }
+    }
+    private fun consultaAPI() {
 
         val servico = serviceFirstAccess
-        usuario.getSenha()?.let {
-            servico.setCadastro(usuario.getCpf()!!, it).enqueue(object :
+            servico.setCadastro(cpf, novaSenha).enqueue(object :
                 Callback<Usuario> {
                 override fun onFailure(call: Call<Usuario>, t: Throwable) {
                     // registra informações de erro
@@ -81,7 +97,7 @@ class PrimeiroAcesso : AppCompatActivity() {
                     }
                 }
             })
-        }
+
 
     }
     private fun togglePasswordVisibility() {
@@ -106,18 +122,7 @@ class PrimeiroAcesso : AppCompatActivity() {
             togglePasswordVisibility()
         }
     }
-    private fun cadastroPrimeiroAcesso() {
 
-        val isDone = binding.textCpfCnpj.isDone
-        if (isDone) { // verifica se o usuario digitou os dados corretamente
-            val usuario = Usuario()
-            usuario.setCpf(binding.textCpfCnpj.unMasked)
-            usuario.setSenha(binding.txtNovaSenha.text.toString())
-            consultaAPI(usuario)
-        } else {
-            Toast.makeText(this, "Ops! Campos vazios.", Toast.LENGTH_SHORT).show()
-        }
-    }
     private fun exibeSnackBar(mensagem: String) {
         if (mensagem == "Senha Cadastrada com sucesso!") {
             Snackbar.make(

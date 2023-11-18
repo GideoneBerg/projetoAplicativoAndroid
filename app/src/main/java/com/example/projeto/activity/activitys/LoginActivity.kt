@@ -1,6 +1,7 @@
 package com.example.projeto.activity.activitys
 
 
+import Usuario
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
@@ -10,8 +11,6 @@ import android.net.NetworkCapabilities
 
 import android.net.Uri
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.provider.Settings
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
@@ -23,7 +22,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.projeto.R
 import com.example.projeto.activity.classes.RetrofitService
-import com.example.projeto.activity.classes.Usuario
+
 import com.example.projeto.activity.interfaces.ServiceLogin
 import com.example.projeto.databinding.ActivityLoginBinding
 import com.google.android.material.snackbar.Snackbar
@@ -34,16 +33,17 @@ import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var sharedPreferences: SharedPreferences
-    private lateinit var handler: Handler
+
     private lateinit var serviceLogin: ServiceLogin
     private lateinit var binding: ActivityLoginBinding
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
 
         serviceLogin = RetrofitService.getRetrofitInstance()
             .create(ServiceLogin::class.java)
@@ -53,8 +53,6 @@ class LoginActivity : AppCompatActivity() {
 
         funcaoBotoes()
     }
-
-
 
     private fun togglePasswordVisibility() {
         val editTextSenha = binding.editTextSenha
@@ -99,16 +97,57 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun loginUsuario() {
-        val usuario = Usuario()
+
         if (isNetworkAvailable()) {
 
             // isDone verifica se o usuario preencheu todos os campos
             // unMasked recupera os dados sem a máscara
             val isDone = binding.editTextCpfCnpj.isDone
             if (isDone) { // verifica se o usuario digitou os dados corretamente
-                usuario.setCpf(binding.editTextCpfCnpj.unMasked)
-                usuario.setSenha(binding.editTextSenha.text.toString())
-                chamaAPI(usuario)
+                val cpf = binding.editTextCpfCnpj.unMasked
+                val senha = binding.editTextSenha.text.toString()
+
+                val progressBar = findViewById<ProgressBar>(R.id.progressBar2)
+                val botaoVisibilidade = findViewById<Button>(R.id.btnEntrar)
+
+                val servico = serviceLogin
+                servico.setUsuario(cpf, senha).enqueue(object :
+                    Callback<Usuario> {
+                    override fun onFailure(call: Call<Usuario>, t: Throwable) {
+                        // registra informações de erro
+                        Log.d("Erro", t.toString())
+                        snackBar("Tivemos um problema. Tente novamente mais tarde.")
+
+                    }
+
+                    override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
+                        if (response.isSuccessful) {
+                            response.body()?.let {
+                                //   val sharedPreferences = getSharedPreferences("db", MODE_PRIVATE)
+                                val editor = sharedPreferences.edit()
+                                editor.putBoolean("logado", true)
+                                editor.apply()
+
+                                if (it.cpf == "vazio") {
+                                    progressBar.visibility = View.GONE
+                                    botaoVisibilidade.visibility = View.VISIBLE
+
+                                    exibeSnackBar(false)
+                                } else {
+
+                                    // Mensangem
+                                    exibeSnackBar(true)
+                                    // Dados que seram enviados para ClienteActivity
+                                    dadosActivity(it)
+                                    progressBar.visibility = View.VISIBLE
+                                    botaoVisibilidade.visibility = View.INVISIBLE
+
+                                    limpaCampos()
+                                }
+                            }
+                        }
+                    }
+                })
             } else {
                 snackBar("Ops! Campos vazios")
             }
@@ -117,97 +156,14 @@ class LoginActivity : AppCompatActivity() {
         }
 
     }
-
-
-    private fun chamaAPI(usuario: Usuario) {
-        val progressBar = findViewById<ProgressBar>(R.id.progressBar2)
-        val botaoVisibilidade = findViewById<Button>(R.id.btnEntrar)
-
-        val servico = serviceLogin
-        usuario.getCpf()?.let {
-            servico.setUsuario(it, usuario.getSenha()!!).enqueue(object :
-                Callback<Usuario> {
-                override fun onFailure(call: Call<Usuario>, t: Throwable) {
-                    // registra informações de erro
-                    Log.d("Erro", t.toString())
-                    snackBar("Tivemos um problema. Tente novamente mais tarde.")
-
-                }
-
-                override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
-                    if (response.isSuccessful) {
-                        response.body()?.let {
-                            //   val sharedPreferences = getSharedPreferences("db", MODE_PRIVATE)
-                            val editor = sharedPreferences.edit()
-                            editor.putBoolean("logado", true)
-                            editor.apply()
-
-                            if (it.getCpf() == "vazio") {
-                                progressBar.visibility = View.GONE
-                                botaoVisibilidade.visibility = View.VISIBLE
-
-                                exibeSnackBar(false)
-                            } else {
-
-                                // Mensangem
-                                exibeSnackBar(true)
-                                // Dados que seram enviados para ClienteActivity
-                                dadosActivity(it)
-                                progressBar.visibility = View.VISIBLE
-                                botaoVisibilidade.visibility = View.INVISIBLE
-
-                                // Limpa os campos depois de efetuar o login
-                                limpaCampos()
-                            }
-                        }
-                    }
-                }
-            })
-        }
-    }
-
     private fun dadosActivity(usuario: Usuario) {
-
         val intent = Intent(this@LoginActivity, ClienteActivity::class.java)
-        intent.putExtra("nome", usuario.getNome())
-        intent.putExtra("nascimento", usuario.getNascimento())
-        intent.putExtra("plano", usuario.getPlano())
-        intent.putExtra("vencimento", usuario.getVencimento())
-        intent.putExtra("cidade", usuario.getCidade())
-        intent.putExtra("rua", usuario.getRua())
-        intent.putExtra("numero", usuario.getNumero())
-        intent.putExtra("bairro", usuario.getBairro())
-        intent.putExtra("estado", usuario.getEstado())
-        intent.putExtra("login", usuario.getLogin())
-        intent.putExtra("cod", usuario.cod)
+        intent.putExtra("usuario", usuario)
 
-        // Exibe a Snackbar antes de iniciar a próxima atividade
-        Snackbar.make(
-            findViewById(android.R.id.content),
-            "Usuário autenticado",
-            Snackbar.LENGTH_SHORT
-        ).setBackgroundTint(ContextCompat.getColor(this, R.color.azulAnil))
-            .addCallback(object : Snackbar.Callback() {
-                override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
-                    // A Snackbar foi dispensada (usuário a viu), então agora inicie a próxima atividade
-                    startActivity(intent)
-                    finish()
+        startActivity(intent)
 
-                    // Atualize os dados no SharedPreferences após iniciar a próxima atividade
-                    val editor = sharedPreferences.edit()
-                    editor.putString("nome", usuario.getNome())
-                    editor.putString("nascimento", usuario.getNascimento())
-                    editor.putString("plano", usuario.getPlano())
-                    editor.putString("cidade", usuario.getCidade())
-                    editor.putString("vencimento", usuario.getVencimento())
-                    editor.putString("rua", usuario.getRua())
-                    editor.putString("numero", usuario.getNumero())
-                    editor.putString("bairro", usuario.getBairro())
-                    editor.putString("estado", usuario.getEstado())
-                    editor.putString("login", usuario.getLogin())
-                    editor.apply()
-                }
-            }).show()
+
+
     }
 
 
