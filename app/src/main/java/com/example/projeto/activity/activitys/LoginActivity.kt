@@ -26,6 +26,7 @@ import com.example.projeto.activity.classes.RetrofitService
 import com.example.projeto.activity.interfaces.ServiceLogin
 import com.example.projeto.databinding.ActivityLoginBinding
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.delay
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -36,6 +37,7 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var serviceLogin: ServiceLogin
     private lateinit var binding: ActivityLoginBinding
+    private var usuario: Usuario? = null
 
 
 
@@ -48,7 +50,6 @@ class LoginActivity : AppCompatActivity() {
         serviceLogin = RetrofitService.getRetrofitInstance()
             .create(ServiceLogin::class.java)
 
-        sharedPreferences = getSharedPreferences("db", MODE_PRIVATE)
 
 
         funcaoBotoes()
@@ -124,9 +125,9 @@ class LoginActivity : AppCompatActivity() {
                         if (response.isSuccessful) {
                             response.body()?.let {
                                 //   val sharedPreferences = getSharedPreferences("db", MODE_PRIVATE)
-                                val editor = sharedPreferences.edit()
-                                editor.putBoolean("logado", true)
-                                editor.apply()
+                               // val editor = sharedPreferences.edit()
+                               // editor.putBoolean("logado", true)
+                               // editor.apply()
 
                                 if (it.cpf == "vazio") {
                                     progressBar.visibility = View.GONE
@@ -135,14 +136,17 @@ class LoginActivity : AppCompatActivity() {
                                     exibeSnackBar(false)
                                 } else {
 
-                                    // Mensangem
-                                    exibeSnackBar(true)
-                                    // Dados que seram enviados para ClienteActivity
-                                    dadosActivity(it)
-                                    progressBar.visibility = View.VISIBLE
                                     botaoVisibilidade.visibility = View.INVISIBLE
+                                    progressBar.visibility = View.VISIBLE
+                                    exibeSnackBar(true)
+                                    val intent = Intent(this@LoginActivity, ClienteActivity::class.java)
+                                    intent.putExtra("usuario", it)
+                                    startActivity(intent)
+                                    // Dados que seram enviados para ClienteActivity
+
 
                                     limpaCampos()
+                                    
                                 }
                             }
                         }
@@ -154,18 +158,7 @@ class LoginActivity : AppCompatActivity() {
         } else {
             showNoInternetSnackbar()
         }
-
     }
-    private fun dadosActivity(usuario: Usuario) {
-        val intent = Intent(this@LoginActivity, ClienteActivity::class.java)
-        intent.putExtra("usuario", usuario)
-
-        startActivity(intent)
-
-
-
-    }
-
 
     private fun exibeSnackBar(respostaServidor: Boolean) {
         if (respostaServidor) {

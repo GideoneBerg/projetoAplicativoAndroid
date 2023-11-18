@@ -125,12 +125,13 @@ class ClienteActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         val lancamentos = response.body()
                         if (lancamentos.isNullOrEmpty()) {
-                            exibeSnackBar(false)
+
+
                         } else {
                             val intent = Intent(this@ClienteActivity, FaturasEmAberto::class.java)
                             intent.putParcelableArrayListExtra("lancamentos", ArrayList(lancamentos))
                             startActivity(intent)
-                            exibeSnackBar(true)
+
                         }
                     }
                 }
