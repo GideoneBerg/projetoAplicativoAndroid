@@ -17,9 +17,13 @@ class Usuario {
     private var estado: String? = null
     var cod: String? = null
     var mensagem: String = ""
-    var login: String? = null
+    private var login: String? = null
 
+    fun getLogin(): String? = login
 
+    fun setLogin(login: String) {
+        this.login = login
+    }
 
     fun getCpf(): String? = cpf
     fun setCpf(cpf: String) {

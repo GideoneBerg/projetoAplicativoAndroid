@@ -49,45 +49,9 @@ class LoginActivity : AppCompatActivity() {
             .create(ServiceLogin::class.java)
 
         sharedPreferences = getSharedPreferences("db", MODE_PRIVATE)
-        handler = Handler(Looper.getMainLooper())
-        startUserStatusTimer()
+
 
         funcaoBotoes()
-    }
-
-    private fun startUserStatusTimer() {
-        handler.postDelayed({
-            // Usuário inativo por 5 minutos (300,000 milissegundos)
-            val inactivityThreshold = 300000
-            val lastActiveTime = sharedPreferences.getLong("lastActiveTime", 0)
-
-            if (System.currentTimeMillis() - lastActiveTime >= inactivityThreshold) {
-                // Usuário inativo, realiza o logout
-                logoutUser()
-            } else {
-                // Usuário ainda está ativo, continua o timer
-                startUserStatusTimer()
-            }
-        }, 1000) // Executa a verificação a cada 1 segundo (pode ajustar conforme necessário)
-    }
-
-    private fun resetUserStatus() {
-        // Atualiza o tempo de atividade do usuário
-        val editor = sharedPreferences.edit()
-        editor.putLong("lastActiveTime", System.currentTimeMillis())
-        editor.apply()
-    }
-
-    private fun logoutUser() {
-        // Implemente as ações necessárias para realizar o logout aqui
-        // Por exemplo, limpe os dados do SharedPreferences e redirecione para a tela de login
-        val editor = sharedPreferences.edit()
-        editor.putBoolean("logado", false)
-        editor.apply()
-
-        val intent = Intent(this, LoginActivity::class.java)
-        startActivity(intent)
-        finish()
     }
 
 
@@ -214,7 +178,7 @@ class LoginActivity : AppCompatActivity() {
         intent.putExtra("numero", usuario.getNumero())
         intent.putExtra("bairro", usuario.getBairro())
         intent.putExtra("estado", usuario.getEstado())
-        intent.putExtra("login", usuario.login)
+        intent.putExtra("login", usuario.getLogin())
         intent.putExtra("cod", usuario.cod)
 
         // Exibe a Snackbar antes de iniciar a próxima atividade
@@ -240,6 +204,7 @@ class LoginActivity : AppCompatActivity() {
                     editor.putString("numero", usuario.getNumero())
                     editor.putString("bairro", usuario.getBairro())
                     editor.putString("estado", usuario.getEstado())
+                    editor.putString("login", usuario.getLogin())
                     editor.apply()
                 }
             }).show()
@@ -324,15 +289,5 @@ class LoginActivity : AppCompatActivity() {
         snackbar.show()
     }
 
-    override fun onResume() {
-        super.onResume()
-        resetUserStatus()
-        startUserStatusTimer()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        handler.removeCallbacksAndMessages(null)
-    }
 
 }

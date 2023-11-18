@@ -39,6 +39,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         String bairro = prefs.getString("bairro", "");
         String numero = prefs.getString("numero", "");
         String estado = prefs.getString("estado", "");
+        String login = prefs.getString("login", "");
         if(logado){
             Intent intent = new Intent(SplashScreenActivity.this, ClienteActivity.class);
             intent.putExtra("nascimento", nascimento);
@@ -50,6 +51,7 @@ public class SplashScreenActivity extends AppCompatActivity {
             intent.putExtra("bairro", bairro);
             intent.putExtra("estado", estado);
             intent.putExtra("nome", nomeUsuario);
+            intent.putExtra("login", login);
             startActivity(intent);
 
         }   else {
