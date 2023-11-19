@@ -22,7 +22,9 @@ import android.widget.Button
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import com.example.projeto.R
+import com.example.projeto.activity.classes.ClienteViewModel
 import com.example.projeto.activity.classes.RetrofitService
 
 import com.example.projeto.activity.interfaces.ServiceLogin
@@ -44,6 +46,7 @@ class LoginActivity : AppCompatActivity() {
 
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -52,6 +55,9 @@ class LoginActivity : AppCompatActivity() {
 
         serviceLogin = RetrofitService.getRetrofitInstance()
             .create(ServiceLogin::class.java)
+
+
+
 
 
 
@@ -126,7 +132,8 @@ class LoginActivity : AppCompatActivity() {
 
                     override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
                         if (response.isSuccessful) {
-                            response.body()?.let {
+                            usuario = response.body()
+                            response.body()?.let { it ->
                                 //   val sharedPreferences = getSharedPreferences("db", MODE_PRIVATE)
                                // val editor = sharedPreferences.edit()
                                // editor.putBoolean("logado", true)
@@ -141,12 +148,18 @@ class LoginActivity : AppCompatActivity() {
 
                                     botaoVisibilidade.visibility = View.INVISIBLE
                                     progressBar.visibility = View.VISIBLE
+
+                                    val clienteViewModel = ViewModelProvider(this@LoginActivity).get(ClienteViewModel::class.java)
+                                    usuario?.let { clienteViewModel.setCliente(it) }
+
+
                                     exibeSnackBar(true)
                                     Handler(Looper.getMainLooper()).postDelayed({
                                         val intent = Intent(this@LoginActivity, ClienteActivity::class.java)
+                                        intent.putExtra("usuario", it)
                                         val user = it
                                         DataHolder.userData = user
-                                        intent.putExtra("usuario", it)
+
                                         startActivity(intent)
                                     }, 1000)
 

@@ -26,6 +26,7 @@ class FaturasEmAberto : AppCompatActivity() {
 
         faturasAdapter = FaturasAdapter(lancamentos)
         rvLista.adapter = faturasAdapter
+
         rvLista.layoutManager = LinearLayoutManager(this)
 
     }
