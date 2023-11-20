@@ -2,7 +2,7 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Usuario(
+data class Usuario (
     var cpf: String? = null,
     var cpfCnpj: String? = null,
     var senha: String? = null,

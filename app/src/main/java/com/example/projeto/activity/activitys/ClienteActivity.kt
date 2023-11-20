@@ -4,23 +4,25 @@ import Usuario
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
-import androidx.annotation.RequiresApi
+
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.projeto.R
+
 import com.example.projeto.activity.classes.Lancamento
 import com.example.projeto.activity.classes.RetrofitService
+import com.example.projeto.activity.classes.UsuarioViewModel
 
 import com.example.projeto.activity.interfaces.ServiceLancamentos
-import com.example.projeto.activity.model.DataHolderLancamento
 
 import com.example.projeto.activity.webView.WebSpeedTestActivity
 import com.example.projeto.databinding.ActivityClienteBinding
@@ -33,8 +35,10 @@ class ClienteActivity : AppCompatActivity() {
 
     private lateinit var serviceLancamentos: ServiceLancamentos
     private lateinit var binding: ActivityClienteBinding
+    private val usuario: Usuario? = null
 
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityClienteBinding.inflate(layoutInflater)
@@ -50,18 +54,19 @@ class ClienteActivity : AppCompatActivity() {
         dadosAPI()
 
     }
-
-
     @SuppressLint("SetTextI18n")
     private fun dadosAPI() {
 
-        val usuario = intent.getParcelableExtra<Usuario>("usuario")
+       val usuario = intent.getParcelableExtra<Usuario>("usuario")
+
+
 
 
         if(usuario != null){
-            binding.textViewNome.text = usuario.nome
+
             binding.plano.text = usuario.plano?.replace("_", " ")
             binding.vencimento.text = usuario.vencimento
+            binding.textViewNome.text = usuario.nome
         }
 
         // Botao criado para exibição de dados do cliente usando popup
@@ -78,7 +83,7 @@ class ClienteActivity : AppCompatActivity() {
             // Personaliza o estilo do popup
             dialog.window?.setBackgroundDrawableResource(R.drawable.backgroud_popup)
 
-            // dados do cliente no popup
+           //  dados do cliente no popup
             val nome = dialogLayout.findViewById<TextView>(R.id.nome)
             nome.text = "Nome: ${usuario?.nome}"
 
@@ -94,7 +99,7 @@ class ClienteActivity : AppCompatActivity() {
             val bairro = dialogLayout.findViewById<TextView>(R.id.bairro)
             bairro.text = "Bairro: ${usuario?.bairro}"
 
-            // Fechar o popup quando o botão "OK" é clicado
+             //Fechar o popup quando o botão "OK" é clicado
 
             val buttonOk = dialogLayout.findViewById<Button>(R.id.button_ok)
             buttonOk.setOnClickListener {
@@ -130,8 +135,6 @@ class ClienteActivity : AppCompatActivity() {
 
                         } else {
                             val intent = Intent(this@ClienteActivity, FaturasEmAberto::class.java)
-                            val userList = lancamentos
-                            DataHolderLancamento.userList = userList
                             intent.putParcelableArrayListExtra("lancamentos", ArrayList(lancamentos))
                             startActivity(intent)
 

@@ -5,7 +5,6 @@ import Usuario
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 
@@ -24,28 +23,22 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.projeto.R
-import com.example.projeto.activity.classes.ClienteViewModel
+
 import com.example.projeto.activity.classes.RetrofitService
+import com.example.projeto.activity.classes.UsuarioViewModel
 
 import com.example.projeto.activity.interfaces.ServiceLogin
-import com.example.projeto.activity.model.DataHolder
 import com.example.projeto.databinding.ActivityLoginBinding
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.coroutines.delay
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 
 class LoginActivity : AppCompatActivity() {
-    private lateinit var sharedPreferences: SharedPreferences
 
     private lateinit var serviceLogin: ServiceLogin
     private lateinit var binding: ActivityLoginBinding
-    private var usuario: Usuario? = null
-
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,11 +48,6 @@ class LoginActivity : AppCompatActivity() {
 
         serviceLogin = RetrofitService.getRetrofitInstance()
             .create(ServiceLogin::class.java)
-
-
-
-
-
 
         funcaoBotoes()
     }
@@ -132,14 +120,9 @@ class LoginActivity : AppCompatActivity() {
 
                     override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
                         if (response.isSuccessful) {
-                            usuario = response.body()
-                            response.body()?.let { it ->
-                                //   val sharedPreferences = getSharedPreferences("db", MODE_PRIVATE)
-                               // val editor = sharedPreferences.edit()
-                               // editor.putBoolean("logado", true)
-                               // editor.apply()
+                          var usuario = response.body()
 
-                                if (it.cpf == "vazio") {
+                                if (usuario?.cpf == "vazio") {
                                     progressBar.visibility = View.GONE
                                     botaoVisibilidade.visibility = View.VISIBLE
 
@@ -149,17 +132,11 @@ class LoginActivity : AppCompatActivity() {
                                     botaoVisibilidade.visibility = View.INVISIBLE
                                     progressBar.visibility = View.VISIBLE
 
-                                    val clienteViewModel = ViewModelProvider(this@LoginActivity).get(ClienteViewModel::class.java)
-                                    usuario?.let { clienteViewModel.setCliente(it) }
-
 
                                     exibeSnackBar(true)
                                     Handler(Looper.getMainLooper()).postDelayed({
                                         val intent = Intent(this@LoginActivity, ClienteActivity::class.java)
-                                        intent.putExtra("usuario", it)
-                                        val user = it
-                                        DataHolder.userData = user
-
+                                        intent.putExtra("usuario", usuario)
                                         startActivity(intent)
                                     }, 1000)
 
@@ -169,7 +146,7 @@ class LoginActivity : AppCompatActivity() {
                                     limpaCampos()
                                     
                                 }
-                            }
+
                         }
                     }
                 })
