@@ -14,6 +14,10 @@ import com.example.projeto.activity.classes.Lancamento
 
 import com.example.projeto.databinding.ActivityEscolhaPagamentoBinding
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class EscolhaPagamento : AppCompatActivity() {
 
@@ -42,7 +46,15 @@ class EscolhaPagamento : AppCompatActivity() {
             val clipBoard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
             val clip = ClipData.newPlainText("Chave do Boleto", codigo)
             clipBoard.setPrimaryClip(clip)
-            snackBar("Chave do boleto copiada")
+            CoroutineScope(Dispatchers.Main).launch {
+                binding.copiarCodBarras.text = "Chave Copiada"
+
+                delay(3000)
+
+                binding.copiarCodBarras.text = "Copiar"
+            }
+
+
 
         }
 
