@@ -40,6 +40,8 @@ public class GeradorQRActivity extends AppCompatActivity {
     }
 
     private void gerarQRCode() {
+
+
         String texto = editText_qrcode.getText().toString();
         MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
         try {

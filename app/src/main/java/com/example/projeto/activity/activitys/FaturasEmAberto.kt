@@ -3,6 +3,8 @@ package com.example.projeto.activity.activitys
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+
 import androidx.annotation.RequiresApi
 
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,19 +30,25 @@ class FaturasEmAberto : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-
-
         lancamentos = intent.getParcelableArrayListExtra("lancamentos", Lancamento::class.java) ?: emptyList()
-        rvLista = findViewById(R.id.rv_lista)
 
-        val tamanhoLista = lancamentos.size.toString()
+        if (lancamentos.isNotEmpty()){
 
-        binding.sizeList.text = tamanhoLista
+            val tamanhoLista = lancamentos.size.toString()
+            binding.sizeList.text = tamanhoLista
 
-        faturasAdapter = FaturasAdapter(lancamentos)
-        rvLista.adapter = faturasAdapter
+            faturasAdapter = FaturasAdapter(lancamentos)
+            rvLista.adapter = faturasAdapter
 
-        rvLista.layoutManager = LinearLayoutManager(this)
+            rvLista.layoutManager = LinearLayoutManager(this)
+
+        } else {
+            binding.mensagemTextView.visibility = View.VISIBLE
+            binding.rvLista.visibility = View.GONE
+
+        }
+
+
 
     }
 }

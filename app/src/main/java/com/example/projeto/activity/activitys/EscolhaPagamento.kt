@@ -1,19 +1,22 @@
 package com.example.projeto.activity.activitys
 
+
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.graphics.Bitmap
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.projeto.R
 import com.example.projeto.activity.classes.Lancamento
-
-
 import com.example.projeto.databinding.ActivityEscolhaPagamentoBinding
 import com.google.android.material.snackbar.Snackbar
+import com.google.zxing.BarcodeFormat
+import com.google.zxing.MultiFormatWriter
+import com.google.zxing.WriterException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -48,24 +51,52 @@ class EscolhaPagamento : AppCompatActivity() {
             clipBoard.setPrimaryClip(clip)
             CoroutineScope(Dispatchers.Main).launch {
                 binding.copiarCodBarras.text = "Chave Copiada"
-
-                delay(3000)
-
+                delay(2000)
                 binding.copiarCodBarras.text = "Copiar"
             }
-
-
-
         }
 
+       binding.buttonGerarPix.setOnClickListener {
+           gerarQRCode()
+       }
     }
 
     private fun snackBar(mensagem: String) {
+
         Snackbar.make(
             findViewById(android.R.id.content),
             mensagem,
             Snackbar.LENGTH_SHORT
         ).setBackgroundTint(ContextCompat.getColor(this, R.color.azulAnil))
             .show()
+    }
+
+    private fun gerarQRCode() {
+        val textQRcode = binding.textqrCode.text
+        val ivQRCode = binding.ivqrCode
+
+        if (textQRcode.isNotEmpty()){
+            val texto: String = textQRcode.toString()
+            val multiFormatWriter = MultiFormatWriter()
+            try {
+                val bitMatrix = multiFormatWriter.encode(texto, BarcodeFormat.QR_CODE, 600, 600)
+                val width = bitMatrix.width
+                val height = bitMatrix.height
+                val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+                for (x in 0 until width) {
+                    for (y in 0 until height) {
+                        bitmap.setPixel(x, y, if (bitMatrix[x, y]) -0x1000000 else -0x1)
+                    }
+                }
+                ivQRCode.setImageBitmap(bitmap)
+            } catch (e: WriterException) {
+                e.printStackTrace()
+            }
+
+        } else {
+            snackBar("Campos vazios")
+        }
+
+
     }
 }

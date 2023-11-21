@@ -38,7 +38,6 @@ class FaturasAdapter(private val faturasList: List<Lancamento>) :
         // Configure os TextViews ou outros elementos de layout conforme necessário
         holder.cardView.setOnClickListener{
 
-
             val intent = Intent(holder.itemView.context, EscolhaPagamento::class.java).apply {
                 putExtra("key", lancamento)
             }
