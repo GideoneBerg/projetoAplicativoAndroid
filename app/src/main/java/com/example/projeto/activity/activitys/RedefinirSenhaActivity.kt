@@ -9,8 +9,7 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.projeto.R
-import com.example.projeto.activity.classes.ResetPassword
-import com.example.projeto.activity.classes.RetrofitService
+import com.example.projeto.activity.model.RetrofitService
 import com.example.projeto.activity.interfaces.ServiceResetPassword
 import com.example.projeto.databinding.ActivityRedefinirSenhaBinding
 import retrofit2.Call

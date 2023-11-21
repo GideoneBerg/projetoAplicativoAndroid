@@ -10,7 +10,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.example.projeto.R
-import com.example.projeto.activity.classes.RetrofitService
+import com.example.projeto.activity.model.RetrofitService
 
 import com.example.projeto.activity.interfaces.ServiceFirstAccess
 import com.example.projeto.databinding.ActivityPrimeiroAcessoBinding

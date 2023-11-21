@@ -1,4 +1,4 @@
-package com.example.projeto.activity.classes
+package com.example.projeto.activity.model
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

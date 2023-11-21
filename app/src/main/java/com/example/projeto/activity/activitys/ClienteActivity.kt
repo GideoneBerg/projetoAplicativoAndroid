@@ -4,12 +4,14 @@ import Usuario
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -19,10 +21,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.projeto.R
 
 import com.example.projeto.activity.classes.Lancamento
-import com.example.projeto.activity.classes.RetrofitService
+import com.example.projeto.activity.model.RetrofitService
 import com.example.projeto.activity.classes.UsuarioViewModel
 
 import com.example.projeto.activity.interfaces.ServiceLancamentos
+import com.example.projeto.activity.model.DadosSingleton
 
 import com.example.projeto.activity.webView.WebSpeedTestActivity
 import com.example.projeto.databinding.ActivityClienteBinding
@@ -35,10 +38,9 @@ class ClienteActivity : AppCompatActivity() {
 
     private lateinit var serviceLancamentos: ServiceLancamentos
     private lateinit var binding: ActivityClienteBinding
-    private val usuario: Usuario? = null
+    //private val usuario: Usuario? = null
 
-
-
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityClienteBinding.inflate(layoutInflater)
@@ -52,62 +54,57 @@ class ClienteActivity : AppCompatActivity() {
         botoesScroll()
         // Dados do cliente
         dadosAPI()
-
     }
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     @SuppressLint("SetTextI18n")
     private fun dadosAPI() {
 
-       val usuario = intent.getParcelableExtra<Usuario>("usuario")
-
-
-
-
-        if(usuario != null){
+       val usuario = intent.getParcelableExtra("usuario", Usuario::class.java)
+        if(usuario != null) {
 
             binding.plano.text = usuario.plano?.replace("_", " ")
             binding.vencimento.text = usuario.vencimento
             binding.textViewNome.text = usuario.nome
-        }
 
-        // Botao criado para exibição de dados do cliente usando popup
-        binding.maisDados.setOnClickListener {
+            // Botao criado para exibição de dados do cliente usando popup
+            binding.maisDados.setOnClickListener {
 
-            val builder = AlertDialog.Builder(this)
+                val builder = AlertDialog.Builder(this)
 //             builder.setTitle("Dados do Cliente")
 
-            val inflater = layoutInflater
-            val dialogLayout = inflater.inflate(R.layout.popup, null)
-            builder.setView(dialogLayout)
+                val inflater = layoutInflater
+                val dialogLayout = inflater.inflate(R.layout.popup, null)
+                builder.setView(dialogLayout)
 
-            val dialog = builder.create()
-            // Personaliza o estilo do popup
-            dialog.window?.setBackgroundDrawableResource(R.drawable.backgroud_popup)
+                val dialog = builder.create()
+                // Personaliza o estilo do popup
+                dialog.window?.setBackgroundDrawableResource(R.drawable.backgroud_popup)
 
-           //  dados do cliente no popup
-            val nome = dialogLayout.findViewById<TextView>(R.id.nome)
-            nome.text = "Nome: ${usuario?.nome}"
+                //  dados do cliente no popup
+                val nome = dialogLayout.findViewById<TextView>(R.id.nome)
+                nome.text = "Nome: ${usuario.nome}"
 
-            val ruaCliente = dialogLayout.findViewById<TextView>(R.id.endereco)
-            ruaCliente.text = "End: ${usuario?.rua}, n° ${usuario?.numero}"
+                val ruaCliente = dialogLayout.findViewById<TextView>(R.id.endereco)
+                ruaCliente.text = "End: ${usuario.rua}, n° ${usuario.numero}"
 
-            val cidadeAtual = dialogLayout.findViewById<TextView>(R.id.cidade)
-            cidadeAtual.text = "Cidade: ${usuario?.cidade}, ${usuario?.estado}"
+                val cidadeAtual = dialogLayout.findViewById<TextView>(R.id.cidade)
+                cidadeAtual.text = "Cidade: ${usuario.cidade}, ${usuario.estado}"
 
-            val nasc = dialogLayout.findViewById<TextView>(R.id.nascimento)
-            nasc.text = "Nascimento: ${usuario?.nascimento}"
+                val nasc = dialogLayout.findViewById<TextView>(R.id.nascimento)
+                nasc.text = "Nascimento: ${usuario.nascimento}"
 
-            val bairro = dialogLayout.findViewById<TextView>(R.id.bairro)
-            bairro.text = "Bairro: ${usuario?.bairro}"
+                val bairro = dialogLayout.findViewById<TextView>(R.id.bairro)
+                bairro.text = "Bairro: ${usuario.bairro}"
 
-             //Fechar o popup quando o botão "OK" é clicado
+                //Fechar o popup quando o botão "OK" é clicado
 
-            val buttonOk = dialogLayout.findViewById<Button>(R.id.button_ok)
-            buttonOk.setOnClickListener {
-                dialog.dismiss()
+                val buttonOk = dialogLayout.findViewById<Button>(R.id.button_ok)
+                buttonOk.setOnClickListener {
+                    dialog.dismiss()
+                }
+                dialog.show()
             }
-            dialog.show()
         }
-
     }
 
     private fun botoesScroll() {

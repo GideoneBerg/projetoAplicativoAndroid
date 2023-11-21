@@ -9,7 +9,7 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.example.projeto.R
-import com.example.projeto.activity.classes.RetrofitService
+import com.example.projeto.activity.model.RetrofitService
 import com.example.projeto.activity.interfaces.ServiceClientRequest
 import com.example.projeto.databinding.ActivitySolicitacaoClienteBinding
 import com.google.android.material.snackbar.Snackbar

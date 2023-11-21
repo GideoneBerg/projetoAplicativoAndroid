@@ -7,7 +7,6 @@ import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
@@ -21,13 +20,10 @@ import android.widget.Button
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
 import com.example.projeto.R
-
-import com.example.projeto.activity.classes.RetrofitService
-import com.example.projeto.activity.classes.UsuarioViewModel
-
+import com.example.projeto.activity.model.RetrofitService
 import com.example.projeto.activity.interfaces.ServiceLogin
+import com.example.projeto.activity.model.DadosSingleton
 import com.example.projeto.databinding.ActivityLoginBinding
 import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
@@ -120,33 +116,30 @@ class LoginActivity : AppCompatActivity() {
 
                     override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
                         if (response.isSuccessful) {
-                          var usuario = response.body()
-
+                          val usuario = response.body()
+                                  DadosSingleton.usuario = usuario
                                 if (usuario?.cpf == "vazio") {
                                     progressBar.visibility = View.GONE
                                     botaoVisibilidade.visibility = View.VISIBLE
 
                                     exibeSnackBar(false)
                                 } else {
-
                                     botaoVisibilidade.visibility = View.INVISIBLE
                                     progressBar.visibility = View.VISIBLE
-
 
                                     exibeSnackBar(true)
                                     Handler(Looper.getMainLooper()).postDelayed({
                                         val intent = Intent(this@LoginActivity, ClienteActivity::class.java)
                                         intent.putExtra("usuario", usuario)
                                         startActivity(intent)
+                                        finish()
                                     }, 1000)
 
                                     // Dados que seram enviados para ClienteActivity
 
 
                                     limpaCampos()
-                                    
                                 }
-
                         }
                     }
                 })
@@ -157,7 +150,6 @@ class LoginActivity : AppCompatActivity() {
             showNoInternetSnackbar()
         }
     }
-
     private fun exibeSnackBar(respostaServidor: Boolean) {
         if (respostaServidor) {
             Snackbar.make(
@@ -176,18 +168,14 @@ class LoginActivity : AppCompatActivity() {
                 .show()
         }
     }
-
     private fun limpaCampos() {
         binding.editTextCpfCnpj.setText("")
         binding.editTextSenha.setText("")
-
     }
-
     private fun openUrl(url: String) {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         startActivity(intent)
     }
-
     @SuppressLint("MissingPermission")
     private fun isNetworkAvailable(): Boolean {
         val connectivityManager =
@@ -198,7 +186,6 @@ class LoginActivity : AppCompatActivity() {
                 (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ||
                         capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR))
     }
-
     private fun snackBar(mensagem: String) {
         if (mensagem == "Ops! Campos vazios") {
 
@@ -217,9 +204,7 @@ class LoginActivity : AppCompatActivity() {
             ).setBackgroundTint(ContextCompat.getColor(this, R.color.rosa))
                 .show()
         }
-
     }
-
     private fun showNoInternetSnackbar() {
         val snackbar = Snackbar.make(
             findViewById(android.R.id.content),

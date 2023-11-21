@@ -21,6 +21,7 @@ class FaturasAdapter(private val faturasList: List<Lancamento>) :
         val textStatusFatura: TextView = itemView.findViewById(R.id.statusFatura)
         val textTitulo: TextView = itemView.findViewById(R.id.id_fatura)
 
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -36,9 +37,13 @@ class FaturasAdapter(private val faturasList: List<Lancamento>) :
         val lancamento = faturasList[position]
         // Configure os TextViews ou outros elementos de layout conforme necessário
         holder.cardView.setOnClickListener{
-            val intent = Intent(holder.itemView.context, EscolhaPagamento::class.java)
-            intent.putExtra("linhadig", lancamento.linhadig)
+
+
+            val intent = Intent(holder.itemView.context, EscolhaPagamento::class.java).apply {
+                putExtra("key", lancamento)
+            }
             holder.itemView.context.startActivity(intent)
+
         }
 
         holder.textValor.text = "R$ ${lancamento.valor}"
@@ -51,13 +56,6 @@ class FaturasAdapter(private val faturasList: List<Lancamento>) :
         // Retorne o número de faturas na lista
         return faturasList.size
     }
-
-//    fun atualizarFaturas(novaLista: List<Lancamento>) {
-//        // Atualize a lista de faturas e notifique o RecyclerView
-//        faturasList.clear()
-//        faturasList.addAll(novaLista)
-//        notifyDataSetChanged()
-//    }
 
 }
 

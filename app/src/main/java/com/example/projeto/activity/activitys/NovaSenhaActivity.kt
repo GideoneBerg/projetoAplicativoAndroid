@@ -7,12 +7,10 @@ import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.view.View
 import android.widget.Button
-import android.widget.EditText
-import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.projeto.R
-import com.example.projeto.activity.classes.RetrofitService
+import com.example.projeto.activity.model.RetrofitService
 import com.example.projeto.activity.interfaces.ServiceNewPassword
 import com.example.projeto.databinding.ActivityNovaSenhaBinding
 import retrofit2.Call
