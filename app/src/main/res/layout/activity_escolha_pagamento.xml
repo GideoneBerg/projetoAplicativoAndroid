@@ -149,9 +149,9 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/abel"
                 android:text="Pagamento via PIX"
+                android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -194,6 +194,18 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/copiarCodBarras"
+        android:layout_width="114dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/background_botao1"
+        android:text="Copiar"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/card_barras" />
 
     <ImageView
         android:id="@+id/ivQRCode"
