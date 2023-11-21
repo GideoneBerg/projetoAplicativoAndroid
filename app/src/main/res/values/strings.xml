@@ -17,7 +17,7 @@
     <string name="cpf_cnpj">CPF/CNPJ</string>
     <string name="senha">Senha</string>
     <string name="ajuda">Como podemos ajudar?</string>
-    <string name="pagamento_pix">Pagamento\nPix</string>
+    <string name="financeiro">Financeiro\n</string>
     <string name="vencimento">Vencimento</string>
     <string name="planoAtual">Plano Atual</string>
     <string name="plano">Plano</string>

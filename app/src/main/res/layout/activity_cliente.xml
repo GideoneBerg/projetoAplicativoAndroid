@@ -120,6 +120,8 @@
                             android:textColor="@color/white"
                             android:textSize="14sp" />
 
+
+
                         <TextView
                             android:id="@+id/valor"
                             android:layout_width="wrap_content"
@@ -132,42 +134,6 @@
                             android:textStyle="bold" />
                     </LinearLayout>
 
-                    <!-- Novo LinearLayout para os botões à direita -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="end"
-                        android:orientation="vertical">
-
-                        <!-- Adicione seus botões aqui -->
-                        <Button
-                            android:id="@+id/btnPagarFatura"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:background="@drawable/background_botao_menu_cliente"
-                            android:fontFamily="sans-serif-condensed"
-                            android:padding="10dp"
-                            android:text="@string/pagarFatura"
-                            android:textAllCaps="true"
-                            android:textColor="@color/white"
-                            android:textSize="13sp" />
-
-                        <Button
-                            android:id="@+id/verFaturas"
-                            android:layout_width="100dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:background="@drawable/background_botao_menu_cliente"
-                            android:fontFamily="sans-serif-condensed"
-                            android:padding="10dp"
-                            android:text="Ver Faturas"
-                            android:textAllCaps="true"
-                            android:textColor="@color/white"
-                            android:textSize="13sp" />
-
-
-                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -247,7 +213,7 @@
                     android:textSize="12sp" />
 
                 <Button
-                    android:id="@+id/pagamento_pix"
+                    android:id="@+id/financeiro"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -261,7 +227,7 @@
                     android:paddingRight="10dp"
                     android:paddingBottom="30dp"
                     android:shadowRadius="0"
-                    android:text="@string/pagamento_pix"
+                    android:text="@string/financeiro"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textColor="@color/white"

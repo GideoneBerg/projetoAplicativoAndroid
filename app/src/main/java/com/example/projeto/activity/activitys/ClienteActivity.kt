@@ -26,6 +26,8 @@ import com.example.projeto.activity.classes.UsuarioViewModel
 
 import com.example.projeto.activity.interfaces.ServiceLancamentos
 import com.example.projeto.activity.model.DadosSingleton
+import com.example.projeto.activity.model.DadosSingleton.usuario
+import com.example.projeto.activity.model.DataLancSingleton
 
 import com.example.projeto.activity.webView.WebSpeedTestActivity
 import com.example.projeto.databinding.ActivityClienteBinding
@@ -49,6 +51,9 @@ class ClienteActivity : AppCompatActivity() {
 
         serviceLancamentos = RetrofitService.getRetrofitInstance()
             .create(ServiceLancamentos::class.java)
+
+
+
 
         // Ação dos botões
         botoesScroll()
@@ -113,9 +118,8 @@ class ClienteActivity : AppCompatActivity() {
 
         val usuario = intent.getParcelableExtra<Usuario>("usuario")
 
-        binding.btnPagarFatura.setOnClickListener {
+        binding.financeiro.setOnClickListener {
             val login = usuario?.login
-
              serviceLancamentos.getLancamentos(login!!).enqueue(object :
                 Callback<List<Lancamento>> {
                 override fun onFailure(call: Call<List<Lancamento>>, t: Throwable) {
@@ -128,7 +132,6 @@ class ClienteActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         val lancamentos = response.body()
                         if (lancamentos.isNullOrEmpty()) {
-
 
                         } else {
                             val intent = Intent(this@ClienteActivity, FaturasEmAberto::class.java)
@@ -191,11 +194,6 @@ class ClienteActivity : AppCompatActivity() {
             val intent = Intent(this, PdfActivity::class.java)
             startActivity(intent)
         }
-
-        binding.pagamentoPix.setOnClickListener {
-            val intent = Intent(this, GeradorQRActivity::class.java)
-            startActivity(intent)
-        }
     }
 
     private fun realizarLogout() {
@@ -246,5 +244,7 @@ class ClienteActivity : AppCompatActivity() {
                 .show()
         }
     }
+
+
 
 }
