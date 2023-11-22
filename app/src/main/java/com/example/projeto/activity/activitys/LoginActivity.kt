@@ -22,10 +22,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.projeto.R
 import com.example.projeto.activity.classes.Lancamento
+import com.example.projeto.activity.classes.Pix
 import com.example.projeto.activity.interfaces.ServiceLancamentos
 import com.example.projeto.activity.model.RetrofitService
 import com.example.projeto.activity.interfaces.ServiceLogin
-import com.example.projeto.activity.model.DadosSingleton
+import com.example.projeto.activity.interfaces.ServicePix
 import com.example.projeto.databinding.ActivityLoginBinding
 import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
@@ -38,20 +39,25 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var serviceLogin: ServiceLogin
     private lateinit var binding: ActivityLoginBinding
     private lateinit var serviceLancamentos: ServiceLancamentos
+    private lateinit var servicePix: ServicePix
     var lancamentos: List<Lancamento> = emptyList()
+    var uuidLanc : String? = ""
+    var lancamentoPix: List<Pix> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
+        // chamada login
         serviceLogin = RetrofitService.getRetrofitInstance()
             .create(ServiceLogin::class.java)
-
+        // chamada faturas
         serviceLancamentos = RetrofitService.getRetrofitInstance()
             .create(ServiceLancamentos::class.java)
-
+        //chamadas Pix
+        servicePix = RetrofitService.getRetrofitInstance()
+            .create(ServicePix::class.java)
 
         funcaoBotoes()
     }
@@ -124,7 +130,10 @@ class LoginActivity : AppCompatActivity() {
 
                     override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
                         if (response.isSuccessful) {
-                          val usuario = response.body()
+
+                            val usuario = response.body()
+
+
                             if (usuario?.cpf == "vazio") {
                                 progressBar.visibility = View.GONE
                                 botaoVisibilidade.visibility = View.VISIBLE
@@ -132,11 +141,9 @@ class LoginActivity : AppCompatActivity() {
                                 exibeSnackBar(false)
                             } else {
 
-
                                 if (usuario != null) {
                                     usuario.login?.let { chamadaLancamentos(it) }
                                 }
-
 
                                 botaoVisibilidade.visibility = View.INVISIBLE
                                 progressBar.visibility = View.VISIBLE
@@ -144,8 +151,9 @@ class LoginActivity : AppCompatActivity() {
                                 exibeSnackBar(true)
                                 Handler(Looper.getMainLooper()).postDelayed({
                                     val intent = Intent(this@LoginActivity, ClienteActivity::class.java)
-                                    intent.putParcelableArrayListExtra("lancamentos", ArrayList(lancamentos))
                                     intent.putExtra("usuario", usuario)
+                                    intent.putParcelableArrayListExtra("lancamentos", ArrayList(lancamentos))
+                                    intent.putParcelableArrayListExtra("pix", ArrayList(lancamentoPix))
                                     startActivity(intent)
                                     finish()
                                 }, 1000)
@@ -165,10 +173,7 @@ class LoginActivity : AppCompatActivity() {
             showNoInternetSnackbar()
         }
     }
-
     private fun chamadaLancamentos(login: String){
-
-
 
         serviceLancamentos.getLancamentos(login).enqueue(object :
             Callback<List<Lancamento>> {
@@ -179,17 +184,56 @@ class LoginActivity : AppCompatActivity() {
 
             }
             override fun onResponse(call: Call<List<Lancamento>>, response: Response<List<Lancamento>>) {
+
                 if (response.isSuccessful) {
                     lancamentos = response.body()!!
+
                     if (lancamentos.isNullOrEmpty()) {
 
                     } else {
+
+                        lancamentos.forEach { lancamento ->
+                            uuidLanc = lancamento.uuid_lanc
+                            uuidLanc?.let { chamadaPix(it) }
+                        }
 
 
                     }
                 }
             }
         })
+
+    }
+    private fun chamadaPix(uuidLanc: String){
+
+        servicePix.getPix(uuidLanc).enqueue(object :
+        Callback <List<Pix>>{
+            override fun onFailure(call: Call <List<Pix>>, t: Throwable) {
+                Log.d("Erro", t.toString())
+                snackBar("Tivemos um problema. Tente novamente mais tarde.")
+            }
+
+            override fun onResponse(call: Call <List<Pix>>, response: Response <List<Pix>>) {
+                if(response.isSuccessful){
+                   lancamentoPix = response.body()!!
+                    if (lancamentoPix.isNullOrEmpty()){
+                        Log.i("ErroPix","Erro: $lancamentoPix")
+                    }
+
+                    lancamentoPix.forEach {
+                        it.qrcode
+                    }
+
+
+
+                    Log.i("Sucesso"," $lancamentoPix")
+
+                }
+            }
+        })
+
+
+
 
     }
     private fun exibeSnackBar(respostaServidor: Boolean) {
