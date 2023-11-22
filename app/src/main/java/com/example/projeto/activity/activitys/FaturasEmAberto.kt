@@ -30,8 +30,7 @@ class FaturasEmAberto : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-
-        lancamentos = intent.getParcelableArrayListExtra("lancamentos", Lancamento::class.java) ?: emptyList()
+       lancamentos = intent.getParcelableArrayListExtra("lancamentos", Lancamento::class.java) ?: emptyList()
 
         if (lancamentos.isNotEmpty()){
             rvLista = findViewById(R.id.rv_lista)

@@ -38,9 +38,8 @@ import retrofit2.Response
 
 class ClienteActivity : AppCompatActivity() {
 
-    private lateinit var serviceLancamentos: ServiceLancamentos
     private lateinit var binding: ActivityClienteBinding
-    //private val usuario: Usuario? = null
+    private var lancamentos: List<Lancamento> = emptyList()
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,11 +48,7 @@ class ClienteActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        serviceLancamentos = RetrofitService.getRetrofitInstance()
-            .create(ServiceLancamentos::class.java)
-
-
-
+        lancamentos = intent.getParcelableArrayListExtra("lancamentos", Lancamento::class.java)?: emptyList()
 
         // Ação dos botões
         botoesScroll()
@@ -112,36 +107,15 @@ class ClienteActivity : AppCompatActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     private fun botoesScroll() {
 
         val extras = intent.extras ?: return
 
-        val usuario = intent.getParcelableExtra<Usuario>("usuario")
-
         binding.financeiro.setOnClickListener {
-            val login = usuario?.login
-             serviceLancamentos.getLancamentos(login!!).enqueue(object :
-                Callback<List<Lancamento>> {
-                override fun onFailure(call: Call<List<Lancamento>>, t: Throwable) {
-                    // registra informações de erro
-                    Log.d("Erro", t.toString())
-                          snackBar("Tivemos um problema. Tente novamente mais tarde.")
-
-                }
-                override fun onResponse(call: Call<List<Lancamento>>, response: Response<List<Lancamento>>) {
-                    if (response.isSuccessful) {
-                        val lancamentos = response.body()
-                        if (lancamentos.isNullOrEmpty()) {
-
-                        } else {
-                            val intent = Intent(this@ClienteActivity, FaturasEmAberto::class.java)
-                            intent.putParcelableArrayListExtra("lancamentos", ArrayList(lancamentos))
-                            startActivity(intent)
-
-                        }
-                    }
-                }
-            })
+            val intent = Intent(this@ClienteActivity, FaturasEmAberto::class.java)
+            intent.putParcelableArrayListExtra("lancamentos", ArrayList(lancamentos))
+            startActivity(intent)
         }
 
         binding.solicitarServico.setOnClickListener {
@@ -244,7 +218,5 @@ class ClienteActivity : AppCompatActivity() {
                 .show()
         }
     }
-
-
 
 }

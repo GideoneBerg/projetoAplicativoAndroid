@@ -21,6 +21,8 @@ import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.projeto.R
+import com.example.projeto.activity.classes.Lancamento
+import com.example.projeto.activity.interfaces.ServiceLancamentos
 import com.example.projeto.activity.model.RetrofitService
 import com.example.projeto.activity.interfaces.ServiceLogin
 import com.example.projeto.activity.model.DadosSingleton
@@ -35,6 +37,8 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var serviceLogin: ServiceLogin
     private lateinit var binding: ActivityLoginBinding
+    private lateinit var serviceLancamentos: ServiceLancamentos
+    var lancamentos: List<Lancamento> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +48,10 @@ class LoginActivity : AppCompatActivity() {
 
         serviceLogin = RetrofitService.getRetrofitInstance()
             .create(ServiceLogin::class.java)
+
+        serviceLancamentos = RetrofitService.getRetrofitInstance()
+            .create(ServiceLancamentos::class.java)
+
 
         funcaoBotoes()
     }
@@ -117,29 +125,36 @@ class LoginActivity : AppCompatActivity() {
                     override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
                         if (response.isSuccessful) {
                           val usuario = response.body()
-                                  DadosSingleton.usuario = usuario
-                                if (usuario?.cpf == "vazio") {
-                                    progressBar.visibility = View.GONE
-                                    botaoVisibilidade.visibility = View.VISIBLE
+                            if (usuario?.cpf == "vazio") {
+                                progressBar.visibility = View.GONE
+                                botaoVisibilidade.visibility = View.VISIBLE
 
-                                    exibeSnackBar(false)
-                                } else {
-                                    botaoVisibilidade.visibility = View.INVISIBLE
-                                    progressBar.visibility = View.VISIBLE
-
-                                    exibeSnackBar(true)
-                                    Handler(Looper.getMainLooper()).postDelayed({
-                                        val intent = Intent(this@LoginActivity, ClienteActivity::class.java)
-                                        intent.putExtra("usuario", usuario)
-                                        startActivity(intent)
-                                        finish()
-                                    }, 1000)
-
-                                    // Dados que seram enviados para ClienteActivity
+                                exibeSnackBar(false)
+                            } else {
 
 
-                                    limpaCampos()
+                                if (usuario != null) {
+                                    usuario.login?.let { chamadaLancamentos(it) }
                                 }
+
+
+                                botaoVisibilidade.visibility = View.INVISIBLE
+                                progressBar.visibility = View.VISIBLE
+
+                                exibeSnackBar(true)
+                                Handler(Looper.getMainLooper()).postDelayed({
+                                    val intent = Intent(this@LoginActivity, ClienteActivity::class.java)
+                                    intent.putParcelableArrayListExtra("lancamentos", ArrayList(lancamentos))
+                                    intent.putExtra("usuario", usuario)
+                                    startActivity(intent)
+                                    finish()
+                                }, 1000)
+
+                                // Dados que seram enviados para ClienteActivity
+
+
+                                limpaCampos()
+                            }
                         }
                     }
                 })
@@ -149,6 +164,33 @@ class LoginActivity : AppCompatActivity() {
         } else {
             showNoInternetSnackbar()
         }
+    }
+
+    private fun chamadaLancamentos(login: String){
+
+
+
+        serviceLancamentos.getLancamentos(login).enqueue(object :
+            Callback<List<Lancamento>> {
+            override fun onFailure(call: Call<List<Lancamento>>, t: Throwable) {
+                // registra informações de erro
+                Log.d("Erro", t.toString())
+                snackBar("Tivemos um problema. Tente novamente mais tarde.")
+
+            }
+            override fun onResponse(call: Call<List<Lancamento>>, response: Response<List<Lancamento>>) {
+                if (response.isSuccessful) {
+                    lancamentos = response.body()!!
+                    if (lancamentos.isNullOrEmpty()) {
+
+                    } else {
+
+
+                    }
+                }
+            }
+        })
+
     }
     private fun exibeSnackBar(respostaServidor: Boolean) {
         if (respostaServidor) {
