@@ -13,6 +13,7 @@ import com.example.projeto.R
 import com.example.projeto.activity.classes.FaturasAdapter
 import com.example.projeto.activity.classes.Lancamento
 import com.example.projeto.activity.classes.Pix
+import com.example.projeto.activity.classes.QRCodeData
 import com.example.projeto.databinding.ActivityEscolhaPagamentoBinding
 import com.example.projeto.databinding.ActivityFaturasEmAbertoBinding
 
@@ -21,7 +22,7 @@ class FaturasEmAberto : AppCompatActivity() {
     private lateinit var rvLista: RecyclerView
     private lateinit var faturasAdapter: FaturasAdapter
     private var lancamentos: List<Lancamento> = emptyList()
-    private var lancamentoPix: List<Pix> = emptyList()
+    private var qrCodeDataList: List<QRCodeData> = emptyList()
 
     private val binding  by lazy {
         ActivityFaturasEmAbertoBinding.inflate(layoutInflater)
@@ -33,14 +34,15 @@ class FaturasEmAberto : AppCompatActivity() {
         setContentView(binding.root)
 
        lancamentos = intent.getParcelableArrayListExtra("lancamentos", Lancamento::class.java) ?: emptyList()
-     //   lancamentoPix = intent.getParcelableArrayListExtra("pix", Pix::class.java)?: emptyList()
+       // lancamentoPix = intent.getParcelableArrayListExtra("pix", Pix::class.java)?: emptyList()
+        qrCodeDataList = intent.getParcelableArrayListExtra("qrCode", QRCodeData::class.java)?: emptyList()
     // && lancamentoPix.isNotEmpty()
-        if (lancamentos.isNotEmpty()){
+        if (lancamentos.isNotEmpty() && qrCodeDataList.isNotEmpty()){
             rvLista = findViewById(R.id.rv_lista)
             val tamanhoLista = lancamentos.size.toString()
             binding.sizeList.text = tamanhoLista
             // , lancamentoPix
-            faturasAdapter = FaturasAdapter(lancamentos)
+            faturasAdapter = FaturasAdapter(lancamentos, qrCodeDataList)
             rvLista.adapter = faturasAdapter
 
             rvLista.layoutManager = LinearLayoutManager(this)
@@ -48,10 +50,6 @@ class FaturasEmAberto : AppCompatActivity() {
         } else {
             binding.mensagemTextView.visibility = View.VISIBLE
             binding.rvLista.visibility = View.GONE
-
         }
-
-
-
     }
 }

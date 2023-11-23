@@ -10,9 +10,9 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projeto.R
 import com.example.projeto.activity.activitys.EscolhaPagamento
-// , private val faturasPix: List<Pix>
 
-class FaturasAdapter(private val faturasList: List<Lancamento>) :
+
+class FaturasAdapter(private val faturasList: List<Lancamento> , private val faturasPix: List<QRCodeData>) :
     RecyclerView.Adapter<FaturasAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -20,7 +20,7 @@ class FaturasAdapter(private val faturasList: List<Lancamento>) :
         val textValor: TextView = itemView.findViewById(R.id.valor)
         val textVencimento: TextView = itemView.findViewById(R.id.vencimento)
         val textStatusFatura: TextView = itemView.findViewById(R.id.statusFatura)
-        val textTitulo: TextView = itemView.findViewById(R.id.id_fatura)
+
 
 
     }
@@ -36,8 +36,8 @@ class FaturasAdapter(private val faturasList: List<Lancamento>) :
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         // Atualize os elementos de layout com os dados da fatura
-        val lancamento = faturasList[position]
-       // val lancamentoPix = faturasPix.getOrNull(position)
+        val lancamento = faturasList.getOrNull(position)
+        val lancamentoPix = faturasPix.getOrNull(position)
 
 
             // Configure os TextViews ou outros elementos de layout conforme necessário
@@ -45,7 +45,7 @@ class FaturasAdapter(private val faturasList: List<Lancamento>) :
 
                 val intent = Intent(holder.itemView.context, EscolhaPagamento::class.java).apply {
                     putExtra("key", lancamento)
-                  //  putExtra("pix", lancamentoPix)
+                    putExtra("pix", lancamentoPix)
                 }
                 holder.itemView.context.startActivity(intent)
 
@@ -54,7 +54,7 @@ class FaturasAdapter(private val faturasList: List<Lancamento>) :
             holder.textValor.text = "R$ ${lancamento?.valor}"
             holder.textVencimento.text = "Vence em ${lancamento?.datavenc}"
             holder.textStatusFatura.text = lancamento?.status
-            holder.textTitulo.text = lancamento?.titulo
+
 
     }
 
@@ -63,7 +63,7 @@ class FaturasAdapter(private val faturasList: List<Lancamento>) :
        // faturasPix.size
 
         // Retorne o número de faturas na lista
-         return faturasList.size
+         return maxOf(faturasList.size, faturasPix.size)
     }
 
 }

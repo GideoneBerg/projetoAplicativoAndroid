@@ -16,24 +16,22 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.example.projeto.R
 
 import com.example.projeto.activity.classes.Lancamento
 import com.example.projeto.activity.classes.Pix
+import com.example.projeto.activity.classes.QRCodeData
 import com.example.projeto.activity.model.RetrofitService
-import com.example.projeto.activity.classes.UsuarioViewModel
 
-import com.example.projeto.activity.interfaces.ServiceLancamentos
 import com.example.projeto.activity.interfaces.ServicePix
-import com.example.projeto.activity.model.DadosSingleton
-import com.example.projeto.activity.model.DadosSingleton.usuario
-import com.example.projeto.activity.model.DataLancSingleton
 
 import com.example.projeto.activity.webView.WebSpeedTestActivity
 import com.example.projeto.databinding.ActivityClienteBinding
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -43,6 +41,7 @@ class ClienteActivity : AppCompatActivity() {
     private lateinit var binding: ActivityClienteBinding
     private var lancamentos: List<Lancamento> = emptyList()
     private var lancamentoPix: List<Pix> = emptyList()
+    private val qrCodeDataList = mutableListOf<QRCodeData>()
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,7 +55,8 @@ class ClienteActivity : AppCompatActivity() {
             .create(ServicePix::class.java)
 
         lancamentos = intent.getParcelableArrayListExtra("lancamentos", Lancamento::class.java)?: emptyList()
- //       lancamentoPix = intent.getParcelableArrayListExtra("pix", Pix::class.java)?: emptyList()
+        lancamentoPix = intent.getParcelableArrayListExtra("pix", Pix::class.java)?: emptyList()
+        chamadaPix()
 
         // Ação dos botões
         botoesScroll()
@@ -123,7 +123,8 @@ class ClienteActivity : AppCompatActivity() {
         binding.financeiro.setOnClickListener {
             val intent = Intent(this@ClienteActivity, FaturasEmAberto::class.java)
             intent.putParcelableArrayListExtra("lancamentos", ArrayList(lancamentos))
-         //   intent.putParcelableArrayListExtra("pix", ArrayList(lancamentoPix))
+            intent.putParcelableArrayListExtra("pix", ArrayList(lancamentoPix))
+            intent.putParcelableArrayListExtra("qrCode", ArrayList(qrCodeDataList))
             startActivity(intent)
         }
 
@@ -176,30 +177,54 @@ class ClienteActivity : AppCompatActivity() {
 
     }
 
-    private fun chamadaPix(uuidLanc: String){
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    private fun chamadaPix() {
+        lancamentos = intent.getParcelableArrayListExtra("lancamentos", Lancamento::class.java) ?: emptyList()
+        val uuidLanc = mutableListOf<String>()
 
-        servicePix.getPix(uuidLanc).enqueue(object :
-            Callback <List<Pix>>{
-            override fun onFailure(call: Call <List<Pix>>, t: Throwable) {
-                Log.d("Erro", t.toString())
-                snackBar("Tivemos um problema. Tente novamente mais tarde.")
+        lancamentos.forEach {
+            it.uuid_lanc?.let { uuid ->
+                uuidLanc.add(uuid)
             }
+        }
 
-            override fun onResponse(call: Call <List<Pix>>, response: Response <List<Pix>>) {
-                if(response.isSuccessful){
-                    lancamentoPix = response.body()!!
-                    if (lancamentoPix.isNullOrEmpty()){
-                        Log.i("ErroPix","Erro: $lancamentoPix")
-                    }
-                    lancamentoPix.forEach {
-                        it.qrcode
-                    }
-                    Log.i("Sucesso"," $lancamentoPix")
+        if (uuidLanc.isNotEmpty()) {
+            val coroutineScope = CoroutineScope(Dispatchers.Main)
 
+            coroutineScope.launch {
+
+
+                for (uuid in uuidLanc) {
+                    try {
+                        val response = withContext(Dispatchers.IO) {
+                            servicePix.getPix(uuid).execute()
+                        }
+
+                        if (response.isSuccessful) {
+                            lancamentoPix = response.body()!!
+                            if (lancamentoPix.isNullOrEmpty()) {
+                                Log.i("ErroPix", "Erro: $lancamentoPix")
+                            }
+
+                            lancamentoPix.forEach {
+                                it.qrcode?.let { it1 -> QRCodeData(it1) }
+                                    ?.let { it2 -> qrCodeDataList.add(it2) }
+                            }
+
+                            Log.i("Sucesso", " $lancamentoPix")
+                        }
+                    } catch (e: Exception) {
+                        Log.e("Erro", e.toString())
+                        snackBar("Tivemos um problema. Tente novamente mais tarde.")
+                    }
                 }
             }
-        })
+        }
     }
+
+
+
+
 
     private fun realizarLogout() {
 

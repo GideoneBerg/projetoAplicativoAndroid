@@ -11,7 +11,7 @@
         android:id="@+id/imageView11"
         android:layout_width="219dp"
         android:layout_height="123dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -19,8 +19,8 @@
 
     <View
         android:id="@+id/view2"
-        android:layout_width="413dp"
-        android:layout_height="485dp"
+        android:layout_width="0dp"
+        android:layout_height="490dp"
         android:layout_marginTop="400dp"
         android:background="@drawable/objeto15"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -60,6 +60,7 @@
                 android:text="Fatura Disponível"
                 android:textSize="16sp"
                 android:textStyle="bold"
+                android:textColor="@color/azulAnil"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -71,7 +72,8 @@
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/abel"
                 android:text="Vence em 10/06/2023"
-                android:textSize="11sp"
+                android:textColor="@color/azulAnil"
+                android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -86,6 +88,7 @@
                 android:text="R$ 49,99"
                 android:textSize="18sp"
                 android:textStyle="bold"
+                android:textColor="@color/azulAnil"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/vencimento" />
 
@@ -105,20 +108,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/id_fatura"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/background_botao_planos"
-                android:padding="10dp"
-                android:text="2544"
-                android:textAllCaps="true"
-                android:textColor="@color/white"
-                android:textSize="13sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
@@ -128,7 +117,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
         app:cardCornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -149,7 +138,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/abel"
                 android:text="Pagamento via PIX"
-                android:textColor="@color/black"
+                android:textColor="@color/azulAnil"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -167,12 +156,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         app:cardCornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView13">
+        app:layout_constraintTop_toBottomOf="@+id/btnGerarPix">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -186,7 +175,43 @@
                 android:fontFamily="@font/abel"
                 android:text="Código de barras"
                 android:textSize="16sp"
+                android:textColor="@color/azulAnil"
                 android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardqrCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView13">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/pixCopiaCola"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/abel"
+                android:text="PIX"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/azulAnil"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -199,7 +224,7 @@
         android:id="@+id/copiarCodBarras"
         android:layout_width="114dp"
         android:layout_height="50dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/background_botao1"
         android:text="Copiar"
         android:textColor="@color/white"
@@ -224,42 +249,23 @@
         android:id="@+id/imageView13"
         android:layout_width="275dp"
         android:layout_height="271dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/card_pix"
         app:srcCompat="@drawable/objeto3" />
 
-    <EditText
-        android:id="@+id/textqrCode"
-        android:layout_width="278dp"
-        android:layout_height="51dp"
-        android:layout_marginTop="128dp"
-        android:background="@drawable/background_texto1"
-        android:elevation="3sp"
-        android:hint="Informe a palavra para codificação"
-        android:inputType="textPersonName"
-        android:padding="10dp"
-        android:textColor="@color/azulAnil"
-        android:textColorHint="@color/azulAnil"
-        app:layout_constraintBottom_toTopOf="@+id/buttonGerarPix"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.954" />
-
     <Button
-        android:id="@+id/buttonGerarPix"
+        android:id="@+id/btnGerarPix"
         android:layout_width="114dp"
         android:layout_height="50dp"
-        android:layout_marginTop="776dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/background_botao1"
-        android:text="QR Code"
+        android:text="Copiar Pix"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/cardqrCode" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

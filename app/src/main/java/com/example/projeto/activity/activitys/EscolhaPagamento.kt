@@ -1,10 +1,10 @@
 package com.example.projeto.activity.activitys
 
-
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import androidx.annotation.RequiresApi
@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.projeto.R
 import com.example.projeto.activity.classes.Lancamento
-import com.example.projeto.activity.classes.Pix
+import com.example.projeto.activity.classes.QRCodeData
 import com.example.projeto.databinding.ActivityEscolhaPagamentoBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.zxing.BarcodeFormat
@@ -25,24 +25,24 @@ import kotlinx.coroutines.launch
 
 class EscolhaPagamento : AppCompatActivity() {
 
-    private val binding  by lazy {
+    private val binding by lazy {
         ActivityEscolhaPagamentoBinding.inflate(layoutInflater)
     }
+
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
         val lancamento = intent.getParcelableExtra("key", Lancamento::class.java)
-     //   val lancamentoPix = intent.getParcelableExtra("pix", Pix::class.java)
-        if(lancamento != null){
-            binding.idFatura.text = lancamento.titulo
+        //   val lancamentoPix = intent.getParcelableExtra("pix", Pix::class.java)
+        if (lancamento != null) {
             binding.statusFatura.text = lancamento.status
             binding.valor.text = lancamento.valor
             binding.vencimento.text = lancamento.datavenc
             binding.codigo.text = lancamento.linhadig
-
         }
+        gerarQRCode()
 
         val btnCopiarBoleto = binding.copiarCodBarras
         val codigo = binding.codigo.text.toString()
@@ -57,10 +57,19 @@ class EscolhaPagamento : AppCompatActivity() {
                 binding.copiarCodBarras.text = "Copiar"
             }
         }
+        val btnGerarPix = binding.btnGerarPix
+        val codigoPix = binding.pixCopiaCola.text.toString()
 
-       binding.buttonGerarPix.setOnClickListener {
-           gerarQRCode()
-       }
+        btnGerarPix.setOnClickListener {
+            val clipBoard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            val clip = ClipData.newPlainText("Chave Pix", codigoPix)
+            clipBoard.setPrimaryClip(clip)
+            CoroutineScope(Dispatchers.Main).launch {
+                binding.btnGerarPix.text = "Pix Copiado"
+                delay(2000)
+                binding.btnGerarPix.text = "Copiar Pix"
+            }
+        }
     }
 
     private fun snackBar(mensagem: String) {
@@ -75,25 +84,26 @@ class EscolhaPagamento : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     private fun gerarQRCode() {
-        var lancamentoPix = intent.getParcelableExtra("pix", Pix::class.java)
+        var lancamentoPix = intent.getParcelableExtra("pix", QRCodeData::class.java)
 
-      //  lancamentoPix.qrcode
+        //  lancamentoPix.qrcode
 
+        binding.pixCopiaCola.text = lancamentoPix?.qrcode
 
-        //val textQRcode = binding.textqrCode.text
         val ivQRCode = binding.ivqrCode
 
-        if (lancamentoPix != null){
-            val texto: String = lancamentoPix.qrcode.toString()
+        if (lancamentoPix != null) {
+            val texto: String = lancamentoPix.qrcode
             val multiFormatWriter = MultiFormatWriter()
             try {
                 val bitMatrix = multiFormatWriter.encode(texto, BarcodeFormat.QR_CODE, 600, 600)
                 val width = bitMatrix.width
                 val height = bitMatrix.height
                 val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+                val color = ContextCompat.getColor(this, R.color.azulMarinho)
                 for (x in 0 until width) {
                     for (y in 0 until height) {
-                        bitmap.setPixel(x, y, if (bitMatrix[x, y]) -0x1000000 else -0x1)
+                        bitmap.setPixel(x, y, if (bitMatrix[x, y]) color else Color.TRANSPARENT)
                     }
                 }
                 ivQRCode.setImageBitmap(bitmap)
