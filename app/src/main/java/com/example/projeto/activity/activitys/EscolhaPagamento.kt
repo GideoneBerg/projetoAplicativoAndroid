@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.projeto.R
 import com.example.projeto.activity.classes.Lancamento
+import com.example.projeto.activity.classes.Pix
 import com.example.projeto.databinding.ActivityEscolhaPagamentoBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.zxing.BarcodeFormat
@@ -33,6 +34,7 @@ class EscolhaPagamento : AppCompatActivity() {
         setContentView(binding.root)
 
         val lancamento = intent.getParcelableExtra("key", Lancamento::class.java)
+     //   val lancamentoPix = intent.getParcelableExtra("pix", Pix::class.java)
         if(lancamento != null){
             binding.idFatura.text = lancamento.titulo
             binding.statusFatura.text = lancamento.status
@@ -71,12 +73,18 @@ class EscolhaPagamento : AppCompatActivity() {
             .show()
     }
 
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     private fun gerarQRCode() {
-        val textQRcode = binding.textqrCode.text
+        var lancamentoPix = intent.getParcelableExtra("pix", Pix::class.java)
+
+      //  lancamentoPix.qrcode
+
+
+        //val textQRcode = binding.textqrCode.text
         val ivQRCode = binding.ivqrCode
 
-        if (textQRcode.isNotEmpty()){
-            val texto: String = textQRcode.toString()
+        if (lancamentoPix != null){
+            val texto: String = lancamentoPix.qrcode.toString()
             val multiFormatWriter = MultiFormatWriter()
             try {
                 val bitMatrix = multiFormatWriter.encode(texto, BarcodeFormat.QR_CODE, 600, 600)

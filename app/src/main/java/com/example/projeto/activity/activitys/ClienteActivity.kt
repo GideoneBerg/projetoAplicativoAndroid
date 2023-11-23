@@ -21,10 +21,12 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.projeto.R
 
 import com.example.projeto.activity.classes.Lancamento
+import com.example.projeto.activity.classes.Pix
 import com.example.projeto.activity.model.RetrofitService
 import com.example.projeto.activity.classes.UsuarioViewModel
 
 import com.example.projeto.activity.interfaces.ServiceLancamentos
+import com.example.projeto.activity.interfaces.ServicePix
 import com.example.projeto.activity.model.DadosSingleton
 import com.example.projeto.activity.model.DadosSingleton.usuario
 import com.example.projeto.activity.model.DataLancSingleton
@@ -37,9 +39,10 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class ClienteActivity : AppCompatActivity() {
-
+    private lateinit var servicePix: ServicePix
     private lateinit var binding: ActivityClienteBinding
     private var lancamentos: List<Lancamento> = emptyList()
+    private var lancamentoPix: List<Pix> = emptyList()
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,7 +51,12 @@ class ClienteActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        //chamadas Pix
+        servicePix = RetrofitService.getRetrofitInstance()
+            .create(ServicePix::class.java)
+
         lancamentos = intent.getParcelableArrayListExtra("lancamentos", Lancamento::class.java)?: emptyList()
+ //       lancamentoPix = intent.getParcelableArrayListExtra("pix", Pix::class.java)?: emptyList()
 
         // Ação dos botões
         botoesScroll()
@@ -115,6 +123,7 @@ class ClienteActivity : AppCompatActivity() {
         binding.financeiro.setOnClickListener {
             val intent = Intent(this@ClienteActivity, FaturasEmAberto::class.java)
             intent.putParcelableArrayListExtra("lancamentos", ArrayList(lancamentos))
+         //   intent.putParcelableArrayListExtra("pix", ArrayList(lancamentoPix))
             startActivity(intent)
         }
 
@@ -165,6 +174,31 @@ class ClienteActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    private fun chamadaPix(uuidLanc: String){
+
+        servicePix.getPix(uuidLanc).enqueue(object :
+            Callback <List<Pix>>{
+            override fun onFailure(call: Call <List<Pix>>, t: Throwable) {
+                Log.d("Erro", t.toString())
+                snackBar("Tivemos um problema. Tente novamente mais tarde.")
+            }
+
+            override fun onResponse(call: Call <List<Pix>>, response: Response <List<Pix>>) {
+                if(response.isSuccessful){
+                    lancamentoPix = response.body()!!
+                    if (lancamentoPix.isNullOrEmpty()){
+                        Log.i("ErroPix","Erro: $lancamentoPix")
+                    }
+                    lancamentoPix.forEach {
+                        it.qrcode
+                    }
+                    Log.i("Sucesso"," $lancamentoPix")
+
+                }
+            }
+        })
     }
 
     private fun realizarLogout() {

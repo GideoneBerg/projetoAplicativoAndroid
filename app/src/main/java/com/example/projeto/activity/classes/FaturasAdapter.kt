@@ -10,6 +10,7 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projeto.R
 import com.example.projeto.activity.activitys.EscolhaPagamento
+// , private val faturasPix: List<Pix>
 
 class FaturasAdapter(private val faturasList: List<Lancamento>) :
     RecyclerView.Adapter<FaturasAdapter.ViewHolder>() {
@@ -31,29 +32,38 @@ class FaturasAdapter(private val faturasList: List<Lancamento>) :
         return ViewHolder(view)
     }
 
+
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         // Atualize os elementos de layout com os dados da fatura
         val lancamento = faturasList[position]
-        // Configure os TextViews ou outros elementos de layout conforme necessário
-        holder.cardView.setOnClickListener{
+       // val lancamentoPix = faturasPix.getOrNull(position)
 
-            val intent = Intent(holder.itemView.context, EscolhaPagamento::class.java).apply {
-                putExtra("key", lancamento)
+
+            // Configure os TextViews ou outros elementos de layout conforme necessário
+        holder.cardView.setOnClickListener {
+
+                val intent = Intent(holder.itemView.context, EscolhaPagamento::class.java).apply {
+                    putExtra("key", lancamento)
+                  //  putExtra("pix", lancamentoPix)
+                }
+                holder.itemView.context.startActivity(intent)
+
             }
-            holder.itemView.context.startActivity(intent)
 
-        }
+            holder.textValor.text = "R$ ${lancamento?.valor}"
+            holder.textVencimento.text = "Vence em ${lancamento?.datavenc}"
+            holder.textStatusFatura.text = lancamento?.status
+            holder.textTitulo.text = lancamento?.titulo
 
-        holder.textValor.text = "R$ ${lancamento.valor}"
-        holder.textVencimento.text = "Vence em ${lancamento.datavenc}"
-        holder.textStatusFatura.text = lancamento.status
-        holder.textTitulo.text = lancamento.titulo
     }
 
     override fun getItemCount(): Int {
+
+       // faturasPix.size
+
         // Retorne o número de faturas na lista
-        return faturasList.size
+         return faturasList.size
     }
 
 }

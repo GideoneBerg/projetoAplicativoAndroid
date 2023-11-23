@@ -39,7 +39,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var serviceLogin: ServiceLogin
     private lateinit var binding: ActivityLoginBinding
     private lateinit var serviceLancamentos: ServiceLancamentos
-    private lateinit var servicePix: ServicePix
+
     var lancamentos: List<Lancamento> = emptyList()
     var uuidLanc : String? = ""
     var lancamentoPix: List<Pix> = emptyList()
@@ -55,9 +55,7 @@ class LoginActivity : AppCompatActivity() {
         // chamada faturas
         serviceLancamentos = RetrofitService.getRetrofitInstance()
             .create(ServiceLancamentos::class.java)
-        //chamadas Pix
-        servicePix = RetrofitService.getRetrofitInstance()
-            .create(ServicePix::class.java)
+
 
         funcaoBotoes()
     }
@@ -133,7 +131,6 @@ class LoginActivity : AppCompatActivity() {
 
                             val usuario = response.body()
 
-
                             if (usuario?.cpf == "vazio") {
                                 progressBar.visibility = View.GONE
                                 botaoVisibilidade.visibility = View.VISIBLE
@@ -153,14 +150,11 @@ class LoginActivity : AppCompatActivity() {
                                     val intent = Intent(this@LoginActivity, ClienteActivity::class.java)
                                     intent.putExtra("usuario", usuario)
                                     intent.putParcelableArrayListExtra("lancamentos", ArrayList(lancamentos))
-                                    intent.putParcelableArrayListExtra("pix", ArrayList(lancamentoPix))
                                     startActivity(intent)
                                     finish()
                                 }, 1000)
 
                                 // Dados que seram enviados para ClienteActivity
-
-
                                 limpaCampos()
                             }
                         }
@@ -184,19 +178,12 @@ class LoginActivity : AppCompatActivity() {
 
             }
             override fun onResponse(call: Call<List<Lancamento>>, response: Response<List<Lancamento>>) {
-
                 if (response.isSuccessful) {
                     lancamentos = response.body()!!
-
                     if (lancamentos.isNullOrEmpty()) {
 
                     } else {
 
-                        lancamentos.forEach { lancamento ->
-                            uuidLanc = lancamento.uuid_lanc
-                            uuidLanc?.let { chamadaPix(it) }
-                        }
-
 
                     }
                 }
@@ -204,38 +191,7 @@ class LoginActivity : AppCompatActivity() {
         })
 
     }
-    private fun chamadaPix(uuidLanc: String){
 
-        servicePix.getPix(uuidLanc).enqueue(object :
-        Callback <List<Pix>>{
-            override fun onFailure(call: Call <List<Pix>>, t: Throwable) {
-                Log.d("Erro", t.toString())
-                snackBar("Tivemos um problema. Tente novamente mais tarde.")
-            }
-
-            override fun onResponse(call: Call <List<Pix>>, response: Response <List<Pix>>) {
-                if(response.isSuccessful){
-                   lancamentoPix = response.body()!!
-                    if (lancamentoPix.isNullOrEmpty()){
-                        Log.i("ErroPix","Erro: $lancamentoPix")
-                    }
-
-                    lancamentoPix.forEach {
-                        it.qrcode
-                    }
-
-
-
-                    Log.i("Sucesso"," $lancamentoPix")
-
-                }
-            }
-        })
-
-
-
-
-    }
     private fun exibeSnackBar(respostaServidor: Boolean) {
         if (respostaServidor) {
             Snackbar.make(
