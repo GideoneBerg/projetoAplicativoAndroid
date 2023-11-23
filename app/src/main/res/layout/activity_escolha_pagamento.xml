@@ -7,22 +7,12 @@
     android:background="@drawable/new_background"
     tools:context=".activity.activitys.EscolhaPagamento">
 
-    <ImageView
-        android:id="@+id/imageView11"
-        android:layout_width="219dp"
-        android:layout_height="123dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/img_qrcode" />
-
     <View
         android:id="@+id/view2"
-        android:layout_width="0dp"
-        android:layout_height="490dp"
+        android:layout_width="413dp"
+        android:layout_height="584dp"
         android:layout_marginTop="400dp"
-        android:background="@drawable/objeto15"
+        android:background="@drawable/objeto7"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -35,17 +25,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="750dp"
         android:layout_marginEnd="32dp"
+        android:elevation="5sp"
         app:cardCornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView11">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -58,9 +49,9 @@
                 android:layout_marginStart="8dp"
                 android:fontFamily="@font/abel"
                 android:text="Fatura Disponível"
+                android:textColor="@color/azulAnil"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="@color/azulAnil"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -86,9 +77,9 @@
                 android:layout_marginTop="8dp"
                 android:fontFamily="sans-serif-condensed"
                 android:text="R$ 49,99"
+                android:textColor="@color/azulAnil"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:textColor="@color/azulAnil"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/vencimento" />
 
@@ -98,6 +89,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/background_botao1"
+                android:elevation="5sp"
                 android:fontFamily="sans-serif-condensed"
                 android:padding="10dp"
                 android:text="@string/Aberto"
@@ -112,41 +104,33 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
+
+    <Button
+        android:id="@+id/copiarCodBarras"
+        android:layout_width="254dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/background_botao1"
+        android:text="Copiar Linha Digitável"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/card_barras" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/card_pix"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="284dp"
         android:layout_marginEnd="32dp"
         app:cardCornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView3">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <TextView
-                android:id="@+id/pix"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/abel"
-                android:text="Pagamento via PIX"
-                android:textColor="@color/azulAnil"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.cardview.widget.CardView>
@@ -156,10 +140,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="32dp"
         app:cardCornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnGerarPix">
 
@@ -174,8 +159,8 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/abel"
                 android:text="Código de barras"
-                android:textSize="16sp"
                 android:textColor="@color/azulAnil"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -185,15 +170,15 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
-
     <androidx.cardview.widget.CardView
         android:id="@+id/cardqrCode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginStart="65dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="65dp"
         app:cardCornerRadius="20dp"
+        android:outlineSpotShadowColor="@color/qmui_s_transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView13">
@@ -209,9 +194,9 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/abel"
                 android:text="PIX"
+                android:textColor="@color/azulAnil"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="@color/azulAnil"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -220,22 +205,10 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
-    <Button
-        android:id="@+id/copiarCodBarras"
-        android:layout_width="114dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/background_botao1"
-        android:text="Copiar"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/card_barras" />
-
     <ImageView
         android:id="@+id/ivqrCode"
-        android:layout_width="179dp"
-        android:layout_height="184dp"
+        android:layout_width="274dp"
+        android:layout_height="269dp"
         android:elevation="3sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView13"
         app:layout_constraintEnd_toEndOf="@+id/imageView13"
@@ -247,21 +220,22 @@
 
     <ImageView
         android:id="@+id/imageView13"
-        android:layout_width="275dp"
-        android:layout_height="271dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="288dp"
+        android:layout_height="290dp"
+        android:layout_marginTop="60dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/card_pix"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/objeto3" />
 
     <Button
         android:id="@+id/btnGerarPix"
-        android:layout_width="114dp"
-        android:layout_height="50dp"
+        android:layout_width="254dp"
+        android:layout_height="51dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/background_botao1"
         android:text="Copiar Pix"
+        android:textAllCaps="false"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
