@@ -164,10 +164,7 @@ class ClienteActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        binding.segundaVia.setOnClickListener {
-            val intent = Intent(this, PdfActivity::class.java)
-            startActivity(intent)
-        }
+
     }
 
     private fun realizarLogout() {

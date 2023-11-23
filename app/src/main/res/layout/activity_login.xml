@@ -154,34 +154,35 @@
         android:layout_width="wrap_content"
         android:layout_height="27dp"
         android:layout_gravity="center"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="12dp"
         android:elevation="2dp"
         android:fontFamily="@font/abel"
         android:text="@string/esqueceu_sua_senha"
         android:textAlignment="center"
-        android:textColor="@color/azulAnil"
+        android:textColor="@color/azulClaro"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.792"
+        app:layout_constraintHorizontal_bias="0.808"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnEntrar" />
+        app:layout_constraintTop_toBottomOf="@+id/txtPrimeiroAcesso" />
 
     <TextView
         android:id="@+id/txtPrimeiroAcesso"
-        android:layout_width="wrap_content"
-        android:layout_height="27dp"
+        android:layout_width="325dp"
+        android:layout_height="57dp"
         android:layout_gravity="center"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
+        android:padding="15dp"
+        android:background="@drawable/background_botaoprimeiroacesso"
         android:elevation="2dp"
         android:fontFamily="@font/abel"
         android:text="Primeiro Acesso?"
         android:textAlignment="center"
-        android:textColor="@color/azulAnil"
+        android:textColor="@color/white"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.792"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_esqueci_senha" />
+        app:layout_constraintTop_toBottomOf="@+id/btnEntrar" />
 
     <ProgressBar
         android:id="@+id/progressBar2"
@@ -201,7 +202,7 @@
         android:layout_width="wrap_content"
         android:layout_height="28dp"
         android:layout_gravity="center"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="68dp"
         android:elevation="2dp"
         android:fontFamily="sans-serif-light"
         android:text="@string/text_ajudaZap"
@@ -210,7 +211,7 @@
         android:textSize="18sp"
         app:drawableStartCompat="@drawable/whatsapp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.481"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtPrimeiroAcesso" />
 

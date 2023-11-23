@@ -11,9 +11,9 @@
 
     <TextView
         android:id="@+id/primeiroacesso"
-        android:layout_width="194dp"
+        android:layout_width="220dp"
         android:layout_height="45dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="80dp"
         android:elevation="3sp"
         android:fontFamily="@font/bebas_neue"
         android:text="Primeiro Acesso"
@@ -21,23 +21,38 @@
         android:textColor="@color/amarelo"
         android:textSize="35sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.56"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/primeirofrase"
+        android:layout_width="319dp"
+        android:layout_height="88dp"
+        android:layout_marginTop="32dp"
+        android:elevation="2dp"
+        android:fontFamily="@font/abel"
+        android:text="@string/primeiroTexto"
+        android:textAlignment="center"
+        android:textColor="@color/azulAnil"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.532"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+
     <View
         android:id="@+id/view2"
-        android:layout_width="413dp"
-        android:layout_height="485dp"
-        android:layout_marginTop="400dp"
-        android:background="@drawable/objeto15"
+        android:layout_width="409dp"
+        android:layout_height="544dp"
+        android:layout_marginTop="410dp"
+        android:background="@drawable/objeto7"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.41" />
-
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/imageView8"
@@ -54,7 +69,7 @@
         android:id="@+id/textCpfCnpj"
         android:layout_width="325dp"
         android:layout_height="57dp"
-        android:layout_marginTop="136dp"
+        android:layout_marginTop="168dp"
         android:background="@drawable/background_texto1"
         android:drawableStart="@drawable/baseline_person_24"
         android:drawablePadding="6dp"
@@ -73,12 +88,39 @@
         app:maskStyle="completable"
         tools:ignore="MissingConstraints" />
 
+    <ToggleButton
+        android:id="@+id/toggleButton"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/backgroud_mostra_ocultar_senha"
+        android:checked="false"
+        android:elevation="3dp"
+        android:textOff=""
+        android:textOn=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.844"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/txtNovaSenha" />
+
+    <Button
+        android:id="@+id/btnNovaSenha"
+        android:layout_width="151dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/background_toast"
+        android:text="@string/enviar"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtNovaSenha" />
+
     <EditText
         android:id="@+id/txtNovaSenha"
         android:layout_width="325dp"
         android:layout_height="57dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/background_texto1"
         android:ems="10"
@@ -89,37 +131,8 @@
         android:textColor="@color/azulAnil"
         android:textColorHint="@color/azulAnil"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textCpfCnpj" />
-
-    <ToggleButton
-        android:id="@+id/toggleButton"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginTop="18dp"
-        android:background="@drawable/backgroud_mostra_ocultar_senha"
-        android:checked="false"
-        android:elevation="3dp"
-        android:textOff=""
-        android:textOn=""
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.845"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/txtNovaSenha" />
-
-    <Button
-        android:id="@+id/btnNovaSenha"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/background_botao_fechar_popup"
-        android:text="@string/enviar"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtNovaSenha" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"

@@ -20,8 +20,8 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="347dp"
+            android:layout_height="97dp"
             android:layout_margin="5dp">
 
             <!-- Adicione seus botões aqui -->
@@ -35,6 +35,7 @@
                 android:layout_marginTop="8dp"
                 android:fontFamily="sans-serif-condensed"
                 android:text="@string/fatura_disponivel"
+                android:textColor="@color/azulMarinho"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -45,9 +46,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:fontFamily="sans-serif-condensed"
                 android:text="R$ 49,99"
+                android:textColor="@color/azulMarinho"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -58,23 +60,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="2dp"
                 android:fontFamily="sans-serif-condensed-light"
                 android:text="Vence em 10/06/2023"
+                android:textColor="@color/azulMarinho"
                 android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/text_nome" />
 
             <TextView
                 android:id="@+id/statusFatura"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="93dp"
+                android:layout_height="44dp"
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/background_botao1"
                 android:fontFamily="sans-serif-condensed"
                 android:padding="10dp"
                 android:text="@string/Aberto"
-                android:textAllCaps="false"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="@color/white"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"

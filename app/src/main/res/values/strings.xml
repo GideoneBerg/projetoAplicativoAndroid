@@ -17,7 +17,7 @@
     <string name="cpf_cnpj">CPF/CNPJ</string>
     <string name="senha">Senha</string>
     <string name="ajuda">Como podemos ajudar?</string>
-    <string name="financeiro">Financeiro\n</string>
+    <string name="financeiro">Apc Financeiro</string>
     <string name="vencimento">Vencimento</string>
     <string name="planoAtual">Plano Atual</string>
     <string name="plano">Plano</string>
@@ -188,5 +188,6 @@ cidade Paulista, CEP 53.425-430. Ao usar o Aplicativo, você concorda em cumprir
     <string name="msg_primeiroAcesso3">"Ops! CPF não localizado na base de dados."</string>
     <string name="msg_primeiroAcesso4">"Senha não pode estar em branco!"</string>
     <string name="conexao_internet">Sem conexão com a internet</string>
+    <string name="primeiroTexto">Seja Bem Vindo!\nEste é seu primeiro acesso aqui no aplicativo da APC - Tecnologia!</string>
 
 </resources>
