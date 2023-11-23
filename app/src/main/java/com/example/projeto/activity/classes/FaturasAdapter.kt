@@ -7,12 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.core.net.ParseException
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projeto.R
 import com.example.projeto.activity.activitys.EscolhaPagamento
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 
-class FaturasAdapter(private val faturasList: List<Lancamento> , private val faturasPix: List<QRCodeData>) :
+class FaturasAdapter(
+    private val faturasList: List<Lancamento>,
+    private val faturasPix: List<QRCodeData>
+) :
     RecyclerView.Adapter<FaturasAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -20,7 +26,6 @@ class FaturasAdapter(private val faturasList: List<Lancamento> , private val fat
         val textValor: TextView = itemView.findViewById(R.id.valor)
         val textVencimento: TextView = itemView.findViewById(R.id.vencimento)
         val textStatusFatura: TextView = itemView.findViewById(R.id.statusFatura)
-
 
 
     }
@@ -40,30 +45,50 @@ class FaturasAdapter(private val faturasList: List<Lancamento> , private val fat
         val lancamentoPix = faturasPix.getOrNull(position)
 
 
-            // Configure os TextViews ou outros elementos de layout conforme necessário
+        // Configure os TextViews ou outros elementos de layout conforme necessário
         holder.cardView.setOnClickListener {
 
-                val intent = Intent(holder.itemView.context, EscolhaPagamento::class.java).apply {
-                    putExtra("key", lancamento)
-                    putExtra("pix", lancamentoPix)
-                }
-                holder.itemView.context.startActivity(intent)
-
+            val intent = Intent(holder.itemView.context, EscolhaPagamento::class.java).apply {
+                putExtra("key", lancamento)
+                putExtra("pix", lancamentoPix)
             }
+            holder.itemView.context.startActivity(intent)
 
-            holder.textValor.text = "R$ ${lancamento?.valor}"
-            holder.textVencimento.text = "Vence em ${lancamento?.datavenc}"
-            holder.textStatusFatura.text = lancamento?.status
+        }
+
+
+
+        holder.textValor.text = "R$ ${lancamento?.valor}"
+
+        holder.textStatusFatura.text = lancamento?.status
+
+        val dataVencimento = lancamento?.datavenc?.let { formatarData(it) }
+        holder.textVencimento.text = "Vence em $dataVencimento"
+
+        holder.textStatusFatura.text = lancamento?.status
 
 
     }
 
     override fun getItemCount(): Int {
 
-       // faturasPix.size
+        // faturasPix.size
 
         // Retorne o número de faturas na lista
-         return maxOf(faturasList.size, faturasPix.size)
+        return maxOf(faturasList.size, faturasPix.size)
+    }
+
+    private fun formatarData(data: String): String {
+        val formatoBanco = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+        val formatoBrasileiro = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+
+        return try {
+            val dataFormatada: String = formatoBrasileiro.format(formatoBanco.parse(data))
+            dataFormatada
+        } catch (e: ParseException) {
+            e.printStackTrace()
+            ""
+        }
     }
 
 }

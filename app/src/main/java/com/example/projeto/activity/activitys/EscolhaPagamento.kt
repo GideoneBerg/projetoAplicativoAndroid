@@ -10,6 +10,7 @@ import android.os.Bundle
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.net.ParseException
 import com.example.projeto.R
 import com.example.projeto.activity.classes.Lancamento
 import com.example.projeto.activity.classes.QRCodeData
@@ -22,6 +23,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class EscolhaPagamento : AppCompatActivity() {
 
@@ -35,11 +39,26 @@ class EscolhaPagamento : AppCompatActivity() {
         setContentView(binding.root)
 
         val lancamento = intent.getParcelableExtra("key", Lancamento::class.java)
+
+        val formatoBanco = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+        val formatoDesejado = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+
+        try {
+            val dataBanco: Date? = lancamento?.datavenc?.let { formatoBanco.parse(it) }
+            val dataFormatada: String? = dataBanco?.let { formatoDesejado.format(it) }
+            binding.vencimento.text = dataFormatada
+        } catch (e: ParseException) {
+            e.printStackTrace()
+        }
+
+
         //   val lancamentoPix = intent.getParcelableExtra("pix", Pix::class.java)
         if (lancamento != null) {
+
+
             binding.statusFatura.text = lancamento.status
             binding.valor.text = lancamento.valor
-            binding.vencimento.text = lancamento.datavenc
+           // binding.vencimento.text = lancamento.datavenc
             binding.codigo.text = lancamento.linhadig
         }
         gerarQRCode()

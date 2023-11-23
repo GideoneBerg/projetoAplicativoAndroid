@@ -34,9 +34,9 @@ class FaturasEmAberto : AppCompatActivity() {
         setContentView(binding.root)
 
        lancamentos = intent.getParcelableArrayListExtra("lancamentos", Lancamento::class.java) ?: emptyList()
-       // lancamentoPix = intent.getParcelableArrayListExtra("pix", Pix::class.java)?: emptyList()
+
         qrCodeDataList = intent.getParcelableArrayListExtra("qrCode", QRCodeData::class.java)?: emptyList()
-    // && lancamentoPix.isNotEmpty()
+
         if (lancamentos.isNotEmpty() && qrCodeDataList.isNotEmpty()){
             rvLista = findViewById(R.id.rv_lista)
             val tamanhoLista = lancamentos.size.toString()
