@@ -46,19 +46,16 @@ class EscolhaPagamento : AppCompatActivity() {
         try {
             val dataBanco: Date? = lancamento?.datavenc?.let { formatoBanco.parse(it) }
             val dataFormatada: String? = dataBanco?.let { formatoDesejado.format(it) }
-            binding.vencimento.text = dataFormatada
+            binding.vencimento.text = "Vence em $dataFormatada"
         } catch (e: ParseException) {
             e.printStackTrace()
         }
 
-
         //   val lancamentoPix = intent.getParcelableExtra("pix", Pix::class.java)
         if (lancamento != null) {
-
-
-            binding.statusFatura.text = lancamento.status
+            val statusFormat = lancamento.status
+            binding.statusFatura.text = statusFormat?.uppercase()
             binding.valor.text = lancamento.valor
-           // binding.vencimento.text = lancamento.datavenc
             binding.codigo.text = lancamento.linhadig
         }
         gerarQRCode()

@@ -59,22 +59,15 @@ class FaturasAdapter(
 
 
         holder.textValor.text = "R$ ${lancamento?.valor}"
-
-        holder.textStatusFatura.text = lancamento?.status
-
+        val statusFormat = lancamento?.status
+        holder.textStatusFatura.text = statusFormat?.uppercase()
         val dataVencimento = lancamento?.datavenc?.let { formatarData(it) }
         holder.textVencimento.text = "Vence em $dataVencimento"
-
-        holder.textStatusFatura.text = lancamento?.status
-
-
+        
     }
 
     override fun getItemCount(): Int {
 
-        // faturasPix.size
-
-        // Retorne o número de faturas na lista
         return maxOf(faturasList.size, faturasPix.size)
     }
 

@@ -16,6 +16,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.net.ParseException
 import com.example.projeto.R
 
 import com.example.projeto.activity.classes.Lancamento
@@ -35,6 +36,8 @@ import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class ClienteActivity : AppCompatActivity() {
     private lateinit var servicePix: ServicePix
@@ -55,13 +58,16 @@ class ClienteActivity : AppCompatActivity() {
             .create(ServicePix::class.java)
 
         lancamentos = intent.getParcelableArrayListExtra("lancamentos", Lancamento::class.java)?: emptyList()
-        lancamentoPix = intent.getParcelableArrayListExtra("pix", Pix::class.java)?: emptyList()
+       // lancamentoPix = intent.getParcelableArrayListExtra("pix", Pix::class.java)?: emptyList()
         chamadaPix()
+
+
 
         // Ação dos botões
         botoesScroll()
         // Dados do cliente
         dadosAPI()
+        faturaAtual()
     }
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     @SuppressLint("SetTextI18n")
@@ -71,7 +77,7 @@ class ClienteActivity : AppCompatActivity() {
         if(usuario != null) {
 
             binding.plano.text = usuario.plano?.replace("_", " ")
-            binding.vencimento.text = usuario.vencimento
+           // binding.vencimento.text = usuario.vencimento
             binding.textViewNome.text = usuario.nome
 
             // Botao criado para exibição de dados do cliente usando popup
@@ -123,7 +129,7 @@ class ClienteActivity : AppCompatActivity() {
         binding.financeiro.setOnClickListener {
             val intent = Intent(this@ClienteActivity, FaturasEmAberto::class.java)
             intent.putParcelableArrayListExtra("lancamentos", ArrayList(lancamentos))
-            intent.putParcelableArrayListExtra("pix", ArrayList(lancamentoPix))
+          //  intent.putParcelableArrayListExtra("pix", ArrayList(lancamentoPix))
             intent.putParcelableArrayListExtra("qrCode", ArrayList(qrCodeDataList))
             startActivity(intent)
         }
@@ -193,7 +199,6 @@ class ClienteActivity : AppCompatActivity() {
 
             coroutineScope.launch {
 
-
                 for (uuid in uuidLanc) {
                     try {
                         val response = withContext(Dispatchers.IO) {
@@ -222,10 +227,39 @@ class ClienteActivity : AppCompatActivity() {
         }
     }
 
+    private fun faturaAtual(){
+        val primeiroLancamento = lancamentos.firstOrNull()
+        val primeiroLancPix = qrCodeDataList.firstOrNull()
+
+        if (primeiroLancamento != null || primeiroLancPix != null) {
+            val primeiroStatus = primeiroLancamento?.status
+            val primeiraDataVenc = primeiroLancamento?.datavenc?.let { formatarData(it) }
+            val primeiroTitulo = primeiroLancamento?.titulo
+            val primeiraLinhaDig = primeiroLancamento?.linhadig
+            val valorPrimeiraFat = primeiroLancamento?.valor
+            val primeiroPix = primeiroLancPix?.qrcode
+
+            binding.vencimento.text = "Vence em $primeiraDataVenc"
+            binding.valor.text = valorPrimeiraFat
+            if (primeiroLancamento != null) {
+                binding.statusFatura.text = primeiroLancamento.status?.uppercase()
+            }
+
+            binding.cardCliente.setOnClickListener {
+                val intent = Intent(this, EscolhaPagamento::class.java)
+                intent.putExtra("atual ", primeiroLancamento)
+                intent.putExtra("atualPix", primeiroLancPix)
+                startActivity(intent)
+            }
 
 
 
+            // Agora você pode usar os valores do primeiro elemento conforme necessário
+        } else {
+            // A lista está vazia, trate conforme necessário
+        }
 
+    }
     private fun realizarLogout() {
 
         val sharedPreferences = getSharedPreferences("db", MODE_PRIVATE)
@@ -272,6 +306,19 @@ class ClienteActivity : AppCompatActivity() {
                 Snackbar.LENGTH_SHORT
             ).setBackgroundTint(ContextCompat.getColor(this, R.color.rosa))
                 .show()
+        }
+    }
+
+    private fun formatarData(data: String): String {
+        val formatoBanco = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+        val formatoBrasileiro = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+
+        return try {
+            val dataFormatada: String = formatoBrasileiro.format(formatoBanco.parse(data))
+            dataFormatada
+        } catch (e: ParseException) {
+            e.printStackTrace()
+            ""
         }
     }
 

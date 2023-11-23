@@ -189,5 +189,6 @@ cidade Paulista, CEP 53.425-430. Ao usar o Aplicativo, você concorda em cumprir
     <string name="msg_primeiroAcesso4">"Senha não pode estar em branco!"</string>
     <string name="conexao_internet">Sem conexão com a internet</string>
     <string name="primeiroTexto">Seja Bem Vindo!\nEste é seu primeiro acesso aqui no aplicativo da APC - Tecnologia!</string>
+    <string name="fatura_atual">Fatura Atual</string>
 
 </resources>
