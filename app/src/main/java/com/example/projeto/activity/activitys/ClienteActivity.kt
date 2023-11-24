@@ -33,9 +33,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -46,21 +44,20 @@ class ClienteActivity : AppCompatActivity() {
     private var lancamentoPix: List<Pix> = emptyList()
     private val qrCodeDataList = mutableListOf<QRCodeData>()
 
+
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityClienteBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
+        chamadaPix()
         //chamadas Pix
         servicePix = RetrofitService.getRetrofitInstance()
             .create(ServicePix::class.java)
 
         lancamentos = intent.getParcelableArrayListExtra("lancamentos", Lancamento::class.java)?: emptyList()
        // lancamentoPix = intent.getParcelableArrayListExtra("pix", Pix::class.java)?: emptyList()
-        chamadaPix()
-
 
 
         // Ação dos botões
@@ -69,6 +66,55 @@ class ClienteActivity : AppCompatActivity() {
         dadosAPI()
         faturaAtual()
     }
+
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    private fun chamadaPix() {
+        lancamentos = intent.getParcelableArrayListExtra("lancamentos", Lancamento::class.java) ?: emptyList()
+        val uuidLanc = mutableListOf<String>()
+
+        lancamentos.forEach {
+            it.uuid_lanc?.let { uuid ->
+                uuidLanc.add(uuid)
+            }
+        }
+
+        if (uuidLanc.isNotEmpty()) {
+            val coroutineScope = CoroutineScope(Dispatchers.IO)
+
+            coroutineScope.launch {
+
+                for (uuid in uuidLanc) {
+                    try {
+                        val response = withContext(Dispatchers.IO) {
+                            servicePix.getPix(uuid).execute()
+                        }
+
+                        if (response.isSuccessful) {
+                            lancamentoPix = response.body()!!
+                            if (lancamentoPix.isNullOrEmpty()) {
+                                Log.i("ErroPix", "Erro: $lancamentoPix")
+                            }
+
+                            lancamentoPix.forEach {
+                                it.qrcode?.let { it1 -> QRCodeData(it1) }
+                                    ?.let { it2 -> qrCodeDataList.add(it2) }
+                            }
+
+                            Log.i("Sucesso", " $lancamentoPix")
+                        }
+                    } catch (e: Exception) {
+                        Log.e("Erro", e.toString())
+                        withContext(Dispatchers.Main){
+                            snackBar("Tivemos um problema. Tente novamente mais tarde.")
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+
+
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     @SuppressLint("SetTextI18n")
     private fun dadosAPI() {
@@ -183,49 +229,7 @@ class ClienteActivity : AppCompatActivity() {
 
     }
 
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-    private fun chamadaPix() {
-        lancamentos = intent.getParcelableArrayListExtra("lancamentos", Lancamento::class.java) ?: emptyList()
-        val uuidLanc = mutableListOf<String>()
 
-        lancamentos.forEach {
-            it.uuid_lanc?.let { uuid ->
-                uuidLanc.add(uuid)
-            }
-        }
-
-        if (uuidLanc.isNotEmpty()) {
-            val coroutineScope = CoroutineScope(Dispatchers.Main)
-
-            coroutineScope.launch {
-
-                for (uuid in uuidLanc) {
-                    try {
-                        val response = withContext(Dispatchers.IO) {
-                            servicePix.getPix(uuid).execute()
-                        }
-
-                        if (response.isSuccessful) {
-                            lancamentoPix = response.body()!!
-                            if (lancamentoPix.isNullOrEmpty()) {
-                                Log.i("ErroPix", "Erro: $lancamentoPix")
-                            }
-
-                            lancamentoPix.forEach {
-                                it.qrcode?.let { it1 -> QRCodeData(it1) }
-                                    ?.let { it2 -> qrCodeDataList.add(it2) }
-                            }
-
-                            Log.i("Sucesso", " $lancamentoPix")
-                        }
-                    } catch (e: Exception) {
-                        Log.e("Erro", e.toString())
-                        snackBar("Tivemos um problema. Tente novamente mais tarde.")
-                    }
-                }
-            }
-        }
-    }
 
     private fun faturaAtual(){
         val primeiroLancamento = lancamentos.firstOrNull()
@@ -247,8 +251,8 @@ class ClienteActivity : AppCompatActivity() {
 
             binding.cardCliente.setOnClickListener {
                 val intent = Intent(this, EscolhaPagamento::class.java)
-                intent.putExtra("atual ", primeiroLancamento)
-                intent.putExtra("atualPix", primeiroLancPix)
+                intent.putExtra("key", primeiroLancamento)
+                intent.putExtra("pix", primeiroLancPix)
                 startActivity(intent)
             }
 

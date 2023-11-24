@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.net.ParseException
 import com.example.projeto.R
 import com.example.projeto.activity.classes.Lancamento
+import com.example.projeto.activity.classes.Pix
 import com.example.projeto.activity.classes.QRCodeData
 import com.example.projeto.databinding.ActivityEscolhaPagamentoBinding
 import com.google.android.material.snackbar.Snackbar
@@ -29,20 +30,22 @@ import java.util.Locale
 
 class EscolhaPagamento : AppCompatActivity() {
 
+
+    private var lancamentoPix: QRCodeData? = null
     private val binding by lazy {
         ActivityEscolhaPagamentoBinding.inflate(layoutInflater)
     }
-
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val lancamento = intent.getParcelableExtra("key", Lancamento::class.java)
 
+
+
+        val lancamento = intent.getParcelableExtra("key", Lancamento::class.java)
         val formatoBanco = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
         val formatoDesejado = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-
         try {
             val dataBanco: Date? = lancamento?.datavenc?.let { formatoBanco.parse(it) }
             val dataFormatada: String? = dataBanco?.let { formatoDesejado.format(it) }
@@ -50,8 +53,7 @@ class EscolhaPagamento : AppCompatActivity() {
         } catch (e: ParseException) {
             e.printStackTrace()
         }
-
-        //   val lancamentoPix = intent.getParcelableExtra("pix", Pix::class.java)
+       // val lancamentoPix = intent.getParcelableExtra("pix", Pix::class.java)
         if (lancamento != null) {
             val statusFormat = lancamento.status
             binding.statusFatura.text = statusFormat?.uppercase()
@@ -100,16 +102,14 @@ class EscolhaPagamento : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     private fun gerarQRCode() {
-        var lancamentoPix = intent.getParcelableExtra("pix", QRCodeData::class.java)
-
-        //  lancamentoPix.qrcode
+     lancamentoPix = intent.getParcelableExtra("pix", QRCodeData::class.java)
 
         binding.pixCopiaCola.text = lancamentoPix?.qrcode
 
         val ivQRCode = binding.ivqrCode
 
         if (lancamentoPix != null) {
-            val texto: String = lancamentoPix.qrcode
+            val texto: String = lancamentoPix!!.qrcode
             val multiFormatWriter = MultiFormatWriter()
             try {
                 val bitMatrix = multiFormatWriter.encode(texto, BarcodeFormat.QR_CODE, 600, 600)
@@ -130,7 +130,6 @@ class EscolhaPagamento : AppCompatActivity() {
         } else {
             snackBar("Campos vazios")
         }
-
-
     }
+
 }
