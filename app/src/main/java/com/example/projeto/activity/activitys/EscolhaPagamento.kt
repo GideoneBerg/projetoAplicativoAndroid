@@ -7,6 +7,7 @@ import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.webkit.WebViewClient
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -104,7 +105,7 @@ class EscolhaPagamento : AppCompatActivity() {
     private fun gerarQRCode() {
      lancamentoPix = intent.getParcelableExtra("pix", QRCodeData::class.java)
 
-        binding.pixCopiaCola.text = lancamentoPix?.qrcode
+       // binding.pixCopiaCola.text = lancamentoPix?.qrcode
 
         val ivQRCode = binding.ivqrCode
 
@@ -131,5 +132,8 @@ class EscolhaPagamento : AppCompatActivity() {
             snackBar("Campos vazios")
         }
     }
+
+
+
 
 }

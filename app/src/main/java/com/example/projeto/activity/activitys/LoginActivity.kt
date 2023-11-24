@@ -23,6 +23,7 @@ import androidx.core.content.ContextCompat
 import com.example.projeto.R
 import com.example.projeto.activity.classes.Lancamento
 import com.example.projeto.activity.classes.Pix
+import com.example.projeto.activity.classes.QRCodeData
 import com.example.projeto.activity.interfaces.ServiceLancamentos
 import com.example.projeto.activity.model.RetrofitService
 import com.example.projeto.activity.interfaces.ServiceLogin
@@ -40,9 +41,12 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var serviceLancamentos: ServiceLancamentos
 
+    val lancamentosVencidos = mutableListOf<Lancamento>()
+    val lancamentosPagos = mutableListOf<Lancamento>()
+    val lancamentosAbertos = mutableListOf<Lancamento>()
+
     var lancamentos: List<Lancamento> = emptyList()
-    var uuidLanc : String? = ""
-    var lancamentoPix: List<Pix> = emptyList()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -149,7 +153,15 @@ class LoginActivity : AppCompatActivity() {
                                 Handler(Looper.getMainLooper()).postDelayed({
                                     val intent = Intent(this@LoginActivity, ClienteActivity::class.java)
                                     intent.putExtra("usuario", usuario)
+
+                                    intent.putExtra("lancamentosVencidos", ArrayList(lancamentosVencidos))
+                                    intent.putExtra("lancamentosPagos", ArrayList(lancamentosPagos))
+                                    intent.putExtra("lancamentosAbertos", ArrayList(lancamentosAbertos))
+
+
+
                                     intent.putParcelableArrayListExtra("lancamentos", ArrayList(lancamentos))
+                                    intent.putParcelableArrayListExtra("lancVenc", ArrayList(lancamentosVencidos))
                                     startActivity(intent)
                                     finish()
                                 }, 1000)
@@ -181,8 +193,18 @@ class LoginActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     lancamentos = response.body()!!
                     if (lancamentos.isNullOrEmpty()) {
-
+                        // Lista de lançamentos está vazia ou nula
                     } else {
+
+
+                        lancamentos.forEach {
+                            when (it.status?.lowercase()) {
+                                "vencido" -> lancamentosVencidos.add(it)
+                                "pago" -> lancamentosPagos.add(it)
+                                else -> lancamentosAbertos.add(it)
+                            }
+                        }
+
 
 
                     }

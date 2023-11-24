@@ -45,6 +45,8 @@ class ClienteActivity : AppCompatActivity() {
     private val qrCodeDataList = mutableListOf<QRCodeData>()
 
 
+
+
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,7 +81,7 @@ class ClienteActivity : AppCompatActivity() {
         }
 
         if (uuidLanc.isNotEmpty()) {
-            val coroutineScope = CoroutineScope(Dispatchers.IO)
+            val coroutineScope = CoroutineScope(Dispatchers.Main)
 
             coroutineScope.launch {
 
@@ -325,5 +327,10 @@ class ClienteActivity : AppCompatActivity() {
             ""
         }
     }
+
+
+ //   val lancamentosVencidos = intent.getSerializableExtra("lancamentosVencidos") as ArrayList<Lancamento>
+   // val lancamentosPagos = intent.getSerializableExtra("lancamentosPagos") as ArrayList<Lancamento>
+  //  val lancamentosAbertos = intent.getSerializableExtra("lancamentosAbertos") as ArrayList<Lancamento>
 
 }
