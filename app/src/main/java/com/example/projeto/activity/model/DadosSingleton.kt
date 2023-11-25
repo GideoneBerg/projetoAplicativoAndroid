@@ -5,4 +5,5 @@ import Usuario
 object DadosSingleton {
 
     var usuario: Usuario? = null
+
 }

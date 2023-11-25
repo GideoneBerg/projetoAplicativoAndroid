@@ -25,6 +25,7 @@ import com.example.projeto.activity.classes.QRCodeData
 import com.example.projeto.activity.model.RetrofitService
 
 import com.example.projeto.activity.interfaces.ServicePix
+import com.example.projeto.activity.model.DadosSingleton
 
 import com.example.projeto.activity.webView.WebSpeedTestActivity
 import com.example.projeto.databinding.ActivityClienteBinding
@@ -47,12 +48,14 @@ class ClienteActivity : AppCompatActivity() {
 
 
 
+
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityClienteBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
         chamadaPix()
         //chamadas Pix
         servicePix = RetrofitService.getRetrofitInstance()
@@ -122,7 +125,15 @@ class ClienteActivity : AppCompatActivity() {
     private fun dadosAPI() {
 
        val usuario = intent.getParcelableExtra("usuario", Usuario::class.java)
+
         if(usuario != null) {
+            DadosSingleton.usuario = Usuario(
+                usuario.cpf,usuario.cpfCnpj,usuario.senha,
+                usuario.nome, usuario.nascimento, usuario.plano,
+                usuario.vencimento, usuario.cidade, usuario.rua,
+                usuario.numero, usuario.bairro, usuario.estado,
+                usuario.cod, usuario.mensagem, usuario.login
+            )
 
             binding.plano.text = usuario.plano?.replace("_", " ")
            // binding.vencimento.text = usuario.vencimento
@@ -176,6 +187,7 @@ class ClienteActivity : AppCompatActivity() {
 
         binding.financeiro.setOnClickListener {
             val intent = Intent(this@ClienteActivity, FaturasEmAberto::class.java)
+
             intent.putParcelableArrayListExtra("lancamentos", ArrayList(lancamentos))
           //  intent.putParcelableArrayListExtra("pix", ArrayList(lancamentoPix))
             intent.putParcelableArrayListExtra("qrCode", ArrayList(qrCodeDataList))

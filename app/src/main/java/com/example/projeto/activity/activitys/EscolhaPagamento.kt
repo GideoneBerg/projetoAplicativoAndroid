@@ -1,8 +1,10 @@
 package com.example.projeto.activity.activitys
 
+import Usuario
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Build
@@ -16,6 +18,8 @@ import com.example.projeto.R
 import com.example.projeto.activity.classes.Lancamento
 import com.example.projeto.activity.classes.Pix
 import com.example.projeto.activity.classes.QRCodeData
+import com.example.projeto.activity.model.DadosSingleton
+import com.example.projeto.activity.webView.WebSpeedTestActivity
 import com.example.projeto.databinding.ActivityEscolhaPagamentoBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.zxing.BarcodeFormat
@@ -41,9 +45,6 @@ class EscolhaPagamento : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-
-
-
         val lancamento = intent.getParcelableExtra("key", Lancamento::class.java)
         val formatoBanco = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
         val formatoDesejado = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
@@ -60,6 +61,16 @@ class EscolhaPagamento : AppCompatActivity() {
             binding.statusFatura.text = statusFormat?.uppercase()
             binding.valor.text = lancamento.valor
             binding.codigo.text = lancamento.linhadig
+            val usuario = DadosSingleton.usuario
+            val login = usuario?.login
+
+
+            binding.linkFatura.setOnClickListener {
+                startActivity(Intent(this, WebSpeedTestActivity::class.java).apply {
+                    putExtra("login", login)
+                    putExtra("titulo", lancamento.titulo)
+                })
+            }
         }
         gerarQRCode()
 
@@ -73,7 +84,8 @@ class EscolhaPagamento : AppCompatActivity() {
             CoroutineScope(Dispatchers.Main).launch {
                 binding.copiarCodBarras.text = "Chave Copiada"
                 delay(2000)
-                binding.copiarCodBarras.text = "Copiar"
+                val texto = R.string.copiar_boleto.toString()
+                binding.copiarCodBarras.text = texto
             }
         }
         val btnGerarPix = binding.btnGerarPix
@@ -86,7 +98,8 @@ class EscolhaPagamento : AppCompatActivity() {
             CoroutineScope(Dispatchers.Main).launch {
                 binding.btnGerarPix.text = "Pix Copiado"
                 delay(2000)
-                binding.btnGerarPix.text = "Copiar Pix"
+                val texto = R.string.copiar_pix.toString()
+                binding.btnGerarPix.text = texto
             }
         }
     }
