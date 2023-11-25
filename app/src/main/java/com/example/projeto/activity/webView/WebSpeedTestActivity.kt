@@ -58,7 +58,7 @@ class WebSpeedTestActivity : AppCompatActivity() {
                 //realizarDownload()
 
                 val url = webView.url
-                val fileName = "boleto" // Ajuste isso para o nome desejado do arquivo com a extensão .pdf
+                val fileName = "boleto.pdf" // Ajuste isso para o nome desejado do arquivo com a extensão .pdf
                 val request = DownloadManager.Request(Uri.parse(url))
 
                 //------------------------COOKIE!!------------------------
@@ -89,8 +89,8 @@ class WebSpeedTestActivity : AppCompatActivity() {
             val webView = binding.webView
             webView.webViewClient = WebViewClient()
             webView.loadUrl("https://www.testeavelocidade.net/speedtest-claro/")
-            webView.settings?.javaScriptEnabled =  true
-            webView.settings?.domStorageEnabled = true
+            webView.settings.javaScriptEnabled =  true
+            webView.settings.domStorageEnabled = true
         }
     }
 

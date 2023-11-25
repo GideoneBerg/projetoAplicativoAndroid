@@ -110,7 +110,7 @@ class EscolhaPagamento : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     private fun gerarQRCode() {
      lancamentoPix = intent.getParcelableExtra("pix", QRCodeData::class.java)
-       // binding.pixCopiaCola.text = lancamentoPix?.qrcode
+        binding.pixCopiaCola.text = lancamentoPix?.qrcode
 
         val ivQRCode = binding.ivqrCode
         if (lancamentoPix != null) {
