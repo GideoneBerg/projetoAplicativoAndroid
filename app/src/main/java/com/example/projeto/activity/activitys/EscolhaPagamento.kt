@@ -63,10 +63,7 @@ class EscolhaPagamento : AppCompatActivity() {
                     binding.btnGerarPix.text = texto
                 }
             }
-
         }
-
-
         val lancamento = intent.getParcelableExtra("key", Lancamento::class.java)
         val formatoBanco = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
         val formatoDesejado = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
@@ -103,7 +100,6 @@ class EscolhaPagamento : AppCompatActivity() {
 
         }
 
-
         if (lancamento != null) {
             val statusFormat = lancamento.status
             binding.statusFatura.text = statusFormat?.uppercase()
@@ -119,7 +115,6 @@ class EscolhaPagamento : AppCompatActivity() {
                 })
             }
         }
-
 
         val btnCopiarBoleto = binding.copiarCodBarras
         val codigo = binding.codigo.text.toString()

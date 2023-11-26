@@ -41,6 +41,18 @@
         app:srcCompat="@drawable/logotipo"
         tools:srcCompat="@drawable/logotipo" />
 
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/txtPrimeiroAcesso"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextSenha"
+        tools:visibility="invisible" />
+
     <Button
         android:id="@+id/btnEntrar"
         android:layout_width="325dp"
@@ -183,19 +195,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnEntrar" />
-
-    <ProgressBar
-        android:id="@+id/progressBar2"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextSenha"
-        tools:ignore="MissingConstraints"
-        tools:visibility="invisible" />
 
     <TextView
         android:id="@+id/button_ajuda"
