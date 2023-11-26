@@ -20,31 +20,19 @@
             android:id="@+id/missao"
             android:layout_width="258dp"
             android:layout_height="523dp"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="52dp"
             android:elevation="2dp"
             android:fontFamily="@font/abel"
             android:text="@string/sobreApc"
             android:textAlignment="textStart"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="@color/azulAnil"
+            android:textColor="@color/white"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.384"
+            app:layout_constraintHorizontal_bias="0.346"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints" />
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="409dp"
-            android:layout_height="812dp"
-            android:layout_marginBottom="40dp"
-            android:elevation="1dp"
-            app:layout_constraintBottom_toTopOf="@+id/imageView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/objeto7" />
 
         <TextView
             android:id="@+id/developers"
@@ -67,12 +55,25 @@
             android:id="@+id/imageView"
             android:layout_width="125dp"
             android:layout_height="76dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="55dp"
+            android:layout_marginTop="152dp"
             android:contentDescription="@string/logoartepc"
-            app:layout_constraintStart_toEndOf="@+id/developers"
-            app:layout_constraintTop_toTopOf="@+id/developers"
+            android:elevation="3sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.839"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/missao"
             app:srcCompat="@drawable/logotipo" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="409dp"
+            android:layout_height="812dp"
+            android:layout_marginTop="900dp"
+            android:elevation="1dp"
+            app:layout_constraintBottom_toTopOf="@+id/imageView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/objeto15" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
