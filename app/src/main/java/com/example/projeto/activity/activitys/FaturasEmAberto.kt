@@ -1,5 +1,7 @@
 package com.example.projeto.activity.activitys
 
+import Usuario
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -24,7 +26,7 @@ class FaturasEmAberto : AppCompatActivity() {
     private var lancamentos: List<Lancamento> = emptyList()
     private var qrCodeDataList: List<QRCodeData> = emptyList()
 
-    private val binding  by lazy {
+    private val binding by lazy {
         ActivityFaturasEmAbertoBinding.inflate(layoutInflater)
     }
 
@@ -33,11 +35,13 @@ class FaturasEmAberto : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-       lancamentos = intent.getParcelableArrayListExtra("lancamentos", Lancamento::class.java) ?: emptyList()
+        lancamentos =
+            intent.getParcelableArrayListExtra("lancamentos", Lancamento::class.java) ?: emptyList()
 
-        qrCodeDataList = intent.getParcelableArrayListExtra("qrCode", QRCodeData::class.java)?: emptyList()
+        qrCodeDataList =
+            intent.getParcelableArrayListExtra("qrCode", QRCodeData::class.java) ?: emptyList()
 
-        if (lancamentos.isNotEmpty() && qrCodeDataList.isNotEmpty()){
+        if (lancamentos.isNotEmpty() && qrCodeDataList.isNotEmpty()) {
             rvLista = findViewById(R.id.rv_lista)
             val tamanhoLista = lancamentos.size.toString()
             binding.sizeList.text = tamanhoLista
@@ -51,5 +55,8 @@ class FaturasEmAberto : AppCompatActivity() {
             binding.mensagemTextView.visibility = View.VISIBLE
             binding.rvLista.visibility = View.GONE
         }
+
+
     }
+
 }

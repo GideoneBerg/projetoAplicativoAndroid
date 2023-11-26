@@ -3,19 +3,20 @@ package com.example.projeto.activity.activitys
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.webkit.WebViewClient
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.net.ParseException
 import com.example.projeto.R
 import com.example.projeto.activity.classes.Lancamento
-import com.example.projeto.activity.classes.Pix
 import com.example.projeto.activity.classes.QRCodeData
+import com.example.projeto.activity.model.DadosSingleton
+import com.example.projeto.activity.webView.WebSpeedTestActivity
 import com.example.projeto.databinding.ActivityEscolhaPagamentoBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.zxing.BarcodeFormat
@@ -31,7 +32,6 @@ import java.util.Locale
 
 class EscolhaPagamento : AppCompatActivity() {
 
-
     private var lancamentoPix: QRCodeData? = null
     private val binding by lazy {
         ActivityEscolhaPagamentoBinding.inflate(layoutInflater)
@@ -40,9 +40,6 @@ class EscolhaPagamento : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
-
-
 
         val lancamento = intent.getParcelableExtra("key", Lancamento::class.java)
         val formatoBanco = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
@@ -54,12 +51,21 @@ class EscolhaPagamento : AppCompatActivity() {
         } catch (e: ParseException) {
             e.printStackTrace()
         }
-       // val lancamentoPix = intent.getParcelableExtra("pix", Pix::class.java)
+
         if (lancamento != null) {
             val statusFormat = lancamento.status
             binding.statusFatura.text = statusFormat?.uppercase()
             binding.valor.text = lancamento.valor
             binding.codigo.text = lancamento.linhadig
+            val usuario = DadosSingleton.usuario
+            val login = usuario?.login
+
+            binding.linkFatura.setOnClickListener {
+                startActivity(Intent(this, WebSpeedTestActivity::class.java).apply {
+                    putExtra("login", login)
+                    putExtra("titulo", lancamento.titulo)
+                })
+            }
         }
         gerarQRCode()
 
@@ -73,7 +79,8 @@ class EscolhaPagamento : AppCompatActivity() {
             CoroutineScope(Dispatchers.Main).launch {
                 binding.copiarCodBarras.text = "Chave Copiada"
                 delay(2000)
-                binding.copiarCodBarras.text = "Copiar"
+                val texto = getString(R.string.copiar_boleto)
+                binding.copiarCodBarras.text = texto
             }
         }
         val btnGerarPix = binding.btnGerarPix
@@ -86,11 +93,11 @@ class EscolhaPagamento : AppCompatActivity() {
             CoroutineScope(Dispatchers.Main).launch {
                 binding.btnGerarPix.text = "Pix Copiado"
                 delay(2000)
-                binding.btnGerarPix.text = "Copiar Pix"
+                val texto = getString(R.string.copiar_boleto)
+                binding.btnGerarPix.text = texto
             }
         }
     }
-
     private fun snackBar(mensagem: String) {
 
         Snackbar.make(
@@ -100,15 +107,12 @@ class EscolhaPagamento : AppCompatActivity() {
         ).setBackgroundTint(ContextCompat.getColor(this, R.color.azulAnil))
             .show()
     }
-
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     private fun gerarQRCode() {
      lancamentoPix = intent.getParcelableExtra("pix", QRCodeData::class.java)
-
-       // binding.pixCopiaCola.text = lancamentoPix?.qrcode
+        binding.pixCopiaCola.text = lancamentoPix?.qrcode
 
         val ivQRCode = binding.ivqrCode
-
         if (lancamentoPix != null) {
             val texto: String = lancamentoPix!!.qrcode
             val multiFormatWriter = MultiFormatWriter()
@@ -127,13 +131,8 @@ class EscolhaPagamento : AppCompatActivity() {
             } catch (e: WriterException) {
                 e.printStackTrace()
             }
-
         } else {
             snackBar("Campos vazios")
         }
     }
-
-
-
-
 }
