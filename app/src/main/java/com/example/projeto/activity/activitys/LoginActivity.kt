@@ -109,8 +109,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun loginUsuario() {
 
-        binding.progressBar2.visibility = View.INVISIBLE
-        binding.btnEntrar.visibility = View.VISIBLE
+
 
 
 
@@ -120,10 +119,11 @@ class LoginActivity : AppCompatActivity() {
             if (isDone) { // verifica se o usuario digitou os dados corretamente
                 val cpf = binding.editTextCpfCnpj.unMasked
                 val senha = binding.editTextSenha.text.toString()
-
-
-
                 val servico = serviceLogin
+                binding.progressBar2.visibility = View.VISIBLE
+                binding.btnEntrar.visibility = View.INVISIBLE
+
+
                 servico.setUsuario(cpf, senha).enqueue(object :
                     Callback<Usuario> {
                     override fun onFailure(call: Call<Usuario>, t: Throwable) {
@@ -135,7 +135,8 @@ class LoginActivity : AppCompatActivity() {
 
                     override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
                         if (response.isSuccessful) {
-
+                            binding.progressBar2.visibility = View.VISIBLE
+                            binding.btnEntrar.visibility = View.INVISIBLE
 
                             val usuario = response.body()
 
