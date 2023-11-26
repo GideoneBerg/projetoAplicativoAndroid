@@ -103,7 +103,7 @@ class EscolhaPagamento : AppCompatActivity() {
         if (lancamento != null) {
             val statusFormat = lancamento.status
             binding.statusFatura.text = statusFormat?.uppercase()
-            binding.valor.text = lancamento.valor
+            binding.valor.text = "R$ ${lancamento.valor}"
             binding.codigo.text = lancamento.linhadig
             val usuario = DadosSingleton.usuario
             val login = usuario?.login

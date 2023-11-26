@@ -3,6 +3,7 @@
     <style name="Base.Theme.Projeto" parent="Theme.AppCompat.NoActionBar">
         <!-- Customize your dark theme here. -->
         <item name="colorPrimaryDark">@color/azulMarinho</item>
+        <item name="colorPrimary">@color/azulEscuro</item>
     </style>
 
 

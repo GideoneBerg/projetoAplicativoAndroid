@@ -121,12 +121,12 @@ class ClienteActivity : AppCompatActivity() {
             val primeiroLancamento = lancamentos.firstOrNull()
 
             if (primeiroLancamento != null) {
-                val primeiraDataVenc = primeiroLancamento?.datavenc?.let { formatarData(it) }
-                val valorPrimeiraFat = primeiroLancamento?.valor
+                val primeiraDataVenc = primeiroLancamento.datavenc?.let { formatarData(it) }
+                val valorPrimeiraFat = primeiroLancamento.valor
 
                 withContext(Dispatchers.Main){
                     binding.vencimento.text = "Vence em $primeiraDataVenc"
-                    binding.valor.text = valorPrimeiraFat
+                    binding.valor.text = "R$ $valorPrimeiraFat"
                     binding.statusFatura.text = primeiroLancamento.status?.uppercase()
 
                 }
