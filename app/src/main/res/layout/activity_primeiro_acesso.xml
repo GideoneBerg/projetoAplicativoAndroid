@@ -43,8 +43,8 @@
 
     <View
         android:id="@+id/view_background"
-        android:layout_width="409dp"
-        android:layout_height="544dp"
+        android:layout_width="0dp"
+        android:layout_height="518dp"
         android:layout_marginTop="410dp"
         android:background="@drawable/objeto7"
         app:layout_constraintBottom_toBottomOf="parent"

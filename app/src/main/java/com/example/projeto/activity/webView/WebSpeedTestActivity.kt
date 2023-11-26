@@ -53,7 +53,7 @@ class WebSpeedTestActivity : AppCompatActivity() {
             webView.settings.domStorageEnabled = true
 
             val botaoFatura = findViewById<Button>(R.id.btnDownFatura)
-            botaoFatura.visibility = View.VISIBLE
+            botaoFatura.visibility = View.INVISIBLE
             botaoFatura.setOnClickListener {
                 //realizarDownload()
 
@@ -94,8 +94,5 @@ class WebSpeedTestActivity : AppCompatActivity() {
         }
     }
 
-    private fun realizarDownload() {
 
-
-    }
 }

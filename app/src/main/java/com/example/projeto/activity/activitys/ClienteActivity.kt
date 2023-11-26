@@ -25,6 +25,7 @@ import com.example.projeto.activity.classes.QRCodeData
 import com.example.projeto.activity.model.RetrofitService
 
 import com.example.projeto.activity.interfaces.ServicePix
+import com.example.projeto.activity.model.DadosPix
 import com.example.projeto.activity.model.DadosSingleton
 
 import com.example.projeto.activity.webView.WebSpeedTestActivity
@@ -46,30 +47,30 @@ class ClienteActivity : AppCompatActivity() {
     private val qrCodeDataList = mutableListOf<QRCodeData>()
 
 
-
-
-
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityClienteBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
-        chamadaPix()
         //chamadas Pix
         servicePix = RetrofitService.getRetrofitInstance()
             .create(ServicePix::class.java)
 
         lancamentos = intent.getParcelableArrayListExtra("lancamentos", Lancamento::class.java)?: emptyList()
-       // lancamentoPix = intent.getParcelableArrayListExtra("pix", Pix::class.java)?: emptyList()
 
+        val coroutineScope = CoroutineScope(Dispatchers.IO)
+        coroutineScope.launch {
+            chamadaPix()
+
+            faturaAtual()
+        }
 
         // Ação dos botões
         botoesScroll()
         // Dados do cliente
         dadosAPI()
-        faturaAtual()
+
     }
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
@@ -84,8 +85,7 @@ class ClienteActivity : AppCompatActivity() {
         }
 
         if (uuidLanc.isNotEmpty()) {
-            val coroutineScope = CoroutineScope(Dispatchers.Main)
-
+            val coroutineScope = CoroutineScope(Dispatchers.IO)
             coroutineScope.launch {
 
                 for (uuid in uuidLanc) {
@@ -104,7 +104,6 @@ class ClienteActivity : AppCompatActivity() {
                                 it.qrcode?.let { it1 -> QRCodeData(it1) }
                                     ?.let { it2 -> qrCodeDataList.add(it2) }
                             }
-
                             Log.i("Sucesso", " $lancamentoPix")
                         }
                     } catch (e: Exception) {
@@ -118,7 +117,23 @@ class ClienteActivity : AppCompatActivity() {
             }
         }
     }
+    private fun faturaAtual(){
+        CoroutineScope(Dispatchers.IO).launch {
+            val primeiroLancamento = lancamentos.firstOrNull()
 
+            if (primeiroLancamento != null) {
+                val primeiraDataVenc = primeiroLancamento?.datavenc?.let { formatarData(it) }
+                val valorPrimeiraFat = primeiroLancamento?.valor
+
+                withContext(Dispatchers.Main){
+                    binding.vencimento.text = "Vence em $primeiraDataVenc"
+                    binding.valor.text = valorPrimeiraFat
+                    binding.statusFatura.text = primeiroLancamento.status?.uppercase()
+
+                }
+            }
+        }
+    }
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     @SuppressLint("SetTextI18n")
@@ -127,6 +142,7 @@ class ClienteActivity : AppCompatActivity() {
        val usuario = intent.getParcelableExtra("usuario", Usuario::class.java)
 
         if(usuario != null) {
+
             DadosSingleton.usuario = Usuario(
                 usuario.cpf,usuario.cpfCnpj,usuario.senha,
                 usuario.nome, usuario.nascimento, usuario.plano,
@@ -185,11 +201,16 @@ class ClienteActivity : AppCompatActivity() {
 
         val extras = intent.extras ?: return
 
+        binding.cardCliente.setOnClickListener {
+            val intent = Intent(this, EscolhaPagamento::class.java)
+            intent.putExtra("key", lancamentos.firstOrNull())
+            intent.putExtra("pix1", lancamentoPix.firstOrNull())
+            startActivity(intent)
+        }
+
         binding.financeiro.setOnClickListener {
             val intent = Intent(this@ClienteActivity, FaturasEmAberto::class.java)
-
             intent.putParcelableArrayListExtra("lancamentos", ArrayList(lancamentos))
-          //  intent.putParcelableArrayListExtra("pix", ArrayList(lancamentoPix))
             intent.putParcelableArrayListExtra("qrCode", ArrayList(qrCodeDataList))
             startActivity(intent)
         }
@@ -234,50 +255,12 @@ class ClienteActivity : AppCompatActivity() {
             val intent = Intent(this, WebSpeedTestActivity::class.java)
             startActivity(intent)
         }
-
         binding.sobre.setOnClickListener {
             val intent = Intent(this, SobreActivity::class.java)
             startActivity(intent)
         }
-
-
     }
 
-
-
-    private fun faturaAtual(){
-        val primeiroLancamento = lancamentos.firstOrNull()
-        val primeiroLancPix = qrCodeDataList.firstOrNull()
-
-        if (primeiroLancamento != null || primeiroLancPix != null) {
-            val primeiroStatus = primeiroLancamento?.status
-            val primeiraDataVenc = primeiroLancamento?.datavenc?.let { formatarData(it) }
-            val primeiroTitulo = primeiroLancamento?.titulo
-            val primeiraLinhaDig = primeiroLancamento?.linhadig
-            val valorPrimeiraFat = primeiroLancamento?.valor
-            val primeiroPix = primeiroLancPix?.qrcode
-
-            binding.vencimento.text = "Vence em $primeiraDataVenc"
-            binding.valor.text = valorPrimeiraFat
-            if (primeiroLancamento != null) {
-                binding.statusFatura.text = primeiroLancamento.status?.uppercase()
-            }
-
-            binding.cardCliente.setOnClickListener {
-                val intent = Intent(this, EscolhaPagamento::class.java)
-                intent.putExtra("key", primeiroLancamento)
-                intent.putExtra("pix", primeiroLancPix)
-                startActivity(intent)
-            }
-
-
-
-            // Agora você pode usar os valores do primeiro elemento conforme necessário
-        } else {
-            // A lista está vazia, trate conforme necessário
-        }
-
-    }
     private fun realizarLogout() {
 
         val sharedPreferences = getSharedPreferences("db", MODE_PRIVATE)

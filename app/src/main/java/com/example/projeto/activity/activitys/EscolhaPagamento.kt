@@ -8,6 +8,7 @@ import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.widget.ImageView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -20,8 +21,10 @@ import com.example.projeto.activity.webView.WebSpeedTestActivity
 import com.example.projeto.databinding.ActivityEscolhaPagamentoBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.zxing.BarcodeFormat
+import com.google.zxing.EncodeHintType
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.WriterException
+import com.google.zxing.common.BitMatrix
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -40,6 +43,7 @@ class EscolhaPagamento : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        gerarQRCode()
 
         val lancamento = intent.getParcelableExtra("key", Lancamento::class.java)
         val formatoBanco = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
@@ -67,7 +71,7 @@ class EscolhaPagamento : AppCompatActivity() {
                 })
             }
         }
-        gerarQRCode()
+
 
         val btnCopiarBoleto = binding.copiarCodBarras
         val codigo = binding.codigo.text.toString()
@@ -110,7 +114,12 @@ class EscolhaPagamento : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     private fun gerarQRCode() {
      lancamentoPix = intent.getParcelableExtra("pix", QRCodeData::class.java)
+
+        val primeiraFaturaPix = intent.getStringExtra("pix")
         binding.pixCopiaCola.text = lancamentoPix?.qrcode
+
+
+
 
         val ivQRCode = binding.ivqrCode
         if (lancamentoPix != null) {
@@ -133,6 +142,41 @@ class EscolhaPagamento : AppCompatActivity() {
             }
         } else {
             snackBar("Campos vazios")
+        }
+    }
+
+    fun gerarQrCode(conteudo: String): Bitmap? {
+        val hints = hashMapOf(EncodeHintType.CHARACTER_SET to "UTF-8")
+        try {
+            val matrix: BitMatrix = MultiFormatWriter().encode(
+                conteudo,
+                BarcodeFormat.QR_CODE,
+                600, // largura do QR code
+                600, // altura do QR code
+                hints
+            )
+            val width = matrix.width
+            val height = matrix.height
+            val pixels = IntArray(width * height)
+            for (y in 0 until height) {
+                val offset = y * width
+                for (x in 0 until width) {
+                    pixels[offset + x] = if (matrix.get(x, y)) Color.BLACK else Color.WHITE
+                }
+            }
+            val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+            bitmap.setPixels(pixels, 0, width, 0, 0, width, height)
+            return bitmap
+        } catch (e: WriterException) {
+            e.printStackTrace()
+        }
+        return null
+    }
+    fun exibirQrCode(qrCodeBitmap: Bitmap?, imageView: ImageView) {
+        if (qrCodeBitmap != null) {
+            imageView.setImageBitmap(qrCodeBitmap)
+        } else {
+            // Trate a situação em que não foi possível gerar o QR code
         }
     }
 }

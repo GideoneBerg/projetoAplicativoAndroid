@@ -164,7 +164,7 @@ class LoginActivity : AppCompatActivity() {
                                     intent.putParcelableArrayListExtra("lancVenc", ArrayList(lancamentosVencidos))
                                     startActivity(intent)
                                     finish()
-                                }, 1000)
+                                }, 2000)
 
                                 // Dados que seram enviados para ClienteActivity
                                 limpaCampos()
