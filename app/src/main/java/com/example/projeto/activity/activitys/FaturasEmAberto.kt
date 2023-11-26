@@ -25,6 +25,7 @@ class FaturasEmAberto : AppCompatActivity() {
     private lateinit var faturasAdapter: FaturasAdapter
     private var lancamentos: List<Lancamento> = emptyList()
     private var qrCodeDataList: List<QRCodeData> = emptyList()
+    private val lancamentosPagos = mutableListOf<Lancamento>()
 
     private val binding by lazy {
         ActivityFaturasEmAbertoBinding.inflate(layoutInflater)
@@ -56,6 +57,17 @@ class FaturasEmAberto : AppCompatActivity() {
             binding.rvLista.visibility = View.GONE
         }
 
+
+    }
+
+    private fun faturasPagas(){
+
+        binding.btnFaturasPagas.setOnClickListener {
+            //val intent = Intent(this, )
+
+        }
+
+        intent.putParcelableArrayListExtra("pagos", ArrayList(lancamentosPagos))
 
     }
 

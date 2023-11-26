@@ -10,9 +10,9 @@
     <uses-permission android:name="android.permission.CALL_PHONE" /> <!-- Permissão para acesso a internet -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
-
 
     <application
         android:allowBackup="true"
@@ -25,13 +25,16 @@
         android:usesCleartextTraffic="false"
         tools:targetApi="31">
         <activity
-            android:name=".activity.activitys.EscolhaPagamento"
-            android:screenOrientation="portrait"
+            android:name=".activity.activitys.FaturasPagas"
             android:exported="false" />
         <activity
+            android:name=".activity.activitys.EscolhaPagamento"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".activity.activitys.FaturasEmAberto"
-            android:screenOrientation="portrait"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.activitys.PrimeiroAcesso"
             android:exported="false"

@@ -47,6 +47,7 @@ class ClienteActivity : AppCompatActivity() {
     private var lancamentoPix: List<Pix> = emptyList()
     private val qrCodeDataList = mutableListOf<QRCodeData>()
     private var lancamentosAbertos = mutableListOf<Lancamento>()
+    private val lancamentosPagos = mutableListOf<Lancamento>()
 
     private val binding by lazy {
         ActivityClienteBinding.inflate(layoutInflater)
@@ -63,8 +64,6 @@ class ClienteActivity : AppCompatActivity() {
 
         lancamentos = intent.getParcelableArrayListExtra("lancamentos", Lancamento::class.java)?: emptyList()
 
-        //val lancamentosVencidos = intent.getSerializableExtra("lancamentosVencidos") as ArrayList<Lancamento>
-        // val lancamentosPagos = intent.getSerializableExtra("lancamentosPagos") as ArrayList<Lancamento>
         lancamentosAbertos =
             (intent.getParcelableArrayListExtra("lancamentosAbertos", Lancamento::class.java)?: emptyList()).toMutableList()
 
@@ -221,6 +220,7 @@ class ClienteActivity : AppCompatActivity() {
             val intent = Intent(this@ClienteActivity, FaturasEmAberto::class.java)
             intent.putParcelableArrayListExtra("lancamentos", ArrayList(lancamentosAbertos))
             intent.putParcelableArrayListExtra("qrCode", ArrayList(qrCodeDataList))
+            intent.putParcelableArrayListExtra("pagos", ArrayList(lancamentosPagos))
             startActivity(intent)
         }
 

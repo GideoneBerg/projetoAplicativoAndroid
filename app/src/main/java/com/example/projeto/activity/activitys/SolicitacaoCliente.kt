@@ -67,30 +67,35 @@ class SolicitacaoCliente : AppCompatActivity() {
             if (motivo.isNotEmpty() && descricao.isNotEmpty()){
                 // enviando cod do cliente para o banco de dados
 
-                val cod = intent.extras!!.getString("cod")
-                val nomeUsuario = intent.extras!!.getString("nomeUsuario")
+                val cod = intent.extras?.getString("cod")
+                val nomeUsuario = intent.extras?.getString("nomeUsuario")
 
                 val servico = serviceClientRequest
-                servico.enviarDados(cod!!, nomeUsuario!!, motivo, descricao)
-                    .enqueue(object : Callback<String> {
-                        override fun onResponse(call: Call<String>, response: Response<String>) {
-                            if (response.isSuccessful) {
-                                val responseBody = response.body()
-                                if (responseBody == "success") {
-                                    snackBar("Solicitação Enviada")
-                                } else {
-                                    if (responseBody != null) {
-                                        snackBar(responseBody)
+                if (cod != null) {
+                    if (nomeUsuario != null) {
+                        servico.enviarDados(cod, nomeUsuario, motivo, descricao)
+                            .enqueue(object : Callback<String> {
+                                override fun onResponse(call: Call<String>, response: Response<String>) {
+                                    if (response.isSuccessful) {
+                                        val responseBody = response.body()
+                                        if (responseBody == "success") {
+                                            snackBar("Solicitação Enviada")
+                                        } else {
+                                            if (responseBody != null) {
+                                                snackBar(responseBody)
+                                            }
+                                        }
+                                    } else {
+                                        snackBar("Erro: Solicitação não foi enviada")
                                     }
                                 }
-                            } else {
-                                snackBar("Erro: Solicitação não foi enviada")
-                            }
-                        }
-                        override fun onFailure(call: Call<String>, t: Throwable) {
-                            Toast.makeText(applicationContext, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
-                        }
-                    })
+
+                                override fun onFailure(call: Call<String>, t: Throwable) {
+                                    Toast.makeText(applicationContext, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+                                }
+                            })
+                    }
+                }
             } else{
                 Toast.makeText(this, "Ops! Os campos são obrigatórios", Toast.LENGTH_SHORT).show()
                 }
