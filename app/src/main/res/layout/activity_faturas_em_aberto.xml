@@ -13,7 +13,7 @@
         android:layout_width="417dp"
         android:layout_height="1310dp"
         android:layout_marginTop="400dp"
-        android:background="@drawable/objeto9"
+        android:background="@drawable/objeto1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -37,36 +37,37 @@
 
     <ImageView
         android:id="@+id/imageView10"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginTop="46dp"
+        android:layout_width="329dp"
+        android:layout_height="385dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logotipo" />
+        app:srcCompat="@drawable/img_qrcode" />
 
     <TextView
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:fontFamily="sans-serif-condensed"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/abel"
         android:text="Faturas Disponíveis"
-        android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textColor="#00FFFFFF"
+        android:textSize="25sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/sizeList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="20dp"
         android:fontFamily="sans-serif-condensed"
         android:text="0"
-        android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textColor="#00FFFFFF"
+        android:textSize="25sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView7"
         app:layout_constraintStart_toEndOf="@+id/textView7" />
 
@@ -74,13 +75,12 @@
         android:id="@+id/scrollView3"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="250dp"
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/textView7">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_lista"
