@@ -219,7 +219,7 @@ class ClienteActivity : AppCompatActivity() {
 
         binding.financeiro.setOnClickListener {
             val intent = Intent(this@ClienteActivity, FaturasEmAberto::class.java)
-            intent.putParcelableArrayListExtra("lancamentos", ArrayList(lancamentos))
+            intent.putParcelableArrayListExtra("lancamentos", ArrayList(lancamentosAbertos))
             intent.putParcelableArrayListExtra("qrCode", ArrayList(qrCodeDataList))
             startActivity(intent)
         }
