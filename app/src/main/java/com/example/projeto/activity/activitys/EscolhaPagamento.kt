@@ -35,7 +35,6 @@ import java.util.Locale
 
 class EscolhaPagamento : AppCompatActivity() {
 
-    private var lancamentoPix: QRCodeData? = null
     private val binding by lazy {
         ActivityEscolhaPagamentoBinding.inflate(layoutInflater)
     }
@@ -43,7 +42,30 @@ class EscolhaPagamento : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        gerarQRCode()
+
+        val faturaAtual = intent.getStringExtra("pixAtual")
+        if (faturaAtual != null) {
+            val qrCodeBitmap = gerarQrCode(faturaAtual)
+            val imageViewQrCode = binding.ivqrCode
+            exibirQrCode(qrCodeBitmap, imageViewQrCode)
+
+            val btnGerarPix = binding.btnGerarPix
+            binding.pixCopiaCola.text = faturaAtual
+
+            btnGerarPix.setOnClickListener {
+                val clipBoard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                val clip = ClipData.newPlainText("Chave Pix", faturaAtual)
+                clipBoard.setPrimaryClip(clip)
+                CoroutineScope(Dispatchers.Main).launch {
+                    binding.btnGerarPix.text = "Pix Copiado"
+                    delay(2000)
+                    val texto = getString(R.string.copiar_boleto)
+                    binding.btnGerarPix.text = texto
+                }
+            }
+
+        }
+
 
         val lancamento = intent.getParcelableExtra("key", Lancamento::class.java)
         val formatoBanco = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
@@ -55,6 +77,32 @@ class EscolhaPagamento : AppCompatActivity() {
         } catch (e: ParseException) {
             e.printStackTrace()
         }
+
+         val lancamentoPix = intent.getParcelableExtra("pix", QRCodeData::class.java)
+
+        if (lancamentoPix != null) {
+            val conteudoQrCode = lancamentoPix.qrcode
+            val qrCodeBitmap = gerarQrCode(conteudoQrCode)
+            val imageViewQrCode = binding.ivqrCode
+            exibirQrCode(qrCodeBitmap, imageViewQrCode)
+
+            val btnGerarPix = binding.btnGerarPix
+            binding.pixCopiaCola.text = conteudoQrCode
+
+            btnGerarPix.setOnClickListener {
+                val clipBoard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                val clip = ClipData.newPlainText("Chave Pix",  conteudoQrCode)
+                clipBoard.setPrimaryClip(clip)
+                CoroutineScope(Dispatchers.Main).launch {
+                    binding.btnGerarPix.text = "Pix Copiado"
+                    delay(2000)
+                    val texto = getString(R.string.copiar_boleto)
+                    binding.btnGerarPix.text = texto
+                }
+            }
+
+        }
+
 
         if (lancamento != null) {
             val statusFormat = lancamento.status
@@ -87,20 +135,7 @@ class EscolhaPagamento : AppCompatActivity() {
                 binding.copiarCodBarras.text = texto
             }
         }
-        val btnGerarPix = binding.btnGerarPix
-        val codigoPix = binding.pixCopiaCola.text.toString()
 
-        btnGerarPix.setOnClickListener {
-            val clipBoard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-            val clip = ClipData.newPlainText("Chave Pix", codigoPix)
-            clipBoard.setPrimaryClip(clip)
-            CoroutineScope(Dispatchers.Main).launch {
-                binding.btnGerarPix.text = "Pix Copiado"
-                delay(2000)
-                val texto = getString(R.string.copiar_boleto)
-                binding.btnGerarPix.text = texto
-            }
-        }
     }
     private fun snackBar(mensagem: String) {
 
@@ -111,7 +146,7 @@ class EscolhaPagamento : AppCompatActivity() {
         ).setBackgroundTint(ContextCompat.getColor(this, R.color.azulAnil))
             .show()
     }
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+   /* @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     private fun gerarQRCode() {
      lancamentoPix = intent.getParcelableExtra("pix", QRCodeData::class.java)
 
@@ -143,7 +178,7 @@ class EscolhaPagamento : AppCompatActivity() {
         } else {
             snackBar("Campos vazios")
         }
-    }
+    }*/
 
     fun gerarQrCode(conteudo: String): Bitmap? {
         val hints = hashMapOf(EncodeHintType.CHARACTER_SET to "UTF-8")
@@ -158,13 +193,14 @@ class EscolhaPagamento : AppCompatActivity() {
             val width = matrix.width
             val height = matrix.height
             val pixels = IntArray(width * height)
+            val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+            val color = ContextCompat.getColor(this, R.color.azulMarinho)
             for (y in 0 until height) {
                 val offset = y * width
                 for (x in 0 until width) {
-                    pixels[offset + x] = if (matrix.get(x, y)) Color.BLACK else Color.WHITE
+                    pixels[offset + x] = if (matrix.get(x, y)) color else Color.TRANSPARENT
                 }
             }
-            val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
             bitmap.setPixels(pixels, 0, width, 0, 0, width, height)
             return bitmap
         } catch (e: WriterException) {
@@ -176,7 +212,8 @@ class EscolhaPagamento : AppCompatActivity() {
         if (qrCodeBitmap != null) {
             imageView.setImageBitmap(qrCodeBitmap)
         } else {
-            // Trate a situação em que não foi possível gerar o QR code
+            snackBar("Falha ao gerar QRCODE")
+
         }
     }
 }

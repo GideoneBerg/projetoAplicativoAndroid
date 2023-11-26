@@ -204,7 +204,7 @@ class ClienteActivity : AppCompatActivity() {
         binding.cardCliente.setOnClickListener {
             val intent = Intent(this, EscolhaPagamento::class.java)
             intent.putExtra("key", lancamentos.firstOrNull())
-            intent.putExtra("pix1", lancamentoPix.firstOrNull())
+            intent.putExtra("pixAtual", lancamentoPix.firstOrNull()?.qrcode)
             startActivity(intent)
         }
 
