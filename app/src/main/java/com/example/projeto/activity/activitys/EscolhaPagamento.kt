@@ -8,6 +8,7 @@ import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.view.Gravity
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -57,9 +58,10 @@ class EscolhaPagamento : AppCompatActivity() {
                 val clip = ClipData.newPlainText("Chave Pix", faturaAtual)
                 clipBoard.setPrimaryClip(clip)
                 CoroutineScope(Dispatchers.Main).launch {
-                    binding.btnGerarPix.text = "Pix Copiado"
+                    binding.btnGerarPix.text = "   Pix Copiado"
+                    binding.btnGerarPix.gravity = Gravity.CENTER
                     delay(2000)
-                    val texto = getString(R.string.copiar_boleto)
+                    val texto = getString(R.string.copiar_pix)
                     binding.btnGerarPix.text = texto
                 }
             }
@@ -91,9 +93,10 @@ class EscolhaPagamento : AppCompatActivity() {
                 val clip = ClipData.newPlainText("Chave Pix",  conteudoQrCode)
                 clipBoard.setPrimaryClip(clip)
                 CoroutineScope(Dispatchers.Main).launch {
-                    binding.btnGerarPix.text = "Pix Copiado"
+                    binding.btnGerarPix.gravity = Gravity.CENTER
+                    binding.btnGerarPix.text = "   Pix Copiado"
                     delay(2000)
-                    val texto = getString(R.string.copiar_boleto)
+                    val texto = getString(R.string.copiar_pix)
                     binding.btnGerarPix.text = texto
                 }
             }
@@ -124,7 +127,8 @@ class EscolhaPagamento : AppCompatActivity() {
             val clip = ClipData.newPlainText("Chave do Boleto", codigo)
             clipBoard.setPrimaryClip(clip)
             CoroutineScope(Dispatchers.Main).launch {
-                binding.copiarCodBarras.text = "Chave Copiada"
+                binding.btnGerarPix.gravity = Gravity.CENTER
+                binding.copiarCodBarras.text = "   Chave Copiada"
                 delay(2000)
                 val texto = getString(R.string.copiar_boleto)
                 binding.copiarCodBarras.text = texto

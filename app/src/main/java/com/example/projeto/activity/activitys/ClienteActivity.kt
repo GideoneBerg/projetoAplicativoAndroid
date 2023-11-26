@@ -30,6 +30,7 @@ import com.example.projeto.activity.model.DadosSingleton
 
 import com.example.projeto.activity.webView.WebSpeedTestActivity
 import com.example.projeto.databinding.ActivityClienteBinding
+import com.example.projeto.databinding.ActivityEscolhaPagamentoBinding
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -41,18 +42,20 @@ import java.util.Locale
 
 class ClienteActivity : AppCompatActivity() {
     private lateinit var servicePix: ServicePix
-    private lateinit var binding: ActivityClienteBinding
+
     private var lancamentos: List<Lancamento> = emptyList()
     private var lancamentoPix: List<Pix> = emptyList()
     private val qrCodeDataList = mutableListOf<QRCodeData>()
+
+    private val binding by lazy {
+        ActivityClienteBinding.inflate(layoutInflater)
+    }
 
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityClienteBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+        setContentView(binding.root)
         //chamadas Pix
         servicePix = RetrofitService.getRetrofitInstance()
             .create(ServicePix::class.java)

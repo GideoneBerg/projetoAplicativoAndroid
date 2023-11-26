@@ -13,17 +13,18 @@ import androidx.core.content.ContextCompat
 import com.example.projeto.R
 import com.example.projeto.activity.model.NetworkUtils
 import com.example.projeto.databinding.ActivityInicialBinding
+import com.example.projeto.databinding.ActivityLoginBinding
 import com.google.android.material.snackbar.Snackbar
 
 class InicialActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityInicialBinding
+    private val binding by lazy {
+        ActivityInicialBinding.inflate(layoutInflater)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityInicialBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+        setContentView(binding.root)
         checkNetworkAndInitialize()
         botoes()
     }

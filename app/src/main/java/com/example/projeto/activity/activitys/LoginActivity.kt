@@ -30,6 +30,7 @@ import com.example.projeto.activity.model.RetrofitService
 import com.example.projeto.activity.interfaces.ServiceLogin
 import com.example.projeto.activity.interfaces.ServicePix
 import com.example.projeto.activity.model.NetworkUtils
+import com.example.projeto.databinding.ActivityEscolhaPagamentoBinding
 import com.example.projeto.databinding.ActivityLoginBinding
 import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
@@ -40,17 +41,20 @@ import retrofit2.Response
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var serviceLogin: ServiceLogin
-    private lateinit var binding: ActivityLoginBinding
     private lateinit var serviceLancamentos: ServiceLancamentos
     private val lancamentosVencidos = mutableListOf<Lancamento>()
     private val lancamentosPagos = mutableListOf<Lancamento>()
     private val lancamentosAbertos = mutableListOf<Lancamento>()
     private var lancamentos: List<Lancamento> = emptyList()
 
+    private val binding by lazy {
+        ActivityLoginBinding.inflate(layoutInflater)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         checkNetworkAndInitialize()
 
         funcaoBotoes()
