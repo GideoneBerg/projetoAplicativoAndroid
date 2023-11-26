@@ -9,10 +9,10 @@
 
     <View
         android:id="@+id/view_background"
-        android:layout_width="0dp"
-        android:layout_height="560dp"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/objeto7"
+        android:layout_width="415dp"
+        android:layout_height="518dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/objeto10a"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -24,8 +24,11 @@
         android:id="@+id/link_fatura"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/abel"
         android:text="Mais detalhes da fatura"
+        android:textColor="@color/white"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView3" />
@@ -47,7 +50,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="30dp"
+            android:padding="20dp"
+            android:background="@color/azulAnil"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent">
@@ -59,7 +63,7 @@
                 android:layout_marginStart="8dp"
                 android:fontFamily="@font/abel"
                 android:text="Fatura Disponível"
-                android:textColor="@color/azulAnil"
+                android:textColor="@color/amarelo"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -73,7 +77,7 @@
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/abel"
                 android:text="Vence em 10/06/2023"
-                android:textColor="@color/azulAnil"
+                android:textColor="@color/white"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -87,7 +91,7 @@
                 android:layout_marginTop="8dp"
                 android:fontFamily="sans-serif-condensed"
                 android:text="R$ 49,99"
-                android:textColor="@color/azulAnil"
+                android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -122,6 +126,10 @@
         android:layout_marginTop="24dp"
         android:background="@drawable/background_botao1"
         android:text="@string/copiar_boleto"
+        android:drawableStart="@drawable/baseline_view_column_24"
+        android:drawablePadding="-40dp"
+        android:paddingLeft="40dp"
+        android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
@@ -131,11 +139,11 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_barras"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="65dp"
+        android:layout_width="256dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="75dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="65dp"
+        android:layout_marginEnd="75dp"
         app:cardCornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -145,6 +153,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/color_codigo_barra"
             android:padding="10dp">
 
             <TextView
@@ -216,8 +225,8 @@
 
     <ImageView
         android:id="@+id/imageView13"
-        android:layout_width="288dp"
-        android:layout_height="290dp"
+        android:layout_width="304dp"
+        android:layout_height="303dp"
         android:layout_marginTop="60dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -230,6 +239,10 @@
         android:layout_height="51dp"
         android:layout_marginTop="60dp"
         android:background="@drawable/background_botao1"
+        android:drawableStart="@drawable/baseline_pix_24"
+        android:drawablePadding="-40dp"
+        android:paddingLeft="40dp"
+        android:textAlignment="center"
         android:text="@string/copiar_pix"
         android:textAllCaps="false"
         android:textColor="@color/white"
