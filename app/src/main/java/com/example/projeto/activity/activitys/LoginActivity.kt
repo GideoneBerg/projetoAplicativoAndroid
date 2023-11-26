@@ -8,6 +8,7 @@ import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -28,6 +29,7 @@ import com.example.projeto.activity.interfaces.ServiceLancamentos
 import com.example.projeto.activity.model.RetrofitService
 import com.example.projeto.activity.interfaces.ServiceLogin
 import com.example.projeto.activity.interfaces.ServicePix
+import com.example.projeto.activity.model.NetworkUtils
 import com.example.projeto.databinding.ActivityLoginBinding
 import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
@@ -49,16 +51,21 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        if (isNetworkAvailable()) {
-            // chamada login
-            serviceLogin = RetrofitService.getRetrofitInstance()
-                .create(ServiceLogin::class.java)
-            // chamada faturas
-            serviceLancamentos = RetrofitService.getRetrofitInstance()
-                .create(ServiceLancamentos::class.java)
+        checkNetworkAndInitialize()
 
-            funcaoBotoes()
-        }else {
+        funcaoBotoes()
+
+    }
+
+
+    private fun checkNetworkAndInitialize() {
+        if (NetworkUtils.isNetworkAvailable(this)) {
+            // Se a rede estiver disponível, execute suas ações aqui
+            serviceLogin = RetrofitService.getRetrofitInstance().create(ServiceLogin::class.java)
+            serviceLancamentos = RetrofitService.getRetrofitInstance().create(ServiceLancamentos::class.java)
+
+
+        } else {
             showNoInternetSnackbar()
         }
     }
@@ -103,15 +110,9 @@ class LoginActivity : AppCompatActivity() {
             openUrl("https://api.whatsapp.com/send/?phone=5581986271986&text&type=phone_number&app_absent=0")
         }
 
-
-
     }
 
     private fun loginUsuario() {
-
-
-
-
 
             // isDone verifica se o usuario preencheu todos os campos
             // unMasked recupera os dados sem a máscara
@@ -120,9 +121,6 @@ class LoginActivity : AppCompatActivity() {
                 val cpf = binding.editTextCpfCnpj.unMasked
                 val senha = binding.editTextSenha.text.toString()
                 val servico = serviceLogin
-                binding.progressBar2.visibility = View.VISIBLE
-                binding.btnEntrar.visibility = View.INVISIBLE
-
 
                 servico.setUsuario(cpf, senha).enqueue(object :
                     Callback<Usuario> {
@@ -135,13 +133,9 @@ class LoginActivity : AppCompatActivity() {
 
                     override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
                         if (response.isSuccessful) {
-                            binding.progressBar2.visibility = View.VISIBLE
-                            binding.btnEntrar.visibility = View.INVISIBLE
-
                             val usuario = response.body()
 
                             if (usuario?.cpf == "vazio") {
-
 
                                 exibeSnackBar(false)
                             } else {
@@ -150,8 +144,8 @@ class LoginActivity : AppCompatActivity() {
                                     usuario.login?.let { chamadaLancamentos(it) }
 
                                 }
-
-
+                                binding.progressBar2.visibility = View.VISIBLE
+                                binding.btnEntrar.visibility = View.INVISIBLE
 
                                 exibeSnackBar(true)
                                 Handler(Looper.getMainLooper()).postDelayed({
@@ -242,20 +236,6 @@ class LoginActivity : AppCompatActivity() {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         startActivity(intent)
     }
-    @SuppressLint("MissingPermission")
-    private fun isNetworkAvailable(): Boolean {
-        var result = false
-        runOnUiThread {
-            val connectivityManager =
-                getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-            val network = connectivityManager.activeNetwork
-            val capabilities = connectivityManager.getNetworkCapabilities(network)
-            result = capabilities != null &&
-                    (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ||
-                            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR))
-        }
-        return result
-    }
 
     private fun snackBar(mensagem: String) {
         if (mensagem == "Ops! Campos vazios") {
@@ -291,6 +271,9 @@ class LoginActivity : AppCompatActivity() {
 
         snackbar.show()
     }
-
+    override fun onResume() {
+        super.onResume()
+        checkNetworkAndInitialize()
+    }
 
 }

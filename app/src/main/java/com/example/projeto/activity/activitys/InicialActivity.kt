@@ -1,17 +1,17 @@
 package com.example.projeto.activity.activitys
 
-import android.annotation.SuppressLint
-import android.content.Context
+
 import android.content.Intent
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
+
 import android.net.Uri
+
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.projeto.R
+import com.example.projeto.activity.model.NetworkUtils
 import com.example.projeto.databinding.ActivityInicialBinding
 import com.google.android.material.snackbar.Snackbar
 
@@ -24,8 +24,18 @@ class InicialActivity : AppCompatActivity() {
         binding = ActivityInicialBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        if (isNetworkAvailable()) {
-            botoes()
+        checkNetworkAndInitialize()
+        botoes()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        checkNetworkAndInitialize()
+    }
+
+    private fun checkNetworkAndInitialize() {
+        if (NetworkUtils.isNetworkAvailable(this)) {
+            // Se a rede estiver disponível, execute suas ações aqui
 
         } else {
             showNoInternetSnackbar()
@@ -53,21 +63,6 @@ class InicialActivity : AppCompatActivity() {
             startActivity(intent)
 
         }
-    }
-
-    @SuppressLint("MissingPermission")
-    private fun isNetworkAvailable(): Boolean {
-        var result = false
-        runOnUiThread {
-            val connectivityManager =
-                getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-            val network = connectivityManager.activeNetwork
-            val capabilities = connectivityManager.getNetworkCapabilities(network)
-            result = capabilities != null &&
-                    (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ||
-                            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR))
-        }
-        return result
     }
 
     private fun showNoInternetSnackbar() {
