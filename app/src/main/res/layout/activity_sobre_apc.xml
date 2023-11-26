@@ -16,7 +16,7 @@
         <!--  transparencia da imagem  android:alpha="0.5"-->
 
 
-        <TextView
+        ;<TextView
             android:id="@+id/missao"
             android:layout_width="258dp"
             android:layout_height="523dp"

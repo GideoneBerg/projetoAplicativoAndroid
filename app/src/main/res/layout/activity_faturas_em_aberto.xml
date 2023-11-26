@@ -10,9 +10,9 @@
 
     <View
         android:id="@+id/view3"
-        android:layout_width="0dp"
-        android:layout_height="620dp"
-        android:layout_marginTop="300dp"
+        android:layout_width="412dp"
+        android:layout_height="687dp"
+        android:layout_marginTop="205dp"
         android:background="@drawable/objeto1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,7 +39,7 @@
         android:id="@+id/imageView10"
         android:layout_width="329dp"
         android:layout_height="385dp"
-        android:layout_marginTop="85dp"
+        android:layout_marginTop="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
@@ -75,13 +75,12 @@
         android:id="@+id/scrollView3"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="330dp"
+        android:layout_marginTop="260dp"
         android:fillViewport="true"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btn_faturas_pagas"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_lista"
@@ -104,11 +103,16 @@
         android:id="@+id/btn_faturas_pagas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginBottom="83dp"
         android:text="Faturas Pagas"
+        android:textColor="@color/white"
+        android:padding="15dp"
+        android:background="@drawable/background_botao_planos"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView3" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
