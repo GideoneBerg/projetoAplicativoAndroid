@@ -54,7 +54,6 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
         checkNetworkAndInitialize()
 
         funcaoBotoes()
@@ -162,8 +161,7 @@ class LoginActivity : AppCompatActivity() {
 
 
 
-                                    intent.putParcelableArrayListExtra("lancamentos", ArrayList(lancamentos))
-                                    intent.putParcelableArrayListExtra("lancVenc", ArrayList(lancamentosVencidos))
+                                   /// intent.putParcelableArrayListExtra("lancamentos", ArrayList(lancamentos))
                                     startActivity(intent)
                                     finish()
                                 }, 2000)

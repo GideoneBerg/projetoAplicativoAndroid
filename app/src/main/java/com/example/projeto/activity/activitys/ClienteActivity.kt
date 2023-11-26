@@ -46,6 +46,7 @@ class ClienteActivity : AppCompatActivity() {
     private var lancamentos: List<Lancamento> = emptyList()
     private var lancamentoPix: List<Pix> = emptyList()
     private val qrCodeDataList = mutableListOf<QRCodeData>()
+    private var lancamentosAbertos = mutableListOf<Lancamento>()
 
     private val binding by lazy {
         ActivityClienteBinding.inflate(layoutInflater)
@@ -62,6 +63,11 @@ class ClienteActivity : AppCompatActivity() {
 
         lancamentos = intent.getParcelableArrayListExtra("lancamentos", Lancamento::class.java)?: emptyList()
 
+        //val lancamentosVencidos = intent.getSerializableExtra("lancamentosVencidos") as ArrayList<Lancamento>
+        // val lancamentosPagos = intent.getSerializableExtra("lancamentosPagos") as ArrayList<Lancamento>
+        lancamentosAbertos =
+            (intent.getParcelableArrayListExtra("lancamentosAbertos", Lancamento::class.java)?: emptyList()).toMutableList()
+
         val coroutineScope = CoroutineScope(Dispatchers.IO)
         coroutineScope.launch {
             chamadaPix()
@@ -77,10 +83,10 @@ class ClienteActivity : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     private fun chamadaPix() {
-        lancamentos = intent.getParcelableArrayListExtra("lancamentos", Lancamento::class.java) ?: emptyList()
+       // lancamentos = intent.getParcelableArrayListExtra("lancamentos", Lancamento::class.java) ?: emptyList()
         val uuidLanc = mutableListOf<String>()
 
-        lancamentos.forEach {
+        lancamentosAbertos.forEach {
             it.uuid_lanc?.let { uuid ->
                 uuidLanc.add(uuid)
             }
@@ -121,7 +127,7 @@ class ClienteActivity : AppCompatActivity() {
     }
     private fun faturaAtual(){
         CoroutineScope(Dispatchers.IO).launch {
-            val primeiroLancamento = lancamentos.firstOrNull()
+            val primeiroLancamento = lancamentosAbertos.firstOrNull()
 
             if (primeiroLancamento != null) {
                 val primeiraDataVenc = primeiroLancamento.datavenc?.let { formatarData(it) }
@@ -205,8 +211,9 @@ class ClienteActivity : AppCompatActivity() {
 
         binding.cardCliente.setOnClickListener {
             val intent = Intent(this, EscolhaPagamento::class.java)
-            intent.putExtra("key", lancamentos.firstOrNull())
-            intent.putExtra("pixAtual", lancamentoPix.firstOrNull()?.qrcode)
+            intent.putExtra("key", lancamentosAbertos.firstOrNull())
+           // intent.putExtra("pixAtual", lancamentoPix.firstOrNull()?.qrcode)
+            intent.putExtra("pixAtual", qrCodeDataList.firstOrNull()?.qrcode)
             startActivity(intent)
         }
 
@@ -326,8 +333,6 @@ class ClienteActivity : AppCompatActivity() {
     }
 
 
- //   val lancamentosVencidos = intent.getSerializableExtra("lancamentosVencidos") as ArrayList<Lancamento>
-   // val lancamentosPagos = intent.getSerializableExtra("lancamentosPagos") as ArrayList<Lancamento>
-  //  val lancamentosAbertos = intent.getSerializableExtra("lancamentosAbertos") as ArrayList<Lancamento>
+ //
 
 }
