@@ -40,28 +40,27 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var serviceLogin: ServiceLogin
     private lateinit var binding: ActivityLoginBinding
     private lateinit var serviceLancamentos: ServiceLancamentos
-
-    val lancamentosVencidos = mutableListOf<Lancamento>()
-    val lancamentosPagos = mutableListOf<Lancamento>()
-    val lancamentosAbertos = mutableListOf<Lancamento>()
-
-    var lancamentos: List<Lancamento> = emptyList()
-
+    private val lancamentosVencidos = mutableListOf<Lancamento>()
+    private val lancamentosPagos = mutableListOf<Lancamento>()
+    private val lancamentosAbertos = mutableListOf<Lancamento>()
+    private var lancamentos: List<Lancamento> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
-        // chamada login
-        serviceLogin = RetrofitService.getRetrofitInstance()
-            .create(ServiceLogin::class.java)
-        // chamada faturas
-        serviceLancamentos = RetrofitService.getRetrofitInstance()
-            .create(ServiceLancamentos::class.java)
+        setContentView(binding.root)
+        if (isNetworkAvailable()) {
+            // chamada login
+            serviceLogin = RetrofitService.getRetrofitInstance()
+                .create(ServiceLogin::class.java)
+            // chamada faturas
+            serviceLancamentos = RetrofitService.getRetrofitInstance()
+                .create(ServiceLancamentos::class.java)
 
-
-        funcaoBotoes()
+            funcaoBotoes()
+        }else {
+            showNoInternetSnackbar()
+        }
     }
 
     private fun togglePasswordVisibility() {
@@ -78,6 +77,10 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun funcaoBotoes() {
+
+        binding.btnEntrar.setOnClickListener {
+            loginUsuario()
+        }
 
         binding.txtPrimeiroAcesso.setOnClickListener {
             val intent = Intent(this, PrimeiroAcesso::class.java)
@@ -100,15 +103,15 @@ class LoginActivity : AppCompatActivity() {
             openUrl("https://api.whatsapp.com/send/?phone=5581986271986&text&type=phone_number&app_absent=0")
         }
 
-        binding.btnEntrar.setOnClickListener {
-            loginUsuario()
-        }
+
 
     }
 
     private fun loginUsuario() {
 
-        if (isNetworkAvailable()) {
+
+
+
 
             // isDone verifica se o usuario preencheu todos os campos
             // unMasked recupera os dados sem a máscara
@@ -116,11 +119,11 @@ class LoginActivity : AppCompatActivity() {
             if (isDone) { // verifica se o usuario digitou os dados corretamente
                 val cpf = binding.editTextCpfCnpj.unMasked
                 val senha = binding.editTextSenha.text.toString()
-
-                val progressBar = findViewById<ProgressBar>(R.id.progressBar2)
-                val botaoVisibilidade = findViewById<Button>(R.id.btnEntrar)
-
                 val servico = serviceLogin
+                binding.progressBar2.visibility = View.VISIBLE
+                binding.btnEntrar.visibility = View.INVISIBLE
+
+
                 servico.setUsuario(cpf, senha).enqueue(object :
                     Callback<Usuario> {
                     override fun onFailure(call: Call<Usuario>, t: Throwable) {
@@ -132,22 +135,23 @@ class LoginActivity : AppCompatActivity() {
 
                     override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
                         if (response.isSuccessful) {
+                            binding.progressBar2.visibility = View.VISIBLE
+                            binding.btnEntrar.visibility = View.INVISIBLE
 
                             val usuario = response.body()
 
                             if (usuario?.cpf == "vazio") {
-                                progressBar.visibility = View.GONE
-                                botaoVisibilidade.visibility = View.VISIBLE
+
 
                                 exibeSnackBar(false)
                             } else {
 
                                 if (usuario != null) {
                                     usuario.login?.let { chamadaLancamentos(it) }
+
                                 }
 
-                                botaoVisibilidade.visibility = View.INVISIBLE
-                                progressBar.visibility = View.VISIBLE
+
 
                                 exibeSnackBar(true)
                                 Handler(Looper.getMainLooper()).postDelayed({
@@ -175,9 +179,7 @@ class LoginActivity : AppCompatActivity() {
             } else {
                 snackBar("Ops! Campos vazios")
             }
-        } else {
-            showNoInternetSnackbar()
-        }
+
     }
     private fun chamadaLancamentos(login: String){
 
@@ -242,14 +244,19 @@ class LoginActivity : AppCompatActivity() {
     }
     @SuppressLint("MissingPermission")
     private fun isNetworkAvailable(): Boolean {
-        val connectivityManager =
-            getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val network = connectivityManager.activeNetwork
-        val capabilities = connectivityManager.getNetworkCapabilities(network)
-        return capabilities != null &&
-                (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ||
-                        capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR))
+        var result = false
+        runOnUiThread {
+            val connectivityManager =
+                getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            val network = connectivityManager.activeNetwork
+            val capabilities = connectivityManager.getNetworkCapabilities(network)
+            result = capabilities != null &&
+                    (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ||
+                            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR))
+        }
+        return result
     }
+
     private fun snackBar(mensagem: String) {
         if (mensagem == "Ops! Campos vazios") {
 
@@ -273,7 +280,7 @@ class LoginActivity : AppCompatActivity() {
         val snackbar = Snackbar.make(
             findViewById(android.R.id.content),
             R.string.conexao_internet,
-            Snackbar.LENGTH_LONG
+            Snackbar.LENGTH_INDEFINITE
         ).setBackgroundTint(ContextCompat.getColor(this, R.color.rosa))
 
         snackbar.setAction("Abrir Configurações", View.OnClickListener {

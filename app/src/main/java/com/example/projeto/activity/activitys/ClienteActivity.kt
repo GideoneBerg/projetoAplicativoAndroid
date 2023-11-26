@@ -65,7 +65,6 @@ class ClienteActivity : AppCompatActivity() {
 
             faturaAtual()
         }
-
         // Ação dos botões
         botoesScroll()
         // Dados do cliente
