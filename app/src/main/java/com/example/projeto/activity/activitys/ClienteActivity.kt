@@ -157,10 +157,10 @@ class ClienteActivity : AppCompatActivity() {
                 usuario.numero, usuario.bairro, usuario.estado,
                 usuario.cod, usuario.mensagem, usuario.login
             )
-
+            binding.textViewNome.text = usuario.nome
             binding.plano.text = usuario.plano?.replace("_", " ")
            // binding.vencimento.text = usuario.vencimento
-            binding.textViewNome.text = usuario.nome
+
 
             // Botao criado para exibição de dados do cliente usando popup
             binding.maisDados.setOnClickListener {
@@ -226,11 +226,12 @@ class ClienteActivity : AppCompatActivity() {
         }
 
         binding.solicitarServico.setOnClickListener {
+            val nome = DadosSingleton.usuario?.nome
+            val cpf = DadosSingleton.usuario?.cpf
             val intent = Intent(this, SolicitacaoCliente::class.java)
-            val cod = extras.getString("cod")
-            val nomeUsuario = extras.getString("nome")
-            intent.putExtra("cod", cod)
-            intent.putExtra("nomeUsuario", nomeUsuario)
+            intent.putExtra("nome",nome)
+            intent.putExtra("cpf",cpf)
+
             startActivity(intent)
         }
 
