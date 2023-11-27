@@ -154,7 +154,7 @@ class LoginActivity : AppCompatActivity() {
 
                             exibeSnackBar(true)
                             lifecycleScope.launch(Dispatchers.Main) {
-                                delay(3000)
+                                delay(9000)
 
                                 val intent = Intent(this@LoginActivity, ClienteActivity::class.java)
                                 intent.putExtra("usuario", usuario)
@@ -197,7 +197,7 @@ class LoginActivity : AppCompatActivity() {
                     if (lancamentos.isNullOrEmpty()) {
                         // Lista de lançamentos está vazia ou nula
                     } else {
-                        CoroutineScope(Dispatchers.IO).launch {
+                        CoroutineScope(Dispatchers.Main).launch {
                             lancamentos.forEach {
                                 if (it.status == "pago") {
                                     lancamentosPagos.add(it)
@@ -207,9 +207,7 @@ class LoginActivity : AppCompatActivity() {
                                     lancamentosAbertos.add(it)
                                 }
                             }
-
                         }
-
                     }
                 }
             }
