@@ -3,6 +3,7 @@ package com.example.projeto.activity.activitys
 
 import Usuario
 import android.content.Intent
+import android.graphics.PorterDuff
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
@@ -47,6 +48,8 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
         checkNetworkAndInitialize()
         funcaoBotoes()
+
+
     }
 
     private fun checkNetworkAndInitialize() {

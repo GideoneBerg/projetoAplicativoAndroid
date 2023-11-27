@@ -9,11 +9,15 @@ import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import com.example.projeto.R
 import com.example.projeto.activity.model.RetrofitService
 import com.example.projeto.activity.interfaces.ServiceFirstAccess
 import com.example.projeto.databinding.ActivityPrimeiroAcessoBinding
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -74,9 +78,14 @@ class PrimeiroAcesso : AppCompatActivity() {
                         if (mensagem != null) {
                             if (mensagem == "Senha Cadastrada com sucesso!") {
                                 exibeSnackBar(mensagem)
-                                val intent = Intent(this@PrimeiroAcesso, LoginActivity::class.java)
-                                startActivity(intent)
-                                finish()
+                                lifecycleScope.launch(Dispatchers.Main) {
+                                    delay(1000)
+
+                                    val intent =
+                                        Intent(this@PrimeiroAcesso, LoginActivity::class.java)
+                                    startActivity(intent)
+                                    finish()
+                                }
                             } else if (mensagem == "Senha ja cadastrada!") {
                                 exibeSnackBar(mensagem)
                             } else if (mensagem == "CPF nao localizado!") {

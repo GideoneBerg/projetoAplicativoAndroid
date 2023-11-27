@@ -10,4 +10,9 @@
     <color name="amarelo">#FAE905</color>
     <color name="azulEscuro">#141526</color>
     <color name="alerta">#FFCD07</color>
+    <color name="progressBarBackground">#C0C0C0</color>
+    <color name="progressBarColor">#FF4081</color>
+
 </resources>
+
+

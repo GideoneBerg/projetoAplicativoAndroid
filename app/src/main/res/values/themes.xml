@@ -21,6 +21,7 @@
         <item name="android:scrollbarTrackVertical">@drawable/scrollbar_track</item>
     </style>
 
+
     <style name="AppCompat.TelaCheia" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="colorPrimaryDark">@color/azulMarinho</item>
     </style>

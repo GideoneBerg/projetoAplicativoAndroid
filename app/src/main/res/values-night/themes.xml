@@ -5,6 +5,19 @@
         <item name="colorPrimaryDark">@color/azulMarinho</item>
         <item name="colorPrimary">@color/azulEscuro</item>
     </style>
+    <style name="CustomRecyclerViewScrollbar">
+        <item name="android:scrollbarThumbVertical">@drawable/scrollbar_thumb</item>
+        <item name="android:scrollbarTrackVertical">@drawable/scrollbar_track</item>
+    </style>
+    <style name="CustomRecyclerViewScrollbarBlue">
+        <item name="android:scrollbarThumbVertical">@drawable/scrollbar_blue</item>
+        <item name="android:scrollbarTrackVertical">@drawable/scrollbar_track</item>
+    </style>
+
+    <style name="CustomRecyclerViewScrollbarRosa">
+        <item name="android:scrollbarThumbVertical">@drawable/scrollbar_rosa</item>
+        <item name="android:scrollbarTrackVertical">@drawable/scrollbar_track</item>
+    </style>
 
 
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
