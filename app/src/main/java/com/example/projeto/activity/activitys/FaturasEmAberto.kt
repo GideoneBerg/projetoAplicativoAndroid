@@ -22,7 +22,8 @@ class FaturasEmAberto : AppCompatActivity() {
     private lateinit var faturasAdapter: FaturasAdapter
     private var lancamentos: List<Lancamento> = emptyList()
     private var qrCodeDataList: List<QRCodeData> = emptyList()
-    private var lancamentosPagos : List<Lancamento> = emptyList()
+    private var lancamentosPagos: List<Lancamento> = emptyList()
+    private var lancamentosVencidos: List<Lancamento> = emptyList()
 
     private val binding by lazy {
         ActivityFaturasEmAbertoBinding.inflate(layoutInflater)
@@ -32,7 +33,7 @@ class FaturasEmAberto : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        faturasPagas()
+
 
         lancamentos =
             intent.getParcelableArrayListExtra("lancamentos", Lancamento::class.java) ?: emptyList()
@@ -41,7 +42,12 @@ class FaturasEmAberto : AppCompatActivity() {
             intent.getParcelableArrayListExtra("qrCode", QRCodeData::class.java) ?: emptyList()
 
         lancamentosPagos =
-            intent.getParcelableArrayListExtra("lancamentosPagos", Lancamento::class.java)?: emptyList()
+            intent.getParcelableArrayListExtra("lancamentosPagos", Lancamento::class.java)
+                ?: emptyList()
+
+        lancamentosVencidos =
+            intent.getParcelableArrayListExtra("lancamentosVencidos", Lancamento::class.java)
+                ?: emptyList()
 
         if (lancamentos.isNotEmpty() && qrCodeDataList.isNotEmpty()) {
             rvLista = findViewById(R.id.rv_lista)
@@ -57,13 +63,13 @@ class FaturasEmAberto : AppCompatActivity() {
             binding.mensagemTextView.visibility = View.VISIBLE
             binding.rvLista.visibility = View.GONE
         }
-
-
+        faturasPagas()
+        faturasVencidas()
 
 
     }
 
-    private fun faturasPagas(){
+    private fun faturasPagas() {
 
         binding.btnFaturasPagas.setOnClickListener {
             val intent = Intent(this, FaturasPagas::class.java)
@@ -71,8 +77,16 @@ class FaturasEmAberto : AppCompatActivity() {
             startActivity(intent)
 
         }
+    }
 
+    private fun faturasVencidas() {
 
+        binding.btnFaturasVencidas.setOnClickListener {
+            val intent = Intent(this, FaturasVencidas::class.java)
+            intent.putParcelableArrayListExtra("lancamentosVencidos", ArrayList(lancamentosVencidos))
+            startActivity(intent)
+
+        }
 
     }
 

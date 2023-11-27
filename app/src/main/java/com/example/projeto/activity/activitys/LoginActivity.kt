@@ -70,7 +70,8 @@ class LoginActivity : AppCompatActivity() {
         if (NetworkUtils.isNetworkAvailable(this)) {
             // Se a rede estiver disponível, execute suas ações aqui
             serviceLogin = RetrofitService.getRetrofitInstance().create(ServiceLogin::class.java)
-            serviceLancamentos = RetrofitService.getRetrofitInstance().create(ServiceLancamentos::class.java)
+            serviceLancamentos =
+                RetrofitService.getRetrofitInstance().create(ServiceLancamentos::class.java)
 
 
         } else {
@@ -122,65 +123,61 @@ class LoginActivity : AppCompatActivity() {
 
     private fun loginUsuario() {
 
-            // isDone verifica se o usuario preencheu todos os campos
-            // unMasked recupera os dados sem a máscara
-            val isDone = binding.editTextCpfCnpj.isDone
-            if (isDone) { // verifica se o usuario digitou os dados corretamente
-                val cpf = binding.editTextCpfCnpj.unMasked
-                val senha = binding.editTextSenha.text.toString()
-                val servico = serviceLogin
+        // isDone verifica se o usuario preencheu todos os campos
+        // unMasked recupera os dados sem a máscara
+        val isDone = binding.editTextCpfCnpj.isDone
+        if (isDone) { // verifica se o usuario digitou os dados corretamente
+            val cpf = binding.editTextCpfCnpj.unMasked
+            val senha = binding.editTextSenha.text.toString()
+            val servico = serviceLogin
 
-                servico.setUsuario(cpf, senha).enqueue(object :
-                    Callback<Usuario> {
-                    override fun onFailure(call: Call<Usuario>, t: Throwable) {
-                        // registra informações de erro
-                        Log.d("Erro", t.toString())
-                        snackBar("Tivemos um problema. Tente novamente mais tarde.")
+            servico.setUsuario(cpf, senha).enqueue(object :
+                Callback<Usuario> {
+                override fun onFailure(call: Call<Usuario>, t: Throwable) {
+                    // registra informações de erro
+                    Log.d("Erro", t.toString())
+                    snackBar("Tivemos um problema. Tente novamente mais tarde.")
 
-                    }
+                }
 
-                    override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
-                        if (response.isSuccessful) {
-                            val usuario = response.body()
-                            if (usuario?.cpf == "vazio") {
-                                exibeSnackBar(false)
-                            } else {
-                                if (usuario != null) {
-                                    usuario.login?.let { chamadaLancamentos(it) }
-                                }
-                                binding.progressBar2.visibility = View.VISIBLE
-                                binding.btnEntrar.visibility = View.INVISIBLE
-
-                                exibeSnackBar(true)
-                                lifecycleScope.launch(Dispatchers.Main){
-                                    delay(3000)
-
-                                        val intent = Intent(this@LoginActivity, ClienteActivity::class.java)
-                                        intent.putExtra("usuario", usuario)
-                                        intent.putExtra("lancamentosVencidos", ArrayList(lancamentosVencidos))
-                                        intent.putExtra("lancamentosPagos", ArrayList(lancamentosPagos))
-                                        intent.putExtra("lancamentosAbertos", ArrayList(lancamentosAbertos))
-
-                                        startActivity(intent)
-                                        finish()
-
-
-                                }
-
-
-
-                                // Dados que seram enviados para ClienteActivity
-                                limpaCampos()
+                override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
+                    if (response.isSuccessful) {
+                        val usuario = response.body()
+                        if (usuario?.cpf == "vazio") {
+                            exibeSnackBar(false)
+                        } else {
+                            if (usuario != null) {
+                                usuario.login?.let { chamadaLancamentos(it) }
                             }
+                            binding.progressBar2.visibility = View.VISIBLE
+                            binding.btnEntrar.visibility = View.INVISIBLE
+
+                            exibeSnackBar(true)
+                            lifecycleScope.launch(Dispatchers.Main) {
+                                delay(3000)
+
+                                val intent = Intent(this@LoginActivity, ClienteActivity::class.java)
+                                intent.putExtra("usuario", usuario)
+                                intent.putExtra("lancamentosVencidos", ArrayList(lancamentosVencidos))
+                                intent.putExtra("lancamentosPagos", ArrayList(lancamentosPagos))
+                                intent.putExtra("lancamentosAbertos", ArrayList(lancamentosAbertos))
+
+                                startActivity(intent)
+                                finish()
+                            }
+
+                            // Dados que seram enviados para ClienteActivity
+                            limpaCampos()
                         }
                     }
-                })
-            } else {
-                snackBar("Ops! Campos vazios")
-            }
-
+                }
+            })
+        } else {
+            snackBar("Ops! Campos vazios")
+        }
     }
-    private fun chamadaLancamentos(login: String){
+
+    private fun chamadaLancamentos(login: String) {
 
         serviceLancamentos.getLancamentos(login).enqueue(object :
             Callback<List<Lancamento>> {
@@ -190,7 +187,11 @@ class LoginActivity : AppCompatActivity() {
                 snackBar("Tivemos um problema. Tente novamente mais tarde.")
 
             }
-            override fun onResponse(call: Call<List<Lancamento>>, response: Response<List<Lancamento>>) {
+
+            override fun onResponse(
+                call: Call<List<Lancamento>>,
+                response: Response<List<Lancamento>>
+            ) {
                 if (response.isSuccessful) {
                     lancamentos = response.body()!!
                     if (lancamentos.isNullOrEmpty()) {
@@ -198,9 +199,9 @@ class LoginActivity : AppCompatActivity() {
                     } else {
                         CoroutineScope(Dispatchers.IO).launch {
                             lancamentos.forEach {
-                                if(it.status == "pago") {
+                                if (it.status == "pago") {
                                     lancamentosPagos.add(it)
-                                } else if (it.status == "vencido"){
+                                } else if (it.status == "vencido") {
                                     lancamentosVencidos.add(it)
                                 } else {
                                     lancamentosAbertos.add(it)
@@ -234,10 +235,12 @@ class LoginActivity : AppCompatActivity() {
                 .show()
         }
     }
+
     private fun limpaCampos() {
         binding.editTextCpfCnpj.setText("")
         binding.editTextSenha.setText("")
     }
+
     private fun openUrl(url: String) {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         startActivity(intent)
@@ -262,6 +265,7 @@ class LoginActivity : AppCompatActivity() {
                 .show()
         }
     }
+
     private fun showNoInternetSnackbar() {
         val snackbar = Snackbar.make(
             findViewById(android.R.id.content),
@@ -277,6 +281,7 @@ class LoginActivity : AppCompatActivity() {
 
         snackbar.show()
     }
+
     override fun onResume() {
         super.onResume()
         checkNetworkAndInitialize()

@@ -42,16 +42,15 @@ import java.util.Locale
 
 class ClienteActivity : AppCompatActivity() {
     private lateinit var servicePix: ServicePix
-
     private var lancamentoPix: List<Pix> = emptyList()
     private val qrCodeDataList = mutableListOf<QRCodeData>()
     private var lancamentosAbertos: List<Lancamento> = emptyList()
     private var lancamentosPagos : List<Lancamento> = emptyList()
+    private var lancamentosVencidos : List<Lancamento> = emptyList()
 
     private val binding by lazy {
         ActivityClienteBinding.inflate(layoutInflater)
     }
-
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,6 +64,8 @@ class ClienteActivity : AppCompatActivity() {
             intent.getParcelableArrayListExtra("lancamentosAbertos", Lancamento::class.java)?: emptyList()
         lancamentosPagos =
             intent.getParcelableArrayListExtra("lancamentosPagos", Lancamento::class.java)?: emptyList()
+        lancamentosVencidos =
+            intent.getParcelableArrayListExtra("lancamentosVencidos", Lancamento::class.java)?: emptyList()
 
         val coroutineScope = CoroutineScope(Dispatchers.IO)
         coroutineScope.launch {
@@ -81,7 +82,7 @@ class ClienteActivity : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     private fun chamadaPix() {
-       // lancamentos = intent.getParcelableArrayListExtra("lancamentos", Lancamento::class.java) ?: emptyList()
+
         val uuidLanc = mutableListOf<String>()
 
         lancamentosAbertos.forEach {
@@ -220,6 +221,7 @@ class ClienteActivity : AppCompatActivity() {
             intent.putParcelableArrayListExtra("lancamentos", ArrayList(lancamentosAbertos))
             intent.putParcelableArrayListExtra("qrCode", ArrayList(qrCodeDataList))
             intent.putParcelableArrayListExtra("lancamentosPagos", ArrayList(lancamentosPagos))
+            intent.putParcelableArrayListExtra("lancamentosVencidos", ArrayList(lancamentosVencidos))
             startActivity(intent)
         }
 

@@ -5,14 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/new_background"
-    tools:context=".activity.activitys.FaturasEmAberto">
-
+    tools:context=".activity.activitys.FaturasVencidas">
 
     <View
         android:id="@+id/view3"
         android:layout_width="0dp"
-        android:layout_height="693dp"
-        android:layout_marginTop="208dp"
+        android:layout_height="620dp"
+        android:layout_marginTop="300dp"
         android:background="@drawable/objeto1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,25 +20,28 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.256" />
 
+
     <TextView
         android:id="@+id/mensagemTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Não há faturas em aberto"
+        android:layout_marginTop="100dp"
         android:elevation="1dp"
+        android:text="Não há faturas vencidas"
         android:textColor="@color/azulAnil"
         android:textSize="18sp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
 
     <ImageView
         android:id="@+id/imageView10"
         android:layout_width="329dp"
         android:layout_height="385dp"
+        android:layout_marginTop="85dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
@@ -75,15 +77,16 @@
         android:id="@+id/scrollView3"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="250dp"
+        android:layout_marginTop="330dp"
         android:fillViewport="true"
-        app:layout_constraintBottom_toTopOf="@+id/btn_faturas_pagas"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_lista"
+            android:id="@+id/rv_lista3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -99,34 +102,5 @@
 
     </ScrollView>
 
-    <Button
-        android:id="@+id/btn_faturas_pagas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:layout_marginBottom="83dp"
-        android:text="Faturas Pagas"
-        android:textColor="@color/white"
-        android:padding="15dp"
-        android:background="@drawable/background_botao_planos"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView3" />
-
-    <Button
-        android:id="@+id/btn_faturas_vencidas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/background_botao_planos"
-        android:padding="15dp"
-        android:text="Faturas Vencidas"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
