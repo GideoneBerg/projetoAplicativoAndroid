@@ -41,7 +41,7 @@
         android:layout_height="49dp"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/assistant_extralight"
-        android:text="Como podemos ajudar? \nSelecione o motivo:"
+        android:text="Como podemos ajudar? \nDescreva o motivo:"
         android:textAlignment="center"
         android:textColor="#FDF8F8"
         android:textSize="16sp"
@@ -69,6 +69,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="32dp"
         android:text=""
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/descricaochamado"/>
@@ -80,7 +81,8 @@
         android:layout_marginTop="10dp"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
-        android:text=""
+        android:text="nome"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewNome"/>

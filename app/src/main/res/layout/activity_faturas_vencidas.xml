@@ -35,18 +35,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible" />
-
-    <ImageView
-        android:id="@+id/imageView10"
-        android:layout_width="329dp"
-        android:layout_height="385dp"
-        android:layout_marginTop="85dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/img_qrcode" />
+        tools:visibility="gone" />
 
     <TextView
         android:id="@+id/textView7"
@@ -62,6 +51,33 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/primeiroacesso4"
+        android:layout_width="235dp"
+        android:layout_height="82dp"
+        android:layout_marginTop="176dp"
+        android:elevation="3sp"
+        android:fontFamily="@font/bebas_neue"
+        android:text="Faturas\nVencidas"
+        android:textAlignment="center"
+        android:textColor="@color/rosa"
+        android:textSize="35sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.522"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView14"
+        android:layout_width="105dp"
+        android:layout_height="91dp"
+        android:layout_marginTop="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.882"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logotipo" />
+
+    <TextView
         android:id="@+id/sizeList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -72,6 +88,17 @@
         android:textSize="25sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView7"
         app:layout_constraintStart_toEndOf="@+id/textView7" />
+
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="72dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="176dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.109"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/qmui_icon_notify_error" />
 
     <ScrollView
         android:id="@+id/scrollView3"
@@ -97,7 +124,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView7"
             tools:itemCount="4"
-            tools:listitem="@layout/layout_recycler_view" />
+            tools:listitem="@layout/layout_recycler_view_vencido" >
+
+        </androidx.recyclerview.widget.RecyclerView>
 
 
     </ScrollView>

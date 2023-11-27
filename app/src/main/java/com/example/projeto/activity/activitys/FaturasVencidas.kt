@@ -8,7 +8,7 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projeto.R
-import com.example.projeto.activity.classes.FaturaAdapterPagas
+import com.example.projeto.activity.classes.FaturasAdapterVencidas
 import com.example.projeto.activity.classes.Lancamento
 import com.example.projeto.databinding.ActivityFaturasVencidasBinding
 

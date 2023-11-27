@@ -53,7 +53,7 @@ class SolicitacaoCliente : AppCompatActivity() {
 
         // Mensagem do usuário a ser digitada
         val mensagemUsuario = binding.descricao.text.toString()
-        val mensagemFinal = "*Preciso de Suporte Técnico*\n\nNome: $nomeUsuario\nCPF: $cpfUsuario\n\n$mensagemUsuario"
+        val mensagemFinal = "\uD83D\uDEE0 *Preciso de Suporte Técnico*\n\nNome: $nomeUsuario\nCPF: $cpfUsuario\n\n$mensagemUsuario"
 
         // Construa o URI com o link do WhatsApp
         val uri = Uri.parse("https://api.whatsapp.com/send/?phone=$numeroTelefone&text=$mensagemFinal&type=phone_number&app_absent=0")

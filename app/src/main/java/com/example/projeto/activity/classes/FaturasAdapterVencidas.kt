@@ -1,4 +1,4 @@
-package com.example.projeto.activity.activitys
+package com.example.projeto.activity.classes
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +7,6 @@ import android.widget.TextView
 import androidx.core.net.ParseException
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projeto.R
-import com.example.projeto.activity.classes.Lancamento
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -22,7 +21,7 @@ class  FaturasAdapterVencidas(private val faturasListvenc: List<Lancamento>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.layout_recycler_view, parent, false)
+            .inflate(R.layout.layout_recycler_view_vencido, parent, false)
         return ViewHolder(view)
     }
 
@@ -33,7 +32,7 @@ class  FaturasAdapterVencidas(private val faturasListvenc: List<Lancamento>
         val statusFormat = lancamentoVenc?.status
         holder.textStatusFatura.text = statusFormat?.uppercase()
         val dataVencimento = lancamentoVenc?.datavenc?.let { formatarData(it) }
-        holder.textVencimento.text = "Vence em $dataVencimento"
+        holder.textVencimento.text = "Vencida em $dataVencimento"
     }
 
     override fun getItemCount(): Int {

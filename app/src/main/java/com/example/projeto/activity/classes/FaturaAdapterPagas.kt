@@ -25,7 +25,7 @@ class FaturaAdapterPagas(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         // Inflar o layout do item da fatura e criar uma instância do ViewHolder
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.layout_recycler_view, parent, false)
+            .inflate(R.layout.layout_recycler_view_pago, parent, false)
         return ViewHolder(view)
     }
     @SuppressLint("SetTextI18n")
