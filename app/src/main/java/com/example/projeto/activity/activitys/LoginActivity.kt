@@ -107,6 +107,8 @@ class LoginActivity : AppCompatActivity() {
 
         // isDone verifica se o usuario preencheu todos os campos
         // unMasked recupera os dados sem a máscara
+
+
         val isDone = binding.editTextCpfCnpj.isDone
         if (isDone) { // verifica se o usuario digitou os dados corretamente
             val cpf = binding.editTextCpfCnpj.unMasked

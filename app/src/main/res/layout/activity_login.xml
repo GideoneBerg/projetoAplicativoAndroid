@@ -43,11 +43,11 @@
 
     <ProgressBar
         android:id="@+id/progressBar2"
-        style="?android:attr/progressBarStyle"
+        style="@android:style/Widget.ProgressBar"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
-        android:visibility="invisible"
         android:elevation="3dp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/txtPrimeiroAcesso"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

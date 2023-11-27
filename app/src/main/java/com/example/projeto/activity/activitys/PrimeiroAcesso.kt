@@ -53,7 +53,7 @@ class PrimeiroAcesso : AppCompatActivity() {
 
     private fun snackBar(mensagem: String) {
         Snackbar.make(
-            findViewById(R.id.layout_cliente),
+            findViewById(android.R.id.content),
             mensagem,
             Snackbar.LENGTH_LONG
         ).setBackgroundTint(ContextCompat.getColor(this, R.color.azulAnil))
