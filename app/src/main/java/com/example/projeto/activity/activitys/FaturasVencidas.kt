@@ -27,7 +27,7 @@ class FaturasVencidas : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        lancamentosVencidos = intent.getParcelableArrayListExtra("lancamentosVencidos", Lancamento::class.java)?: emptyList()
+        lancamentosVencidos = intent.getParcelableArrayListExtra<Lancamento>("lancamentosVencidos")?: emptyList()
 
         if(lancamentosVencidos.isNotEmpty()){
             rvLista3 = findViewById(R.id.rv_lista3)

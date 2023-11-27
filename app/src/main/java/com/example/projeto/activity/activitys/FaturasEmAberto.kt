@@ -33,17 +33,17 @@ class FaturasEmAberto : AppCompatActivity() {
         setContentView(binding.root)
 
         lancamentos =
-            intent.getParcelableArrayListExtra("lancamentos", Lancamento::class.java) ?: emptyList()
+            intent.getParcelableArrayListExtra<Lancamento>("lancamentos") ?: emptyList()
 
         qrCodeDataList =
-            intent.getParcelableArrayListExtra("qrCode", QRCodeData::class.java) ?: emptyList()
+            intent.getParcelableArrayListExtra<QRCodeData>("qrCode") ?: emptyList()
 
         lancamentosPagos =
-            intent.getParcelableArrayListExtra("lancamentosPagos", Lancamento::class.java)
+            intent.getParcelableArrayListExtra<Lancamento>("lancamentosPagos")
                 ?: emptyList()
 
         lancamentosVencidos =
-            intent.getParcelableArrayListExtra("lancamentosVencidos", Lancamento::class.java)
+            intent.getParcelableArrayListExtra<Lancamento>("lancamentosVencidos")
                 ?: emptyList()
 
         if (lancamentos.isNotEmpty() && qrCodeDataList.isNotEmpty()) {

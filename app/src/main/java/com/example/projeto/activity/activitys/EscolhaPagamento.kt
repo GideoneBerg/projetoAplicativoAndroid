@@ -66,7 +66,7 @@ class EscolhaPagamento : AppCompatActivity() {
                 }
             }
         }
-        val lancamento = intent.getParcelableExtra("key", Lancamento::class.java)
+        val lancamento = intent.getParcelableExtra<Lancamento>("key")
         val formatoBanco = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
         val formatoDesejado = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
         try {
@@ -77,7 +77,7 @@ class EscolhaPagamento : AppCompatActivity() {
             e.printStackTrace()
         }
 
-         val lancamentoPix = intent.getParcelableExtra("pix", QRCodeData::class.java)
+         val lancamentoPix = intent.getParcelableExtra<QRCodeData>("pix")
 
         if (lancamentoPix != null) {
             val conteudoQrCode = lancamentoPix.qrcode

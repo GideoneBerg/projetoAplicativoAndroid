@@ -43,8 +43,17 @@ class PrimeiroAcesso : AppCompatActivity() {
             novaSenha = binding.txtNovaSenha.text.toString()
             consultaAPI()
         } else {
-            Toast.makeText(this, "Ops! Campos vazios.", Toast.LENGTH_SHORT).show()
+            snackBar("Ops! Campos vazios.")
         }
+    }
+
+    private fun snackBar(mensagem: String) {
+        Snackbar.make(
+            findViewById(R.id.layout_cliente),
+            mensagem,
+            Snackbar.LENGTH_LONG
+        ).setBackgroundTint(ContextCompat.getColor(this, R.color.azulAnil))
+            .show()
     }
 
     private fun consultaAPI() {

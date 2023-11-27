@@ -53,11 +53,11 @@ class ClienteActivity : AppCompatActivity() {
             .create(ServicePix::class.java)
 
         lancamentosAbertos =
-            intent.getParcelableArrayListExtra("lancamentosAbertos", Lancamento::class.java)?: emptyList()
+            intent.getParcelableArrayListExtra<Lancamento>("lancamentosAbertos")?: emptyList()
         lancamentosPagos =
-            intent.getParcelableArrayListExtra("lancamentosPagos", Lancamento::class.java)?: emptyList()
+            intent.getParcelableArrayListExtra<Lancamento>("lancamentosPagos")?: emptyList()
         lancamentosVencidos =
-            intent.getParcelableArrayListExtra("lancamentosVencidos", Lancamento::class.java)?: emptyList()
+            intent.getParcelableArrayListExtra<Lancamento>("lancamentosVencidos")?: emptyList()
 
         val coroutineScope = CoroutineScope(Dispatchers.IO)
         coroutineScope.launch {
@@ -136,7 +136,8 @@ class ClienteActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     private fun dadosAPI() {
 
-       val usuario = intent.getParcelableExtra("usuario", Usuario::class.java)
+        val usuario = intent.getParcelableExtra<Usuario>("usuario")
+
 
         if(usuario != null) {
 

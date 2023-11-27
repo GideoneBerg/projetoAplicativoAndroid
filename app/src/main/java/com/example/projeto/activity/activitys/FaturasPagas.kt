@@ -25,7 +25,7 @@ class FaturasPagas : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        lancamentosPagos = intent.getParcelableArrayListExtra("lancamentosPagos", Lancamento::class.java)?: emptyList()
+        lancamentosPagos = intent.getParcelableArrayListExtra<Lancamento>("lancamentosPagos")?: emptyList()
 
         if (lancamentosPagos.isNotEmpty()){
             rvLista2 = findViewById(R.id.rv_listapg)
