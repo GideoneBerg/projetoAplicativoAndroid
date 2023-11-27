@@ -43,11 +43,10 @@ import java.util.Locale
 class ClienteActivity : AppCompatActivity() {
     private lateinit var servicePix: ServicePix
 
-    private var lancamentos: List<Lancamento> = emptyList()
     private var lancamentoPix: List<Pix> = emptyList()
     private val qrCodeDataList = mutableListOf<QRCodeData>()
-    private var lancamentosAbertos = mutableListOf<Lancamento>()
-    private val lancamentosPagos = mutableListOf<Lancamento>()
+    private var lancamentosAbertos: List<Lancamento> = emptyList()
+    private var lancamentosPagos : List<Lancamento> = emptyList()
 
     private val binding by lazy {
         ActivityClienteBinding.inflate(layoutInflater)
@@ -62,10 +61,10 @@ class ClienteActivity : AppCompatActivity() {
         servicePix = RetrofitService.getRetrofitInstance()
             .create(ServicePix::class.java)
 
-        lancamentos = intent.getParcelableArrayListExtra("lancamentos", Lancamento::class.java)?: emptyList()
-
         lancamentosAbertos =
-            (intent.getParcelableArrayListExtra("lancamentosAbertos", Lancamento::class.java)?: emptyList()).toMutableList()
+            intent.getParcelableArrayListExtra("lancamentosAbertos", Lancamento::class.java)?: emptyList()
+        lancamentosPagos =
+            intent.getParcelableArrayListExtra("lancamentosPagos", Lancamento::class.java)?: emptyList()
 
         val coroutineScope = CoroutineScope(Dispatchers.IO)
         coroutineScope.launch {
@@ -220,7 +219,7 @@ class ClienteActivity : AppCompatActivity() {
             val intent = Intent(this@ClienteActivity, FaturasEmAberto::class.java)
             intent.putParcelableArrayListExtra("lancamentos", ArrayList(lancamentosAbertos))
             intent.putParcelableArrayListExtra("qrCode", ArrayList(qrCodeDataList))
-            intent.putParcelableArrayListExtra("pagos", ArrayList(lancamentosPagos))
+            intent.putParcelableArrayListExtra("lancamentosPagos", ArrayList(lancamentosPagos))
             startActivity(intent)
         }
 

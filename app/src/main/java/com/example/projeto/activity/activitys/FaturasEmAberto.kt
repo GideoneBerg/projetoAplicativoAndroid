@@ -1,6 +1,5 @@
 package com.example.projeto.activity.activitys
 
-import Usuario
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -14,9 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.projeto.R
 import com.example.projeto.activity.classes.FaturasAdapter
 import com.example.projeto.activity.classes.Lancamento
-import com.example.projeto.activity.classes.Pix
 import com.example.projeto.activity.classes.QRCodeData
-import com.example.projeto.databinding.ActivityEscolhaPagamentoBinding
 import com.example.projeto.databinding.ActivityFaturasEmAbertoBinding
 
 
@@ -25,7 +22,7 @@ class FaturasEmAberto : AppCompatActivity() {
     private lateinit var faturasAdapter: FaturasAdapter
     private var lancamentos: List<Lancamento> = emptyList()
     private var qrCodeDataList: List<QRCodeData> = emptyList()
-    private val lancamentosPagos = mutableListOf<Lancamento>()
+    private var lancamentosPagos : List<Lancamento> = emptyList()
 
     private val binding by lazy {
         ActivityFaturasEmAbertoBinding.inflate(layoutInflater)
@@ -35,12 +32,16 @@ class FaturasEmAberto : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        faturasPagas()
 
         lancamentos =
             intent.getParcelableArrayListExtra("lancamentos", Lancamento::class.java) ?: emptyList()
 
         qrCodeDataList =
             intent.getParcelableArrayListExtra("qrCode", QRCodeData::class.java) ?: emptyList()
+
+        lancamentosPagos =
+            intent.getParcelableArrayListExtra("lancamentosPagos", Lancamento::class.java)?: emptyList()
 
         if (lancamentos.isNotEmpty() && qrCodeDataList.isNotEmpty()) {
             rvLista = findViewById(R.id.rv_lista)
@@ -58,16 +59,20 @@ class FaturasEmAberto : AppCompatActivity() {
         }
 
 
+
+
     }
 
     private fun faturasPagas(){
 
         binding.btnFaturasPagas.setOnClickListener {
-            //val intent = Intent(this, )
+            val intent = Intent(this, FaturasPagas::class.java)
+            intent.putParcelableArrayListExtra("lancamentosPagos", ArrayList(lancamentosPagos))
+            startActivity(intent)
 
         }
 
-        intent.putParcelableArrayListExtra("pagos", ArrayList(lancamentosPagos))
+
 
     }
 

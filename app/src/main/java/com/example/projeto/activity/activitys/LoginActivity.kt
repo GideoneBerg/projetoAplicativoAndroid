@@ -21,6 +21,7 @@ import android.widget.Button
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import com.example.projeto.R
 import com.example.projeto.activity.classes.Lancamento
 import com.example.projeto.activity.classes.Pix
@@ -33,6 +34,11 @@ import com.example.projeto.activity.model.NetworkUtils
 import com.example.projeto.databinding.ActivityEscolhaPagamentoBinding
 import com.example.projeto.databinding.ActivityLoginBinding
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -55,7 +61,6 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         checkNetworkAndInitialize()
-
         funcaoBotoes()
 
     }
@@ -137,34 +142,32 @@ class LoginActivity : AppCompatActivity() {
                     override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
                         if (response.isSuccessful) {
                             val usuario = response.body()
-
                             if (usuario?.cpf == "vazio") {
-
                                 exibeSnackBar(false)
                             } else {
-
                                 if (usuario != null) {
                                     usuario.login?.let { chamadaLancamentos(it) }
-
                                 }
                                 binding.progressBar2.visibility = View.VISIBLE
                                 binding.btnEntrar.visibility = View.INVISIBLE
 
                                 exibeSnackBar(true)
-                                Handler(Looper.getMainLooper()).postDelayed({
-                                    val intent = Intent(this@LoginActivity, ClienteActivity::class.java)
-                                    intent.putExtra("usuario", usuario)
+                                lifecycleScope.launch(Dispatchers.Main){
+                                    delay(3000)
 
-                                    intent.putExtra("lancamentosVencidos", ArrayList(lancamentosVencidos))
-                                    intent.putExtra("lancamentosPagos", ArrayList(lancamentosPagos))
-                                    intent.putExtra("lancamentosAbertos", ArrayList(lancamentosAbertos))
+                                        val intent = Intent(this@LoginActivity, ClienteActivity::class.java)
+                                        intent.putExtra("usuario", usuario)
+                                        intent.putExtra("lancamentosVencidos", ArrayList(lancamentosVencidos))
+                                        intent.putExtra("lancamentosPagos", ArrayList(lancamentosPagos))
+                                        intent.putExtra("lancamentosAbertos", ArrayList(lancamentosAbertos))
+
+                                        startActivity(intent)
+                                        finish()
 
 
+                                }
 
-                                   /// intent.putParcelableArrayListExtra("lancamentos", ArrayList(lancamentos))
-                                    startActivity(intent)
-                                    finish()
-                                }, 2000)
+
 
                                 // Dados que seram enviados para ClienteActivity
                                 limpaCampos()
@@ -193,17 +196,18 @@ class LoginActivity : AppCompatActivity() {
                     if (lancamentos.isNullOrEmpty()) {
                         // Lista de lançamentos está vazia ou nula
                     } else {
-
-
-                        lancamentos.forEach {
-                            when (it.status?.lowercase()) {
-                                "vencido" -> lancamentosVencidos.add(it)
-                                "pago" -> lancamentosPagos.add(it)
-                                else -> lancamentosAbertos.add(it)
+                        CoroutineScope(Dispatchers.IO).launch {
+                            lancamentos.forEach {
+                                if(it.status == "pago") {
+                                    lancamentosPagos.add(it)
+                                } else if (it.status == "vencido"){
+                                    lancamentosVencidos.add(it)
+                                } else {
+                                    lancamentosAbertos.add(it)
+                                }
                             }
+
                         }
-
-
 
                     }
                 }
