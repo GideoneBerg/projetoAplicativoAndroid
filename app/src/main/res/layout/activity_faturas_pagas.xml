@@ -52,7 +52,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible" />
+        tools:visibility="invisible" />
 
     <ImageView
         android:id="@+id/imageView10"
@@ -109,6 +109,8 @@
             android:layout_marginTop="10dp"
             android:paddingBottom="20dp"
             android:visibility="visible"
+            android:scrollbars="vertical"
+            style="@style/CustomRecyclerViewScrollbarBlue"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
