@@ -2,47 +2,32 @@ package com.example.projeto.activity.activitys
 
 
 import Usuario
-import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.provider.Settings
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.projeto.R
 import com.example.projeto.activity.classes.Lancamento
-import com.example.projeto.activity.classes.Pix
-import com.example.projeto.activity.classes.QRCodeData
 import com.example.projeto.activity.interfaces.ServiceLancamentos
 import com.example.projeto.activity.model.RetrofitService
 import com.example.projeto.activity.interfaces.ServiceLogin
-import com.example.projeto.activity.interfaces.ServicePix
 import com.example.projeto.activity.model.NetworkUtils
-import com.example.projeto.databinding.ActivityEscolhaPagamentoBinding
 import com.example.projeto.databinding.ActivityLoginBinding
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
 
 class LoginActivity : AppCompatActivity() {
 
@@ -62,9 +47,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
         checkNetworkAndInitialize()
         funcaoBotoes()
-
     }
-
 
     private fun checkNetworkAndInitialize() {
         if (NetworkUtils.isNetworkAvailable(this)) {
@@ -72,8 +55,6 @@ class LoginActivity : AppCompatActivity() {
             serviceLogin = RetrofitService.getRetrofitInstance().create(ServiceLogin::class.java)
             serviceLancamentos =
                 RetrofitService.getRetrofitInstance().create(ServiceLancamentos::class.java)
-
-
         } else {
             showNoInternetSnackbar()
         }
@@ -112,13 +93,11 @@ class LoginActivity : AppCompatActivity() {
         binding.textEsqueciSenha.setOnClickListener {
             val intent = Intent(this, RedefinirSenhaActivity::class.java)
             startActivity(intent)
-
         }
 
         binding.buttonAjuda.setOnClickListener {
             openUrl("https://api.whatsapp.com/send/?phone=5581986271986&text&type=phone_number&app_absent=0")
         }
-
     }
 
     private fun loginUsuario() {
@@ -137,7 +116,6 @@ class LoginActivity : AppCompatActivity() {
                     // registra informações de erro
                     Log.d("Erro", t.toString())
                     snackBar("Tivemos um problema. Tente novamente mais tarde.")
-
                 }
 
                 override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
@@ -154,14 +132,13 @@ class LoginActivity : AppCompatActivity() {
 
                             exibeSnackBar(true)
                             lifecycleScope.launch(Dispatchers.Main) {
-                                delay(9000)
+                                delay(5000)
 
                                 val intent = Intent(this@LoginActivity, ClienteActivity::class.java)
                                 intent.putExtra("usuario", usuario)
                                 intent.putExtra("lancamentosVencidos", ArrayList(lancamentosVencidos))
                                 intent.putExtra("lancamentosPagos", ArrayList(lancamentosPagos))
                                 intent.putExtra("lancamentosAbertos", ArrayList(lancamentosAbertos))
-
                                 startActivity(intent)
                                 finish()
                             }
@@ -185,7 +162,6 @@ class LoginActivity : AppCompatActivity() {
                 // registra informações de erro
                 Log.d("Erro", t.toString())
                 snackBar("Tivemos um problema. Tente novamente mais tarde.")
-
             }
 
             override fun onResponse(
@@ -197,7 +173,7 @@ class LoginActivity : AppCompatActivity() {
                     if (lancamentos.isNullOrEmpty()) {
                         // Lista de lançamentos está vazia ou nula
                     } else {
-                        CoroutineScope(Dispatchers.Main).launch {
+                        CoroutineScope(Dispatchers.IO).launch {
                             lancamentos.forEach {
                                 if (it.status == "pago") {
                                     lancamentosPagos.add(it)

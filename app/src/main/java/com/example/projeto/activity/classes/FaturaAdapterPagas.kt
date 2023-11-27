@@ -15,12 +15,10 @@ class FaturaAdapterPagas(
     private val faturasListPg: List<Lancamento>
 ) : RecyclerView.Adapter<FaturaAdapterPagas.ViewHolder>() {
 
-
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textValor: TextView = itemView.findViewById(R.id.valor)
         val textVencimento: TextView = itemView.findViewById(R.id.vencimento)
         val textStatusFatura: TextView = itemView.findViewById(R.id.statusFatura)
-
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         // Inflar o layout do item da fatura e criar uma instância do ViewHolder
@@ -40,7 +38,6 @@ class FaturaAdapterPagas(
         holder.textVencimento.text = "Vence em $dataVencimento"
     }
     override fun getItemCount(): Int {
-
         return faturasListPg.size
     }
 
@@ -56,6 +53,4 @@ class FaturaAdapterPagas(
             ""
         }
     }
-
-
 }

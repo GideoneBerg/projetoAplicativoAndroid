@@ -27,25 +27,17 @@ class FaturasPagas : AppCompatActivity() {
         setContentView(binding.root)
         lancamentosPagos = intent.getParcelableArrayListExtra("lancamentosPagos", Lancamento::class.java)?: emptyList()
 
-
         if (lancamentosPagos.isNotEmpty()){
-
             rvLista2 = findViewById(R.id.rv_listapg)
             //val tamanhoLista = lancamentosPagos.size.toString()
             faturasAdapter = FaturaAdapterPagas(lancamentosPagos)
             rvLista2.adapter = faturasAdapter
-
             rvLista2.layoutManager = LinearLayoutManager(this)
 
         } else {
 
             binding.mensagemTextView.visibility = View.VISIBLE
             binding.rvListapg.visibility = View.GONE
-
-
         }
-
-
-
     }
 }

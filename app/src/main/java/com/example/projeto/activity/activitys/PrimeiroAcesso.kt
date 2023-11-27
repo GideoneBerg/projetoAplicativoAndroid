@@ -11,7 +11,6 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.example.projeto.R
 import com.example.projeto.activity.model.RetrofitService
-
 import com.example.projeto.activity.interfaces.ServiceFirstAccess
 import com.example.projeto.databinding.ActivityPrimeiroAcessoBinding
 import com.google.android.material.snackbar.Snackbar
@@ -21,9 +20,8 @@ import retrofit2.Response
 
 class PrimeiroAcesso : AppCompatActivity() {
 
-    private  lateinit var serviceFirstAccess: ServiceFirstAccess
+    private lateinit var serviceFirstAccess: ServiceFirstAccess
     private lateinit var binding: ActivityPrimeiroAcessoBinding
-    private var usuario: Usuario? = null
     private lateinit var cpf: String
     private lateinit var novaSenha: String
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,12 +35,10 @@ class PrimeiroAcesso : AppCompatActivity() {
             .create(ServiceFirstAccess::class.java)
         funcaoBotoes()
     }
-
     private fun cadastroPrimeiroAcesso() {
 
         val isDone = binding.textCpfCnpj.isDone
         if (isDone) { // verifica se o usuario digitou os dados corretamente
-
             cpf = binding.textCpfCnpj.unMasked
             novaSenha = binding.txtNovaSenha.text.toString()
             consultaAPI()
@@ -50,56 +46,56 @@ class PrimeiroAcesso : AppCompatActivity() {
             Toast.makeText(this, "Ops! Campos vazios.", Toast.LENGTH_SHORT).show()
         }
     }
+
     private fun consultaAPI() {
 
         val servico = serviceFirstAccess
-            servico.setCadastro(cpf, novaSenha).enqueue(object :
-                Callback<Usuario> {
-                override fun onFailure(call: Call<Usuario>, t: Throwable) {
-                    // registra informações de erro
-                    Log.d("Erro", t.toString())
-                }
+        servico.setCadastro(cpf, novaSenha).enqueue(object :
+            Callback<Usuario> {
+            override fun onFailure(call: Call<Usuario>, t: Throwable) {
+                // registra informações de erro
+                Log.d("Erro", t.toString())
+            }
 
-                override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
-                    if (response.isSuccessful) {
-                        val result = response.body()
-                        if (result != null) {
-                            val mensagem = result.mensagem
-                            if (mensagem != null) {
-                                if (mensagem == "Senha Cadastrada com sucesso!") {
-                                    exibeSnackBar(mensagem)
-                                    val intent = Intent(this@PrimeiroAcesso, LoginActivity::class.java)
-                                    startActivity(intent)
-                                    finish()
-                                } else if (mensagem == "Senha ja cadastrada!") {
-                                    exibeSnackBar(mensagem)
-                                } else if (mensagem == "CPF nao localizado!") {
-                                    exibeSnackBar(mensagem)
-                                } else if (mensagem == "Senha nao pode estar em branco!") {
-                                    exibeSnackBar(mensagem)
-                                } else {
-                                    Toast.makeText(
-                                        applicationContext,
-                                        "Erro inesperado!",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                }
+            override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
+                if (response.isSuccessful) {
+                    val result = response.body()
+                    if (result != null) {
+                        val mensagem = result.mensagem
+                        if (mensagem != null) {
+                            if (mensagem == "Senha Cadastrada com sucesso!") {
+                                exibeSnackBar(mensagem)
+                                val intent = Intent(this@PrimeiroAcesso, LoginActivity::class.java)
+                                startActivity(intent)
+                                finish()
+                            } else if (mensagem == "Senha ja cadastrada!") {
+                                exibeSnackBar(mensagem)
+                            } else if (mensagem == "CPF nao localizado!") {
+                                exibeSnackBar(mensagem)
+                            } else if (mensagem == "Senha nao pode estar em branco!") {
+                                exibeSnackBar(mensagem)
                             } else {
-                                Toast.makeText(applicationContext, "Null", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    applicationContext,
+                                    "Erro inesperado!",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         } else {
-                            Toast.makeText(
-                                applicationContext,
-                                "Erro na resposta da API",
-                                Toast.LENGTH_SHORT
-                            ).show()
+                            Toast.makeText(applicationContext, "Null", Toast.LENGTH_SHORT).show()
                         }
+                    } else {
+                        Toast.makeText(
+                            applicationContext,
+                            "Erro na resposta da API",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
-            })
-
-
+            }
+        })
     }
+
     private fun togglePasswordVisibility() {
         val txtNovaSenha = binding.txtNovaSenha
         if (txtNovaSenha.transformationMethod == PasswordTransformationMethod.getInstance()) {
@@ -112,6 +108,7 @@ class PrimeiroAcesso : AppCompatActivity() {
         // Move o cursor para o final do texto
         txtNovaSenha.setSelection(txtNovaSenha.text.length)
     }
+
     private fun funcaoBotoes() {
 
         binding.btnNovaSenha.setOnClickListener {
@@ -131,14 +128,14 @@ class PrimeiroAcesso : AppCompatActivity() {
                 Snackbar.LENGTH_SHORT
             ).setBackgroundTint(ContextCompat.getColor(this, R.color.azulAnil))
                 .show()
-        } else if (mensagem == "Senha ja cadastrada!"){
+        } else if (mensagem == "Senha ja cadastrada!") {
             Snackbar.make(
                 findViewById(android.R.id.content),
                 R.string.msg_primeiroAcesso2,
                 Snackbar.LENGTH_SHORT
             ).setBackgroundTint(ContextCompat.getColor(this, R.color.alerta))
                 .show()
-        } else if (mensagem == "CPF nao localizado!"){
+        } else if (mensagem == "CPF nao localizado!") {
             Snackbar.make(
                 findViewById(android.R.id.content),
                 R.string.msg_primeiroAcesso3,
@@ -152,8 +149,6 @@ class PrimeiroAcesso : AppCompatActivity() {
                 Snackbar.LENGTH_LONG
             ).setBackgroundTint(ContextCompat.getColor(this, R.color.rosa))
                 .show()
-
         }
     }
-
 }

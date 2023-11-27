@@ -16,7 +16,6 @@ class  FaturasAdapterVencidas(private val faturasListvenc: List<Lancamento>
         val textValor: TextView = itemView.findViewById(R.id.valor)
         val textVencimento: TextView = itemView.findViewById(R.id.vencimento)
         val textStatusFatura: TextView = itemView.findViewById(R.id.statusFatura)
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -27,7 +26,6 @@ class  FaturasAdapterVencidas(private val faturasListvenc: List<Lancamento>
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val lancamentoVenc = faturasListvenc.getOrNull(position)
-
         holder.textValor.text = "R$ ${lancamentoVenc?.valor}"
         val statusFormat = lancamentoVenc?.status
         holder.textStatusFatura.text = statusFormat?.uppercase()
@@ -51,8 +49,4 @@ class  FaturasAdapterVencidas(private val faturasListvenc: List<Lancamento>
             ""
         }
     }
-
-
-
-
 }

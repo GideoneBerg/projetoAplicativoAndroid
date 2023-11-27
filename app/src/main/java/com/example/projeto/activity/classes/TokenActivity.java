@@ -28,10 +28,6 @@ public class TokenActivity extends AppCompatActivity {
         inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
 
         EditText pinView = findViewById(R.id.pin_view);
-//        EditText pinView2 = findViewById(R.id.pin_view1); // Substitua R.id.pinView2 pelo ID correto da segunda caixa de texto
-//        EditText pinView3 = findViewById(R.id.pin_view2); // Substitua R.id.pinView3 pelo ID correto da terceira caixa de texto
-
-
 
         pinView.addTextChangedListener(new TextWatcher() {
             @Override
@@ -52,7 +48,5 @@ public class TokenActivity extends AppCompatActivity {
                 // Após a alteração do texto
             }
         });
-
-
     }
 }

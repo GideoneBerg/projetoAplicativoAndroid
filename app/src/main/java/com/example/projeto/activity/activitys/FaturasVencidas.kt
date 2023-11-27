@@ -18,7 +18,6 @@ class FaturasVencidas : AppCompatActivity() {
     private lateinit var rvLista3: RecyclerView
     private lateinit var faturasAdapter: FaturasAdapterVencidas
 
-
     private val binding by lazy {
         ActivityFaturasVencidasBinding.inflate(layoutInflater)
     }
@@ -30,7 +29,6 @@ class FaturasVencidas : AppCompatActivity() {
 
         lancamentosVencidos = intent.getParcelableArrayListExtra("lancamentosVencidos", Lancamento::class.java)?: emptyList()
 
-
         if(lancamentosVencidos.isNotEmpty()){
             rvLista3 = findViewById(R.id.rv_lista3)
             faturasAdapter = FaturasAdapterVencidas(lancamentosVencidos)
@@ -40,8 +38,6 @@ class FaturasVencidas : AppCompatActivity() {
         }else{
             binding.mensagemTextView.visibility = View.VISIBLE
             binding.rvLista3.visibility = View.GONE
-
         }
-
     }
 }

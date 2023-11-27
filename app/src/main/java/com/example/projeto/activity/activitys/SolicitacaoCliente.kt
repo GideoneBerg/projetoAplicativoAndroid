@@ -1,11 +1,9 @@
 package com.example.projeto.activity.activitys
-import Usuario
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -39,11 +37,8 @@ class SolicitacaoCliente : AppCompatActivity() {
             binding.botaoEnvSolicitacao.setOnClickListener {
                 abrirLinkWhatsApp()
             }
-
         }
-
     }
-
     private fun abrirLinkWhatsApp() {
         val numeroTelefone = "5581986271986" // Substitua pelo número desejado
 
@@ -69,7 +64,6 @@ class SolicitacaoCliente : AppCompatActivity() {
             snackBar("Não há aplicativos para abrir o WhatsApp.")
         }
     }
-
 
     private fun snackBar(mensagem: String) {
         val snackbar = Snackbar.make(

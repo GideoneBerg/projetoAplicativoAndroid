@@ -14,7 +14,6 @@ import com.example.projeto.activity.activitys.EscolhaPagamento
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-
 class FaturasAdapter(
     private val faturasList: List<Lancamento>,
     private val faturasPix: List<QRCodeData>
@@ -26,8 +25,6 @@ class FaturasAdapter(
         val textValor: TextView = itemView.findViewById(R.id.valor)
         val textVencimento: TextView = itemView.findViewById(R.id.vencimento)
         val textStatusFatura: TextView = itemView.findViewById(R.id.statusFatura)
-
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -37,37 +34,28 @@ class FaturasAdapter(
         return ViewHolder(view)
     }
 
-
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         // Atualize os elementos de layout com os dados da fatura
         val lancamento = faturasList.getOrNull(position)
         val lancamentoPix = faturasPix.getOrNull(position)
 
-
-        // Configure os TextViews ou outros elementos de layout conforme necessário
         holder.cardView.setOnClickListener {
-
             val intent = Intent(holder.itemView.context, EscolhaPagamento::class.java).apply {
                 putExtra("key", lancamento)
                 putExtra("pix", lancamentoPix)
             }
             holder.itemView.context.startActivity(intent)
-
         }
-
-
 
         holder.textValor.text = "R$ ${lancamento?.valor}"
         val statusFormat = lancamento?.status
         holder.textStatusFatura.text = statusFormat?.uppercase()
         val dataVencimento = lancamento?.datavenc?.let { formatarData(it) }
         holder.textVencimento.text = "Vence em $dataVencimento"
-        
     }
 
     override fun getItemCount(): Int {
-
         return maxOf(faturasList.size, faturasPix.size)
     }
 
@@ -83,9 +71,6 @@ class FaturasAdapter(
             ""
         }
     }
-
-
-
 }
 
 

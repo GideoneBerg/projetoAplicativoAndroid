@@ -12,31 +12,24 @@ import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import androidx.annotation.RequiresApi
-
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.net.ParseException
 import com.example.projeto.R
-
 import com.example.projeto.activity.classes.Lancamento
 import com.example.projeto.activity.classes.Pix
 import com.example.projeto.activity.classes.QRCodeData
 import com.example.projeto.activity.model.RetrofitService
-
 import com.example.projeto.activity.interfaces.ServicePix
-import com.example.projeto.activity.model.DadosPix
 import com.example.projeto.activity.model.DadosSingleton
-
 import com.example.projeto.activity.webView.WebSpeedTestActivity
 import com.example.projeto.databinding.ActivityClienteBinding
-import com.example.projeto.databinding.ActivityEscolhaPagamentoBinding
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -51,7 +44,6 @@ class ClienteActivity : AppCompatActivity() {
     private val binding by lazy {
         ActivityClienteBinding.inflate(layoutInflater)
     }
-
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,7 +69,6 @@ class ClienteActivity : AppCompatActivity() {
         botoesScroll()
         // Dados do cliente
         dadosAPI()
-
     }
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
@@ -118,7 +109,6 @@ class ClienteActivity : AppCompatActivity() {
                         withContext(Dispatchers.Main){
                             snackBar("Tivemos um problema. Tente novamente mais tarde.")
                         }
-
                     }
                 }
             }
@@ -160,7 +150,6 @@ class ClienteActivity : AppCompatActivity() {
             binding.textViewNome.text = usuario.nome
             binding.plano.text = usuario.plano?.replace("_", " ")
            // binding.vencimento.text = usuario.vencimento
-
 
             // Botao criado para exibição de dados do cliente usando popup
             binding.maisDados.setOnClickListener {
@@ -231,7 +220,6 @@ class ClienteActivity : AppCompatActivity() {
             val intent = Intent(this, SolicitacaoCliente::class.java)
             intent.putExtra("nome",nome)
             intent.putExtra("cpf",cpf)
-
             startActivity(intent)
         }
 
@@ -333,8 +321,5 @@ class ClienteActivity : AppCompatActivity() {
             ""
         }
     }
-
-
- //
 
 }

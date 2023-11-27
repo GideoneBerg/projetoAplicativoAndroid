@@ -5,9 +5,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-
 import androidx.annotation.RequiresApi
-
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projeto.R
@@ -33,7 +31,6 @@ class FaturasEmAberto : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
 
         lancamentos =
             intent.getParcelableArrayListExtra("lancamentos", Lancamento::class.java) ?: emptyList()
@@ -65,8 +62,6 @@ class FaturasEmAberto : AppCompatActivity() {
         }
         faturasPagas()
         faturasVencidas()
-
-
     }
 
     private fun faturasPagas() {
@@ -75,19 +70,14 @@ class FaturasEmAberto : AppCompatActivity() {
             val intent = Intent(this, FaturasPagas::class.java)
             intent.putParcelableArrayListExtra("lancamentosPagos", ArrayList(lancamentosPagos))
             startActivity(intent)
-
         }
     }
 
     private fun faturasVencidas() {
-
         binding.btnFaturasVencidas.setOnClickListener {
             val intent = Intent(this, FaturasVencidas::class.java)
             intent.putParcelableArrayListExtra("lancamentosVencidos", ArrayList(lancamentosVencidos))
             startActivity(intent)
-
         }
-
     }
-
 }

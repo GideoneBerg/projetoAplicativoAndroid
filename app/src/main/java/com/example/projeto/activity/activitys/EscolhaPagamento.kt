@@ -137,7 +137,6 @@ class EscolhaPagamento : AppCompatActivity() {
 
     }
     private fun snackBar(mensagem: String) {
-
         Snackbar.make(
             findViewById(android.R.id.content),
             mensagem,
@@ -145,39 +144,6 @@ class EscolhaPagamento : AppCompatActivity() {
         ).setBackgroundTint(ContextCompat.getColor(this, R.color.azulAnil))
             .show()
     }
-   /* @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-    private fun gerarQRCode() {
-     lancamentoPix = intent.getParcelableExtra("pix", QRCodeData::class.java)
-
-        val primeiraFaturaPix = intent.getStringExtra("pix")
-        binding.pixCopiaCola.text = lancamentoPix?.qrcode
-
-
-
-
-        val ivQRCode = binding.ivqrCode
-        if (lancamentoPix != null) {
-            val texto: String = lancamentoPix!!.qrcode
-            val multiFormatWriter = MultiFormatWriter()
-            try {
-                val bitMatrix = multiFormatWriter.encode(texto, BarcodeFormat.QR_CODE, 600, 600)
-                val width = bitMatrix.width
-                val height = bitMatrix.height
-                val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
-                val color = ContextCompat.getColor(this, R.color.azulMarinho)
-                for (x in 0 until width) {
-                    for (y in 0 until height) {
-                        bitmap.setPixel(x, y, if (bitMatrix[x, y]) color else Color.TRANSPARENT)
-                    }
-                }
-                ivQRCode.setImageBitmap(bitmap)
-            } catch (e: WriterException) {
-                e.printStackTrace()
-            }
-        } else {
-            snackBar("Campos vazios")
-        }
-    }*/
 
     fun gerarQrCode(conteudo: String): Bitmap? {
         val hints = hashMapOf(EncodeHintType.CHARACTER_SET to "UTF-8")
@@ -212,7 +178,6 @@ class EscolhaPagamento : AppCompatActivity() {
             imageView.setImageBitmap(qrCodeBitmap)
         } else {
             snackBar("Falha ao gerar QRCODE")
-
         }
     }
 }

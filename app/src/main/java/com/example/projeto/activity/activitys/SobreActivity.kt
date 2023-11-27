@@ -26,8 +26,5 @@ class SobreActivity : AppCompatActivity() {
             val intent = Intent(this, TermosDeUsoActivity::class.java)
             startActivity(intent)
         }
-
     }
-
-
 }
